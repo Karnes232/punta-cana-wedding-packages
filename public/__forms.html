@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    Netlify Forms discovery file.
+    This file is never rendered to visitors — it exists solely so Netlify's
+    build bot can detect and register the forms used in this Next.js app.
+
+    Every <form> here must have:
+      - name=""           matching the name used in the React component
+      - data-netlify="true"
+      - netlify-honeypot="bot-field" (spam protection)
+      - a hidden <input name="form-name"> with the same value
+      - every field name that the live form submits
+
+    Add a new form block here whenever a new Netlify-backed form is added
+    to the codebase.
+  -->
+  <title>Netlify Forms</title>
+</head>
+<body>
+
+  <!-- ── Contact form (/contact) ──────────────────────────────────────────── -->
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden"  name="form-name"   value="contact" />
+    <input type="text"    name="bot-field" />
+    <input type="text"    name="name" />
+    <input type="email"   name="email" />
+    <input type="tel"     name="phone" />
+    <input type="number"  name="guests" />
+    <input type="text"    name="weddingDate" />
+    <textarea             name="message"></textarea>
+  </form>
+
+  <!-- ── Wedding calculator lead form (/wedding-calculator) ───────────────── -->
+  <!--
+    Add fields here as the calculator form is built out.
+    Keep field names in sync with the React component.
+  -->
+  <form name="wedding-calculator" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden"  name="form-name"      value="wedding-calculator" />
+    <input type="text"    name="bot-field" />
+    <input type="text"    name="name" />
+    <input type="email"   name="email" />
+    <input type="tel"     name="phone" />
+    <input type="text"    name="weddingDate" />
+    <input type="number"  name="guests" />
+    <input type="text"    name="venue" />
+    <input type="text"    name="menu" />
+    <input type="text"    name="drinks" />
+    <input type="text"    name="decoration" />
+    <input type="text"    name="photography" />
+    <input type="text"    name="entertainment" />
+    <input type="text"    name="transportation" />
+    <input type="text"    name="extras" />
+    <input type="number"  name="estimatedTotal" />
+    <textarea             name="message"></textarea>
+  </form>
+
+</body>
+</html>

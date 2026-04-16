@@ -1,0 +1,1 @@
+export { contactPage } from './contactPage'

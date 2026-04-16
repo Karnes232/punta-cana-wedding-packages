@@ -1,0 +1,1 @@
+export { howItWorksPage } from './howItWorksPage'

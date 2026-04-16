@@ -1,0 +1,115 @@
+{
+  "nav": {
+    "howItWorks": "How It Works",
+    "calculator": "Build My Wedding",
+    "about": "About Us",
+    "stories": "Stories",
+    "contact": "Contact",
+    "cta": "Start Planning",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "brand": {
+      "tagline": "Your destination wedding sanctuary in Punta Cana, Dominican Republic. Beautiful weddings, transparent pricing, zero stress."
+    },
+    "connect": {
+      "heading": "Connect",
+      "whatsapp": "WhatsApp",
+      "email": "Email Us",
+      "blog": "Blog"
+    },
+    "legal": {
+      "heading": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "copyright": "© {year} Punta Cana Wedding Packages. All rights reserved."
+  },
+  "howItWorks": {
+    "process": { "heading": "How It Works" },
+    "payment": {
+      "heading": "Financial Peace of Mind",
+      "deposit": "Refundable Deposit",
+      "balance30": "30-Day Balance",
+      "remaining": "Final Payment"
+    },
+    "why": { "heading": "Why This Works for Modern Couples" },
+    "faq": { "heading": "Frequently Asked Questions" },
+    "cta": {
+      "heading": "Ready to Start the Journey?",
+      "sub": "Build your wedding in minutes, work with our team for perfection.",
+      "button": "Start Planning",
+      "contact": "Have questions? Contact us"
+    }
+  },
+  "about": {
+    "story": { "heading": "Our Story" },
+    "venue": { "heading": "The Venue" },
+    "team": { "heading": "Meet the Team" },
+    "values": { "heading": "What We Stand For" },
+    "cta": {
+      "heading": "Ready to Start Planning?",
+      "sub": "Let our team help you build the wedding you've always imagined.",
+      "button": "Build My Wedding",
+      "contact": "Have questions? Contact us"
+    }
+  },
+  "contact": {
+    "form": {
+      "intro": "Fill in the details below and we'll get back to you within 24 hours.",
+      "name": "Your Name",
+      "email": "Email Address",
+      "phone": "Phone Number (optional)",
+      "weddingDate": "Estimated Wedding Date",
+      "weddingDatePlaceholder": "e.g. June 2026",
+      "guests": "Number of Guests",
+      "message": "Tell Us About Your Vision",
+      "messagePlaceholder": "Share any details about your dream wedding...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent! We'll be in touch within 24 hours.",
+      "error": "Something went wrong. Please try again or email us directly."
+    },
+    "info": {
+      "heading": "Get in Touch",
+      "whatsapp": "Chat on WhatsApp",
+      "email": "Send an Email",
+      "location": "Punta Cana, Dominican Republic",
+      "locationDetail": "Cabeza de Toro Beach — our home base",
+      "response": "We respond within 24 hours, 7 days a week."
+    }
+  },
+  "blog": {
+    "heading": "Blog",
+    "subtitle": "Wedding inspiration, planning tips, and destination guides.",
+    "readMore": "Read More",
+    "backToBlog": "Back to Blog",
+    "publishedOn": "Published on",
+    "noArticles": "No articles yet. Check back soon."
+  },
+  "home": {
+    "hero": {
+      "cta": "Start Planning My Wedding"
+    },
+    "howItWorks": {
+      "heading": "How It Works"
+    },
+    "customize": {
+      "heading": "What You Can Customize"
+    },
+    "pricing": {
+      "heading": "Transparent Pricing, No Surprises",
+      "startingFrom": "Starting from",
+      "cta": "Build My Wedding"
+    },
+    "whyUs": {
+      "heading": "Why Choose Us?"
+    },
+    "cta": {
+      "heading": "Ready to Design Your Dream Wedding?",
+      "sub": "It takes less than 10 minutes. No commitment required.",
+      "button": "Start Planning"
+    }
+  }
+}

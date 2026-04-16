@@ -1,0 +1,115 @@
+{
+  "nav": {
+    "howItWorks": "Cómo Funciona",
+    "calculator": "Diseña Tu Boda",
+    "about": "Nosotros",
+    "stories": "Historias",
+    "contact": "Contacto",
+    "cta": "Comenzar",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "footer": {
+    "brand": {
+      "tagline": "Tu santuario de bodas en Punta Cana, República Dominicana. Bodas hermosas, precios transparentes, sin estrés."
+    },
+    "connect": {
+      "heading": "Contacto",
+      "whatsapp": "WhatsApp",
+      "email": "Escríbenos",
+      "blog": "Blog"
+    },
+    "legal": {
+      "heading": "Legal",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio"
+    },
+    "copyright": "© {year} Punta Cana Wedding Packages. Todos los derechos reservados."
+  },
+  "howItWorks": {
+    "process": { "heading": "Cómo Funciona" },
+    "payment": {
+      "heading": "Tranquilidad Financiera",
+      "deposit": "Depósito Reembolsable",
+      "balance30": "Saldo a 30 Días",
+      "remaining": "Pago Final"
+    },
+    "why": { "heading": "Por Qué Funciona para Parejas Modernas" },
+    "faq": { "heading": "Preguntas Frecuentes" },
+    "cta": {
+      "heading": "¿Lista para Comenzar el Viaje?",
+      "sub": "Diseña tu boda en minutos, nuestro equipo se encargará de la perfección.",
+      "button": "Comenzar a Planificar",
+      "contact": "¿Tienes preguntas? Contáctanos"
+    }
+  },
+  "about": {
+    "story": { "heading": "Nuestra Historia" },
+    "venue": { "heading": "El Lugar" },
+    "team": { "heading": "Conoce al Equipo" },
+    "values": { "heading": "Lo Que Nos Define" },
+    "cta": {
+      "heading": "¿Lista para Comenzar a Planificar?",
+      "sub": "Deja que nuestro equipo te ayude a construir la boda que siempre imaginaste.",
+      "button": "Diseña Mi Boda",
+      "contact": "¿Tienes preguntas? Contáctanos"
+    }
+  },
+  "contact": {
+    "form": {
+      "intro": "Completa los datos a continuación y te responderemos en 24 horas.",
+      "name": "Tu Nombre",
+      "email": "Correo Electrónico",
+      "phone": "Número de Teléfono (opcional)",
+      "weddingDate": "Fecha Estimada de Boda",
+      "weddingDatePlaceholder": "ej. Junio 2026",
+      "guests": "Número de Invitados",
+      "message": "Cuéntanos Tu Visión",
+      "messagePlaceholder": "Comparte detalles sobre la boda de tus sueños...",
+      "submit": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado! Te contactaremos en 24 horas.",
+      "error": "Algo salió mal. Por favor intenta de nuevo o escríbenos directamente."
+    },
+    "info": {
+      "heading": "Contáctanos",
+      "whatsapp": "Chatear por WhatsApp",
+      "email": "Enviar un Correo",
+      "location": "Punta Cana, República Dominicana",
+      "locationDetail": "Playa Cabeza de Toro — nuestra base",
+      "response": "Respondemos en 24 horas, 7 días a la semana."
+    }
+  },
+  "blog": {
+    "heading": "Blog",
+    "subtitle": "Inspiración para bodas, consejos de planificación y guías de destino.",
+    "readMore": "Leer Más",
+    "backToBlog": "Volver al Blog",
+    "publishedOn": "Publicado el",
+    "noArticles": "Aún no hay artículos. Vuelve pronto."
+  },
+  "home": {
+    "hero": {
+      "cta": "Comenzar a Planificar Mi Boda"
+    },
+    "howItWorks": {
+      "heading": "Cómo Funciona"
+    },
+    "customize": {
+      "heading": "Qué Puedes Personalizar"
+    },
+    "pricing": {
+      "heading": "Precios Transparentes, Sin Sorpresas",
+      "startingFrom": "Desde",
+      "cta": "Diseña Mi Boda"
+    },
+    "whyUs": {
+      "heading": "¿Por Qué Elegirnos?"
+    },
+    "cta": {
+      "heading": "¿Lista para Diseñar la Boda de Tus Sueños?",
+      "sub": "Tarda menos de 10 minutos. Sin compromiso.",
+      "button": "Comenzar a Planificar"
+    }
+  }
+}

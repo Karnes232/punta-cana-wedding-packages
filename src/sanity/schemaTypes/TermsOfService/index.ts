@@ -1,0 +1,1 @@
+export { termsOfService } from './termsOfService'

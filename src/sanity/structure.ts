@@ -1,0 +1,98 @@
+import type { StructureResolver } from 'sanity/structure'
+
+// Document IDs for singletons — one document per dataset
+const SINGLETONS = {
+  generalLayout: 'generalLayout',
+  homePage: 'homePage',
+  aboutPage: 'aboutPage',
+  howItWorksPage: 'howItWorksPage',
+  privacyPolicy: 'privacyPolicy',
+  termsOfService: 'termsOfService',
+  contactPage: 'contactPage',
+} as const
+
+// All singleton document IDs — excluded from auto-generated list items
+const SINGLETON_IDS = new Set<string>(Object.values(SINGLETONS))
+
+export const structure: StructureResolver = (S) =>
+  S.list()
+    .title('Content')
+    .items([
+      // ── Site Settings (singletons) ───────────────────────────────────────
+      S.listItem()
+        .title('General Layout')
+        .id('generalLayout')
+        .child(
+          S.document()
+            .schemaType('generalLayout')
+            .documentId('generalLayout')
+            .title('General Layout'),
+        ),
+
+      S.listItem()
+        .title('Home Page')
+        .id('homePage')
+        .child(
+          S.document()
+            .schemaType('homePage')
+            .documentId('homePage')
+            .title('Home Page'),
+        ),
+
+      S.listItem()
+        .title('About Us Page')
+        .id('aboutPage')
+        .child(
+          S.document()
+            .schemaType('aboutPage')
+            .documentId('aboutPage')
+            .title('About Us Page'),
+        ),
+
+      S.listItem()
+        .title('How It Works Page')
+        .id('howItWorksPage')
+        .child(
+          S.document()
+            .schemaType('howItWorksPage')
+            .documentId('howItWorksPage')
+            .title('How It Works Page'),
+        ),
+
+      S.listItem()
+        .title('Privacy Policy')
+        .id('privacyPolicy')
+        .child(
+          S.document()
+            .schemaType('privacyPolicy')
+            .documentId('privacyPolicy')
+            .title('Privacy Policy'),
+        ),
+
+      S.listItem()
+        .title('Terms of Service')
+        .id('termsOfService')
+        .child(
+          S.document()
+            .schemaType('termsOfService')
+            .documentId('termsOfService')
+            .title('Terms of Service'),
+        ),
+
+      S.listItem()
+        .title('Contact Page')
+        .id('contactPage')
+        .child(
+          S.document()
+            .schemaType('contactPage')
+            .documentId('contactPage')
+            .title('Contact Page'),
+        ),
+
+      S.divider(),
+
+      // ── All other document types (auto-generated, excluding singletons) ──
+      ...S.documentTypeListItems().filter(
+        (item) => !SINGLETON_IDS.has(item.getId() ?? ''),
+      ),
+    ])
