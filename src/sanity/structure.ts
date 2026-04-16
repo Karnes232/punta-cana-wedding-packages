@@ -2,14 +2,29 @@ import type { StructureResolver } from 'sanity/structure'
 
 // Document IDs for singletons — one document per dataset
 const SINGLETONS = {
-  generalLayout: 'generalLayout',
-  homePage: 'homePage',
-  aboutPage: 'aboutPage',
-  howItWorksPage: 'howItWorksPage',
-  privacyPolicy: 'privacyPolicy',
-  termsOfService: 'termsOfService',
-  contactPage: 'contactPage',
+  generalLayout:   'generalLayout',
+  homePage:        'homePage',
+  aboutPage:       'aboutPage',
+  howItWorksPage:  'howItWorksPage',
+  privacyPolicy:   'privacyPolicy',
+  termsOfService:  'termsOfService',
+  contactPage:     'contactPage',
+  calculatorConfig: 'calculatorConfig',
 } as const
+
+// Calculator collection types — excluded from auto-generated list
+const CALCULATOR_TYPES = new Set([
+  'menuOption',
+  'barPackage',
+  'furnitureOption',
+  'decorPackage',
+  'photoPackage',
+  'videoPackage',
+  'transportationZone',
+  'entertainmentOption',
+  'extraOption',
+  'calculatorConfig',
+])
 
 // All singleton document IDs — excluded from auto-generated list items
 const SINGLETON_IDS = new Set<string>(Object.values(SINGLETONS))
@@ -116,10 +131,43 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
+      // ── Wedding Calculator Pricing ────────────────────────────────────────
+      S.listItem()
+        .title('Wedding Calculator')
+        .id('calculatorSection')
+        .child(
+          S.list()
+            .title('Wedding Calculator Pricing')
+            .items([
+              S.listItem()
+                .title('Configuration')
+                .id('calculatorConfig')
+                .child(
+                  S.document()
+                    .schemaType('calculatorConfig')
+                    .documentId('calculatorConfig')
+                    .title('Calculator Configuration'),
+                ),
+              S.divider(),
+              S.documentTypeListItem('menuOption').title('Menu Options'),
+              S.documentTypeListItem('barPackage').title('Bar Packages'),
+              S.documentTypeListItem('furnitureOption').title('Furniture Options'),
+              S.documentTypeListItem('decorPackage').title('Decor Packages'),
+              S.documentTypeListItem('photoPackage').title('Photography Packages'),
+              S.documentTypeListItem('videoPackage').title('Videography Packages'),
+              S.documentTypeListItem('transportationZone').title('Transportation Zones'),
+              S.documentTypeListItem('entertainmentOption').title('Entertainment Options'),
+              S.documentTypeListItem('extraOption').title('Extra Experiences'),
+            ]),
+        ),
+
+      S.divider(),
+
       // ── All other document types (auto-generated, excluding singletons) ──
       ...S.documentTypeListItems().filter(
         (item) =>
           !SINGLETON_IDS.has(item.getId() ?? '') &&
+          !CALCULATOR_TYPES.has(item.getId() ?? '') &&
           item.getId() !== 'pageSeo' &&
           item.getId() !== 'weddingStory',
       ),

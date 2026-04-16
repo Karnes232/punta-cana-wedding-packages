@@ -1712,6 +1712,435 @@ const pageSeoDocuments = [
   },
 ]
 
+// ── Wedding Calculator Pricing Data ──────────────────────────────────────────
+
+const calculatorConfigDoc = {
+  _id: 'calculatorConfig',
+  _type: 'calculatorConfig',
+  venueCost: 4500,
+  coordinationCost: 0,
+  defaultSeatsPerTable: 10,
+  minimumAdvanceMonths: 6,
+}
+
+const menuOptions = [
+  {
+    _id: 'menu-classic',
+    _type: 'menuOption',
+    name: { _type: 'localizedString', en: 'Classic Menu', es: 'Menú Clásico' },
+    description: { _type: 'localizedText', en: 'A timeless selection of international and Caribbean dishes served buffet-style.', es: 'Una selección atemporal de platos internacionales y caribeños servidos en formato buffet.' },
+    style: 'buffet',
+    costPerPerson: 30,
+    order: 1,
+  },
+  {
+    _id: 'menu-tropical',
+    _type: 'menuOption',
+    name: { _type: 'localizedString', en: 'Tropical Menu', es: 'Menú Tropical' },
+    description: { _type: 'localizedText', en: 'Fresh Dominican seafood and tropical ingredients elevated into elegant plated courses.', es: 'Mariscos dominicanos frescos e ingredientes tropicales elevados a elegantes platos servidos.' },
+    style: 'plated',
+    costPerPerson: 40,
+    order: 2,
+  },
+  {
+    _id: 'menu-premium',
+    _type: 'menuOption',
+    name: { _type: 'localizedString', en: 'Premium Menu', es: 'Menú Premium' },
+    description: { _type: 'localizedText', en: 'A gourmet five-course dinner featuring premium proteins and locally-sourced ingredients.', es: 'Una cena gourmet de cinco tiempos con proteínas premium e ingredientes de origen local.' },
+    style: 'plated',
+    costPerPerson: 55,
+    order: 3,
+  },
+  {
+    _id: 'menu-family',
+    _type: 'menuOption',
+    name: { _type: 'localizedString', en: 'Family Style', es: 'Estilo Familiar' },
+    description: { _type: 'localizedText', en: 'Abundant sharing platters brought to each table — warm, communal, and relaxed.', es: 'Abundantes bandejas compartidas servidas en cada mesa — cálido, comunitario y relajado.' },
+    style: 'family',
+    costPerPerson: 35,
+    order: 4,
+  },
+]
+
+const barPackages = [
+  {
+    _id: 'bar-basic',
+    _type: 'barPackage',
+    name: { _type: 'localizedString', en: 'Basic Bar', es: 'Barra Básica' },
+    description: { _type: 'localizedText', en: 'Beer, house wine, rum, and soft drinks. Everything your guests need for a great celebration.', es: 'Cerveza, vino de la casa, ron y refrescos. Todo lo que tus invitados necesitan para una gran celebración.' },
+    tier: 'basic',
+    costPerPersonPerHour: 18,
+    availableHours: [3, 5, 8],
+    addOns: [
+      { _key: 'champagne-toast', name: { _type: 'localizedString', en: 'Champagne Toast', es: 'Brindis con Champán' }, cost: 500, isPerPerson: false },
+      { _key: 'coffee-station', name: { _type: 'localizedString', en: 'Coffee Station', es: 'Estación de Café' }, cost: 200, isPerPerson: false },
+    ],
+    order: 1,
+  },
+  {
+    _id: 'bar-premium',
+    _type: 'barPackage',
+    name: { _type: 'localizedString', en: 'Premium Bar', es: 'Barra Premium' },
+    description: { _type: 'localizedText', en: 'Premium spirits, cocktails, imported wine, and beer. Crafted drinks for a refined celebration.', es: 'Licores premium, cócteles, vino importado y cerveza. Bebidas elaboradas para una celebración refinada.' },
+    tier: 'premium',
+    costPerPersonPerHour: 28,
+    availableHours: [3, 5, 8],
+    addOns: [
+      { _key: 'champagne-toast', name: { _type: 'localizedString', en: 'Champagne Toast', es: 'Brindis con Champán' }, cost: 500, isPerPerson: false },
+      { _key: 'signature-cocktails', name: { _type: 'localizedString', en: 'Signature Cocktails', es: 'Cócteles de Firma' }, cost: 15, isPerPerson: true },
+      { _key: 'wine-pairing', name: { _type: 'localizedString', en: 'Wine Pairing Service', es: 'Maridaje de Vinos' }, cost: 20, isPerPerson: true },
+      { _key: 'coffee-station', name: { _type: 'localizedString', en: 'Coffee Station', es: 'Estación de Café' }, cost: 200, isPerPerson: false },
+    ],
+    order: 2,
+  },
+  {
+    _id: 'bar-topshelf',
+    _type: 'barPackage',
+    name: { _type: 'localizedString', en: 'Top Shelf Bar', es: 'Barra Top Shelf' },
+    description: { _type: 'localizedText', en: 'Unlimited top-shelf spirits, premium champagne, curated cocktails, and sommelier wine service.', es: 'Licores top-shelf ilimitados, champán premium, cócteles curados y servicio de vinos con sommelier.' },
+    tier: 'topShelf',
+    costPerPersonPerHour: 40,
+    availableHours: [5, 8],
+    addOns: [
+      { _key: 'champagne-tower', name: { _type: 'localizedString', en: 'Champagne Tower', es: 'Torre de Champán' }, cost: 800, isPerPerson: false },
+      { _key: 'signature-cocktails', name: { _type: 'localizedString', en: 'Signature Cocktails', es: 'Cócteles de Firma' }, cost: 15, isPerPerson: true },
+      { _key: 'digestif', name: { _type: 'localizedString', en: 'After-Dinner Digestif Service', es: 'Servicio de Digestivos' }, cost: 8, isPerPerson: true },
+      { _key: 'coffee-station', name: { _type: 'localizedString', en: 'Coffee & Espresso Station', es: 'Estación de Café y Espresso' }, cost: 200, isPerPerson: false },
+    ],
+    order: 3,
+  },
+]
+
+const furnitureOptions = [
+  {
+    _id: 'furniture-standard',
+    _type: 'furnitureOption',
+    name: { _type: 'localizedString', en: 'Standard', es: 'Estándar' },
+    description: { _type: 'localizedText', en: 'Standard round tables with white folding chairs and classic white linens.', es: 'Mesas redondas estándar con sillas plegables blancas y manteles clásicos blancos.' },
+    tableType: 'standardRound',
+    chairType: 'standard',
+    seatsPerTable: 10,
+    costPerTable: 15,
+    order: 1,
+  },
+  {
+    _id: 'furniture-premium',
+    _type: 'furnitureOption',
+    name: { _type: 'localizedString', en: 'Premium', es: 'Premium' },
+    description: { _type: 'localizedText', en: 'Premium round tables with elegant cross-back chairs and premium linen overlays.', es: 'Mesas redondas premium con elegantes sillas cross-back y sobremantel premium.' },
+    tableType: 'premiumRound',
+    chairType: 'crossback',
+    seatsPerTable: 10,
+    costPerTable: 35,
+    order: 2,
+  },
+  {
+    _id: 'furniture-luxury',
+    _type: 'furnitureOption',
+    name: { _type: 'localizedString', en: 'Luxury Chiavari', es: 'Chiavari de Lujo' },
+    description: { _type: 'localizedText', en: 'Long banquet tables with gold Chiavari chairs and designer linen in your choice of color.', es: 'Mesas banquete largas con sillas Chiavari doradas y mantería de diseñador en el color de tu elección.' },
+    tableType: 'banquet',
+    chairType: 'chiavari',
+    seatsPerTable: 10,
+    costPerTable: 55,
+    order: 3,
+  },
+]
+
+const decorPackages = [
+  {
+    _id: 'decor-classic',
+    _type: 'decorPackage',
+    name: { _type: 'localizedString', en: 'Classic', es: 'Clásico' },
+    description: { _type: 'localizedText', en: 'Simple, elegant florals with basic centerpieces and a clean ceremony setup.', es: 'Arreglos florales simples y elegantes con centros de mesa básicos y una configuración limpia para la ceremonia.' },
+    baseCost: 3000,
+    addOns: [
+      { _key: 'aisle-florals', name: { _type: 'localizedString', en: 'Aisle Florals', es: 'Flores en el Pasillo' }, cost: 500, isPerTable: false },
+      { _key: 'sweetheart-table', name: { _type: 'localizedString', en: 'Sweetheart Table Design', es: 'Diseño Mesa de Novios' }, cost: 500, isPerTable: false },
+      { _key: 'candles-lighting', name: { _type: 'localizedString', en: 'Candles & Lighting Upgrade', es: 'Mejora de Velas e Iluminación' }, cost: 500, isPerTable: false },
+    ],
+    order: 1,
+  },
+  {
+    _id: 'decor-elegant',
+    _type: 'decorPackage',
+    name: { _type: 'localizedString', en: 'Elegant', es: 'Elegante' },
+    description: { _type: 'localizedText', en: 'Upgraded florals with premium centerpieces, enhanced lighting, and ceremony arch included.', es: 'Flores mejoradas con centros de mesa premium, iluminación realzada y arco de ceremonia incluido.' },
+    baseCost: 6000,
+    addOns: [
+      { _key: 'extra-centerpieces', name: { _type: 'localizedString', en: 'Centerpiece Upgrade (per table)', es: 'Mejora de Centro de Mesa (por mesa)' }, cost: 100, isPerTable: true },
+      { _key: 'sweetheart-table', name: { _type: 'localizedString', en: 'Sweetheart Table Design', es: 'Diseño Mesa de Novios' }, cost: 500, isPerTable: false },
+      { _key: 'lounge-setup', name: { _type: 'localizedString', en: 'Lounge Area Florals', es: 'Flores en Área Lounge' }, cost: 300, isPerTable: false },
+    ],
+    order: 2,
+  },
+  {
+    _id: 'decor-premium',
+    _type: 'decorPackage',
+    name: { _type: 'localizedString', en: 'Premium Luxury', es: 'Lujo Premium' },
+    description: { _type: 'localizedText', en: 'Lavish floral arrangements, elaborate centerpieces, full lighting design, and complete venue transformation.', es: 'Exuberantes arreglos florales, centros de mesa elaborados, diseño completo de iluminación y transformación total del lugar.' },
+    baseCost: 10000,
+    addOns: [
+      { _key: 'extra-centerpieces', name: { _type: 'localizedString', en: 'Centerpiece Upgrade (per table)', es: 'Mejora de Centro de Mesa (por mesa)' }, cost: 100, isPerTable: true },
+      { _key: 'ceremony-arch', name: { _type: 'localizedString', en: 'Custom Ceremony Arch', es: 'Arco de Ceremonia Personalizado' }, cost: 800, isPerTable: false },
+      { _key: 'lounge-setup', name: { _type: 'localizedString', en: 'Lounge Area Florals', es: 'Flores en Área Lounge' }, cost: 300, isPerTable: false },
+    ],
+    order: 3,
+  },
+]
+
+const photoPackages = [
+  {
+    _id: 'photo-standard',
+    _type: 'photoPackage',
+    name: { _type: 'localizedString', en: 'Standard Coverage', es: 'Cobertura Estándar' },
+    description: { _type: 'localizedText', en: '1 photographer, 8 hours of coverage, digital gallery with 400+ edited photos.', es: '1 fotógrafo, 8 horas de cobertura, galería digital con más de 400 fotos editadas.' },
+    hours: 8,
+    cost: 2500,
+    addOns: [
+      { _key: 'drone', name: { _type: 'localizedString', en: 'Drone Footage', es: 'Tomas con Drone' }, cost: 800 },
+      { _key: 'album', name: { _type: 'localizedString', en: 'Premium Photo Album', es: 'Álbum de Fotos Premium' }, cost: 300 },
+      { _key: 'rush', name: { _type: 'localizedString', en: 'Rush Gallery Delivery', es: 'Entrega Rápida de Galería' }, cost: 200 },
+    ],
+    order: 1,
+  },
+  {
+    _id: 'photo-premium',
+    _type: 'photoPackage',
+    name: { _type: 'localizedString', en: 'Premium Coverage', es: 'Cobertura Premium' },
+    description: { _type: 'localizedText', en: '2 photographers, 10 hours of coverage, engagement session included, 600+ edited photos.', es: '2 fotógrafos, 10 horas de cobertura, sesión de compromiso incluida, más de 600 fotos editadas.' },
+    hours: 10,
+    cost: 4000,
+    addOns: [
+      { _key: 'drone', name: { _type: 'localizedString', en: 'Drone Footage', es: 'Tomas con Drone' }, cost: 800 },
+      { _key: 'album', name: { _type: 'localizedString', en: 'Premium Photo Album', es: 'Álbum de Fotos Premium' }, cost: 300 },
+      { _key: 'prints', name: { _type: 'localizedString', en: 'Fine Art Print Set (20 prints)', es: 'Set de Impresiones de Arte (20 impresiones)' }, cost: 400 },
+    ],
+    order: 2,
+  },
+  {
+    _id: 'photo-luxury',
+    _type: 'photoPackage',
+    name: { _type: 'localizedString', en: 'Luxury Coverage', es: 'Cobertura de Lujo' },
+    description: { _type: 'localizedText', en: '2 photographers, 12 hours of coverage, pre-wedding session, drone, 800+ edited photos, luxury album.', es: '2 fotógrafos, 12 horas de cobertura, sesión pre-boda, drone, más de 800 fotos editadas, álbum de lujo.' },
+    hours: 12,
+    cost: 6000,
+    addOns: [
+      { _key: 'drone', name: { _type: 'localizedString', en: 'Second Drone Operator', es: 'Segundo Operador de Drone' }, cost: 600 },
+      { _key: 'prints', name: { _type: 'localizedString', en: 'Fine Art Print Set (20 prints)', es: 'Set de Impresiones de Arte (20 impresiones)' }, cost: 400 },
+      { _key: 'canvas', name: { _type: 'localizedString', en: 'Canvas Wall Art (60×90 cm)', es: 'Arte en Lienzo para Pared (60×90 cm)' }, cost: 250 },
+    ],
+    order: 3,
+  },
+]
+
+const videoPackages = [
+  {
+    _id: 'video-standard',
+    _type: 'videoPackage',
+    name: { _type: 'localizedString', en: 'Standard Video', es: 'Video Estándar' },
+    description: { _type: 'localizedText', en: '1 videographer, 8 hours of coverage, cinematic highlights reel (5–7 min).', es: '1 videógrafo, 8 horas de cobertura, video de momentos destacados (5–7 min).' },
+    hours: 8,
+    cost: 2500,
+    addOns: [
+      { _key: 'drone', name: { _type: 'localizedString', en: 'Drone Footage', es: 'Tomas con Drone' }, cost: 600 },
+      { _key: 'social-cut', name: { _type: 'localizedString', en: 'Social Media Content Package', es: 'Paquete de Contenido para Redes Sociales' }, cost: 300 },
+    ],
+    order: 1,
+  },
+  {
+    _id: 'video-premium',
+    _type: 'videoPackage',
+    name: { _type: 'localizedString', en: 'Premium Cinematic', es: 'Cinematográfico Premium' },
+    description: { _type: 'localizedText', en: '2 videographers, 12 hours of coverage, cinematic film (10–15 min) + raw footage.', es: '2 videógrafos, 12 horas de cobertura, película cinematográfica (10–15 min) + metraje sin editar.' },
+    hours: 12,
+    cost: 4500,
+    addOns: [
+      { _key: 'drone', name: { _type: 'localizedString', en: 'Drone Footage', es: 'Tomas con Drone' }, cost: 600 },
+      { _key: 'same-day-edit', name: { _type: 'localizedString', en: 'Same-Day Highlight Reel', es: 'Video Destacado el Mismo Día' }, cost: 500 },
+      { _key: 'social-cut', name: { _type: 'localizedString', en: 'Social Media Content Package', es: 'Paquete de Contenido para Redes Sociales' }, cost: 300 },
+    ],
+    order: 2,
+  },
+  {
+    _id: 'video-luxury',
+    _type: 'videoPackage',
+    name: { _type: 'localizedString', en: 'Luxury Drone Film', es: 'Película Drone de Lujo' },
+    description: { _type: 'localizedText', en: '2 videographers + dedicated drone operator, 12 hours, full-length documentary + cinematic highlights.', es: '2 videógrafos + operador de drone dedicado, 12 horas, documental completo + destacados cinematográficos.' },
+    hours: 12,
+    cost: 6500,
+    addOns: [
+      { _key: 'same-day-edit', name: { _type: 'localizedString', en: 'Same-Day Highlight Reel', es: 'Video Destacado el Mismo Día' }, cost: 500 },
+      { _key: 'social-cut', name: { _type: 'localizedString', en: 'Social Media Content Package', es: 'Paquete de Contenido para Redes Sociales' }, cost: 300 },
+      { _key: 'ceremony-only', name: { _type: 'localizedString', en: 'Ceremony-Only Trim (discount)', es: 'Solo Ceremonia (descuento)' }, cost: -1000 },
+    ],
+    order: 3,
+  },
+]
+
+const transportationZones = [
+  {
+    _id: 'transport-zone-punta-cana',
+    _type: 'transportationZone',
+    name: { _type: 'localizedString', en: 'Punta Cana (General)', es: 'Punta Cana (General)' },
+    description: { _type: 'localizedText', en: 'Hotels in the main Punta Cana tourist corridor.', es: 'Hoteles en el corredor turístico principal de Punta Cana.' },
+    vehicleCapacity: 15,
+    ratePerVehicle: 120,
+    order: 1,
+  },
+  {
+    _id: 'transport-zone-bavaro',
+    _type: 'transportationZone',
+    name: { _type: 'localizedString', en: 'Bávaro Beach Area', es: 'Zona de Playa Bávaro' },
+    description: { _type: 'localizedText', en: 'Hotels along the Bávaro beach strip, slightly closer to the venue.', es: 'Hoteles a lo largo de la franja de playa Bávaro, algo más cerca del venue.' },
+    vehicleCapacity: 15,
+    ratePerVehicle: 100,
+    order: 2,
+  },
+  {
+    _id: 'transport-zone-cap-cana',
+    _type: 'transportationZone',
+    name: { _type: 'localizedString', en: 'Cap Cana', es: 'Cap Cana' },
+    description: { _type: 'localizedText', en: 'Luxury resort area south of Punta Cana, longer transfer required.', es: 'Área de resorts de lujo al sur de Punta Cana, traslado más largo requerido.' },
+    vehicleCapacity: 15,
+    ratePerVehicle: 160,
+    order: 3,
+  },
+  {
+    _id: 'transport-zone-santo-domingo',
+    _type: 'transportationZone',
+    name: { _type: 'localizedString', en: 'Santo Domingo / Remote', es: 'Santo Domingo / Remoto' },
+    description: { _type: 'localizedText', en: 'Long-distance transfer from Santo Domingo or remote areas.', es: 'Traslado de larga distancia desde Santo Domingo o áreas remotas.' },
+    vehicleCapacity: 15,
+    ratePerVehicle: 300,
+    order: 4,
+  },
+]
+
+const entertainmentOptions = [
+  {
+    _id: 'ent-dj-5h',
+    _type: 'entertainmentOption',
+    name: { _type: 'localizedString', en: 'DJ (5 hours)', es: 'DJ (5 horas)' },
+    description: { _type: 'localizedText', en: 'Professional DJ with full sound system, lighting, and MC service for 5 hours.', es: 'DJ profesional con sistema de sonido completo, iluminación y servicio de MC por 5 horas.' },
+    cost: 1200,
+    order: 1,
+  },
+  {
+    _id: 'ent-dj-7h',
+    _type: 'entertainmentOption',
+    name: { _type: 'localizedString', en: 'DJ (7 hours)', es: 'DJ (7 horas)' },
+    description: { _type: 'localizedText', en: 'Professional DJ with full sound system, lighting, and MC service for 7 hours.', es: 'DJ profesional con sistema de sonido completo, iluminación y servicio de MC por 7 horas.' },
+    cost: 1600,
+    order: 2,
+  },
+  {
+    _id: 'ent-live-band',
+    _type: 'entertainmentOption',
+    name: { _type: 'localizedString', en: 'Live Band (3 hours)', es: 'Banda en Vivo (3 horas)' },
+    description: { _type: 'localizedText', en: 'A 4-piece live band playing tropical, Latin, and pop favorites for 3 hours.', es: 'Banda de 4 piezas tocando favoritos tropicales, latinos y pop durante 3 horas.' },
+    cost: 2500,
+    order: 3,
+  },
+  {
+    _id: 'ent-violinist',
+    _type: 'entertainmentOption',
+    name: { _type: 'localizedString', en: 'Violinist (ceremony + cocktail hour)', es: 'Violinista (ceremonia + cóctel)' },
+    description: { _type: 'localizedText', en: 'A solo violinist performing classical and romantic pieces during ceremony and cocktail hour.', es: 'Un violinista solista interpretando piezas clásicas y románticas durante la ceremonia y el cóctel.' },
+    cost: 400,
+    order: 4,
+  },
+  {
+    _id: 'ent-saxophonist',
+    _type: 'entertainmentOption',
+    name: { _type: 'localizedString', en: 'Saxophonist (cocktail hour)', es: 'Saxofonista (hora del cóctel)' },
+    description: { _type: 'localizedText', en: 'A smooth jazz saxophonist performing during your cocktail hour.', es: 'Un saxofonista de smooth jazz tocando durante tu hora del cóctel.' },
+    cost: 250,
+    order: 5,
+  },
+  {
+    _id: 'ent-mariachi',
+    _type: 'entertainmentOption',
+    name: { _type: 'localizedString', en: 'Mariachi (1 hour)', es: 'Mariachi (1 hora)' },
+    description: { _type: 'localizedText', en: 'A full mariachi ensemble for 1 hour of festive, unforgettable entertainment.', es: 'Un conjunto mariachi completo por 1 hora de entretenimiento festivo e inolvidable.' },
+    cost: 300,
+    order: 6,
+  },
+  {
+    _id: 'ent-mc',
+    _type: 'entertainmentOption',
+    name: { _type: 'localizedString', en: 'MC / Host Service', es: 'Servicio de MC / Animador' },
+    description: { _type: 'localizedText', en: 'A bilingual MC to guide guests through the reception timeline with warmth and energy.', es: 'Un MC bilingüe para guiar a los invitados a través del programa de la recepción con calidez y energía.' },
+    cost: 200,
+    order: 7,
+  },
+  {
+    _id: 'ent-photo-booth',
+    _type: 'entertainmentOption',
+    name: { _type: 'localizedString', en: 'Photo Booth (4 hours)', es: 'Cabina de Fotos (4 horas)' },
+    description: { _type: 'localizedText', en: 'A fun photo booth with props and instant prints for 4 hours — guests love it.', es: 'Una divertida cabina de fotos con accesorios e impresiones instantáneas por 4 horas — los invitados la adoran.' },
+    cost: 800,
+    order: 8,
+  },
+]
+
+const extraOptions = [
+  {
+    _id: 'extra-welcome-dinner',
+    _type: 'extraOption',
+    name: { _type: 'localizedString', en: 'Welcome Dinner (day before)', es: 'Cena de Bienvenida (día anterior)' },
+    description: { _type: 'localizedText', en: 'An intimate dinner the night before the wedding to welcome arriving guests.', es: 'Una cena íntima la noche anterior a la boda para dar la bienvenida a los invitados que llegan.' },
+    cost: 45,
+    isPerPerson: true,
+    order: 1,
+  },
+  {
+    _id: 'extra-farewell-brunch',
+    _type: 'extraOption',
+    name: { _type: 'localizedString', en: 'Farewell Brunch (day after)', es: 'Brunch de Despedida (día después)' },
+    description: { _type: 'localizedText', en: 'A relaxed morning brunch the day after the wedding before guests depart.', es: 'Un brunch matutino relajado al día siguiente de la boda antes de que los invitados partan.' },
+    cost: 35,
+    isPerPerson: true,
+    order: 2,
+  },
+  {
+    _id: 'extra-saona-trip',
+    _type: 'extraOption',
+    name: { _type: 'localizedString', en: 'Private Saona Island Trip (half-day)', es: 'Excursión Privada a la Isla Saona (medio día)' },
+    description: { _type: 'localizedText', en: 'A private catamaran excursion to the legendary Saona Island — stunning beaches, snorkeling, and open bar.', es: 'Una excursión privada en catamarán a la legendaria Isla Saona — playas impresionantes, snorkel y barra libre.' },
+    cost: 85,
+    isPerPerson: true,
+    order: 3,
+  },
+  {
+    _id: 'extra-catamaran',
+    _type: 'extraOption',
+    name: { _type: 'localizedString', en: 'Private Catamaran Party (evening)', es: 'Fiesta Privada en Catamarán (noche)' },
+    description: { _type: 'localizedText', en: 'Sunset sailing on a private catamaran with open bar, music, and Caribbean views.', es: 'Navegación al atardecer en catamarán privado con barra libre, música y vistas al Caribe.' },
+    cost: 120,
+    isPerPerson: true,
+    order: 4,
+  },
+  {
+    _id: 'extra-buggy',
+    _type: 'extraOption',
+    name: { _type: 'localizedString', en: 'Buggy Excursion (group tour)', es: 'Excursión en Buggy (tour grupal)' },
+    description: { _type: 'localizedText', en: 'An off-road buggy adventure through the Punta Cana countryside — exciting and unforgettable.', es: 'Una aventura todo terreno en buggy por el campo de Punta Cana — emocionante e inolvidable.' },
+    cost: 50,
+    isPerPerson: true,
+    order: 5,
+  },
+  {
+    _id: 'extra-spa',
+    _type: 'extraOption',
+    name: { _type: 'localizedString', en: 'Spa Treatment at Hotel', es: 'Tratamiento de Spa en el Hotel' },
+    description: { _type: 'localizedText', en: 'A relaxing spa session for guests at their hotel — a perfect gift before or after the wedding.', es: 'Una relajante sesión de spa para los invitados en su hotel — el regalo perfecto antes o después de la boda.' },
+    cost: 35,
+    isPerPerson: true,
+    order: 6,
+  },
+]
+
 async function seed() {
   console.log(`Seeding → ${projectId} / ${dataset}`)
 
@@ -1766,6 +2195,31 @@ async function seed() {
     console.log(`✓ weddingStory seeded: ${(s as { coupleName?: { en?: string } }).coupleName?.en} (id: ${s._id})`),
   )
   console.log(`\n✓ Stories seed complete: ${seededStories.length} stories`)
+
+  // Calculator config (singleton)
+  const calcConfig = await client.createOrReplace(calculatorConfigDoc)
+  console.log(`✓ calculatorConfig seeded (id: ${calcConfig._id})`)
+
+  // Calculator pricing collections
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const allPricingDocs: any[] = [
+    ...menuOptions,
+    ...barPackages,
+    ...furnitureOptions,
+    ...decorPackages,
+    ...photoPackages,
+    ...videoPackages,
+    ...transportationZones,
+    ...entertainmentOptions,
+    ...extraOptions,
+  ]
+  const seededPricing = await Promise.all(
+    allPricingDocs.map((doc) => client.createOrReplace(doc)),
+  )
+  seededPricing.forEach((doc) =>
+    console.log(`✓ ${(doc as { _type?: string })._type} seeded: ${doc._id}`),
+  )
+  console.log(`\n✓ Calculator pricing seed complete: ${seededPricing.length} documents`)
 }
 
 seed().catch((err) => {

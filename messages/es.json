@@ -131,6 +131,176 @@
       "backToStories": "← Todas las Historias"
     }
   },
+  "weddingCalculator": {
+    "hero": {
+      "heading": "Diseña Tu Paquete de Boda",
+      "sub": "Selecciona cada categoría, mira tu precio actualizarse en tiempo real y envíanos tu plan completo."
+    },
+    "progress": {
+      "step": "Paso {current} de {total}",
+      "complete": "Completo"
+    },
+    "total": {
+      "label": "Total Estimado",
+      "included": "Lugar y Coordinación Incluidos",
+      "collapse": "Ocultar total",
+      "expand": "Mostrar total"
+    },
+    "steps": {
+      "date": {
+        "title": "Fecha de Boda",
+        "label": "¿Cuándo te gustaría casarte?",
+        "help": "Recomendamos reservar con al menos 6 meses de anticipación. La temporada alta es de noviembre a abril.",
+        "placeholder": "Selecciona una fecha",
+        "tooSoon": "Por favor selecciona una fecha al menos 6 meses a partir de hoy."
+      },
+      "guests": {
+        "title": "Número de Invitados",
+        "label": "¿Cuántos invitados esperas?",
+        "help": "El número de invitados afecta los costos de comida, bebidas, mobiliario y transporte.",
+        "min": "Mínimo 10 invitados",
+        "max": "Máximo 500 invitados"
+      },
+      "hotel": {
+        "title": "Hotel / Área",
+        "label": "¿Dónde se hospedan la mayoría de los invitados?",
+        "help": "Usamos esto para calcular tus necesidades de transporte."
+      },
+      "venue": {
+        "title": "Lugar y Coordinación",
+        "included": "Siempre Incluido",
+        "location": "Playa Cabeza de Toro, Punta Cana",
+        "description": "Todas las bodas se celebran en nuestro impresionante venue frente al mar en Cabeza de Toro. La coordinación profesional de bodas está incluida en todos los paquetes.",
+        "confirm": "¡Me emociona casarme aquí!",
+        "features": ["Montaje de ceremonia frente al mar", "Sonido e iluminación profesional", "Acceso todo el día", "Equipo de coordinación en el lugar"]
+      },
+      "menu": {
+        "title": "Selección de Menú",
+        "label": "Elige tu experiencia gastronómica",
+        "perPerson": "/persona",
+        "total": "Total comida:"
+      },
+      "bar": {
+        "title": "Bebidas y Barra Libre",
+        "label": "Elige tu paquete de barra",
+        "hours": "{n} horas",
+        "selectHours": "Duración",
+        "perPersonPerHour": "/persona/hora",
+        "addOns": "Mejoras Opcionales",
+        "barTotal": "Total bebidas:"
+      },
+      "furniture": {
+        "title": "Mobiliario y Manteles",
+        "label": "Elige la configuración de tus mesas",
+        "perTable": "/mesa",
+        "tablesNeeded": "{n} mesas necesarias para {g} invitados",
+        "total": "Total mobiliario:"
+      },
+      "decor": {
+        "title": "Decoración y Flores",
+        "label": "Elige tu paquete de decoración",
+        "addOns": "Mejoras adicionales",
+        "perTable": "/mesa",
+        "total": "Total decoración:"
+      },
+      "photo": {
+        "title": "Fotografía",
+        "label": "Elige tu paquete de fotografía",
+        "hours": "{n} horas",
+        "addOns": "Mejoras",
+        "total": "Total fotografía:"
+      },
+      "video": {
+        "title": "Videografía",
+        "label": "Elige tu paquete de videografía",
+        "hours": "{n} horas",
+        "addOns": "Mejoras",
+        "total": "Total videografía:",
+        "skip": "Omitir videografía"
+      },
+      "transport": {
+        "title": "Transporte",
+        "label": "Transporte desde tu área de hotel",
+        "zone": "Tu área de hotel",
+        "vehiclesNeeded": "{n} vehículos necesarios para {g} invitados",
+        "perVehicle": "/vehículo",
+        "capacity": "{n} pasajeros por vehículo",
+        "total": "Total transporte:"
+      },
+      "entertainment": {
+        "title": "Entretenimiento",
+        "label": "Selecciona opciones de entretenimiento (elige todas las que quieras)",
+        "none": "Omitir entretenimiento",
+        "total": "Total entretenimiento:"
+      },
+      "extras": {
+        "title": "Experiencias Extra",
+        "label": "Experiencias adicionales opcionales para tus invitados",
+        "perPerson": "{cost}/persona",
+        "perPersonTotal": "{cost}/persona × {guests} invitados = {total}",
+        "flat": "Precio fijo",
+        "none": "Sin extras",
+        "total": "Total extras:"
+      }
+    },
+    "summary": {
+      "heading": "Resumen de Tu Boda",
+      "date": "Fecha de Boda",
+      "guests": "{n} invitados",
+      "breakdown": "Desglose de Precios",
+      "venue": "Lugar y Coordinación",
+      "menu": "Menú ({name} × {n} invitados)",
+      "bar": "Barra Libre ({name} · {h}h × {n} invitados)",
+      "furniture": "Mobiliario ({name} · {n} mesas)",
+      "decor": "Decoración y Flores ({name})",
+      "photo": "Fotografía ({name})",
+      "video": "Videografía ({name})",
+      "transport": "Transporte ({n} vehículos)",
+      "entertainment": "Entretenimiento",
+      "extras": "Experiencias Extra",
+      "skipped": "No seleccionado",
+      "total": "Total Estimado",
+      "disclaimer": "Precio final confirmado por tu coordinadora de bodas dedicada. No se requiere pago para enviar.",
+      "edit": "← Editar selecciones",
+      "continue": "Continuar al Formulario →"
+    },
+    "form": {
+      "heading": "Completa Tu Solicitud de Boda",
+      "sub": "Tu coordinadora se pondrá en contacto en 24 horas para confirmar tu paquete y responder tus preguntas.",
+      "name": "Tu Nombre",
+      "namePlaceholder": "Nombre completo",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "tu@correo.com",
+      "whatsapp": "Número de WhatsApp (opcional)",
+      "whatsappPlaceholder": "+1 (809) 000-0000",
+      "phone": "Número de Teléfono (opcional)",
+      "phonePlaceholder": "+1 (809) 000-0000",
+      "notes": "Notas o Preguntas Especiales",
+      "notesPlaceholder": "Restricciones dietéticas, solicitudes especiales, preguntas para el equipo...",
+      "terms": "Entiendo los términos de pago",
+      "termsDetail": "Depósito de $500 para confirmar fecha · 50% a 30 días antes · 50% restante a 15 días antes",
+      "submit": "Enviar Solicitud de Boda",
+      "submitting": "Enviando...",
+      "nameRequired": "Por favor ingresa tu nombre.",
+      "emailRequired": "Por favor ingresa un correo electrónico válido.",
+      "termsRequired": "Por favor confirma que entiendes los términos de pago."
+    },
+    "success": {
+      "heading": "¡Solicitud Recibida!",
+      "sub": "¡Gracias! Nuestra coordinadora se pondrá en contacto en 24 horas para confirmar tu plan de boda.",
+      "paymentTerms": "Plan de pagos:",
+      "deposit": "Depósito de $500 para asegurar tu fecha",
+      "balance30": "50% del total a 30 días antes de la boda",
+      "balance15": "50% restante a 15 días antes de la boda",
+      "goHome": "Volver al Inicio",
+      "viewStories": "Ver Historias de Bodas Reales"
+    },
+    "nav": {
+      "back": "Atrás",
+      "continue": "Continuar →",
+      "skip": "Omitir este paso →"
+    }
+  },
   "notFound": {
     "code": "404",
     "heading": "Página No Encontrada",

@@ -131,6 +131,176 @@
       "backToStories": "← All Stories"
     }
   },
+  "weddingCalculator": {
+    "hero": {
+      "heading": "Build Your Wedding Package",
+      "sub": "Step through each category, watch your price update in real time, then send us your complete plan."
+    },
+    "progress": {
+      "step": "Step {current} of {total}",
+      "complete": "Complete"
+    },
+    "total": {
+      "label": "Estimated Total",
+      "included": "Venue & Coordination Included",
+      "collapse": "Hide total",
+      "expand": "Show total"
+    },
+    "steps": {
+      "date": {
+        "title": "Wedding Date",
+        "label": "When would you like to get married?",
+        "help": "We recommend booking at least 6 months in advance. Peak season is November – April.",
+        "placeholder": "Select date",
+        "tooSoon": "Please select a date at least 6 months from today."
+      },
+      "guests": {
+        "title": "Number of Guests",
+        "label": "How many guests are you expecting?",
+        "help": "Your guest count affects food, drinks, furniture, and transportation costs.",
+        "min": "Minimum 10 guests",
+        "max": "Maximum 500 guests"
+      },
+      "hotel": {
+        "title": "Hotel / Area",
+        "label": "Where are most guests staying?",
+        "help": "We use this to calculate your transportation needs."
+      },
+      "venue": {
+        "title": "Venue & Coordination",
+        "included": "Always Included",
+        "location": "Cabeza de Toro Beach, Punta Cana",
+        "description": "All weddings take place at our stunning Cabeza de Toro beachfront venue. Professional wedding coordination is included in every package.",
+        "confirm": "I'm excited to get married here!",
+        "features": ["Beachfront ceremony setup", "Professional sound & lighting", "Full day access", "On-site coordination team"]
+      },
+      "menu": {
+        "title": "Menu Selection",
+        "label": "Choose your dining experience",
+        "perPerson": "/person",
+        "total": "Food total:"
+      },
+      "bar": {
+        "title": "Drinks & Open Bar",
+        "label": "Choose your bar package",
+        "hours": "{n} hours",
+        "selectHours": "Duration",
+        "perPersonPerHour": "/person/hour",
+        "addOns": "Optional Upgrades",
+        "barTotal": "Bar total:"
+      },
+      "furniture": {
+        "title": "Furniture & Linens",
+        "label": "Choose your table setup",
+        "perTable": "/table",
+        "tablesNeeded": "{n} tables needed for {g} guests",
+        "total": "Furniture total:"
+      },
+      "decor": {
+        "title": "Decoration & Florals",
+        "label": "Choose your decor package",
+        "addOns": "Add-on upgrades",
+        "perTable": "/table",
+        "total": "Decor total:"
+      },
+      "photo": {
+        "title": "Photography",
+        "label": "Choose your photography package",
+        "hours": "{n} hours",
+        "addOns": "Add-ons",
+        "total": "Photography total:"
+      },
+      "video": {
+        "title": "Videography",
+        "label": "Choose your videography package",
+        "hours": "{n} hours",
+        "addOns": "Add-ons",
+        "total": "Videography total:",
+        "skip": "Skip videography"
+      },
+      "transport": {
+        "title": "Transportation",
+        "label": "Transportation from your hotel area",
+        "zone": "Your hotel area",
+        "vehiclesNeeded": "{n} vehicles needed for {g} guests",
+        "perVehicle": "/vehicle",
+        "capacity": "{n} passengers per vehicle",
+        "total": "Transportation total:"
+      },
+      "entertainment": {
+        "title": "Entertainment",
+        "label": "Select entertainment options (choose as many as you like)",
+        "none": "Skip entertainment",
+        "total": "Entertainment total:"
+      },
+      "extras": {
+        "title": "Extra Experiences",
+        "label": "Optional add-on experiences for your guests",
+        "perPerson": "{cost}/person",
+        "perPersonTotal": "{cost}/person × {guests} guests = {total}",
+        "flat": "Flat fee",
+        "none": "No extras",
+        "total": "Extras total:"
+      }
+    },
+    "summary": {
+      "heading": "Your Wedding Summary",
+      "date": "Wedding Date",
+      "guests": "{n} guests",
+      "breakdown": "Pricing Breakdown",
+      "venue": "Venue & Coordination",
+      "menu": "Menu ({name} × {n} guests)",
+      "bar": "Open Bar ({name} · {h}h × {n} guests)",
+      "furniture": "Furniture ({name} · {n} tables)",
+      "decor": "Decoration & Florals ({name})",
+      "photo": "Photography ({name})",
+      "video": "Videography ({name})",
+      "transport": "Transportation ({n} vehicles)",
+      "entertainment": "Entertainment",
+      "extras": "Extra Experiences",
+      "skipped": "Not selected",
+      "total": "Estimated Total",
+      "disclaimer": "Final price confirmed by your dedicated wedding coordinator. No payment required to submit.",
+      "edit": "← Edit selections",
+      "continue": "Continue to Request →"
+    },
+    "form": {
+      "heading": "Complete Your Wedding Request",
+      "sub": "Your coordinator will contact you within 24 hours to confirm your package and answer any questions.",
+      "name": "Your Name",
+      "namePlaceholder": "Full name",
+      "email": "Email Address",
+      "emailPlaceholder": "you@example.com",
+      "whatsapp": "WhatsApp Number (optional)",
+      "whatsappPlaceholder": "+1 (809) 000-0000",
+      "phone": "Phone Number (optional)",
+      "phonePlaceholder": "+1 (809) 000-0000",
+      "notes": "Special Notes or Questions",
+      "notesPlaceholder": "Dietary restrictions, special requests, questions for the team...",
+      "terms": "I understand the payment terms",
+      "termsDetail": "$500 deposit to confirm date · 50% due 30 days before · Final 50% due 15 days before",
+      "submit": "Send Wedding Request",
+      "submitting": "Sending...",
+      "nameRequired": "Please enter your name.",
+      "emailRequired": "Please enter a valid email address.",
+      "termsRequired": "Please confirm that you understand the payment terms."
+    },
+    "success": {
+      "heading": "Request Received!",
+      "sub": "Thank you! Our coordinator will contact you within 24 hours to confirm your wedding plan.",
+      "paymentTerms": "Payment schedule:",
+      "deposit": "$500 deposit to secure your date",
+      "balance30": "50% of total due 30 days before wedding",
+      "balance15": "Final 50% due 15 days before wedding",
+      "goHome": "Back to Home",
+      "viewStories": "See Real Wedding Stories"
+    },
+    "nav": {
+      "back": "Back",
+      "continue": "Continue →",
+      "skip": "Skip this step →"
+    }
+  },
   "notFound": {
     "code": "404",
     "heading": "Page Not Found",

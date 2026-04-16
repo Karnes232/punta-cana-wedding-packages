@@ -21,6 +21,18 @@ import { contactPage } from './ContactPage'
 import { blogArticle, blogCategory } from './Blog'
 import { weddingStory } from './StoriesPage'
 import { seo, pageSeo } from './SEO'
+import {
+  menuOption,
+  barPackage,
+  furnitureOption,
+  decorPackage,
+  photoPackage,
+  videoPackage,
+  transportationZone,
+  entertainmentOption,
+  extraOption,
+  calculatorConfig,
+} from './WeddingCalculator'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -47,5 +59,17 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     // SEO (seo object must be registered before pageSeo uses it)
     seo,
     pageSeo,
+
+    // Wedding Calculator pricing data
+    menuOption,
+    barPackage,
+    furnitureOption,
+    decorPackage,
+    photoPackage,
+    videoPackage,
+    transportationZone,
+    entertainmentOption,
+    extraOption,
+    calculatorConfig,
   ],
 }
