@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { getArticleBySlug } from '@/sanity/queries/Blog';
-import { ArticleHeader, ArticleBody, ArticleTranslationsRegistrar } from '@/components/BlogPage';
+import { ArticleHeader, ArticleBody, ArticleTranslationsRegistrar, BlogCTABanner } from '@/components/BlogPage';
 
 export const revalidate = 3600;
 
@@ -35,6 +35,7 @@ export default async function BlogArticlePage({ params }: Props) {
       <ArticleTranslationsRegistrar translations={article.translations ?? []} />
       <ArticleHeader article={article} locale={locale} />
       <ArticleBody body={article.body} locale={locale} />
+      <BlogCTABanner />
     </>
   );
 }

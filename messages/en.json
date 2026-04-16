@@ -86,7 +86,12 @@
     "readMore": "Read More",
     "backToBlog": "Back to Blog",
     "publishedOn": "Published on",
-    "noArticles": "No articles yet. Check back soon."
+    "noArticles": "No articles yet. Check back soon.",
+    "cta": {
+      "heading": "Ready to Start Planning Your Dream Wedding?",
+      "sub": "Use our free wedding calculator to build your perfect Punta Cana package — and get a personalized quote in minutes.",
+      "button": "Start Planning My Wedding"
+    }
   },
   "home": {
     "hero": {
