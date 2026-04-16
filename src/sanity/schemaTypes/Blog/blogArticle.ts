@@ -138,7 +138,8 @@ export const blogArticle = defineType({
       title: 'SEO Title',
       type: 'string',
       group: 'seo',
-      description: 'Overrides the article title in <title> tags. Leave blank to use title.',
+      description: 'Overrides the article title in <title> tags. Leave blank to use title. Keep under 60 characters.',
+      validation: (R) => R.max(60).warning('SEO titles over 60 characters may be truncated by Google.'),
     }),
 
     defineField({
@@ -147,7 +148,46 @@ export const blogArticle = defineType({
       type: 'text',
       rows: 3,
       group: 'seo',
-      description: 'Meta description for search engines (150–160 chars recommended).',
+      description: 'Meta description shown in search results. Aim for 120–160 characters.',
+      validation: (R) =>
+        R.min(120).warning('Short descriptions may not display well in search results.')
+          .max(160).warning('Descriptions over 160 characters will be cut off by Google.'),
+    }),
+
+    defineField({
+      name: 'ogImage',
+      title: 'Social Sharing Image',
+      type: 'image',
+      group: 'seo',
+      description:
+        'Image shown when this article is shared on social media (Facebook, X/Twitter, WhatsApp, etc.). Ideal size: 1200 × 630 px. Falls back to the featured image if not set.',
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt text',
+          type: 'string',
+        }),
+      ],
+    }),
+
+    defineField({
+      name: 'canonicalUrl',
+      title: 'Canonical URL',
+      type: 'url',
+      group: 'seo',
+      description:
+        'Use only if this content was originally published elsewhere (e.g. guest post, syndication). Tells search engines which URL is the "original" to avoid duplicate-content penalties.',
+    }),
+
+    defineField({
+      name: 'noIndex',
+      title: 'Hide from search engines',
+      type: 'boolean',
+      group: 'seo',
+      description:
+        'When enabled, search engines will not index this article. Use for thin content, drafts, or articles you temporarily want to suppress.',
+      initialValue: false,
     }),
   ],
 

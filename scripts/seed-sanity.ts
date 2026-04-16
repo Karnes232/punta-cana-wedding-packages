@@ -1712,6 +1712,114 @@ const pageSeoDocuments = [
   },
 ]
 
+// ── Wedding Calculator Page SEO ───────────────────────────────────────────────
+
+const weddingCalculatorSeo = {
+  _id: 'page-seo-wedding-calculator',
+  _type: 'pageSeo',
+  pageName: 'wedding-calculator',
+  seo: {
+    _type: 'seo',
+    meta: {
+      en: {
+        title: 'Wedding Package Builder | Punta Cana Wedding Packages',
+        description: 'Design your dream destination wedding step by step. Choose your menu, bar, decor, photography, and more — see live prices with every selection.',
+        keywords: [
+          'Punta Cana wedding calculator',
+          'destination wedding cost',
+          'wedding package builder',
+          'beach wedding pricing',
+          'all-inclusive wedding Dominican Republic',
+          'wedding quote Punta Cana',
+          'Cabeza de Toro wedding cost',
+        ],
+      },
+      es: {
+        title: 'Calculadora de Boda | Paquetes de Bodas en Punta Cana',
+        description: 'Diseña la boda de tus sueños paso a paso. Elige menú, barra, decoración, fotografía y más — ve los precios en tiempo real con cada selección.',
+        keywords: [
+          'calculadora de boda Punta Cana',
+          'costo boda de destino',
+          'armar paquete de boda',
+          'precio boda en la playa',
+          'boda todo incluido República Dominicana',
+          'cotización boda Punta Cana',
+          'costo boda Cabeza de Toro',
+        ],
+      },
+    },
+    openGraph: {
+      en: {
+        title: 'Build Your Wedding Package | Punta Cana Wedding Packages',
+        description: 'Configure every detail of your Punta Cana destination wedding and see a real price in minutes. No commitment required.',
+      },
+      es: {
+        title: 'Diseña Tu Paquete de Boda | Paquetes de Bodas en Punta Cana',
+        description: 'Configura cada detalle de tu boda de destino en Punta Cana y obtén un precio real en minutos. Sin compromiso.',
+      },
+      image: null,
+    },
+    structuredData: {
+      en: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Punta Cana Destination Wedding Packages',
+        description:
+          'Custom destination wedding packages in Punta Cana, Dominican Republic. Configure your wedding step by step with live transparent pricing.',
+        provider: {
+          '@type': 'WeddingVenue',
+          name: 'Punta Cana Wedding Packages',
+          url: 'https://puntacanaweddingpackages.com',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Cabeza de Toro',
+            addressRegion: 'La Altagracia',
+            addressCountry: 'DO',
+          },
+        },
+        areaServed: {
+          '@type': 'Place',
+          name: 'Punta Cana, Dominican Republic',
+        },
+        url: 'https://puntacanaweddingpackages.com/en/wedding-calculator',
+        potentialAction: {
+          '@type': 'RequestQuoteAction',
+          target: 'https://puntacanaweddingpackages.com/en/wedding-calculator',
+        },
+      }),
+      es: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'Paquetes de Boda de Destino en Punta Cana',
+        description:
+          'Paquetes personalizados de boda de destino en Punta Cana, República Dominicana. Configura tu boda paso a paso con precios transparentes en tiempo real.',
+        provider: {
+          '@type': 'WeddingVenue',
+          name: 'Paquetes de Bodas en Punta Cana',
+          url: 'https://puntacanaweddingpackages.com',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Cabeza de Toro',
+            addressRegion: 'La Altagracia',
+            addressCountry: 'DO',
+          },
+        },
+        areaServed: {
+          '@type': 'Place',
+          name: 'Punta Cana, República Dominicana',
+        },
+        url: 'https://puntacanaweddingpackages.com/es/wedding-calculator',
+        potentialAction: {
+          '@type': 'RequestQuoteAction',
+          target: 'https://puntacanaweddingpackages.com/es/wedding-calculator',
+        },
+      }),
+    },
+    noIndex: false,
+    noFollow: false,
+  },
+}
+
 // ── Wedding Calculator Pricing Data ──────────────────────────────────────────
 
 const calculatorConfigDoc = {
@@ -2145,13 +2253,13 @@ async function seed() {
   console.log(`Seeding → ${projectId} / ${dataset}`)
 
   const [gl, hp, ap, hiw, pp, tos, cp] = await Promise.all([
-    client.createOrReplace(generalLayout),
-    client.createOrReplace(homePage),
-    client.createOrReplace(aboutPage),
-    client.createOrReplace(howItWorksPage),
-    client.createOrReplace(privacyPolicy),
-    client.createOrReplace(termsOfService),
-    client.createOrReplace(contactPage),
+    client.createIfNotExists(generalLayout),
+    client.createIfNotExists(homePage),
+    client.createIfNotExists(aboutPage),
+    client.createIfNotExists(howItWorksPage),
+    client.createIfNotExists(privacyPolicy),
+    client.createIfNotExists(termsOfService),
+    client.createIfNotExists(contactPage),
   ])
 
   console.log(`✓ generalLayout seeded (id: ${gl._id})`)
@@ -2164,13 +2272,13 @@ async function seed() {
 
   // Blog categories first
   const seededCategories = await Promise.all(
-    blogCategories.map((cat) => client.createOrReplace(cat)),
+    blogCategories.map((cat) => client.createIfNotExists(cat)),
   )
   seededCategories.forEach((cat) => console.log(`✓ blogCategory seeded: ${cat.title} (id: ${cat._id})`))
 
   // Blog articles
   const seededArticles = await Promise.all(
-    blogArticles.map((article) => client.createOrReplace(article)),
+    blogArticles.map((article) => client.createIfNotExists(article)),
   )
   seededArticles.forEach((a) =>
     console.log(`✓ blogArticle seeded: [${(a as { language?: string }).language?.toUpperCase()}] ${(a as { title?: string }).title} (id: ${a._id})`),
@@ -2180,16 +2288,20 @@ async function seed() {
 
   // Page SEO
   const seededSeo = await Promise.all(
-    pageSeoDocuments.map((doc) => client.createOrReplace(doc)),
+    pageSeoDocuments.map((doc) => client.createIfNotExists(doc)),
   )
   seededSeo.forEach((doc) =>
     console.log(`✓ pageSeo seeded: ${(doc as { pageName?: string }).pageName} (id: ${doc._id})`),
   )
   console.log(`\n✓ SEO seed complete: ${seededSeo.length} pages`)
 
+  // Wedding Calculator SEO (createIfNotExists — never overwrites existing content)
+  const calcSeo = await client.createIfNotExists(weddingCalculatorSeo)
+  console.log(`✓ pageSeo seeded: wedding-calculator (id: ${calcSeo._id})`)
+
   // Wedding stories
   const seededStories = await Promise.all(
-    weddingStories.map((story) => client.createOrReplace(story)),
+    weddingStories.map((story) => client.createIfNotExists(story)),
   )
   seededStories.forEach((s) =>
     console.log(`✓ weddingStory seeded: ${(s as { coupleName?: { en?: string } }).coupleName?.en} (id: ${s._id})`),
@@ -2197,7 +2309,7 @@ async function seed() {
   console.log(`\n✓ Stories seed complete: ${seededStories.length} stories`)
 
   // Calculator config (singleton)
-  const calcConfig = await client.createOrReplace(calculatorConfigDoc)
+  const calcConfig = await client.createIfNotExists(calculatorConfigDoc)
   console.log(`✓ calculatorConfig seeded (id: ${calcConfig._id})`)
 
   // Calculator pricing collections
@@ -2214,7 +2326,7 @@ async function seed() {
     ...extraOptions,
   ]
   const seededPricing = await Promise.all(
-    allPricingDocs.map((doc) => client.createOrReplace(doc)),
+    allPricingDocs.map((doc) => client.createIfNotExists(doc)),
   )
   seededPricing.forEach((doc) =>
     console.log(`✓ ${(doc as { _type?: string })._type} seeded: ${doc._id}`),
