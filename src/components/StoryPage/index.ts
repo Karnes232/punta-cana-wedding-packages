@@ -1,0 +1,6 @@
+export { default as StoryHero        } from './StoryHero'
+export { default as StoryDetails     } from './StoryDetails'
+export { default as StoryTestimonial } from './StoryTestimonial'
+export { default as StoryGallery     } from './StoryGallery'
+export { default as StoryBody        } from './StoryBody'
+export { default as StoryCTA         } from './StoryCTA'

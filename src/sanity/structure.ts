@@ -91,8 +91,36 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
+      // ── Wedding Stories ───────────────────────────────────────────────────
+      S.listItem()
+        .title('Wedding Stories')
+        .id('weddingStory')
+        .child(
+          S.documentTypeList('weddingStory')
+            .title('Wedding Stories')
+            .defaultOrdering([
+              { field: 'featured',    direction: 'desc' },
+              { field: 'publishedAt', direction: 'desc' },
+            ]),
+        ),
+
+      // ── Page SEO ─────────────────────────────────────────────────────────
+      S.listItem()
+        .title('Page SEO')
+        .id('pageSeo')
+        .child(
+          S.documentTypeList('pageSeo')
+            .title('Page SEO')
+            .defaultOrdering([{ field: 'pageName', direction: 'asc' }]),
+        ),
+
+      S.divider(),
+
       // ── All other document types (auto-generated, excluding singletons) ──
       ...S.documentTypeListItems().filter(
-        (item) => !SINGLETON_IDS.has(item.getId() ?? ''),
+        (item) =>
+          !SINGLETON_IDS.has(item.getId() ?? '') &&
+          item.getId() !== 'pageSeo' &&
+          item.getId() !== 'weddingStory',
       ),
     ])

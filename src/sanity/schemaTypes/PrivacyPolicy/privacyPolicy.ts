@@ -18,4 +18,14 @@ export const privacyPolicy = defineType({
       description: 'Full privacy policy text. Edit in both English and Spanish.',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      return {
+        title: selection.title.en,
+      }
+    },
+  },
 })

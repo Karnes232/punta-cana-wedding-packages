@@ -18,4 +18,14 @@ export const termsOfService = defineType({
       description: 'Full terms of service text. Edit in both English and Spanish.',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      return {
+        title: selection.title.en,
+      }
+    },
+  },
 })

@@ -111,5 +111,31 @@
       "sub": "It takes less than 10 minutes. No commitment required.",
       "button": "Start Planning"
     }
+  },
+  "stories": {
+    "hero": {
+      "heading": "Real Wedding Stories",
+      "sub": "Inspiration from couples who celebrated in Punta Cana"
+    },
+    "card": {
+      "readStory": "Read their story",
+      "guests": "{count} guests"
+    },
+    "cta": {
+      "heading": "Ready to write your own story?",
+      "sub": "Build your wedding package and let our team take care of the rest.",
+      "button": "Build My Wedding"
+    },
+    "detail": {
+      "guestCount": "{count} guests",
+      "backToStories": "← All Stories"
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "heading": "Page Not Found",
+    "sub": "It seems this page drifted out to sea. Let's get you back to shore.",
+    "goHome": "Back to Home",
+    "startPlanning": "Build My Wedding"
   }
 }

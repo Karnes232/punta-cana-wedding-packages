@@ -111,5 +111,31 @@
       "sub": "Tarda menos de 10 minutos. Sin compromiso.",
       "button": "Comenzar a Planificar"
     }
+  },
+  "stories": {
+    "hero": {
+      "heading": "Historias de Bodas Reales",
+      "sub": "Inspiración de parejas que celebraron en Punta Cana"
+    },
+    "card": {
+      "readStory": "Leer su historia",
+      "guests": "{count} invitados"
+    },
+    "cta": {
+      "heading": "¿Lista para escribir tu propia historia?",
+      "sub": "Diseña tu paquete de boda y deja que nuestro equipo se encargue del resto.",
+      "button": "Diseñar Mi Boda"
+    },
+    "detail": {
+      "guestCount": "{count} invitados",
+      "backToStories": "← Todas las Historias"
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "heading": "Página No Encontrada",
+    "sub": "Parece que esta página se perdió en el mar. Volvamos a la orilla.",
+    "goHome": "Volver al Inicio",
+    "startPlanning": "Diseñar Mi Boda"
   }
 }

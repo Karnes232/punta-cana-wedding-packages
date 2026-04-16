@@ -19,6 +19,8 @@ import { privacyPolicy } from './PrivacyPolicy'
 import { termsOfService } from './TermsOfService'
 import { contactPage } from './ContactPage'
 import { blogArticle, blogCategory } from './Blog'
+import { weddingStory } from './StoriesPage'
+import { seo, pageSeo } from './SEO'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -40,5 +42,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contactPage,
     blogArticle,
     blogCategory,
+    weddingStory,
+
+    // SEO (seo object must be registered before pageSeo uses it)
+    seo,
+    pageSeo,
   ],
 }

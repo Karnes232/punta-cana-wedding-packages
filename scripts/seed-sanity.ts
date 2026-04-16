@@ -1404,6 +1404,314 @@ const blogArticles = [
   },
 ]
 
+// ─── Wedding Stories ──────────────────────────────────────────────────────────
+
+const weddingStories = [
+  {
+    _id: 'story-sarah-marco',
+    _type: 'weddingStory',
+    coupleName: { _type: 'localizedString', en: 'Sarah & Marco', es: 'Sarah y Marco' },
+    slug: { _type: 'slug', current: 'sarah-and-marco' },
+    publishedAt: '2025-10-15',
+    weddingDate: '2025-10-04',
+    featured: true,
+    guestCount: 82,
+    budgetRange: { _type: 'localizedString', en: 'From $14,000', es: 'Desde $14,000' },
+    excerpt: {
+      _type: 'localizedText',
+      en: 'Sarah and Marco flew in from Toronto with 82 guests and turned Cabeza de Toro into their Caribbean dream — barefoot ceremony, sunset dinner, and dancing until midnight.',
+      es: 'Sarah y Marco volaron desde Toronto con 82 invitados y convirtieron Cabeza de Toro en su sueño caribeño — ceremonia descalzos, cena al atardecer y baile hasta la medianoche.',
+    },
+    testimonial: {
+      _type: 'localizedText',
+      en: 'We could not believe how smoothly everything ran. From the moment we submitted our calculator, the team took care of every detail. Our guests are still talking about it.',
+      es: 'No podíamos creer lo fluido que salió todo. Desde el momento en que enviamos nuestra calculadora, el equipo se encargó de cada detalle. Nuestros invitados todavía hablan de eso.',
+    },
+    body: {
+      _type: 'localizedBlock',
+      en: [
+        makeHeading('The Beginning'),
+        makeBlock('Sarah and Marco had dreamed of a destination wedding for years, but the logistics always felt overwhelming. When they discovered Punta Cana Wedding Packages, everything changed. Within an afternoon they had built their full wedding package online and knew exactly what it would cost.'),
+        makeHeading('The Ceremony'),
+        makeBlock('The ceremony took place at golden hour directly on the beach at Cabeza de Toro. Sarah walked barefoot across the warm sand while Marco waited at a simple arch of white flowers and tropical greenery. The ocean breeze carried the scent of hibiscus through the 82-seat arrangement of rattan chairs.'),
+        makeHeading('The Reception'),
+        makeBlock('Dinner was served as the sky turned rose and amber. The menu featured fresh ceviche, grilled lobster, and a Dominican-style rice station that guests raved about. The DJ kept the dance floor full well past midnight, and the couple took a moonlit walk on the beach before the final song.'),
+      ],
+      es: [
+        makeHeading('El Comienzo'),
+        makeBlock('Sarah y Marco habían soñado con una boda de destino durante años, pero la logística siempre parecía abrumadora. Cuando descubrieron Paquetes de Bodas en Punta Cana, todo cambió. En una tarde habían diseñado su paquete completo en línea y sabían exactamente cuánto costaría.'),
+        makeHeading('La Ceremonia'),
+        makeBlock('La ceremonia tuvo lugar en la hora dorada directamente en la playa de Cabeza de Toro. Sarah caminó descalza sobre la cálida arena mientras Marco la esperaba en un sencillo arco de flores blancas y vegetación tropical. La brisa del océano llevaba el aroma de hibisco a través de los 82 asientos de sillas de ratán.'),
+        makeHeading('La Recepción'),
+        makeBlock('La cena se sirvió mientras el cielo se tornaba rosa y ámbar. El menú incluía ceviche fresco, langosta a la parrilla y una estación de arroz al estilo dominicano que los invitados adoraron. El DJ mantuvo la pista de baile llena hasta bien pasada la medianoche, y la pareja dio un paseo nocturno por la playa antes de la última canción.'),
+      ],
+    },
+  },
+
+  {
+    _id: 'story-emma-james',
+    _type: 'weddingStory',
+    coupleName: { _type: 'localizedString', en: 'Emma & James', es: 'Emma y James' },
+    slug: { _type: 'slug', current: 'emma-and-james' },
+    publishedAt: '2025-08-20',
+    weddingDate: '2025-07-19',
+    featured: false,
+    guestCount: 45,
+    budgetRange: { _type: 'localizedString', en: 'From $9,500', es: 'Desde $9,500' },
+    excerpt: {
+      _type: 'localizedText',
+      en: 'Emma and James kept it intimate — 45 people, a garden ceremony, and a dinner that felt like the best party they had ever thrown.',
+      es: 'Emma y James lo mantuvieron íntimo — 45 personas, una ceremonia en el jardín y una cena que se sintió como la mejor fiesta que habían organizado.',
+    },
+    testimonial: {
+      _type: 'localizedText',
+      en: 'Every single thing we selected from the calculator was exactly as described. No surprises, no hidden costs. Just a beautiful day.',
+      es: 'Absolutamente todo lo que seleccionamos en la calculadora fue exactamente como se describió. Sin sorpresas, sin costos ocultos. Solo un día hermoso.',
+    },
+    body: {
+      _type: 'localizedBlock',
+      en: [
+        makeHeading('Keeping It Intimate'),
+        makeBlock('Emma and James wanted something small and meaningful. They chose a garden setting at Cabeza de Toro, with just 45 of their closest friends and family. The team helped them curate every detail to feel personal rather than large-scale.'),
+        makeHeading('Garden Ceremony'),
+        makeBlock('The ceremony was held under a canopy of bougainvillea, with simple wooden benches and a string quartet playing as guests arrived. Emma wore a flowing linen dress; James wore a linen suit in soft ivory. The vows were personal, handwritten, and brought more than a few guests to tears.'),
+        makeHeading('Dinner Under the Stars'),
+        makeBlock('Dinner was long, relaxed, and full of laughter. Four courses, a craft cocktail bar, and a custom wedding cake made by a local Dominican baker. By 11 pm the dancing had spilled onto the lawn, and the night felt like it would never end.'),
+      ],
+      es: [
+        makeHeading('Manteniéndolo Íntimo'),
+        makeBlock('Emma y James querían algo pequeño y significativo. Eligieron un entorno de jardín en Cabeza de Toro, con solo 45 de sus amigos y familiares más cercanos. El equipo les ayudó a seleccionar cada detalle para que se sintiera personal en lugar de a gran escala.'),
+        makeHeading('Ceremonia en el Jardín'),
+        makeBlock('La ceremonia se realizó bajo un dosel de buganvillas, con sencillos bancos de madera y un cuarteto de cuerdas tocando mientras llegaban los invitados. Emma llevaba un vestido de lino fluyente; James llevaba un traje de lino en marfil suave. Los votos fueron personales, escritos a mano, y dejaron a más de un invitado con lágrimas en los ojos.'),
+        makeHeading('Cena Bajo las Estrellas'),
+        makeBlock('La cena fue larga, relajada y llena de risas. Cuatro platos, un bar de cócteles artesanales y un pastel de boda personalizado hecho por un pastelero dominicano local. A las 11 pm el baile se había extendido al jardín, y la noche parecía que nunca terminaría.'),
+      ],
+    },
+  },
+
+  {
+    _id: 'story-lucia-rafael',
+    _type: 'weddingStory',
+    coupleName: { _type: 'localizedString', en: 'Lucía & Rafael', es: 'Lucía y Rafael' },
+    slug: { _type: 'slug', current: 'lucia-and-rafael' },
+    publishedAt: '2025-06-10',
+    weddingDate: '2025-04-26',
+    featured: false,
+    guestCount: 120,
+    budgetRange: { _type: 'localizedString', en: 'From $21,000', es: 'Desde $21,000' },
+    excerpt: {
+      _type: 'localizedText',
+      en: 'A full celebration with 120 guests flown in from Mexico City — three days of events, a white-and-gold ceremony on the water, and a reception that ended at sunrise.',
+      es: 'Una celebración completa con 120 invitados llegados desde Ciudad de México — tres días de eventos, una ceremonia blanca y dorada a orillas del agua y una recepción que terminó al amanecer.',
+    },
+    testimonial: {
+      _type: 'localizedText',
+      en: 'We had tried to plan this ourselves for two years and kept hitting walls. The team here made everything possible in a matter of weeks. I cannot recommend them enough.',
+      es: 'Habíamos intentado planificar esto por nuestra cuenta durante dos años y seguíamos chocando con obstáculos. El equipo aquí hizo todo posible en cuestión de semanas. No puedo recomendarlos lo suficiente.',
+    },
+    body: {
+      _type: 'localizedBlock',
+      en: [
+        makeHeading('Three Days, One Dream'),
+        makeBlock('Lucía and Rafael arrived from Mexico City with a clear vision: a three-day celebration that their guests would never forget. Day one was a welcome dinner on the terrace. Day two was the main ceremony and reception. Day three was a beach party and farewell brunch.'),
+        makeHeading('The Ceremony'),
+        makeBlock('120 guests gathered at the water\'s edge for a ceremony that blended Mexican and Dominican traditions. The arch was wrapped in white orchids and tropical leaves. A live mariachi trio surprised guests as they arrived, transitioning to a Dominican merengue band for the reception.'),
+        makeHeading('The Sunrise Ending'),
+        makeBlock('The reception was supposed to end at midnight. It did not. The energy was so high that the team extended the DJ set, and the last guests finally said goodbye as the first light of morning appeared over the Caribbean. Lucía says it was the most alive she has ever felt.'),
+      ],
+      es: [
+        makeHeading('Tres Días, Un Sueño'),
+        makeBlock('Lucía y Rafael llegaron desde Ciudad de México con una visión clara: una celebración de tres días que sus invitados nunca olvidarían. El primer día fue una cena de bienvenida en la terraza. El segundo día fue la ceremonia principal y la recepción. El tercer día fue una fiesta en la playa y un brunch de despedida.'),
+        makeHeading('La Ceremonia'),
+        makeBlock('120 invitados se reunieron a la orilla del agua para una ceremonia que combinó tradiciones mexicanas y dominicanas. El arco estaba envuelto en orquídeas blancas y hojas tropicales. Un trío de mariachis en vivo sorprendió a los invitados al llegar, y luego una banda de merengue dominicana tomó el escenario para la recepción.'),
+        makeHeading('El Final al Amanecer'),
+        makeBlock('Se suponía que la recepción terminaría a medianoche. No fue así. La energía era tan alta que el equipo extendió la sesión del DJ, y los últimos invitados finalmente se despidieron cuando la primera luz de la mañana apareció sobre el Caribe. Lucía dice que fue el momento en que más viva se ha sentido.'),
+      ],
+    },
+  },
+]
+
+// ─── Page SEO ─────────────────────────────────────────────────────────────────
+
+const defaultJsonLdEn = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WeddingVenue',
+  name: 'Punta Cana Wedding Packages',
+  description: 'Design your dream destination wedding in Punta Cana, Dominican Republic.',
+  url: 'https://puntacanaweddingpackages.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Cabeza de Toro',
+    addressRegion: 'La Altagracia',
+    addressCountry: 'DO',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+1-829-555-1234',
+    contactType: 'customer service',
+    availableLanguage: ['en', 'es'],
+  },
+  sameAs: [],
+}, null, 2)
+
+const defaultJsonLdEs = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WeddingVenue',
+  name: 'Paquetes de Bodas en Punta Cana',
+  description: 'Diseña la boda de tus sueños en Punta Cana, República Dominicana.',
+  url: 'https://puntacanaweddingpackages.com/es',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Cabeza de Toro',
+    addressRegion: 'La Altagracia',
+    addressCountry: 'DO',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+1-829-555-1234',
+    contactType: 'customer service',
+    availableLanguage: ['en', 'es'],
+  },
+  sameAs: [],
+}, null, 2)
+
+function makeSeoFields(
+  enTitle: string,
+  enDesc: string,
+  esTitle: string,
+  esDesc: string,
+  enKeywords: string[],
+  esKeywords: string[],
+) {
+  return {
+    seo: {
+      _type: 'seo',
+      meta: {
+        en: { title: enTitle, description: enDesc, keywords: enKeywords },
+        es: { title: esTitle, description: esDesc, keywords: esKeywords },
+      },
+      openGraph: {
+        en: { title: enTitle, description: enDesc },
+        es: { title: esTitle, description: esDesc },
+        image: null,
+      },
+      structuredData: {
+        en: defaultJsonLdEn,
+        es: defaultJsonLdEs,
+      },
+      noIndex: false,
+      noFollow: false,
+    },
+  }
+}
+
+const pageSeoDocuments = [
+  {
+    _id: 'page-seo-home',
+    _type: 'pageSeo',
+    pageName: 'home',
+    ...makeSeoFields(
+      'Punta Cana Wedding Packages — Design Your Dream Wedding',
+      'Build your perfect destination wedding in Punta Cana, Dominican Republic. Transparent pricing, real choices, zero stress.',
+      'Paquetes de Bodas en Punta Cana — Diseña Tu Boda Perfecta',
+      'Crea tu boda de destino perfecta en Punta Cana, República Dominicana. Precios transparentes, opciones reales, sin estrés.',
+      ['Punta Cana wedding', 'destination wedding', 'wedding packages', 'Cabeza de Toro', 'Caribbean wedding', 'beach wedding', 'Dominican Republic wedding'],
+      ['boda en Punta Cana', 'boda de destino', 'paquetes de boda', 'Cabeza de Toro', 'boda en el Caribe', 'boda en la playa', 'boda en República Dominicana'],
+    ),
+  },
+  {
+    _id: 'page-seo-about',
+    _type: 'pageSeo',
+    pageName: 'about',
+    ...makeSeoFields(
+      'About Us | Punta Cana Wedding Packages',
+      'Meet the passionate team behind Punta Cana Wedding Packages — dedicated to making your Caribbean wedding unforgettable.',
+      'Sobre Nosotros | Paquetes de Bodas en Punta Cana',
+      'Conoce al equipo apasionado detrás de Paquetes de Bodas en Punta Cana — dedicado a hacer tu boda en el Caribe inolvidable.',
+      ['about Punta Cana weddings', 'wedding team', 'Cabeza de Toro venue', 'wedding coordinators'],
+      ['sobre bodas en Punta Cana', 'equipo de bodas', 'lugar Cabeza de Toro', 'coordinadores de boda'],
+    ),
+  },
+  {
+    _id: 'page-seo-how-it-works',
+    _type: 'pageSeo',
+    pageName: 'how-it-works',
+    ...makeSeoFields(
+      'How It Works | Punta Cana Wedding Packages',
+      'See how easy it is to plan your Punta Cana destination wedding. Build your package, see live pricing, and submit in minutes.',
+      'Cómo Funciona | Paquetes de Bodas en Punta Cana',
+      'Descubre lo fácil que es planificar tu boda de destino en Punta Cana. Arma tu paquete, ve precios en tiempo real y envía en minutos.',
+      ['how to plan a destination wedding', 'wedding planning process', 'Punta Cana wedding steps', 'transparent wedding pricing'],
+      ['cómo planificar una boda de destino', 'proceso de planificación de bodas', 'pasos para boda en Punta Cana', 'precios transparentes de boda'],
+    ),
+  },
+  {
+    _id: 'page-seo-contact',
+    _type: 'pageSeo',
+    pageName: 'contact',
+    ...makeSeoFields(
+      'Contact Us | Punta Cana Wedding Packages',
+      'Get in touch with our wedding planning team. We respond within 24 hours via WhatsApp, email, or video call.',
+      'Contáctanos | Paquetes de Bodas en Punta Cana',
+      'Contáctate con nuestro equipo de planificación de bodas. Respondemos en 24 horas por WhatsApp, correo o videollamada.',
+      ['contact wedding planner Punta Cana', 'wedding inquiry', 'WhatsApp wedding consultation'],
+      ['contactar organizador de bodas Punta Cana', 'consulta de boda', 'consulta de boda por WhatsApp'],
+    ),
+  },
+  {
+    _id: 'page-seo-blog',
+    _type: 'pageSeo',
+    pageName: 'blog',
+    ...makeSeoFields(
+      'Wedding Blog | Punta Cana Wedding Packages',
+      'Tips, inspiration, and real wedding stories for couples planning a destination wedding in Punta Cana.',
+      'Blog de Bodas | Paquetes de Bodas en Punta Cana',
+      'Consejos, inspiración e historias de bodas reales para parejas que planifican una boda de destino en Punta Cana.',
+      ['Punta Cana wedding blog', 'destination wedding tips', 'wedding inspiration', 'real weddings Dominican Republic'],
+      ['blog de bodas Punta Cana', 'consejos para boda de destino', 'inspiración de bodas', 'bodas reales República Dominicana'],
+    ),
+  },
+  {
+    _id: 'page-seo-stories',
+    _type: 'pageSeo',
+    pageName: 'stories',
+    ...makeSeoFields(
+      'Real Wedding Stories | Punta Cana Wedding Packages',
+      'Inspiration from couples who celebrated their dream wedding in Punta Cana, Dominican Republic.',
+      'Historias de Bodas Reales | Paquetes de Bodas en Punta Cana',
+      'Inspiración de parejas que celebraron la boda de sus sueños en Punta Cana, República Dominicana.',
+      ['Punta Cana wedding stories', 'real weddings Dominican Republic', 'wedding inspiration Caribbean', 'destination wedding testimonials'],
+      ['historias de bodas Punta Cana', 'bodas reales República Dominicana', 'inspiración bodas Caribe', 'testimonios boda de destino'],
+    ),
+  },
+  {
+    _id: 'page-seo-privacy-policy',
+    _type: 'pageSeo',
+    pageName: 'privacy-policy',
+    ...makeSeoFields(
+      'Privacy Policy | Punta Cana Wedding Packages',
+      'How Punta Cana Wedding Packages collects, uses, and protects your personal information.',
+      'Política de Privacidad | Paquetes de Bodas en Punta Cana',
+      'Cómo Paquetes de Bodas en Punta Cana recopila, usa y protege tu información personal.',
+      [],
+      [],
+    ),
+  },
+  {
+    _id: 'page-seo-terms-of-service',
+    _type: 'pageSeo',
+    pageName: 'terms-of-service',
+    ...makeSeoFields(
+      'Terms of Service | Punta Cana Wedding Packages',
+      'Terms and conditions governing the use of Punta Cana Wedding Packages planning services.',
+      'Términos de Servicio | Paquetes de Bodas en Punta Cana',
+      'Términos y condiciones que rigen el uso de los servicios de planificación de Paquetes de Bodas en Punta Cana.',
+      [],
+      [],
+    ),
+  },
+]
+
 async function seed() {
   console.log(`Seeding → ${projectId} / ${dataset}`)
 
@@ -1440,6 +1748,24 @@ async function seed() {
   )
 
   console.log(`\n✓ Blog seed complete: ${seededCategories.length} categories, ${seededArticles.length} articles`)
+
+  // Page SEO
+  const seededSeo = await Promise.all(
+    pageSeoDocuments.map((doc) => client.createOrReplace(doc)),
+  )
+  seededSeo.forEach((doc) =>
+    console.log(`✓ pageSeo seeded: ${(doc as { pageName?: string }).pageName} (id: ${doc._id})`),
+  )
+  console.log(`\n✓ SEO seed complete: ${seededSeo.length} pages`)
+
+  // Wedding stories
+  const seededStories = await Promise.all(
+    weddingStories.map((story) => client.createOrReplace(story)),
+  )
+  seededStories.forEach((s) =>
+    console.log(`✓ weddingStory seeded: ${(s as { coupleName?: { en?: string } }).coupleName?.en} (id: ${s._id})`),
+  )
+  console.log(`\n✓ Stories seed complete: ${seededStories.length} stories`)
 }
 
 seed().catch((err) => {

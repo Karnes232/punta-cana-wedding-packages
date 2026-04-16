@@ -1,0 +1,1 @@
+export { weddingStory } from './weddingStory'
