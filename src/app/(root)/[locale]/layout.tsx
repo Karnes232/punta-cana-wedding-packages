@@ -4,6 +4,7 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
+import HtmlLang from "@/components/Layout/HtmlLang";
 import { BlogTranslationsProvider } from "@/contexts/BlogTranslationsContext";
 
 export function generateStaticParams() {
@@ -31,6 +32,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <HtmlLang locale={locale} />
       <BlogTranslationsProvider>
         <Navbar />
         <main className="flex-1">{children}</main>

@@ -37,7 +37,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} h-full antialiased`}>
+    // lang is overridden per-locale by HtmlLang in [locale]/layout.tsx
+    // suppressHydrationWarning silences the mismatch between this fallback and the real locale
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );

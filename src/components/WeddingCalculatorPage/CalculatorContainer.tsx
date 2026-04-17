@@ -52,7 +52,7 @@ export default function CalculatorContainer({ data }: Props) {
   const isSummary = state.currentStep === SUMMARY_STEP;
   const isForm = state.currentStep === FORM_STEP;
   const isSuccess = state.currentStep === SUCCESS_STEP;
-console.log(state)
+
   return (
     <div className="mx-auto max-w-7xl px-6 pb-32 pt-8 lg:pb-16">
       <div className="flex gap-12">

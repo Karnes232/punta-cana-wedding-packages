@@ -55,7 +55,7 @@ export default function NavClient({
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full bg-sand-light transition-shadow duration-300 ${
+      className={`sticky top-0 z-50 w-full bg-white transition-shadow duration-300 ${
         scrolled
           ? "shadow-[0_2px_16px_rgba(0,0,0,0.08)]"
           : "border-b border-[#EFEFEF]"
