@@ -54,40 +54,65 @@ export default function SubmissionForm({
       "PRICING BREAKDOWN:",
       `Venue & Coordination: ${formatUSD(config.venueCost + config.coordinationCost)}`,
     ];
+
     if (state.menu)
       lines.push(
         `Menu: ${state.menu.name} — ${formatUSD(state.menu.costPerPerson * state.guests)}`,
       );
-    if (state.bar)
-      lines.push(
-        `Bar: ${state.bar.name} × ${state.barHours}h — ${formatUSD(state.bar.costPerPersonPerHour * state.barHours * state.guests)}`,
-      );
+
+    if (state.bar) {
+      const barBase = state.bar.costPerPersonPerHour * state.barHours * state.guests;
+      lines.push(`Bar: ${state.bar.name} × ${state.barHours}h — ${formatUSD(barBase)}`);
+      for (const addon of state.barAddOns) {
+        const addonCost = addon.isPerPerson ? addon.cost * state.guests : addon.cost;
+        lines.push(`  + ${addon.name} — ${formatUSD(addonCost)}`);
+      }
+    }
+
     if (state.furniture)
       lines.push(
         `Furniture: ${state.furniture.name} × ${tableCount} tables — ${formatUSD(state.furniture.costPerTable * tableCount)}`,
       );
-    if (state.decor)
-      lines.push(
-        `Decor: ${state.decor.name} — ${formatUSD(state.decor.baseCost)}`,
-      );
-    if (state.photo)
-      lines.push(
-        `Photography: ${state.photo.name} — ${formatUSD(state.photo.cost)}`,
-      );
-    if (state.video && !state.videoSkipped)
-      lines.push(
-        `Videography: ${state.video.name} — ${formatUSD(state.video.cost)}`,
-      );
+
+    if (state.decor) {
+      lines.push(`Decor: ${state.decor.name} — ${formatUSD(state.decor.baseCost)}`);
+      for (const addon of state.decorAddOns) {
+        const addonCost = addon.isPerTable ? addon.cost * tableCount : addon.cost;
+        lines.push(`  + ${addon.name} — ${formatUSD(addonCost)}`);
+      }
+    }
+
+    if (state.photo) {
+      lines.push(`Photography: ${state.photo.name} — ${formatUSD(state.photo.cost)}`);
+      for (const addon of state.photoAddOns)
+        lines.push(`  + ${addon.name} — ${formatUSD(addon.cost)}`);
+    }
+
+    if (state.video && !state.videoSkipped) {
+      lines.push(`Videography: ${state.video.name} — ${formatUSD(state.video.cost)}`);
+      for (const addon of state.videoAddOns)
+        lines.push(`  + ${addon.name} — ${formatUSD(addon.cost)}`);
+    }
+
     if (state.hotel && vehicleCount > 0)
       lines.push(
         `Transportation: ${vehicleCount} vehicles — ${formatUSD(state.hotel.ratePerVehicle * vehicleCount)}`,
       );
-    if (state.entertainment.length > 0)
-      lines.push(
-        `Entertainment: ${state.entertainment.map((e) => e.name).join(", ")}`,
-      );
-    if (state.extras.length > 0)
-      lines.push(`Extras: ${state.extras.map((e) => e.name).join(", ")}`);
+
+    if (state.entertainment.length > 0) {
+      lines.push(`Entertainment:`);
+      for (const ent of state.entertainment)
+        lines.push(`  • ${ent.name} — ${formatUSD(ent.cost)}`);
+    }
+
+    if (state.extras.length > 0) {
+      lines.push(`Extra Experiences:`);
+      for (const extra of state.extras) {
+        const extraCost = extra.isPerPerson ? extra.cost * state.guests : extra.cost;
+        lines.push(`  • ${extra.name} — ${formatUSD(extraCost)}`);
+      }
+    }
+
     lines.push(``, `TOTAL: ${formatUSD(total)}`);
     return lines.join("\n");
   }
