@@ -44,14 +44,16 @@ export default function SubmissionForm({
     ? Math.ceil(state.guests / state.hotel.vehicleCapacity)
     : 0;
 
-  // Build a plain-text summary of all selections for the form payload
+  // Build a plain-text summary of all selections for the form payload.
+  // Uses | to separate list items so the text stays readable even when
+  // Netlify's email notification collapses newlines into spaces.
   function buildSummary(): string {
     const lines: string[] = [
       `Wedding Date: ${state.date}`,
       `Guests: ${state.guests}`,
       `Hotel Area: ${state.hotel?.name ?? "Not selected"}`,
-      "",
-      "PRICING BREAKDOWN:",
+      ``,
+      `===== PRICING BREAKDOWN =====`,
       `Venue & Coordination: ${formatUSD(config.venueCost + config.coordinationCost)}`,
     ];
 
@@ -62,11 +64,12 @@ export default function SubmissionForm({
 
     if (state.bar) {
       const barBase = state.bar.costPerPersonPerHour * state.barHours * state.guests;
-      lines.push(`Bar: ${state.bar.name} × ${state.barHours}h — ${formatUSD(barBase)}`);
-      for (const addon of state.barAddOns) {
-        const addonCost = addon.isPerPerson ? addon.cost * state.guests : addon.cost;
-        lines.push(`  + ${addon.name} — ${formatUSD(addonCost)}`);
-      }
+      const addonParts = state.barAddOns.map((a) => {
+        const c = a.isPerPerson ? a.cost * state.guests : a.cost;
+        return `+${a.name} ${formatUSD(c)}`;
+      });
+      const barParts = [`${state.bar.name} × ${state.barHours}h — ${formatUSD(barBase)}`, ...addonParts];
+      lines.push(`Bar: ${barParts.join(" | ")}`);
     }
 
     if (state.furniture)
@@ -75,23 +78,24 @@ export default function SubmissionForm({
       );
 
     if (state.decor) {
-      lines.push(`Decor: ${state.decor.name} — ${formatUSD(state.decor.baseCost)}`);
-      for (const addon of state.decorAddOns) {
-        const addonCost = addon.isPerTable ? addon.cost * tableCount : addon.cost;
-        lines.push(`  + ${addon.name} — ${formatUSD(addonCost)}`);
-      }
+      const addonParts = state.decorAddOns.map((a) => {
+        const c = a.isPerTable ? a.cost * tableCount : a.cost;
+        return `+${a.name} ${formatUSD(c)}`;
+      });
+      const decorParts = [`${state.decor.name} — ${formatUSD(state.decor.baseCost)}`, ...addonParts];
+      lines.push(`Decor: ${decorParts.join(" | ")}`);
     }
 
     if (state.photo) {
-      lines.push(`Photography: ${state.photo.name} — ${formatUSD(state.photo.cost)}`);
-      for (const addon of state.photoAddOns)
-        lines.push(`  + ${addon.name} — ${formatUSD(addon.cost)}`);
+      const addonParts = state.photoAddOns.map((a) => `+${a.name} ${formatUSD(a.cost)}`);
+      const photoParts = [`${state.photo.name} — ${formatUSD(state.photo.cost)}`, ...addonParts];
+      lines.push(`Photography: ${photoParts.join(" | ")}`);
     }
 
     if (state.video && !state.videoSkipped) {
-      lines.push(`Videography: ${state.video.name} — ${formatUSD(state.video.cost)}`);
-      for (const addon of state.videoAddOns)
-        lines.push(`  + ${addon.name} — ${formatUSD(addon.cost)}`);
+      const addonParts = state.videoAddOns.map((a) => `+${a.name} ${formatUSD(a.cost)}`);
+      const videoParts = [`${state.video.name} — ${formatUSD(state.video.cost)}`, ...addonParts];
+      lines.push(`Videography: ${videoParts.join(" | ")}`);
     }
 
     if (state.hotel && vehicleCount > 0)
@@ -100,20 +104,19 @@ export default function SubmissionForm({
       );
 
     if (state.entertainment.length > 0) {
-      lines.push(`Entertainment:`);
-      for (const ent of state.entertainment)
-        lines.push(`  • ${ent.name} — ${formatUSD(ent.cost)}`);
+      const parts = state.entertainment.map((e) => `${e.name} — ${formatUSD(e.cost)}`);
+      lines.push(`Entertainment: ${parts.join(" | ")}`);
     }
 
     if (state.extras.length > 0) {
-      lines.push(`Extra Experiences:`);
-      for (const extra of state.extras) {
-        const extraCost = extra.isPerPerson ? extra.cost * state.guests : extra.cost;
-        lines.push(`  • ${extra.name} — ${formatUSD(extraCost)}`);
-      }
+      const parts = state.extras.map((e) => {
+        const c = e.isPerPerson ? e.cost * state.guests : e.cost;
+        return `${e.name} — ${formatUSD(c)}`;
+      });
+      lines.push(`Extra Experiences: ${parts.join(" | ")}`);
     }
 
-    lines.push(``, `TOTAL: ${formatUSD(total)}`);
+    lines.push(``, `===== TOTAL: ${formatUSD(total)} =====`);
     return lines.join("\n");
   }
 
