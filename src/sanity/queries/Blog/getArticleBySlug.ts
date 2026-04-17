@@ -13,7 +13,6 @@ export const getArticleBySlugQuery = defineQuery(`
     publishedAt,
     language,
     translationGroup,
-    author,
     title,
     excerpt,
     body,
@@ -21,8 +20,7 @@ export const getArticleBySlugQuery = defineQuery(`
     seoTitle,
     seoDescription,
     ogImage { asset, hotspot, crop, alt },
-    canonicalUrl,
-    noIndex,
+    structuredData,
     "category": category-> { title, "slug": slug.current },
     featuredImage { asset, hotspot, crop, alt },
     "translations": *[_type == "blogArticle" && translationGroup == ^.translationGroup] {
@@ -52,6 +50,7 @@ export type BlogArticleFull = {
     crop?: object;
     alt: string | null;
   } | null;
+  structuredData: string | null;
   category: { title: { en: string; es: string } | null; slug: string } | null;
   featuredImage: {
     asset: { _ref: string; _type: string };

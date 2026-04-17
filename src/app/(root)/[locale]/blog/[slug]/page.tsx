@@ -9,6 +9,7 @@ import {
   ArticleTranslationsRegistrar,
   BlogCTABanner,
 } from "@/components/BlogPage";
+import SeoJsonLd from "@/components/SeoJsonLd";
 
 export const revalidate = 3600;
 
@@ -68,6 +69,7 @@ export default async function BlogArticlePage({ params }: Props) {
 
   return (
     <>
+{article.structuredData && <SeoJsonLd json={article.structuredData} />}
       <ArticleTranslationsRegistrar translations={article.translations ?? []} />
       <ArticleHeader article={article} locale={locale} />
       <ArticleBody body={article.body} locale={locale} />
