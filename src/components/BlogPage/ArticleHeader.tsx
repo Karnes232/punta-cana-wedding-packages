@@ -31,7 +31,7 @@ export default async function ArticleHeader({ article, locale }: Props) {
     : null;
 
   return (
-    <header className="bg-white py-16 md:py-20" dir={isRtl ? "rtl" : undefined}>
+    <header id="article-hero" className="bg-white py-16 md:py-20" dir={isRtl ? "rtl" : undefined}>
       <div className="mx-auto max-w-3xl px-6">
         {/* Back link */}
         <Link
