@@ -21,7 +21,7 @@ export default function ContactForm({ phone, email, introText }: Props) {
     if (!formRef.current) return;
     setStatus("sending");
     try {
-      await fetch("/", {
+      await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(
