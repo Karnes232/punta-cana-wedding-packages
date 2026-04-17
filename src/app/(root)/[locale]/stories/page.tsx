@@ -1,50 +1,71 @@
-import { setRequestLocale } from 'next-intl/server'
-import type { Metadata } from 'next'
-import { MAIN_LOCALES } from '@/i18n/routing'
-import { getAllStories } from '@/sanity/queries/StoriesPage'
-import { getPageSeo, pickLocale } from '@/sanity/queries/SEO'
-import { StoriesHero, StoriesGrid, StoriesCTA } from '@/components/StoriesPage'
+import { setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { MAIN_LOCALES } from "@/i18n/routing";
+import { getAllStories } from "@/sanity/queries/StoriesPage";
+import { getPageSeo, pickLocale } from "@/sanity/queries/SEO";
+import { StoriesHero, StoriesGrid, StoriesCTA } from "@/components/StoriesPage";
+import { urlFor } from "@/sanity/lib/image";
 
-export const revalidate = 3600
+export const revalidate = 3600;
 
 export function generateStaticParams() {
-  return MAIN_LOCALES.map((locale) => ({ locale }))
+  return MAIN_LOCALES.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale } = await params
-  const seoDoc = await getPageSeo('stories')
-  const meta = pickLocale(seoDoc?.seo?.meta, locale)
-  const og   = pickLocale(seoDoc?.seo?.openGraph, locale)
+  const { locale } = await params;
+  const seoDoc = await getPageSeo("stories");
+  const meta = pickLocale(seoDoc?.seo?.meta, locale);
+  const og = pickLocale(seoDoc?.seo?.openGraph, locale);
+
+  const ogImageAsset = seoDoc?.seo?.openGraph?.image?.asset ?? null;
+  const ogImageUrl = ogImageAsset
+    ? urlFor(ogImageAsset)
+        .width(1200)
+        .height(630)
+        .fit("crop")
+        .auto("format")
+        .url()
+    : undefined;
 
   return {
-    title:       meta?.title       ?? 'Real Wedding Stories | Punta Cana Wedding Packages',
-    description: meta?.description ?? 'Inspiration from couples who celebrated in Punta Cana.',
-    keywords:    meta?.keywords    ?? undefined,
-    openGraph: {
-      title:       og?.title       ?? meta?.title       ?? undefined,
-      description: og?.description ?? meta?.description ?? undefined,
-    },
+    title: meta?.title ?? undefined,
+    description: meta?.description ?? undefined,
+    keywords: meta?.keywords ?? undefined,
     robots: {
-      index:  !(seoDoc?.seo?.noIndex  ?? false),
+      index: !(seoDoc?.seo?.noIndex ?? false),
       follow: !(seoDoc?.seo?.noFollow ?? false),
     },
-  }
+    openGraph: {
+      type: "website",
+      title: og?.title ?? meta?.title ?? undefined,
+      description: og?.description ?? meta?.description ?? undefined,
+      ...(ogImageUrl && {
+        images: [{ url: ogImageUrl, width: 1200, height: 630 }],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: og?.title ?? meta?.title ?? undefined,
+      description: og?.description ?? meta?.description ?? undefined,
+      ...(ogImageUrl && { images: [ogImageUrl] }),
+    },
+  };
 }
 
 export default async function StoriesPage({
   params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params
-  setRequestLocale(locale)
+  const { locale } = await params;
+  setRequestLocale(locale);
 
-  const stories = await getAllStories()
+  const stories = await getAllStories();
 
   return (
     <>
@@ -52,5 +73,5 @@ export default async function StoriesPage({
       <StoriesGrid stories={stories} locale={locale} />
       <StoriesCTA locale={locale} />
     </>
-  )
+  );
 }

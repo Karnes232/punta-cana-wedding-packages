@@ -1,21 +1,23 @@
-import { getTranslations } from 'next-intl/server'
-import StoryCard from './StoryCard'
-import type { WeddingStoryPreview } from '@/sanity/queries/StoriesPage'
+import { getTranslations } from "next-intl/server";
+import StoryCard from "./StoryCard";
+import type { WeddingStoryPreview } from "@/sanity/queries/StoriesPage";
 
 type Props = {
-  stories: WeddingStoryPreview[]
-  locale: string
-}
+  stories: WeddingStoryPreview[];
+  locale: string;
+};
 
 export default async function StoriesGrid({ stories, locale }: Props) {
-  const t = await getTranslations({ locale, namespace: 'stories.card' })
+  const t = await getTranslations({ locale, namespace: "stories.card" });
 
   if (stories.length === 0) {
     return (
       <section className="px-6 py-16 text-center">
-        <p className="text-sm text-[#999999]">No stories yet — check back soon.</p>
+        <p className="text-sm text-[#999999]">
+          No stories yet — check back soon.
+        </p>
       </section>
-    )
+    );
   }
 
   return (
@@ -27,11 +29,11 @@ export default async function StoriesGrid({ stories, locale }: Props) {
               key={story._id}
               story={story}
               locale={locale}
-              readStoryLabel={t('readStory')}
+              readStoryLabel={t("readStory")}
             />
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

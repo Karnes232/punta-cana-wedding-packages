@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useBlogTranslations } from '@/contexts/BlogTranslationsContext';
-import type { ArticleTranslation } from '@/sanity/queries/Blog/getArticleBySlug';
+import { useEffect } from "react";
+import { useBlogTranslations } from "@/contexts/BlogTranslationsContext";
+import type { ArticleTranslation } from "@/sanity/queries/Blog/getArticleBySlug";
 
 export default function ArticleTranslationsRegistrar({
   translations,

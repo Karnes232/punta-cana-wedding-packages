@@ -5,4 +5,4 @@ export {
   blogLocalizedString,
   blogLocalizedText,
   blogLocalizedBlock,
-} from './localized'
+} from "./localized";

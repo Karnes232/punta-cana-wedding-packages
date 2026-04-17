@@ -1,167 +1,164 @@
 {
-    "project": {
-      "name": "Punta Cana Wedding Packages",
-      "description": "Elegant wedding configuration platform for destination weddings in Punta Cana, Dominican Republic",
-      "startDate": "April 2026",
-      "status": "brand-new"
+  "project": {
+    "name": "Punta Cana Wedding Packages",
+    "description": "Elegant wedding configuration platform for destination weddings in Punta Cana, Dominican Republic",
+    "startDate": "April 2026",
+    "status": "brand-new"
+  },
+
+  "technology": {
+    "framework": "Next.js 14",
+    "deployment": "Netlify",
+    "cms": "Sanity 5.x",
+    "nextSanity": "12.x",
+    "styling": "Tailwind CSS 4",
+    "i18n": "next-intl",
+    "typescript": "5.x",
+    "nodeVersion": "18+"
+  },
+
+  "localization": {
+    "defaultLocale": "en",
+    "locales": ["en", "es"],
+    "localePrefix": "always",
+    "messagesLocation": "messages/"
+  },
+
+  "design": {
+    "feeling": "soft, light, clean, romantic, professional, easy",
+    "colorPalette": {
+      "primary": "white (~75%)",
+      "secondary": "light neutrals (~15%)",
+      "accent": "soft blue or sage green (~10%)"
     },
-  
-    "technology": {
-      "framework": "Next.js 14",
-      "deployment": "Netlify",
-      "cms": "Sanity 5.x",
-      "nextSanity": "12.x",
-      "styling": "Tailwind CSS 4",
-      "i18n": "next-intl",
-      "typescript": "5.x",
-      "nodeVersion": "18+"
+    "buttons": "rounded, soft colors, friendly text, smooth hover",
+    "spacing": "generous, lots of white space",
+    "typography": "clean, modern (Montserrat, Open Sans, Poppins)",
+    "images": "natural light, real weddings, bright environments",
+    "avoid": "dark colors, gold, aggressive, heavy, complicated feeling"
+  },
+
+  "pages": {
+    "home": {
+      "route": "/:locale/",
+      "priority": "high",
+      "purpose": "Introduce brand, explain platform, push to calculator"
     },
-  
-    "localization": {
-      "defaultLocale": "en",
-      "locales": ["en", "es"],
-      "localePrefix": "always",
-      "messagesLocation": "messages/"
+    "weddingCalculator": {
+      "route": "/:locale/wedding-calculator",
+      "priority": "critical",
+      "purpose": "Build wedding step-by-step, see live estimated price"
     },
-  
-    "design": {
-      "feeling": "soft, light, clean, romantic, professional, easy",
-      "colorPalette": {
-        "primary": "white (~75%)",
-        "secondary": "light neutrals (~15%)",
-        "accent": "soft blue or sage green (~10%)"
-      },
-      "buttons": "rounded, soft colors, friendly text, smooth hover",
-      "spacing": "generous, lots of white space",
-      "typography": "clean, modern (Montserrat, Open Sans, Poppins)",
-      "images": "natural light, real weddings, bright environments",
-      "avoid": "dark colors, gold, aggressive, heavy, complicated feeling"
+    "howItWorks": {
+      "route": "/:locale/how-it-works",
+      "priority": "high",
+      "purpose": "Explain customer journey, booking process, payment schedule"
     },
-  
-    "pages": {
-      "home": {
-        "route": "/:locale/",
-        "priority": "high",
-        "purpose": "Introduce brand, explain platform, push to calculator"
-      },
-      "weddingCalculator": {
-        "route": "/:locale/wedding-calculator",
-        "priority": "critical",
-        "purpose": "Build wedding step-by-step, see live estimated price"
-      },
-      "howItWorks": {
-        "route": "/:locale/how-it-works",
-        "priority": "high",
-        "purpose": "Explain customer journey, booking process, payment schedule"
-      },
-      "about": {
-        "route": "/:locale/about",
-        "priority": "high",
-        "purpose": "Build trust, show team expertise"
-      },
-      "contact": {
-        "route": "/:locale/contact",
-        "priority": "medium",
-        "purpose": "Direct communication channel"
-      },
-      "blog": {
-        "route": "/:locale/blog",
-        "priority": "high",
-        "purpose": "Attract search traffic, educate, guide to calculator"
-      },
-      "stories": {
-        "route": "/:locale/stories",
-        "priority": "medium",
-        "purpose": "Real wedding inspiration, social proof"
-      },
-      "privacy": {
-        "route": "/:locale/privacy-policy",
-        "priority": "required",
-        "purpose": "Legal compliance"
-      },
-      "terms": {
-        "route": "/:locale/terms-of-service",
-        "priority": "required",
-        "purpose": "Legal compliance"
-      }
+    "about": {
+      "route": "/:locale/about",
+      "priority": "high",
+      "purpose": "Build trust, show team expertise"
     },
-  
-    "calculator": {
-      "masterVariable": "guest count",
-      "steps": [
-        "date",
-        "guests",
-        "hotel area",
-        "venue coordination",
-        "menu",
-        "drinks & open bar",
-        "furniture",
-        "decoration & flowers",
-        "photography",
-        "videography",
-        "transportation",
-        "entertainment",
-        "extras",
-        "summary",
-        "form submission"
-      ],
-      "pricingModel": "predetermined (all from Sanity)",
-      "formSubmission": "email to planning team (no payment processing)"
+    "contact": {
+      "route": "/:locale/contact",
+      "priority": "medium",
+      "purpose": "Direct communication channel"
     },
-  
-    "booking": {
-      "deposit": "$500 USD",
-      "depositDeductible": true,
-      "paymentSchedule": [
-        "30 days before: 50%",
-        "15 days before: final 50%"
-      ],
-      "dateFlexibility": "changeable without extra fee if new date available",
-      "advanceBooking": "allowed (e.g., book now for future year)"
+    "blog": {
+      "route": "/:locale/blog",
+      "priority": "high",
+      "purpose": "Attract search traffic, educate, guide to calculator"
     },
-  
-    "performance": {
-      "targets": {
-        "lcp": "< 2.5s",
-        "fid": "< 100ms",
-        "cls": "< 0.1",
-        "lighthouseScore": "> 90 on mobile"
-      }
+    "stories": {
+      "route": "/:locale/stories",
+      "priority": "medium",
+      "purpose": "Real wedding inspiration, social proof"
     },
-  
-    "team": {
-      "timeZone": "Dominican Republic (Atlantic Standard Time)",
-      "support": "24/7 availability after form submission"
+    "privacy": {
+      "route": "/:locale/privacy-policy",
+      "priority": "required",
+      "purpose": "Legal compliance"
     },
-  
-    "conventions": {
-      "components": "PascalCase, organized by page/domain",
-      "functions": "camelCase",
-      "files": {
-        "components": "PascalCase",
-        "utilities": "camelCase",
-        "hooks": "useXxx camelCase"
-      },
-      "imports": "@/ alias from tsconfig"
-    },
-  
-    "sanity": {
-      "schemasLocation": "src/sanity/schemaTypes/",
-      "queriesLocation": "src/sanity/queries/",
-      "queriesMatchSchemaStructure": true,
-      "groqStringsInSeparateFiles": true
-    },
-  
-    "forms": {
-      "submission": "email to team",
-      "includes": "full wedding configuration, estimated total, couple contact info",
-      "noPaymentProcessing": true
-    },
-  
-    "notes": {
-      "venue": "All weddings at Cabeza de Toro (fixed location)",
-      "backend": "Netlify only (no managed backend)",
-      "i18n": "Zero hardcoded English/Spanish (all from messages JSON)",
-      "blog": "Critical for long-term traffic; part of conversion funnel"
+    "terms": {
+      "route": "/:locale/terms-of-service",
+      "priority": "required",
+      "purpose": "Legal compliance"
     }
+  },
+
+  "calculator": {
+    "masterVariable": "guest count",
+    "steps": [
+      "date",
+      "guests",
+      "hotel area",
+      "venue coordination",
+      "menu",
+      "drinks & open bar",
+      "furniture",
+      "decoration & flowers",
+      "photography",
+      "videography",
+      "transportation",
+      "entertainment",
+      "extras",
+      "summary",
+      "form submission"
+    ],
+    "pricingModel": "predetermined (all from Sanity)",
+    "formSubmission": "email to planning team (no payment processing)"
+  },
+
+  "booking": {
+    "deposit": "$500 USD",
+    "depositDeductible": true,
+    "paymentSchedule": ["30 days before: 50%", "15 days before: final 50%"],
+    "dateFlexibility": "changeable without extra fee if new date available",
+    "advanceBooking": "allowed (e.g., book now for future year)"
+  },
+
+  "performance": {
+    "targets": {
+      "lcp": "< 2.5s",
+      "fid": "< 100ms",
+      "cls": "< 0.1",
+      "lighthouseScore": "> 90 on mobile"
+    }
+  },
+
+  "team": {
+    "timeZone": "Dominican Republic (Atlantic Standard Time)",
+    "support": "24/7 availability after form submission"
+  },
+
+  "conventions": {
+    "components": "PascalCase, organized by page/domain",
+    "functions": "camelCase",
+    "files": {
+      "components": "PascalCase",
+      "utilities": "camelCase",
+      "hooks": "useXxx camelCase"
+    },
+    "imports": "@/ alias from tsconfig"
+  },
+
+  "sanity": {
+    "schemasLocation": "src/sanity/schemaTypes/",
+    "queriesLocation": "src/sanity/queries/",
+    "queriesMatchSchemaStructure": true,
+    "groqStringsInSeparateFiles": true
+  },
+
+  "forms": {
+    "submission": "email to team",
+    "includes": "full wedding configuration, estimated total, couple contact info",
+    "noPaymentProcessing": true
+  },
+
+  "notes": {
+    "venue": "All weddings at Cabeza de Toro (fixed location)",
+    "backend": "Netlify only (no managed backend)",
+    "i18n": "Zero hardcoded English/Spanish (all from messages JSON)",
+    "blog": "Critical for long-term traffic; part of conversion funnel"
   }
+}

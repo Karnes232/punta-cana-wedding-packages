@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useState } from 'react';
-import type { ArticleTranslation } from '@/sanity/queries/Blog/getArticleBySlug';
+import { createContext, useContext, useState } from "react";
+import type { ArticleTranslation } from "@/sanity/queries/Blog/getArticleBySlug";
 
 type BlogTranslationsContextValue = {
   translations: ArticleTranslation[];
@@ -13,7 +13,11 @@ const BlogTranslationsContext = createContext<BlogTranslationsContextValue>({
   setTranslations: () => {},
 });
 
-export function BlogTranslationsProvider({ children }: { children: React.ReactNode }) {
+export function BlogTranslationsProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [translations, setTranslations] = useState<ArticleTranslation[]>([]);
 
   return (

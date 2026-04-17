@@ -1,4 +1,5 @@
 # .claude/ Setup Package
+
 ## Punta Cana Wedding Packages
 
 This folder contains everything organized for easy setup.
@@ -37,6 +38,7 @@ This folder contains everything organized for easy setup.
 ## ⏱️ Quick Setup (2 Steps)
 
 ### Step 1: Copy .claude/ to Your Project
+
 ```bash
 # Copy the entire .claude/ folder to your project root
 cp -r .claude-setup/.claude your-project/.claude
@@ -45,6 +47,7 @@ cp -r .claude-setup/.claude your-project/.claude
 That's it! Files are already named correctly and ready to use.
 
 ### Step 2: Read the Guides
+
 ```bash
 cd your-project
 

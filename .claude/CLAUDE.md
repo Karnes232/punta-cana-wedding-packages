@@ -1,4 +1,5 @@
 # Claude Code Instructions
+
 ## Punta Cana Wedding Packages
 
 You are assisting with **Punta Cana Wedding Packages**, an elegant wedding configuration platform for destination weddings in Punta Cana, Dominican Republic.
@@ -11,7 +12,7 @@ You are assisting with **Punta Cana Wedding Packages**, an elegant wedding confi
 - **Framework:** Next.js 16 with App Router
 - **Deployment:** Netlify
 - **CMS:** Sanity 5.x with next-sanity 12.x
-- **Internationalization:** 
+- **Internationalization:**
   - **Main site (Wedding Builder):** next-intl (en, es)
   - **Blog:** Multi-language via Sanity (en, es, fr, de, ru, and expandable to more)
 - **Styling:** Tailwind CSS 4
@@ -49,18 +50,18 @@ The wedding calculator is the core conversion tool. Every other page exists to s
 
 ### Core Pages & Languages
 
-| Page | Route | Languages |
-|------|-------|-----------|
-| **Home** | `/:locale/` | en, es |
-| **Wedding Calculator** | `/:locale/wedding-calculator` | en, es |
-| **How It Works** | `/:locale/how-it-works` | en, es |
-| **About Us** | `/:locale/about` | en, es |
-| **Contact** | `/:locale/contact` | en, es |
-| **Blog** | `/:locale/blog` | en, es, fr, de, ru, + more |
-| **Blog Article** | `/:locale/blog/[slug]` | en, es, fr, de, ru, + more |
-| **Stories** | `/:locale/stories` | en, es |
-| **Privacy Policy** | `/:locale/privacy-policy` | en, es |
-| **Terms of Service** | `/:locale/terms-of-service` | en, es |
+| Page                   | Route                         | Languages                  |
+| ---------------------- | ----------------------------- | -------------------------- |
+| **Home**               | `/:locale/`                   | en, es                     |
+| **Wedding Calculator** | `/:locale/wedding-calculator` | en, es                     |
+| **How It Works**       | `/:locale/how-it-works`       | en, es                     |
+| **About Us**           | `/:locale/about`              | en, es                     |
+| **Contact**            | `/:locale/contact`            | en, es                     |
+| **Blog**               | `/:locale/blog`               | en, es, fr, de, ru, + more |
+| **Blog Article**       | `/:locale/blog/[slug]`        | en, es, fr, de, ru, + more |
+| **Stories**            | `/:locale/stories`            | en, es                     |
+| **Privacy Policy**     | `/:locale/privacy-policy`     | en, es                     |
+| **Terms of Service**   | `/:locale/terms-of-service`   | en, es                     |
 
 ---
 
@@ -69,12 +70,14 @@ The wedding calculator is the core conversion tool. Every other page exists to s
 ### 1. **Dual i18n Strategy**
 
 **Main Site (Wedding Builder & Marketing):**
+
 - Uses `next-intl` for routing & translations
 - 2 languages: English (en) and Spanish (es)
 - All pages wrapped in `/:locale/` URL structure
 - UI text stored in `messages/en.json` and `messages/es.json`
 
 **Blog:**
+
 - Languages stored in **Sanity CMS** (not in code)
 - Each blog article has translations for: en, es, fr, de, ru (and easily expandable)
 - Single blog article route: `/:locale/blog/[slug]`
@@ -82,27 +85,32 @@ The wedding calculator is the core conversion tool. Every other page exists to s
 - If article exists in that language in Sanity, show it; otherwise, show fallback (en)
 
 **Why two strategies?**
+
 - Wedding builder needs fast, code-based i18n (next-intl)
 - Blog needs flexible, CMS-based i18n (scalable to many languages without code changes)
 
 ### 2. **Server-First Components**
+
 - Default to Server Components
 - Use `"use client"` only for interactivity (calculator state, language switcher, forms)
 - Fetch data on server, pass to client components as props
 
 ### 3. **Sanity as Source of Truth**
+
 - All content lives in Sanity 5.x
 - GROQ queries grouped by page/domain in `src/sanity/queries/`
 - Blog articles stored with multi-language support
 - Revalidation: On-demand via Netlify's ISR or build trigger
 
 ### 4. **Page-Scoped Component Organization**
+
 - Components organized by PAGE, not by type
 - Example: `src/components/HomePage/`, `src/components/WeddingCalculatorPage/`
 - Shared/reusable: `src/components/Layout/`, `src/components/ui/`, `src/components/BlockContent/`
 - See `file-structure.md` for complete hierarchy
 
 ### 5. **Wedding Calculator = Guided State Machine**
+
 - Step-by-step flow (date → guests → hotel → menu → decor → etc.)
 - Each selection updates estimated total live
 - Built with predetermined pricing logic (not manual quotes)
@@ -110,6 +118,7 @@ The wedding calculator is the core conversion tool. Every other page exists to s
 - See `wedding-builder-logic.md` for full calculation rules
 
 ### 6. **Design: Soft, Clean, Romantic, Professional**
+
 - **NOT luxury/dark/gold**
 - ~75% white, 15% light neutrals, 10% accent color
 - Soft shadows, rounded corners, light gray lines
@@ -165,6 +174,7 @@ messages/
 ```
 
 **Blog articles are in Sanity**, not in code. Each article has language variants:
+
 ```sanity
 Article: "How Much Does a Wedding Cost?"
 ├── en (English)
@@ -182,6 +192,7 @@ Article: "How Much Does a Wedding Cost?"
 The calculator is the most complex part of the project. Understand these layers:
 
 ### User Experience
+
 - **Not a spreadsheet.** Feels elegant, guided, romantic.
 - **Step-by-step wizard.** Each step focuses on one thing.
 - **Live pricing.** Every choice updates estimated total immediately.
@@ -189,6 +200,7 @@ The calculator is the most complex part of the project. Understand these layers:
 - **Form submission.** Email goes to planning team with full wedding config.
 
 ### Business Logic (What to Calculate)
+
 - **Guest count** (master variable; affects food, drinks, tables, transportation, etc.)
 - **Venue & coordination** (fixed; always included)
 - **Menu** (cost per person × guest count)
@@ -201,6 +213,7 @@ The calculator is the most complex part of the project. Understand these layers:
 - **Extras** (Saona trips, welcome dinner, etc.; optional add-ons)
 
 ### Developer Mindset
+
 - **Predetermined pricing.** All prices come from Sanity; not made up during form fill.
 - **Automatic calculation.** Guest count changes → all costs recalculate.
 - **Clear transparency.** User always understands why price changed.
@@ -217,6 +230,7 @@ See `wedding-builder-logic.md` for full calculation logic and formulas.
 All pages except blog use `next-intl` for routing and translations.
 
 **How it works:**
+
 1. URL structure: `/:locale/...` (e.g., `/en/`, `/es/`)
 2. UI text stored in `messages/en.json` and `messages/es.json`
 3. Configured in `src/i18n/routing.ts`
@@ -224,6 +238,7 @@ All pages except blog use `next-intl` for routing and translations.
 5. Components use `getTranslations()` (server) or `useTranslations()` (client)
 
 **Example:**
+
 ```typescript
 // Server component
 const t = await getTranslations('home');
@@ -239,6 +254,7 @@ const t = useTranslations('home');
 Blog articles are stored in Sanity with multi-language support.
 
 **How it works:**
+
 1. Blog article document in Sanity has `title_en`, `title_es`, `title_fr`, `title_de`, `title_ru`, etc.
 2. Or use Sanity's localization object: `{ en: "...", es: "...", fr: "..." }`
 3. When user visits `/en/blog/[slug]`, the route locale is `en`
@@ -246,12 +262,14 @@ Blog articles are stored in Sanity with multi-language support.
 5. If article doesn't exist in that language, show fallback (e.g., English)
 
 **Benefits:**
+
 - Easy to add new languages (just add fields in Sanity, no code change)
 - Each language version can have different title, description, content
 - Blog can grow to 10+ languages without touching code
 - Marketing team manages translations in Sanity Studio
 
 **Schema Example (Sanity):**
+
 ```typescript
 {
   name: 'blogArticle',
@@ -284,15 +302,18 @@ See `i18n-strategy.md` for complete implementation details.
 ## Design & UX Principles
 
 ### Feeling
+
 ✅ Soft, light, clean, romantic, professional, easy, calm, trustworthy
 ❌ Luxury, dark, aggressive, heavy, complicated, cold
 
 ### Colors
+
 - **White** ~75% (background, breathing room)
 - **Light neutrals** ~15% (light gray, sand, sky blue, soft green)
 - **Accent** ~10% (soft blue or sage green for buttons/CTAs)
 
 ### Components
+
 - **Buttons:** Rounded, soft colors, smooth hover, friendly text
 - **Lines/borders:** Thin, very light gray, rounded corners
 - **Spacing:** Generous white space (users should feel calm)
@@ -313,11 +334,12 @@ See `design-vision.md` for complete visual guidelines.
    { "home.hero.title": "Design Your Dream Wedding" }
    ```
 2. Use in component:
+
    ```typescript
    // Server component
    const t = await getTranslations('home');
    <h1>{t('hero.title')}</h1>
-   
+
    // Client component
    const t = useTranslations('home');
    <h1>{t('hero.title')}</h1>
@@ -344,29 +366,31 @@ See `design-vision.md` for complete visual guidelines.
 
 ## Key Decisions & Constraints
 
-| Decision | Rationale | Impact |
-|----------|-----------|--------|
-| **Next.js 16** | Latest stable with App Router | Modern framework, better performance |
-| **Netlify deployment** | Simple, scalable, cost-effective | No managed backend; serverless functions only |
-| **Sanity 5.x** | Latest with best next-sanity support | Future-proof CMS choice |
-| **Dual i18n strategy** | Main site fast (code), blog flexible (Sanity) | Scalability for blog expansion |
-| **Fixed venue** | Cabeza de Toro simplifies logistics | Coordinate pricing is controlled |
-| **Predetermined pricing** | Accuracy, auditability, scalability | All prices in Sanity; calculator only adds/multiplies |
-| **Page-scoped components** | Maintainability, clarity | Find code easily; reduce dependencies |
-| **next-intl for main site** | Industry standard, App Router native | Only 2 languages needed in code |
-| **Sanity for blog i18n** | Expandable, no code changes needed | Easy to add French, German, Russian, more |
+| Decision                    | Rationale                                     | Impact                                                |
+| --------------------------- | --------------------------------------------- | ----------------------------------------------------- |
+| **Next.js 16**              | Latest stable with App Router                 | Modern framework, better performance                  |
+| **Netlify deployment**      | Simple, scalable, cost-effective              | No managed backend; serverless functions only         |
+| **Sanity 5.x**              | Latest with best next-sanity support          | Future-proof CMS choice                               |
+| **Dual i18n strategy**      | Main site fast (code), blog flexible (Sanity) | Scalability for blog expansion                        |
+| **Fixed venue**             | Cabeza de Toro simplifies logistics           | Coordinate pricing is controlled                      |
+| **Predetermined pricing**   | Accuracy, auditability, scalability           | All prices in Sanity; calculator only adds/multiplies |
+| **Page-scoped components**  | Maintainability, clarity                      | Find code easily; reduce dependencies                 |
+| **next-intl for main site** | Industry standard, App Router native          | Only 2 languages needed in code                       |
+| **Sanity for blog i18n**    | Expandable, no code changes needed            | Easy to add French, German, Russian, more             |
 
 ---
 
 ## Deployment & Performance
 
 ### Netlify Specifics
+
 - **Build:** Next.js 16 with App Router
 - **ISR:** Use Netlify's on-demand revalidation
 - **Edge functions:** Available for redirects, API calls
 - **Environment variables:** Set in Netlify dashboard or `.env.local`
 
 ### Performance Goals
+
 - **Core Web Vitals:** LCP < 2.5s, FID < 100ms, CLS < 0.1
 - **Lighthouse:** Aim for 90+ on mobile
 - **Image optimization:** Use `next/image` with Sanity image URLs
@@ -377,6 +401,7 @@ See `design-vision.md` for complete visual guidelines.
 ## Sanity 5.x + next-sanity 12.x
 
 ### Key Patterns
+
 - **Client setup:** `src/sanity/lib/client.ts` uses `@sanity/client`
 - **Fetch in Server Components:** No need for suspense; use `async/await`
 - **GROQ queries:** Write in `src/sanity/queries/` folders
@@ -385,6 +410,7 @@ See `design-vision.md` for complete visual guidelines.
 - **Multi-language:** Blog articles stored with language variants in Sanity
 
 ### Image URLs
+
 ```typescript
 // Use Sanity image URL builder
 import { urlFor } from '@/sanity/lib/image'
@@ -397,6 +423,7 @@ import { urlFor } from '@/sanity/lib/image'
 ## Testing & Quality
 
 ### Before Deploying
+
 - [ ] All routes render (no 404s) for both locales (en, es)
 - [ ] Blog articles render in multiple languages
 - [ ] Wedding calculator: All steps work, total updates correctly
@@ -412,6 +439,7 @@ import { urlFor } from '@/sanity/lib/image'
 ## When to Ask Claude Code
 
 ✅ **Do ask:**
+
 - "Add a new page for [feature]"
 - "Create a form component for [thing]"
 - "Update the wedding calculator to include [pricing logic]"
@@ -420,6 +448,7 @@ import { urlFor } from '@/sanity/lib/image'
 - "Create Sanity schema for [content type]"
 
 ❌ **Don't ask without context:**
+
 - "Optimize the site" (which page/metric?)
 - "Add authentication" (not in scope for this project)
 - "Handle payments" (business does this offline)
@@ -441,6 +470,7 @@ import { urlFor } from '@/sanity/lib/image'
 ## Questions or Clarifications?
 
 Each doc has a summary section. If something is unclear:
+
 1. Check the relevant doc
 2. Look for a real example
 3. Ask Claude Code with specific context

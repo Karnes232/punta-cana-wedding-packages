@@ -1,7 +1,7 @@
-import createMiddleware from 'next-intl/middleware';
-import { defineRouting } from 'next-intl/routing';
-import { NextRequest, NextResponse } from 'next/server';
-import { routing, MAIN_LOCALES } from './i18n/routing';
+import createMiddleware from "next-intl/middleware";
+import { defineRouting } from "next-intl/routing";
+import { NextRequest, NextResponse } from "next/server";
+import { routing, MAIN_LOCALES } from "./i18n/routing";
 
 // Blog-only locales — valid in /blog routes, not anywhere else
 const BLOG_ONLY_LOCALES = routing.locales.filter(
@@ -15,24 +15,26 @@ const handleBlog = createMiddleware(routing);
 const handleMainSite = createMiddleware(
   defineRouting({
     locales: MAIN_LOCALES,
-    defaultLocale: 'en',
-    localePrefix: 'as-needed',
+    defaultLocale: "en",
+    localePrefix: "as-needed",
   }),
 );
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = pathname.split("/").filter(Boolean);
   const possibleLocale = segments[0];
 
   // Determine the path with any leading locale segment stripped
-  const isKnownLocale = (routing.locales as unknown as string[]).includes(possibleLocale);
+  const isKnownLocale = (routing.locales as unknown as string[]).includes(
+    possibleLocale,
+  );
   const pathWithoutLocale = isKnownLocale
-    ? '/' + segments.slice(1).join('/')
+    ? "/" + segments.slice(1).join("/")
     : pathname;
 
   const isBlogPath =
-    pathWithoutLocale === '/blog' || pathWithoutLocale.startsWith('/blog/');
+    pathWithoutLocale === "/blog" || pathWithoutLocale.startsWith("/blog/");
 
   // Blog routes: let the full 9-locale middleware handle them
   if (isBlogPath) {
@@ -43,7 +45,7 @@ export default function middleware(request: NextRequest) {
   // (next-intl's main-site handler will then pick it up as English)
   if (BLOG_ONLY_LOCALES.includes(possibleLocale)) {
     const url = request.nextUrl.clone();
-    url.pathname = pathWithoutLocale || '/';
+    url.pathname = pathWithoutLocale || "/";
     return NextResponse.redirect(url, { status: 308 });
   }
 
@@ -54,6 +56,6 @@ export default function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all paths except: api routes, _next internals, _vercel, studio, and static files
-    '/((?!api|_next|_vercel|studio|.*\\..*).*)',
+    "/((?!api|_next|_vercel|studio|.*\\..*).*)",
   ],
 };

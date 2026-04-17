@@ -1,4 +1,5 @@
 # i18n Strategy
+
 ## Punta Cana Wedding Packages
 
 Complete reference for the **dual i18n approach**: next-intl for main site (2 languages), Sanity for blog (6+ languages, expandable).
@@ -9,10 +10,10 @@ Complete reference for the **dual i18n approach**: next-intl for main site (2 la
 
 This project uses **two different i18n strategies** optimized for different parts of the site:
 
-| Part | Strategy | Languages | Why |
-|------|----------|-----------|-----|
-| **Main Site** (Home, Calculator, How It Works, About, Contact, Stories) | next-intl (code-based) | en, es | Fast, type-safe, part of app structure |
-| **Blog** (Articles & Index) | Sanity (CMS-based) | en, es, fr, de, ru, + more | Scalable, no code changes needed, marketing team can manage |
+| Part                                                                    | Strategy               | Languages                  | Why                                                         |
+| ----------------------------------------------------------------------- | ---------------------- | -------------------------- | ----------------------------------------------------------- |
+| **Main Site** (Home, Calculator, How It Works, About, Contact, Stories) | next-intl (code-based) | en, es                     | Fast, type-safe, part of app structure                      |
+| **Blog** (Articles & Index)                                             | Sanity (CMS-based)     | en, es, fr, de, ru, + more | Scalable, no code changes needed, marketing team can manage |
 
 ---
 
@@ -21,6 +22,7 @@ This project uses **two different i18n strategies** optimized for different part
 ### What It Covers
 
 All pages except blog articles:
+
 - Home (`/:locale/`)
 - Wedding Calculator (`/:locale/wedding-calculator`)
 - How It Works (`/:locale/how-it-works`)
@@ -37,6 +39,7 @@ All pages except blog articles:
 #### 1. **URL Structure**
 
 All main site URLs include locale:
+
 ```
 /en/                              # English home
 /es/                              # Spanish home
@@ -77,64 +80,63 @@ messages/
 
 ```typescript
 // src/i18n/routing.ts
-import { defineRouting } from 'next-intl/routing'
-import { createNavigation } from 'next-intl/navigation'
+import { defineRouting } from "next-intl/routing";
+import { createNavigation } from "next-intl/navigation";
 
 export const routing = defineRouting({
-  locales: ['en', 'es'],
-  defaultLocale: 'en',
-  localePrefix: 'always', // All URLs have locale (/en/, /es/)
+  locales: ["en", "es"],
+  defaultLocale: "en",
+  localePrefix: "always", // All URLs have locale (/en/, /es/)
   pathnames: {
     // Optional: custom path names per locale
-    '/wedding-calculator': {
-      en: '/wedding-calculator',
-      es: '/configurador-bodas'
-    }
-  }
-})
+    "/wedding-calculator": {
+      en: "/wedding-calculator",
+      es: "/configurador-bodas",
+    },
+  },
+});
 
 export const { Link, redirect, usePathname, useRouter } =
-  createNavigation(routing)
+  createNavigation(routing);
 ```
 
 #### 4. **Request Config (request.ts)**
 
 ```typescript
 // src/i18n/request.ts
-import { getRequestConfig } from 'next-intl/server'
-import { routing } from './routing'
+import { getRequestConfig } from "next-intl/server";
+import { routing } from "./routing";
 
 export default getRequestConfig(async ({ locale }) => ({
-  messages: (await import(`../../messages/${locale}.json`)).default
-}))
+  messages: (await import(`../../messages/${locale}.json`)).default,
+}));
 ```
 
 #### 5. **Middleware (proxy.ts)**
 
 ```typescript
 // src/proxy.ts
-import createMiddleware from 'next-intl/middleware'
-import { routing } from './src/i18n/routing'
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./src/i18n/routing";
 
-export default createMiddleware(routing)
+export default createMiddleware(routing);
 
 export const config = {
-  matcher: [
-    '/((?!_next|_vercel|.*\\..*).*)'
-  ]
-}
+  matcher: ["/((?!_next|_vercel|.*\\..*).*)"],
+};
 ```
 
 #### 6. **Using in Components**
 
 **Server Component:**
+
 ```typescript
 // src/app/(root)/[locale]/page.tsx
 import { getTranslations } from 'next-intl/server'
 
 export default async function HomePage() {
   const t = await getTranslations('home')
-  
+
   return (
     <section>
       <h1>{t('hero.title')}</h1>
@@ -146,6 +148,7 @@ export default async function HomePage() {
 ```
 
 **Client Component:**
+
 ```typescript
 // src/components/LanguageSwitcher.tsx
 'use client'
@@ -156,7 +159,7 @@ import { useRouter } from '@/i18n/navigation'
 export function LanguageSwitcher() {
   const locale = useLocale()
   const router = useRouter()
-  
+
   return (
     <select value={locale} onChange={(e) => router.push('/', { locale: e.target.value })}>
       <option value="en">English</option>
@@ -169,6 +172,7 @@ export function LanguageSwitcher() {
 #### 7. **Key Rules for Main Site**
 
 ✅ **Do:**
+
 - Store all UI text in `messages/en.json` and `messages/es.json`
 - Use `getTranslations()` in server components
 - Use `useTranslations()` in client components
@@ -177,6 +181,7 @@ export function LanguageSwitcher() {
 - Group messages by page or domain
 
 ❌ **Don't:**
+
 - Hardcode English or Spanish text in components
 - Mix i18n strategies (use next-intl consistently on main site)
 - Store copy in markdown or config files
@@ -196,6 +201,7 @@ export function LanguageSwitcher() {
 ### Why Sanity for Blog?
 
 ✅ **Advantages:**
+
 - Scale to 10+ languages without code changes
 - Marketing team manages translations in Sanity Studio
 - Different content per language (not just translations)
@@ -203,6 +209,7 @@ export function LanguageSwitcher() {
 - SEO: Each language can have unique slug, metadata, keywords
 
 ❌ **Would be harder with next-intl:**
+
 - Would need to commit 1000+ translated strings to git
 - Adding new language requires code changes
 - Translation management is developer workflow, not marketing
@@ -216,105 +223,107 @@ export function LanguageSwitcher() {
 ```typescript
 // sanity/schemaTypes/BlogArticle.ts
 export default {
-  name: 'blogArticle',
-  title: 'Blog Article',
-  type: 'document',
+  name: "blogArticle",
+  title: "Blog Article",
+  type: "document",
   fields: [
     {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      description: 'Unique identifier for the article'
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      description: "Unique identifier for the article",
     },
     {
-      name: 'translations',
-      title: 'Article Translations',
-      type: 'object',
+      name: "translations",
+      title: "Article Translations",
+      type: "object",
       fields: [
         {
-          name: 'en',
-          title: 'English',
-          type: 'articleContent' // Reusable object type
+          name: "en",
+          title: "English",
+          type: "articleContent", // Reusable object type
         },
         {
-          name: 'es',
-          title: 'Spanish',
-          type: 'articleContent'
+          name: "es",
+          title: "Spanish",
+          type: "articleContent",
         },
         {
-          name: 'fr',
-          title: 'French',
-          type: 'articleContent'
+          name: "fr",
+          title: "French",
+          type: "articleContent",
         },
         {
-          name: 'de',
-          title: 'German',
-          type: 'articleContent'
+          name: "de",
+          title: "German",
+          type: "articleContent",
         },
         {
-          name: 'ru',
-          title: 'Russian',
-          type: 'articleContent'
-        }
-      ]
+          name: "ru",
+          title: "Russian",
+          type: "articleContent",
+        },
+      ],
     },
     {
-      name: 'publishedAt',
-      title: 'Published At',
-      type: 'datetime'
-    }
-  ]
-}
+      name: "publishedAt",
+      title: "Published At",
+      type: "datetime",
+    },
+  ],
+};
 
 // Reusable content object
 export const articleContent = {
-  name: 'articleContent',
-  title: 'Article Content',
-  type: 'object',
+  name: "articleContent",
+  title: "Article Content",
+  type: "object",
   fields: [
     {
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      validation: (Rule) => Rule.required()
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
-      name: 'excerpt',
-      title: 'Excerpt (for preview)',
-      type: 'text',
-      rows: 3
+      name: "excerpt",
+      title: "Excerpt (for preview)",
+      type: "text",
+      rows: 3,
     },
     {
-      name: 'body',
-      title: 'Content',
-      type: 'blockContent' // Portable Text
+      name: "body",
+      title: "Content",
+      type: "blockContent", // Portable Text
     },
     {
-      name: 'featuredImage',
-      title: 'Featured Image',
-      type: 'image'
+      name: "featuredImage",
+      title: "Featured Image",
+      type: "image",
     },
     {
-      name: 'seo',
-      title: 'SEO',
-      type: 'object',
+      name: "seo",
+      title: "SEO",
+      type: "object",
       fields: [
-        { name: 'metaDescription', type: 'string' },
-        { name: 'keywords', type: 'string' }
-      ]
-    }
-  ]
-}
+        { name: "metaDescription", type: "string" },
+        { name: "keywords", type: "string" },
+      ],
+    },
+  ],
+};
 ```
 
 **Option B: Separate Documents Per Language**
 
 Less recommended, but alternative:
+
 ```
 blogArticle-en (English)
 blogArticle-es (Spanish)
 blogArticle-fr (French)
 ```
+
 Pros: Simpler schema. Cons: Harder to keep in sync, more Studio clutter.
 
 **Recommendation:** Use Option A (localized fields in single document).
@@ -325,11 +334,11 @@ Pros: Simpler schema. Cons: Harder to keep in sync, more Studio clutter.
 
 ```typescript
 // src/sanity/queries/BlogPage/getArticleBySlug.ts
-import { client } from '@/sanity/lib/client'
+import { client } from "@/sanity/lib/client";
 
 export async function getArticleBySlug(
   slug: string,
-  locale: 'en' | 'es' | 'fr' | 'de' | 'ru'
+  locale: "en" | "es" | "fr" | "de" | "ru",
 ) {
   const query = `
     *[_type == "blogArticle" && slug.current == $slug][0] {
@@ -339,19 +348,19 @@ export async function getArticleBySlug(
       },
       publishedAt
     }
-  `
-  
-  const article = await client.fetch(query, { slug })
-  
+  `;
+
+  const article = await client.fetch(query, { slug });
+
   if (!article?.translations?.[locale]) {
     // Fallback to English if language not found
     return await client.fetch(
       `*[_type == "blogArticle" && slug.current == $slug][0].translations.en`,
-      { slug }
-    )
+      { slug },
+    );
   }
-  
-  return article.translations[locale]
+
+  return article.translations[locale];
 }
 ```
 
@@ -359,7 +368,7 @@ export async function getArticleBySlug(
 
 ```typescript
 // src/sanity/queries/BlogPage/getAllArticles.ts
-export async function getAllArticles(locale: 'en' | 'es' | 'fr' | 'de' | 'ru') {
+export async function getAllArticles(locale: "en" | "es" | "fr" | "de" | "ru") {
   const query = `
     *[_type == "blogArticle"] | order(publishedAt desc) {
       slug,
@@ -373,31 +382,32 @@ export async function getAllArticles(locale: 'en' | 'es' | 'fr' | 'de' | 'ru') {
       },
       publishedAt
     }
-  `
-  
-  const articles = await client.fetch(query)
-  
+  `;
+
+  const articles = await client.fetch(query);
+
   // Map and handle fallbacks
   return articles
-    .map(article => ({
+    .map((article) => ({
       slug: article.slug.current,
       content: article.translations[locale] || article.translations.en,
-      publishedAt: article.publishedAt
+      publishedAt: article.publishedAt,
     }))
-    .filter(article => article.content) // Only articles with content
+    .filter((article) => article.content); // Only articles with content
 }
 ```
 
 #### 3. **Blog Routes**
 
 **Blog Index:**
+
 ```typescript
 // src/app/(root)/[locale]/blog/page.tsx
 import { getAllArticles } from '@/sanity/queries/BlogPage/getAllArticles'
 
 export default async function BlogIndex({ params }) {
   const articles = await getAllArticles(params.locale)
-  
+
   return (
     <div>
       <h1>Blog</h1>
@@ -410,17 +420,18 @@ export default async function BlogIndex({ params }) {
 ```
 
 **Blog Article:**
+
 ```typescript
 // src/app/(root)/[locale]/blog/[slug]/page.tsx
 import { getArticleBySlug } from '@/sanity/queries/BlogPage/getArticleBySlug'
 
 export default async function BlogArticle({ params }) {
   const article = await getArticleBySlug(params.slug, params.locale)
-  
+
   if (!article) {
     notFound()
   }
-  
+
   return (
     <article>
       <h1>{article.title}</h1>
@@ -434,6 +445,7 @@ export default async function BlogArticle({ params }) {
 #### 4. **Key Rules for Blog**
 
 ✅ **Do:**
+
 - Store article content in Sanity with language variants
 - Use fallback logic (if language not found, show English)
 - Query by locale and handle missing translations gracefully
@@ -441,6 +453,7 @@ export default async function BlogArticle({ params }) {
 - Add new languages by updating schema (no code deploy)
 
 ❌ **Don't:**
+
 - Store blog articles in code
 - Use next-intl messages for blog content
 - Create separate blog routes for different languages
@@ -453,6 +466,7 @@ export default async function BlogArticle({ params }) {
 ### Adding a New Blog Language
 
 **Step 1:** Update Sanity schema (add language field)
+
 ```typescript
 // In articleContent object, add:
 {
@@ -463,14 +477,16 @@ export default async function BlogArticle({ params }) {
 ```
 
 **Step 2:** Update GROQ queries (add locale option)
+
 ```typescript
 // In getArticleBySlug:
-locale: 'en' | 'es' | 'fr' | 'de' | 'ru' | 'ja'
+locale: "en" | "es" | "fr" | "de" | "ru" | "ja";
 ```
 
 **Step 3:** Update blog routes (TypeScript types)
+
 ```typescript
-type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'ru' | 'ja'
+type SupportedLocale = "en" | "es" | "fr" | "de" | "ru" | "ja";
 ```
 
 **That's it.** No frontend code changes needed (routes are dynamic). Marketing team adds translations in Sanity and they appear automatically.
@@ -480,8 +496,9 @@ type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'ru' | 'ja'
 More involved (would need to add code):
 
 **Step 1:** Add locale to `src/i18n/routing.ts`
+
 ```typescript
-locales: ['en', 'es', 'fr'] // Add 'fr' for French
+locales: ["en", "es", "fr"]; // Add 'fr' for French
 ```
 
 **Step 2:** Create `messages/fr.json` with French UI text
@@ -503,16 +520,17 @@ Use `hreflang` links to indicate language versions:
 ```typescript
 // src/i18n/hreflang.ts
 export function generateHrefLang(currentLocale: string, slug: string) {
-  const basePath = `/wedding-calculator` // Example
+  const basePath = `/wedding-calculator`; // Example
   return [
-    { lang: 'en', href: `https://example.com/en${basePath}` },
-    { lang: 'es', href: `https://example.com/es${basePath}` },
-    { lang: 'x-default', href: `https://example.com/en${basePath}` }
-  ]
+    { lang: "en", href: `https://example.com/en${basePath}` },
+    { lang: "es", href: `https://example.com/es${basePath}` },
+    { lang: "x-default", href: `https://example.com/en${basePath}` },
+  ];
 }
 ```
 
 Add to `<head>`:
+
 ```typescript
 {hrefLangs.map(link => (
   <link
@@ -527,6 +545,7 @@ Add to `<head>`:
 ### Blog
 
 Each article URL includes locale:
+
 - `/en/blog/wedding-costs`
 - `/es/blog/costos-boda`
 - `/fr/blog/couts-mariage`
@@ -538,14 +557,17 @@ Search engines automatically understand these are different languages of the sam
 ## Fallback Strategy
 
 **Main Site:**
+
 - If user visits `/fr/`, redirect to `/en/` (only 2 locales supported)
 - Falls back to English for any unsupported locale
 
 **Blog:**
+
 - If article doesn't exist in selected language, show English version
 - Graceful degradation (user gets content in English rather than 404)
 
 **Example:**
+
 ```typescript
 // Article exists in en, es, fr but not de
 User visits: /de/blog/wedding-costs
@@ -591,15 +613,15 @@ This keeps messages organized and easy to find.
 
 ## Summary: When to Use What
 
-| Scenario | Use |
-|----------|-----|
-| UI text on main site (buttons, labels, headings) | `messages/` + next-intl |
-| Blog article content | Sanity multi-language |
-| Form labels in calculator | `messages/` + next-intl |
-| Blog article title, description | Sanity |
-| Page descriptions (SEO) | next-intl (main site) or Sanity (blog) |
-| Adding new language to blog | Update Sanity schema only (no code deploy) |
-| Adding new language to main site | Add to `routing.ts` + create `messages/` file + deploy |
+| Scenario                                         | Use                                                    |
+| ------------------------------------------------ | ------------------------------------------------------ |
+| UI text on main site (buttons, labels, headings) | `messages/` + next-intl                                |
+| Blog article content                             | Sanity multi-language                                  |
+| Form labels in calculator                        | `messages/` + next-intl                                |
+| Blog article title, description                  | Sanity                                                 |
+| Page descriptions (SEO)                          | next-intl (main site) or Sanity (blog)                 |
+| Adding new language to blog                      | Update Sanity schema only (no code deploy)             |
+| Adding new language to main site                 | Add to `routing.ts` + create `messages/` file + deploy |
 
 ---
 

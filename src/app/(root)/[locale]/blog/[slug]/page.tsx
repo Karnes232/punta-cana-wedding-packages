@@ -1,9 +1,14 @@
-import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
-import type { Metadata } from 'next';
-import { getArticleBySlug } from '@/sanity/queries/Blog';
-import { urlFor } from '@/sanity/lib/image';
-import { ArticleHeader, ArticleBody, ArticleTranslationsRegistrar, BlogCTABanner } from '@/components/BlogPage';
+import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { getArticleBySlug } from "@/sanity/queries/Blog";
+import { urlFor } from "@/sanity/lib/image";
+import {
+  ArticleHeader,
+  ArticleBody,
+  ArticleTranslationsRegistrar,
+  BlogCTABanner,
+} from "@/components/BlogPage";
 
 export const revalidate = 3600;
 
@@ -21,18 +26,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = article.seoDescription ?? article.excerpt ?? undefined;
 
   // Prefer dedicated OG image; fall back to featured image
-  const ogImageAsset = article.ogImage?.asset ?? article.featuredImage?.asset ?? null;
+  const ogImageAsset =
+    article.ogImage?.asset ?? article.featuredImage?.asset ?? null;
   const ogImageUrl = ogImageAsset
-    ? urlFor(ogImageAsset).width(1200).height(630).fit('crop').auto('format').url()
+    ? urlFor(ogImageAsset)
+        .width(1200)
+        .height(630)
+        .fit("crop")
+        .auto("format")
+        .url()
     : undefined;
 
   return {
     title,
     description,
     ...(article.noIndex && { robots: { index: false, follow: false } }),
-    ...(article.canonicalUrl && { alternates: { canonical: article.canonicalUrl } }),
+    ...(article.canonicalUrl && {
+      alternates: { canonical: article.canonicalUrl },
+    }),
     openGraph: {
-      type: 'article',
+      type: "article",
       title: title ?? undefined,
       description: description ?? undefined,
       publishedTime: article.publishedAt ?? undefined,
@@ -42,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       }),
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: title ?? undefined,
       description: description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),

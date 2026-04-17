@@ -1,8 +1,8 @@
-import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
-import { localized } from '@/sanity/lib/localize';
-import { urlFor } from '@/sanity/lib/image';
-import type { HowItWorksPageQueryResult } from '@/sanity/queries/HowItWorksPage';
+import { getTranslations } from "next-intl/server";
+import Image from "next/image";
+import { localized } from "@/sanity/lib/localize";
+import { urlFor } from "@/sanity/lib/image";
+import type { HowItWorksPageQueryResult } from "@/sanity/queries/HowItWorksPage";
 
 type Props = {
   data: HowItWorksPageQueryResult | null;
@@ -11,50 +11,60 @@ type Props = {
 
 const FALLBACK_STEPS = [
   {
-    title: 'Design Your Wedding',
+    title: "Design Your Wedding",
     description:
-      'Open the wedding builder and walk through each element — guests, menu, drinks, decor, photography, and more.',
+      "Open the wedding builder and walk through each element — guests, menu, drinks, decor, photography, and more.",
   },
   {
-    title: 'Get Your Estimate',
+    title: "Get Your Estimate",
     description:
-      'Every choice updates your total in real time. See a full price breakdown before committing to anything.',
+      "Every choice updates your total in real time. See a full price breakdown before committing to anything.",
   },
   {
-    title: 'Submit Your Request',
+    title: "Submit Your Request",
     description:
-      'When you\'re happy with your configuration, submit it. Your full wedding plan lands directly in our team\'s inbox.',
+      "When you're happy with your configuration, submit it. Your full wedding plan lands directly in our team's inbox.",
   },
   {
-    title: 'We Plan Together',
+    title: "We Plan Together",
     description:
-      'A dedicated coordinator contacts you within 24 hours to confirm details, answer questions, and lock in your date.',
+      "A dedicated coordinator contacts you within 24 hours to confirm details, answer questions, and lock in your date.",
   },
 ];
 
 export default async function ProcessSteps({ data, locale }: Props) {
-  const t = await getTranslations('howItWorks.process');
-  const heading = localized(data?.processTitle, locale) ?? t('heading');
+  const t = await getTranslations("howItWorks.process");
+  const heading = localized(data?.processTitle, locale) ?? t("heading");
 
-  const steps =
-    data?.processSteps?.length
-      ? data.processSteps.map((s, i) => ({
-          key: s._key,
-          number: i + 1,
-          title: localized(s.title, locale) ?? FALLBACK_STEPS[i]?.title ?? `Step ${i + 1}`,
-          description: localized(s.description, locale) ?? FALLBACK_STEPS[i]?.description ?? '',
-          imageUrl: s.image?.asset
-            ? urlFor(s.image.asset).width(720).height(405).fit('crop').auto('format').url()
-            : null,
-          imageAlt: s.image?.alt ?? '',
-        }))
-      : FALLBACK_STEPS.map((s, i) => ({
-          key: String(i),
-          number: i + 1,
-          imageUrl: null,
-          imageAlt: '',
-          ...s,
-        }));
+  const steps = data?.processSteps?.length
+    ? data.processSteps.map((s, i) => ({
+        key: s._key,
+        number: i + 1,
+        title:
+          localized(s.title, locale) ??
+          FALLBACK_STEPS[i]?.title ??
+          `Step ${i + 1}`,
+        description:
+          localized(s.description, locale) ??
+          FALLBACK_STEPS[i]?.description ??
+          "",
+        imageUrl: s.image?.asset
+          ? urlFor(s.image.asset)
+              .width(720)
+              .height(405)
+              .fit("crop")
+              .auto("format")
+              .url()
+          : null,
+        imageAlt: s.image?.alt ?? "",
+      }))
+    : FALLBACK_STEPS.map((s, i) => ({
+        key: String(i),
+        number: i + 1,
+        imageUrl: null,
+        imageAlt: "",
+        ...s,
+      }));
 
   return (
     <section className="bg-[#FAFAFA] py-16 md:py-20">

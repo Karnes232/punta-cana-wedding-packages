@@ -1,167 +1,168 @@
-import { defineType, defineField } from 'sanity'
-import { HeartIcon } from '@sanity/icons'
+import { defineType, defineField } from "sanity";
+import { HeartIcon } from "@sanity/icons";
 
 export const weddingStory = defineType({
-  name: 'weddingStory',
-  title: 'Wedding Story',
-  type: 'document',
+  name: "weddingStory",
+  title: "Wedding Story",
+  type: "document",
   icon: HeartIcon,
   groups: [
-    { name: 'basic',   title: 'Basic Info' },
-    { name: 'details', title: 'Details & Quote' },
-    { name: 'content', title: 'Story & Photos' },
+    { name: "basic", title: "Basic Info" },
+    { name: "details", title: "Details & Quote" },
+    { name: "content", title: "Story & Photos" },
   ],
   fields: [
     // ── Identity ──────────────────────────────────────────────────────────────
     defineField({
-      name: 'coupleName',
-      title: 'Couple Name',
-      type: 'localizedString',
-      group: 'basic',
+      name: "coupleName",
+      title: "Couple Name",
+      type: "localizedString",
+      group: "basic",
       description: 'e.g. "Sarah & Marco" / "Sarah y Marco"',
       validation: (R) => R.required(),
     }),
 
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      group: 'basic',
-      description: 'URL-safe identifier — auto-generated from the English couple name.',
-      options: { source: 'coupleName.en' },
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      group: "basic",
+      description:
+        "URL-safe identifier — auto-generated from the English couple name.",
+      options: { source: "coupleName.en" },
       validation: (R) => R.required(),
     }),
 
     defineField({
-      name: 'publishedAt',
-      title: 'Published date',
-      type: 'date',
-      group: 'basic',
+      name: "publishedAt",
+      title: "Published date",
+      type: "date",
+      group: "basic",
       validation: (R) => R.required(),
     }),
 
     defineField({
-      name: 'weddingDate',
-      title: 'Wedding date',
-      type: 'date',
-      group: 'basic',
+      name: "weddingDate",
+      title: "Wedding date",
+      type: "date",
+      group: "basic",
       validation: (R) => R.required(),
     }),
 
     defineField({
-      name: 'featured',
-      title: 'Featured',
-      type: 'boolean',
-      group: 'basic',
-      description: 'Featured stories sort to the top of the listing.',
+      name: "featured",
+      title: "Featured",
+      type: "boolean",
+      group: "basic",
+      description: "Featured stories sort to the top of the listing.",
       initialValue: false,
     }),
 
     // ── Details & Quote ───────────────────────────────────────────────────────
     defineField({
-      name: 'guestCount',
-      title: 'Guest count',
-      type: 'number',
-      group: 'details',
+      name: "guestCount",
+      title: "Guest count",
+      type: "number",
+      group: "details",
       validation: (R) => R.required().min(1),
     }),
 
     defineField({
-      name: 'budgetRange',
-      title: 'Budget range',
-      type: 'localizedString',
-      group: 'details',
+      name: "budgetRange",
+      title: "Budget range",
+      type: "localizedString",
+      group: "details",
       description: 'e.g. "From $12,000" / "Desde $12,000"',
     }),
 
     defineField({
-      name: 'excerpt',
-      title: 'Excerpt',
-      type: 'localizedText',
-      group: 'details',
-      description: '1–2 sentence teaser shown on the index card.',
+      name: "excerpt",
+      title: "Excerpt",
+      type: "localizedText",
+      group: "details",
+      description: "1–2 sentence teaser shown on the index card.",
       validation: (R) => R.required(),
     }),
 
     defineField({
-      name: 'testimonial',
-      title: 'Couple testimonial',
-      type: 'localizedText',
-      group: 'details',
-      description: 'A quote from the couple — shown as a blockquote on the detail page.',
+      name: "testimonial",
+      title: "Couple testimonial",
+      type: "localizedText",
+      group: "details",
+      description:
+        "A quote from the couple — shown as a blockquote on the detail page.",
     }),
 
     // ── Story & Photos ────────────────────────────────────────────────────────
     defineField({
-      name: 'heroImage',
-      title: 'Hero image',
-      type: 'image',
-      group: 'content',
+      name: "heroImage",
+      title: "Hero image",
+      type: "image",
+      group: "content",
       options: { hotspot: true },
-      fields: [
-        defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
-      ],
+      fields: [defineField({ name: "alt", title: "Alt text", type: "string" })],
       validation: (R) => R.required(),
     }),
 
     defineField({
-      name: 'gallery',
-      title: 'Photo gallery',
-      type: 'array',
-      group: 'content',
-      description: 'Additional photos shown in the gallery section of the detail page.',
+      name: "gallery",
+      title: "Photo gallery",
+      type: "array",
+      group: "content",
+      description:
+        "Additional photos shown in the gallery section of the detail page.",
       of: [
         {
-          type: 'image',
+          type: "image",
           options: { hotspot: true },
           fields: [
-            defineField({ name: 'alt', title: 'Alt text', type: 'string' }),
+            defineField({ name: "alt", title: "Alt text", type: "string" }),
           ],
         },
       ],
     }),
 
     defineField({
-      name: 'body',
-      title: 'Story body',
-      type: 'localizedBlock',
-      group: 'content',
-      description: 'Full wedding narrative in English and Spanish (rich text).',
+      name: "body",
+      title: "Story body",
+      type: "localizedBlock",
+      group: "content",
+      description: "Full wedding narrative in English and Spanish (rich text).",
     }),
   ],
 
   preview: {
     select: {
-      nameEn:  'coupleName.en',
-      nameEs:  'coupleName.es',
-      date:    'weddingDate',
-      media:   'heroImage',
-      featured: 'featured',
+      nameEn: "coupleName.en",
+      nameEs: "coupleName.es",
+      date: "weddingDate",
+      media: "heroImage",
+      featured: "featured",
     },
     prepare({ nameEn, nameEs, date, media, featured }) {
-      const name = nameEn ?? nameEs ?? 'Unnamed Couple'
-      const label = featured ? '⭐ ' : ''
+      const name = nameEn ?? nameEs ?? "Unnamed Couple";
+      const label = featured ? "⭐ " : "";
       return {
-        title:    `${label}${name}`,
-        subtitle: date ?? 'No date set',
+        title: `${label}${name}`,
+        subtitle: date ?? "No date set",
         media,
-      }
+      };
     },
   },
 
   orderings: [
     {
-      title: 'Featured first, then newest',
-      name: 'featuredAndNewest',
+      title: "Featured first, then newest",
+      name: "featuredAndNewest",
       by: [
-        { field: 'featured',    direction: 'desc' },
-        { field: 'publishedAt', direction: 'desc' },
+        { field: "featured", direction: "desc" },
+        { field: "publishedAt", direction: "desc" },
       ],
     },
     {
-      title: 'Wedding date (newest first)',
-      name: 'weddingDateDesc',
-      by: [{ field: 'weddingDate', direction: 'desc' }],
+      title: "Wedding date (newest first)",
+      name: "weddingDateDesc",
+      by: [{ field: "weddingDate", direction: "desc" }],
     },
   ],
-})
+});

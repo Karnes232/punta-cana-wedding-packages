@@ -1,74 +1,78 @@
-import { defineType, defineField } from 'sanity'
-import { PlayIcon } from '@sanity/icons'
+import { defineType, defineField } from "sanity";
+import { PlayIcon } from "@sanity/icons";
 
 export const videoPackage = defineType({
-  name: 'videoPackage',
-  title: 'Videography Package',
-  type: 'document',
+  name: "videoPackage",
+  title: "Videography Package",
+  type: "document",
   icon: PlayIcon,
   fields: [
     defineField({
-      name: 'name',
-      title: 'Name',
-      type: 'localizedString',
+      name: "name",
+      title: "Name",
+      type: "localizedString",
       validation: (R) => R.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'localizedText',
+      name: "description",
+      title: "Description",
+      type: "localizedText",
     }),
     defineField({
-      name: 'hours',
-      title: 'Coverage Hours',
-      type: 'number',
+      name: "hours",
+      title: "Coverage Hours",
+      type: "number",
       validation: (R) => R.required().min(1),
     }),
     defineField({
-      name: 'cost',
-      title: 'Package Cost (USD)',
-      type: 'number',
+      name: "cost",
+      title: "Package Cost (USD)",
+      type: "number",
       validation: (R) => R.required().min(0),
     }),
     defineField({
-      name: 'addOns',
-      title: 'Add-ons',
-      type: 'array',
+      name: "addOns",
+      title: "Add-ons",
+      type: "array",
       of: [
         {
-          type: 'object',
+          type: "object",
           fields: [
-            defineField({ name: 'name', title: 'Name', type: 'localizedString' }),
-            defineField({ name: 'cost', title: 'Cost (USD)', type: 'number' }),
+            defineField({
+              name: "name",
+              title: "Name",
+              type: "localizedString",
+            }),
+            defineField({ name: "cost", title: "Cost (USD)", type: "number" }),
           ],
           preview: {
-            select: { nameEn: 'name.en', cost: 'cost' },
+            select: { nameEn: "name.en", cost: "cost" },
             prepare({ nameEn, cost }) {
-              return { title: nameEn ?? 'Add-on', subtitle: `+$${cost}` }
+              return { title: nameEn ?? "Add-on", subtitle: `+$${cost}` };
             },
           },
         },
       ],
     }),
     defineField({
-      name: 'order',
-      title: 'Sort Order',
-      type: 'number',
+      name: "order",
+      title: "Sort Order",
+      type: "number",
       initialValue: 0,
     }),
   ],
 
   preview: {
     select: {
-      nameEn: 'name.en',
-      cost:   'cost',
-      hours:  'hours',
+      nameEn: "name.en",
+      cost: "cost",
+      hours: "hours",
     },
     prepare({ nameEn, cost, hours }) {
       return {
-        title:    nameEn ?? 'Unnamed Video Package',
+        title: nameEn ?? "Unnamed Video Package",
         subtitle: `$${cost?.toLocaleString()} · ${hours}h`,
-      }
+      };
     },
   },
-})
+});

@@ -1,5 +1,5 @@
-import { defineQuery } from 'groq'
-import { client } from '@/sanity/lib/client'
+import { defineQuery } from "groq";
+import { client } from "@/sanity/lib/client";
 
 // Tries the requested locale first; falls back to English if no match for that slug.
 // select() converts the locale match to 0 (match) or 1 (fallback), sorted asc so the
@@ -30,44 +30,44 @@ export const getArticleBySlugQuery = defineQuery(`
       "slug": slug.current
     }
   }
-`)
+`);
 
-export type ArticleTranslation = { language: string; slug: string }
+export type ArticleTranslation = { language: string; slug: string };
 
 export type BlogArticleFull = {
-  _id: string
-  slug: string
-  publishedAt: string
-  language: string
-  translationGroup: string
-  author: string | null
-  title: string | null
-  excerpt: string | null
-  body: unknown[] | null
-  readingTime: number | null
-  seoTitle: string | null
-  seoDescription: string | null
+  _id: string;
+  slug: string;
+  publishedAt: string;
+  language: string;
+  translationGroup: string;
+  author: string | null;
+  title: string | null;
+  excerpt: string | null;
+  body: unknown[] | null;
+  readingTime: number | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
   ogImage: {
-    asset: { _ref: string; _type: string }
-    hotspot?: { x: number; y: number }
-    crop?: object
-    alt: string | null
-  } | null
-  canonicalUrl: string | null
-  noIndex: boolean | null
-  category: { title: string | null; slug: string } | null
+    asset: { _ref: string; _type: string };
+    hotspot?: { x: number; y: number };
+    crop?: object;
+    alt: string | null;
+  } | null;
+  canonicalUrl: string | null;
+  noIndex: boolean | null;
+  category: { title: string | null; slug: string } | null;
   featuredImage: {
-    asset: { _ref: string; _type: string }
-    hotspot?: { x: number; y: number }
-    crop?: object
-    alt: string | null
-  } | null
-  translations: ArticleTranslation[]
-} | null
+    asset: { _ref: string; _type: string };
+    hotspot?: { x: number; y: number };
+    crop?: object;
+    alt: string | null;
+  } | null;
+  translations: ArticleTranslation[];
+} | null;
 
 export async function getArticleBySlug(
   slug: string,
   locale: string,
 ): Promise<BlogArticleFull> {
-  return client.fetch(getArticleBySlugQuery, { slug, locale })
+  return client.fetch(getArticleBySlugQuery, { slug, locale });
 }

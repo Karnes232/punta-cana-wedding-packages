@@ -1,37 +1,37 @@
-'use client'
+"use client";
 
-import { useTranslations } from 'next-intl'
-import StepWrapper from './StepWrapper'
-import type { CalculatorAction, CalculatorState } from './useCalculatorState'
+import { useTranslations } from "next-intl";
+import StepWrapper from "./StepWrapper";
+import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 
 type Props = {
-  state:    CalculatorState
-  dispatch: React.Dispatch<CalculatorAction>
-}
+  state: CalculatorState;
+  dispatch: React.Dispatch<CalculatorAction>;
+};
 
-const MIN_GUESTS = 10
-const MAX_GUESTS = 500
+const MIN_GUESTS = 10;
+const MAX_GUESTS = 500;
 
 export default function Step02Guests({ state, dispatch }: Props) {
-  const t = useTranslations('weddingCalculator.steps.guests')
+  const t = useTranslations("weddingCalculator.steps.guests");
 
   const setGuests = (value: number) => {
-    const clamped = Math.max(MIN_GUESTS, Math.min(MAX_GUESTS, value))
-    dispatch({ type: 'SET_GUESTS', guests: clamped })
-  }
+    const clamped = Math.max(MIN_GUESTS, Math.min(MAX_GUESTS, value));
+    dispatch({ type: "SET_GUESTS", guests: clamped });
+  };
 
   return (
     <StepWrapper
       stepNumber={2}
-      title={t('title')}
-      onBack={() => dispatch({ type: 'PREV_STEP' })}
-      onContinue={() => dispatch({ type: 'NEXT_STEP' })}
+      title={t("title")}
+      onBack={() => dispatch({ type: "PREV_STEP" })}
+      onContinue={() => dispatch({ type: "NEXT_STEP" })}
     >
-      <p className="mb-6 text-sm leading-relaxed text-[#666666]">{t('help')}</p>
+      <p className="mb-6 text-sm leading-relaxed text-[#666666]">{t("help")}</p>
 
       <div className="max-w-xs">
         <label className="mb-2 block text-sm font-medium text-[#333333]">
-          {t('label')}
+          {t("label")}
         </label>
 
         <div className="flex items-center gap-3">
@@ -49,7 +49,9 @@ export default function Step02Guests({ state, dispatch }: Props) {
             min={MIN_GUESTS}
             max={MAX_GUESTS}
             value={state.guests}
-            onChange={(e) => setGuests(parseInt(e.target.value, 10) || MIN_GUESTS)}
+            onChange={(e) =>
+              setGuests(parseInt(e.target.value, 10) || MIN_GUESTS)
+            }
             className="w-24 rounded-xl border border-[#E0E0E0] bg-white px-3 py-3 text-center text-lg font-semibold text-[#1A1A1A] shadow-sm transition-colors duration-200 focus:border-[#5B9FD9] focus:outline-none focus:ring-2 focus:ring-[#5B9FD9]/20"
           />
 
@@ -64,9 +66,9 @@ export default function Step02Guests({ state, dispatch }: Props) {
         </div>
 
         <p className="mt-3 text-xs text-[#AAAAAA]">
-          {t('min')} · {t('max')}
+          {t("min")} · {t("max")}
         </p>
       </div>
     </StepWrapper>
-  )
+  );
 }

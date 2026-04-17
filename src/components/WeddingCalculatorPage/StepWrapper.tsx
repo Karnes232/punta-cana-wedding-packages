@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { useTranslations } from 'next-intl'
+import { useTranslations } from "next-intl";
 
 type Props = {
-  stepNumber: number
-  title:      string
-  children:   React.ReactNode
-  onBack?:    () => void
-  onContinue?: () => void
-  onSkip?:     () => void
-  continueDisabled?: boolean
-  hideContinue?: boolean
-}
+  stepNumber: number;
+  title: string;
+  children: React.ReactNode;
+  onBack?: () => void;
+  onContinue?: () => void;
+  onSkip?: () => void;
+  continueDisabled?: boolean;
+  hideContinue?: boolean;
+};
 
 export default function StepWrapper({
   stepNumber,
@@ -23,7 +23,7 @@ export default function StepWrapper({
   continueDisabled = false,
   hideContinue = false,
 }: Props) {
-  const t = useTranslations('weddingCalculator.nav')
+  const t = useTranslations("weddingCalculator.nav");
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
@@ -38,9 +38,7 @@ export default function StepWrapper({
       </div>
 
       {/* Content */}
-      <div className="mb-8">
-        {children}
-      </div>
+      <div className="mb-8">{children}</div>
 
       {/* Navigation */}
       <div className="flex items-center gap-3">
@@ -49,7 +47,7 @@ export default function StepWrapper({
             onClick={onBack}
             className="rounded-xl border border-[#E0E0E0] px-6 py-3 text-sm font-medium text-[#555555] transition-colors duration-200 hover:border-[#CCCCCC] hover:bg-[#F8F8F8]"
           >
-            {t('back')}
+            {t("back")}
           </button>
         )}
 
@@ -59,7 +57,7 @@ export default function StepWrapper({
             disabled={continueDisabled}
             className="rounded-xl bg-[#5B9FD9] px-8 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#4A90E2] disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {t('continue')}
+            {t("continue")}
           </button>
         )}
 
@@ -68,10 +66,10 @@ export default function StepWrapper({
             onClick={onSkip}
             className="text-sm text-[#AAAAAA] transition-colors duration-200 hover:text-[#888888]"
           >
-            {t('skip')}
+            {t("skip")}
           </button>
         )}
       </div>
     </div>
-  )
+  );
 }

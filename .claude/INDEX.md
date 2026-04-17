@@ -1,4 +1,5 @@
 # .claude/ Setup Guide
+
 ## Punta Cana Wedding Packages
 
 Complete reference for Claude Code configuration and documentation. Start here.
@@ -21,14 +22,17 @@ If you're new to this project, read these docs in this order:
 ## 📁 File-by-File Guide
 
 ### CLAUDE.md
+
 **What:** Main instructions for Claude Code. The entry point.
 
 **Read when:**
+
 - Starting work on the project
 - Unsure about architecture or conventions
 - Need a quick overview
 
 **Contains:**
+
 - Quick facts (framework, deployment, CMS)
 - Project overview (what the site does)
 - Key architectural principles (server-first, Sanity, i18n, design)
@@ -40,15 +44,18 @@ If you're new to this project, read these docs in this order:
 ---
 
 ### PROJECT_STATE.md
+
 **What:** Current state snapshot. Tech versions, decisions, constraints.
 
 **Read when:**
+
 - Before making architectural decisions
 - Starting a new major feature
 - Wondering why something is structured this way
 - Updating tech versions
 
 **Contains:**
+
 - Technology stack with versions
 - Architectural decisions (why + rationale)
 - Current routes & features
@@ -62,15 +69,18 @@ If you're new to this project, read these docs in this order:
 ---
 
 ### file-structure.md
+
 **What:** Complete folder organization reference. Where every type of file goes.
 
 **Read when:**
+
 - Creating a new component
 - Adding a new page
 - Setting up Sanity schemas
 - Wondering "does this file go here?"
 
 **Contains:**
+
 - Root structure
 - App Router structure with examples
 - Components organization (page-scoped, not by type)
@@ -85,15 +95,18 @@ If you're new to this project, read these docs in this order:
 ---
 
 ### website-structure.md
+
 **What:** Business blueprint. What each page does and how they fit together.
 
 **Read when:**
+
 - Understanding the sales funnel
 - Deciding what a page should contain
 - Wondering "why does this page exist?"
 - Planning content strategy
 
 **Contains:**
+
 - General purpose (why the site exists)
 - Complete page list with routes and purposes
 - Detailed breakdown of each page
@@ -108,9 +121,11 @@ If you're new to this project, read these docs in this order:
 ---
 
 ### design-vision.md
+
 **What:** Visual design guidelines. Colors, buttons, spacing, typography, feeling.
 
 **Read when:**
+
 - Designing a component
 - Choosing colors
 - Deciding spacing or sizing
@@ -118,6 +133,7 @@ If you're new to this project, read these docs in this order:
 - Building UI with Tailwind
 
 **Contains:**
+
 - Overall feeling/emotion (soft, calm, easy—NOT luxury/dark)
 - Color palette with specific hex codes
 - Lines, borders, shadows
@@ -136,9 +152,11 @@ If you're new to this project, read these docs in this order:
 ---
 
 ### wedding-builder-logic.md
+
 **What:** Complete technical specification for the wedding calculator. Pricing formulas, step-by-step flow, calculation logic.
 
 **Read when:**
+
 - Building the calculator
 - Setting up Sanity pricing schemas
 - Implementing calculation logic
@@ -146,6 +164,7 @@ If you're new to this project, read these docs in this order:
 - Adding new calculator steps or features
 
 **Contains:**
+
 - Core concept (automatic quote engine)
 - Master variable explanation (guest count)
 - Step-by-step flow (13 steps from date to form)
@@ -163,9 +182,11 @@ If you're new to this project, read these docs in this order:
 ---
 
 ### settings.json
+
 **What:** Shared project configuration. Tech versions, locales, design tokens, URLs.
 
 **Contents:**
+
 - Project metadata
 - Technology stack (versions)
 - Localization config
@@ -178,6 +199,7 @@ If you're new to this project, read these docs in this order:
 - Conventions (naming, structure)
 
 **Update when:**
+
 - Upgrading a tech version
 - Adding a new page
 - Changing a design color
@@ -188,30 +210,39 @@ If you're new to this project, read these docs in this order:
 ## 🎯 Common Workflows
 
 ### I need to understand the whole project
+
 → Read: CLAUDE.md → PROJECT_STATE.md → website-structure.md
 
 ### I'm adding a new page
+
 → Read: file-structure.md → website-structure.md (what should it do?)
 
 ### I'm building components and styling them
+
 → Read: design-vision.md → file-structure.md (where do components go?)
 
 ### I'm working on the wedding calculator
+
 → Read: wedding-builder-logic.md → file-structure.md (schema organization)
 
 ### I'm confused about where a file should go
+
 → Check: file-structure.md → "Final Checklist: Is This File in the Right Place?"
 
 ### I need to know what the site's purpose is
+
 → Check: website-structure.md → "General Purpose" section
 
 ### I need design guidelines for colors/buttons/spacing
+
 → Check: design-vision.md
 
 ### I need to understand how pricing works
+
 → Check: wedding-builder-logic.md → "Step-by-Step Flow"
 
 ### I'm setting up Sanity schemas
+
 → Read: wedding-builder-logic.md (what to calculate) → file-structure.md (how to organize)
 
 ---
@@ -263,22 +294,26 @@ settings.json (configuration)
 ## ✅ Checklists
 
 ### Before Starting Development
+
 - [ ] Read CLAUDE.md (project overview)
 - [ ] Read PROJECT_STATE.md (tech stack, constraints)
 - [ ] Read file-structure.md (where files go)
 - [ ] Check design-vision.md (design directions)
 
 ### Before Implementing Wedding Calculator
+
 - [ ] Read wedding-builder-logic.md (complete spec)
 - [ ] Review file-structure.md Sanity section (schema organization)
 - [ ] Check design-vision.md for form design guidelines
 
 ### Before Adding a New Page
+
 - [ ] Check website-structure.md for page description
 - [ ] Check file-structure.md for file location
 - [ ] Review design-vision.md for styling consistency
 
 ### Before Deploying to Netlify
+
 - [ ] All routes render (no 404s)
 - [ ] Both locales work (en and es)
 - [ ] Wedding calculator all steps functional
@@ -314,16 +349,16 @@ Each doc has guidance and examples. If you can't find something:
 
 ## Document Statistics
 
-| Document | Sections | Read Time | Type |
-|----------|----------|-----------|------|
-| CLAUDE.md | 10 | 5 min | Overview + reference |
-| PROJECT_STATE.md | 8 | 10 min | Reference |
-| file-structure.md | 10 | 15 min | Reference + examples |
-| website-structure.md | 12 | 20 min | Blueprint + examples |
-| design-vision.md | 13 | 20 min | Guidelines |
-| wedding-builder-logic.md | 17 | 30 min | Specification |
-| settings.json | — | — | Configuration |
-| INDEX.md | 11 | 5 min | This file |
+| Document                 | Sections | Read Time | Type                 |
+| ------------------------ | -------- | --------- | -------------------- |
+| CLAUDE.md                | 10       | 5 min     | Overview + reference |
+| PROJECT_STATE.md         | 8        | 10 min    | Reference            |
+| file-structure.md        | 10       | 15 min    | Reference + examples |
+| website-structure.md     | 12       | 20 min    | Blueprint + examples |
+| design-vision.md         | 13       | 20 min    | Guidelines           |
+| wedding-builder-logic.md | 17       | 30 min    | Specification        |
+| settings.json            | —        | —         | Configuration        |
+| INDEX.md                 | 11       | 5 min     | This file            |
 
 **Total reading time for complete onboarding:** ~100 minutes (but you don't need to read everything at once; read on-demand).
 

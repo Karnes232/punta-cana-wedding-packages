@@ -1,4 +1,5 @@
 # Website Structure
+
 ## Punta Cana Wedding Packages
 
 What the website is, what each page does, and how everything connects to the sales funnel. This is the business blueprint, not the technical blueprint.
@@ -21,17 +22,17 @@ The website's main goal is to **move qualified visitors toward the Wedding Calcu
 
 ## Complete Page List
 
-| Page | Route | Purpose | Conversion Point |
-|------|-------|---------|------------------|
-| **Home** | `/:locale/` | Introduce brand & platform | Click calculator CTA |
-| **Wedding Calculator** | `/:locale/wedding-calculator` | Build & estimate | Form submission |
-| **How It Works** | `/:locale/how-it-works` | Explain process | Trust → calculator |
-| **About Us** | `/:locale/about` | Build trust, show team | Confidence → calculator |
-| **Contact** | `/:locale/contact` | Answer questions | Direct inquiry or calculator |
-| **Blog** | `/:locale/blog` | Attract search traffic | Educate → calculator |
-| **Stories** | `/:locale/stories` | Real wedding inspiration | Emotional trust → calculator |
-| **Privacy Policy** | `/:locale/privacy-policy` | Legal (required) | Trust signal |
-| **Terms of Service** | `/:locale/terms-of-service` | Legal (required) | Trust signal |
+| Page                   | Route                         | Purpose                    | Conversion Point             |
+| ---------------------- | ----------------------------- | -------------------------- | ---------------------------- |
+| **Home**               | `/:locale/`                   | Introduce brand & platform | Click calculator CTA         |
+| **Wedding Calculator** | `/:locale/wedding-calculator` | Build & estimate           | Form submission              |
+| **How It Works**       | `/:locale/how-it-works`       | Explain process            | Trust → calculator           |
+| **About Us**           | `/:locale/about`              | Build trust, show team     | Confidence → calculator      |
+| **Contact**            | `/:locale/contact`            | Answer questions           | Direct inquiry or calculator |
+| **Blog**               | `/:locale/blog`               | Attract search traffic     | Educate → calculator         |
+| **Stories**            | `/:locale/stories`            | Real wedding inspiration   | Emotional trust → calculator |
+| **Privacy Policy**     | `/:locale/privacy-policy`     | Legal (required)           | Trust signal                 |
+| **Terms of Service**   | `/:locale/terms-of-service`   | Legal (required)           | Trust signal                 |
 
 ---
 
@@ -112,12 +113,14 @@ This is the **core of the entire platform.** The most important page.
 Allow the user to build the wedding step by step. Should feel elegant, intuitive, highly guided—NOT like a spreadsheet or back-office system.
 
 User should:
+
 - Select date, guests, hotel, venue, menu, drinks, decor, photo, video, music, transport, extras
 - See estimated total update live
 - Never feel overwhelmed
 - Feel that the platform is helping them create something beautiful
 
 **Experience:**
+
 - Guided wizard (one step at a time)
 - Live price updates
 - Visual, aspirational (not technical)
@@ -305,6 +308,7 @@ Attract people who are searching for answers about destination weddings, Punta C
    - Internal CTAs: "Ready to plan?" → Calculator
 
 **Content Direction:**
+
 - How much does a wedding in Punta Cana cost?
 - Wedding budget guidance
 - What's included in destination weddings?
@@ -363,11 +367,13 @@ Real wedding inspiration and social proof. Show beautiful, real weddings that ha
 ### Legal Pages
 
 **Privacy Policy** (`/:locale/privacy-policy`)
+
 - Standard privacy policy
 - Required for EU/international compliance
 - Simple, clear language
 
 **Terms of Service** (`/:locale/terms-of-service`)
+
 - Booking terms
 - Payment terms (deposit, schedule, cancellation)
 - Flexibility rules (date changes, etc.)
@@ -380,6 +386,7 @@ These build trust through transparency.
 ## Navigation Structure
 
 ### Main Menu (Top Navigation)
+
 - Home
 - Wedding Calculator (primary CTA button, prominent)
 - How It Works
@@ -390,6 +397,7 @@ These build trust through transparency.
 **Header Button:** "Start Designing My Wedding" (highlights calculator)
 
 ### Footer
+
 - Logo / Company name
 - Quick links: Home, How It Works, About, Contact
 - **Blog link** (important for discovery)
@@ -442,9 +450,11 @@ Ongoing planning relationship
 ## Key Messaging
 
 ### Core Value Proposition
+
 "Design your dream Punta Cana wedding in minutes and get an instant estimate."
 
 ### Key Messages
+
 1. **Easy:** "Simple, guided process"
 2. **Fast:** "Minutes, not days"
 3. **Transparent:** "See pricing in real time"

@@ -1,2 +1,2 @@
-export { contactPageQuery, getContactPage } from './getContactPage'
-export type { ContactPageQueryResult } from './getContactPage'
+export { contactPageQuery, getContactPage } from "./getContactPage";
+export type { ContactPageQueryResult } from "./getContactPage";

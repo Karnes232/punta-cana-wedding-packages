@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 type FAQItem = {
   key: string;
@@ -37,7 +37,9 @@ export default function FAQAccordion({ items }: Props) {
               {/* Chevron */}
               <span
                 className="shrink-0 transition-transform duration-200"
-                style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                style={{
+                  transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                }}
                 aria-hidden="true"
               >
                 <svg
@@ -58,9 +60,11 @@ export default function FAQAccordion({ items }: Props) {
 
             <div
               className="overflow-hidden transition-all duration-300 ease-in-out"
-              style={{ maxHeight: isOpen ? '400px' : '0px' }}
+              style={{ maxHeight: isOpen ? "400px" : "0px" }}
             >
-              <p className="px-6 pb-5 text-sm leading-relaxed text-[#555555]">{item.answer}</p>
+              <p className="px-6 pb-5 text-sm leading-relaxed text-[#555555]">
+                {item.answer}
+              </p>
             </div>
           </div>
         );

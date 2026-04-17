@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import { localized } from '@/sanity/lib/localize';
-import { urlFor } from '@/sanity/lib/image';
-import type { ContactPageQueryResult } from '@/sanity/queries/ContactPage';
+import Image from "next/image";
+import { localized } from "@/sanity/lib/localize";
+import { urlFor } from "@/sanity/lib/image";
+import type { ContactPageQueryResult } from "@/sanity/queries/ContactPage";
 
 type Props = {
   data: ContactPageQueryResult;
@@ -13,12 +13,18 @@ export default function ContactHero({ data, locale }: Props) {
     localized(data?.heroTitle, locale) ?? "Let's Plan Your Dream Wedding";
   const subtitle =
     localized(data?.heroSubtitle, locale) ??
-    'We are here to help you every step of the way. Reach out and we will get back to you within 24 hours.';
+    "We are here to help you every step of the way. Reach out and we will get back to you within 24 hours.";
 
   const imageUrl = data?.heroImage?.asset
-    ? urlFor(data.heroImage.asset).width(1400).height(560).fit('crop').auto('format').url()
+    ? urlFor(data.heroImage.asset)
+        .width(1400)
+        .height(560)
+        .fit("crop")
+        .auto("format")
+        .url()
     : null;
-  const imageAlt = data?.heroImage?.alt ?? 'Contact Punta Cana Wedding Packages';
+  const imageAlt =
+    data?.heroImage?.alt ?? "Contact Punta Cana Wedding Packages";
 
   return (
     <section className="bg-white py-16 md:py-24">
@@ -27,7 +33,9 @@ export default function ContactHero({ data, locale }: Props) {
           <h1 className="text-4xl font-semibold leading-tight tracking-tight text-[#1A1A1A] md:text-5xl">
             {title}
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-[#555555]">{subtitle}</p>
+          <p className="mt-5 text-lg leading-relaxed text-[#555555]">
+            {subtitle}
+          </p>
         </div>
 
         {imageUrl && (

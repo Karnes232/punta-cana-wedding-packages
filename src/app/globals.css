@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-poppins), 'Poppins', 'Open Sans', sans-serif;
+  --font-sans: var(--font-poppins), "Poppins", "Open Sans", sans-serif;
 
   /* Design tokens */
   --color-primary-blue: #5b9fd9;

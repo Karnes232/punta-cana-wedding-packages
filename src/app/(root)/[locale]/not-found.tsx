@@ -1,14 +1,13 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function NotFound() {
-  const t = useTranslations('notFound');
+  const t = useTranslations("notFound");
 
   return (
     <section className="flex flex-col items-center justify-center px-6 py-32 text-center">
-
       {/* Decorative wave */}
       <div className="mb-10 text-[#D0E8F5]" aria-hidden="true">
         <svg
@@ -38,17 +37,17 @@ export default function NotFound() {
 
       {/* 404 number */}
       <p className="text-8xl font-bold tracking-tight text-[#5B9FD9] sm:text-9xl">
-        {t('code')}
+        {t("code")}
       </p>
 
       {/* Heading */}
       <h1 className="mt-6 text-2xl font-semibold text-[#1A1A1A] sm:text-3xl">
-        {t('heading')}
+        {t("heading")}
       </h1>
 
       {/* Subtitle */}
       <p className="mt-4 max-w-sm text-base leading-relaxed text-[#666666]">
-        {t('sub')}
+        {t("sub")}
       </p>
 
       {/* CTAs */}
@@ -57,17 +56,16 @@ export default function NotFound() {
           href="/"
           className="rounded-xl border border-[#E0E0E0] bg-white px-7 py-3 text-sm font-medium text-[#444444] transition-colors duration-200 hover:border-[#5B9FD9] hover:text-[#5B9FD9]"
         >
-          {t('goHome')}
+          {t("goHome")}
         </Link>
 
         <Link
           href="/wedding-calculator"
           className="rounded-xl bg-[#5B9FD9] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#4A90E2]"
         >
-          {t('startPlanning')}
+          {t("startPlanning")}
         </Link>
       </div>
-
     </section>
   );
 }

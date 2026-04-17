@@ -177,7 +177,12 @@
         "location": "Playa Cabeza de Toro, Punta Cana",
         "description": "Todas las bodas se celebran en nuestro impresionante venue frente al mar en Cabeza de Toro. La coordinación profesional de bodas está incluida en todos los paquetes.",
         "confirm": "¡Me emociona casarme aquí!",
-        "features": ["Montaje de ceremonia frente al mar", "Sonido e iluminación profesional", "Acceso todo el día", "Equipo de coordinación en el lugar"]
+        "features": [
+          "Montaje de ceremonia frente al mar",
+          "Sonido e iluminación profesional",
+          "Acceso todo el día",
+          "Equipo de coordinación en el lugar"
+        ]
       },
       "menu": {
         "title": "Selección de Menú",

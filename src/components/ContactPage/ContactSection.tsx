@@ -1,7 +1,7 @@
-import { getGeneralLayout } from '@/sanity/queries/GeneralLayout';
-import { localized } from '@/sanity/lib/localize';
-import type { ContactPageQueryResult } from '@/sanity/queries/ContactPage';
-import ContactForm from './ContactForm';
+import { getGeneralLayout } from "@/sanity/queries/GeneralLayout";
+import { localized } from "@/sanity/lib/localize";
+import type { ContactPageQueryResult } from "@/sanity/queries/ContactPage";
+import ContactForm from "./ContactForm";
 
 type Props = {
   data: ContactPageQueryResult;

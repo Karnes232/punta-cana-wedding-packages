@@ -1,4 +1,5 @@
 # File Structure
+
 ## Punta Cana Wedding Packages
 
 Complete reference for where every file should go. Based on your preferred organization (page-scoped components, Sanity structure mirrors schema).
@@ -54,6 +55,7 @@ messages/
 ```
 
 **Guidelines:**
+
 - Use dot notation for nested keys: `home.hero.title`, `contact.form.email`
 - Group by page: `home.*`, `calculator.*`, `contact.*`, etc.
 - No hardcoded text in components; everything from messages JSON
@@ -69,6 +71,7 @@ src/i18n/
 ```
 
 **Key Functions:**
+
 - `routing.ts`: Defines available locales, default, prefix strategy
 - `request.ts`: Loads appropriate message file based on locale
 - `navigation.ts`: Provides locale-aware routing helpers
@@ -125,6 +128,7 @@ src/app/
 ```
 
 **Structure Explanation:**
+
 - **`layout.tsx` (root):** HTML shell, wraps everything
 - **`(root)/layout.tsx`:** Shared site shell (Navbar/Footer)
 - **`[locale]/layout.tsx`:** Per-locale providers (NextIntlClientProvider)
@@ -232,6 +236,7 @@ src/components/
 ```
 
 **Key Rules:**
+
 - ❌ Don't: Organize by type (`buttons/`, `cards/`, `forms/`)
 - ✅ Do: Organize by PAGE (`HomePage/`, `BlogPage/`)
 - ✅ Exception: `Layout/`, `BlockContent/`, `ui/` for truly shared pieces
@@ -404,6 +409,7 @@ src/sanity/
 ```
 
 **Key Principles:**
+
 - **Schemas mirror Components:** Same folder structure for organization
 - **Queries mirror Schemas:** Organized same way for easy discovery
 - **GROQ stored separately:** `groq.ts` files contain GROQ strings; query functions use them
@@ -451,20 +457,24 @@ If you're adding a new feature (e.g., "Honeymoon Packages"), here's where files 
 ## Guidelines
 
 ### Naming Conventions
+
 - **Components:** PascalCase (`Hero.tsx`, `PackageCard.tsx`)
 - **Functions/utilities:** camelCase (`getHomePage.ts`, `calculateTotal.ts`)
 - **Hooks:** camelCase with `use` prefix (`useCalculator.ts`)
 - **Files:** PascalCase for components, camelCase for utilities
 
 ### Imports
+
 Use `@` alias in `tsconfig.json`:
+
 ```typescript
-import { HomePage } from '@/components/HomePage'
-import { client } from '@/sanity/lib/client'
-import { getHomePage } from '@/sanity/queries/HomePage'
+import { HomePage } from "@/components/HomePage";
+import { client } from "@/sanity/lib/client";
+import { getHomePage } from "@/sanity/queries/HomePage";
 ```
 
 ### Folder Structure Rules
+
 - ✅ Group by feature/page, not by type
 - ✅ Co-locate related code
 - ✅ Use `index.ts` to export from folders
@@ -474,17 +484,17 @@ import { getHomePage } from '@/sanity/queries/HomePage'
 
 ## Final Checklist: Is This File in the Right Place?
 
-| File | Goes In |
-|------|----------|
-| React component for specific page | `src/components/[PageName]/` |
-| Reusable UI primitive | `src/components/ui/` |
-| Shared layout (Navbar, Footer) | `src/components/Layout/` |
-| Sanity document schema | `src/sanity/schemaTypes/[DomainName]/` |
-| GROQ query function | `src/sanity/queries/[DomainName]/` |
-| i18n text | `messages/en.json` or `messages/es.json` |
-| Page route | `src/app/(root)/[locale]/[page]/page.tsx` |
-| Environment config | `.env.local` |
-| Sanity client setup | `src/sanity/lib/client.ts` |
+| File                              | Goes In                                   |
+| --------------------------------- | ----------------------------------------- |
+| React component for specific page | `src/components/[PageName]/`              |
+| Reusable UI primitive             | `src/components/ui/`                      |
+| Shared layout (Navbar, Footer)    | `src/components/Layout/`                  |
+| Sanity document schema            | `src/sanity/schemaTypes/[DomainName]/`    |
+| GROQ query function               | `src/sanity/queries/[DomainName]/`        |
+| i18n text                         | `messages/en.json` or `messages/es.json`  |
+| Page route                        | `src/app/(root)/[locale]/[page]/page.tsx` |
+| Environment config                | `.env.local`                              |
+| Sanity client setup               | `src/sanity/lib/client.ts`                |
 
 ---
 

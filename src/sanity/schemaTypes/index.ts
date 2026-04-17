@@ -1,4 +1,4 @@
-import { type SchemaTypeDefinition } from 'sanity'
+import { type SchemaTypeDefinition } from "sanity";
 
 // Localized primitive types (must be registered before any schema that uses them)
 import {
@@ -8,19 +8,19 @@ import {
   blogLocalizedString,
   blogLocalizedText,
   blogLocalizedBlock,
-} from './Localized'
+} from "./Localized";
 
 // Document schemas
-import { generalLayout } from './GeneralLayout'
-import { homePage } from './HomePage'
-import { aboutPage } from './AboutPage'
-import { howItWorksPage } from './HowItWorksPage'
-import { privacyPolicy } from './PrivacyPolicy'
-import { termsOfService } from './TermsOfService'
-import { contactPage } from './ContactPage'
-import { blogArticle, blogCategory } from './Blog'
-import { weddingStory } from './StoriesPage'
-import { seo, pageSeo } from './SEO'
+import { generalLayout } from "./GeneralLayout";
+import { homePage } from "./HomePage";
+import { aboutPage } from "./AboutPage";
+import { howItWorksPage } from "./HowItWorksPage";
+import { privacyPolicy } from "./PrivacyPolicy";
+import { termsOfService } from "./TermsOfService";
+import { contactPage } from "./ContactPage";
+import { blogArticle, blogCategory } from "./Blog";
+import { weddingStory } from "./StoriesPage";
+import { seo, pageSeo } from "./SEO";
 import {
   menuOption,
   barPackage,
@@ -32,7 +32,7 @@ import {
   entertainmentOption,
   extraOption,
   calculatorConfig,
-} from './WeddingCalculator'
+} from "./WeddingCalculator";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -72,4 +72,4 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     extraOption,
     calculatorConfig,
   ],
-}
+};

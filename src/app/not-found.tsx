@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 /**
  * Root-level 404 — shown for URLs that don't match any locale route
@@ -7,7 +7,6 @@ import Link from 'next/link';
 export default function RootNotFound() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-6 py-32 text-center">
-
       {/* Decorative wave */}
       <div className="mb-10 text-[#D0E8F5]" aria-hidden="true">
         <svg
@@ -62,7 +61,6 @@ export default function RootNotFound() {
           Build My Wedding
         </Link>
       </div>
-
     </div>
   );
 }

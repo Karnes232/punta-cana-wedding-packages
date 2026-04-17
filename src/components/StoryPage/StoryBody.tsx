@@ -1,19 +1,17 @@
-import { PortableText } from '@portabletext/react'
-import type { WeddingStoryFull } from '@/sanity/queries/StoriesPage'
-import type { PortableTextBlock } from '@portabletext/types'
+import { PortableText } from "@portabletext/react";
+import type { WeddingStoryFull } from "@/sanity/queries/StoriesPage";
+import type { PortableTextBlock } from "@portabletext/types";
 
-type Props = { story: NonNullable<WeddingStoryFull>; locale: string }
+type Props = { story: NonNullable<WeddingStoryFull>; locale: string };
 
 export default function StoryBody({ story, locale }: Props) {
-  const rawBody = story.body
-  if (!rawBody) return null
+  const rawBody = story.body;
+  if (!rawBody) return null;
 
   const content =
-    (rawBody as Record<string, unknown>)[locale] ??
-    rawBody.en ??
-    null
+    (rawBody as Record<string, unknown>)[locale] ?? rawBody.en ?? null;
 
-  if (!content || !Array.isArray(content) || content.length === 0) return null
+  if (!content || !Array.isArray(content) || content.length === 0) return null;
 
   return (
     <section className="px-6 py-8">
@@ -23,5 +21,5 @@ export default function StoryBody({ story, locale }: Props) {
         </div>
       </div>
     </section>
-  )
+  );
 }

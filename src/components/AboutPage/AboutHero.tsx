@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import { localized } from '@/sanity/lib/localize';
-import { urlFor } from '@/sanity/lib/image';
-import type { AboutPageQueryResult } from '@/sanity/queries/AboutPage';
+import Image from "next/image";
+import { localized } from "@/sanity/lib/localize";
+import { urlFor } from "@/sanity/lib/image";
+import type { AboutPageQueryResult } from "@/sanity/queries/AboutPage";
 
 type Props = {
   data: AboutPageQueryResult | null;
@@ -10,25 +10,24 @@ type Props = {
 
 export default async function AboutHero({ data, locale }: Props) {
   const title =
-    localized(data?.heroTitle, locale) ?? 'The Team Behind Your Dream Wedding';
+    localized(data?.heroTitle, locale) ?? "The Team Behind Your Dream Wedding";
   const subtitle =
     localized(data?.heroSubtitle, locale) ??
-    'We are a dedicated team of wedding specialists based in Punta Cana, passionate about creating unforgettable moments for couples from around the world.';
+    "We are a dedicated team of wedding specialists based in Punta Cana, passionate about creating unforgettable moments for couples from around the world.";
 
   const imageUrl = data?.heroImage?.asset
     ? urlFor(data.heroImage.asset)
         .width(1400)
         .height(560)
-        .fit('crop')
-        .auto('format')
+        .fit("crop")
+        .auto("format")
         .url()
     : null;
-  const imageAlt = data?.heroImage?.alt ?? 'Our wedding team in Punta Cana';
+  const imageAlt = data?.heroImage?.alt ?? "Our wedding team in Punta Cana";
 
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6">
-
         {/* Text — always centered */}
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-semibold leading-tight tracking-tight text-[#1A1A1A] md:text-5xl">
@@ -52,7 +51,6 @@ export default async function AboutHero({ data, locale }: Props) {
             />
           </div>
         )}
-
       </div>
     </section>
   );

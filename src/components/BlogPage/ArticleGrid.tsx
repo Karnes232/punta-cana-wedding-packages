@@ -1,6 +1,6 @@
-import { getTranslations } from 'next-intl/server';
-import type { BlogArticlePreview } from '@/sanity/queries/Blog';
-import ArticleCard from './ArticleCard';
+import { getTranslations } from "next-intl/server";
+import type { BlogArticlePreview } from "@/sanity/queries/Blog";
+import ArticleCard from "./ArticleCard";
 
 type Props = {
   articles: BlogArticlePreview[];
@@ -8,13 +8,15 @@ type Props = {
 };
 
 export default async function ArticleGrid({ articles, locale }: Props) {
-  const t = await getTranslations('blog');
+  const t = await getTranslations("blog");
 
   if (articles.length === 0) {
     return (
       <section className="bg-[#FAFAFA] py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <p className="text-center text-sm text-[#999999]">{t('noArticles')}</p>
+          <p className="text-center text-sm text-[#999999]">
+            {t("noArticles")}
+          </p>
         </div>
       </section>
     );

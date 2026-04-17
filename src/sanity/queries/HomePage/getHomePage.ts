@@ -1,5 +1,5 @@
-import { defineQuery } from 'groq'
-import { client } from '@/sanity/lib/client'
+import { defineQuery } from "groq";
+import { client } from "@/sanity/lib/client";
 
 export const homePageQuery = defineQuery(`
   *[_type == "homePage" && _id == "homePage"][0] {
@@ -38,44 +38,48 @@ export const homePageQuery = defineQuery(`
       es
     }
   }
-`)
+`);
 
-export type LocalizedString = { en?: string | null; es?: string | null } | null
-export type ImageAsset = { _ref: string; _type: string }
+export type LocalizedString = { en?: string | null; es?: string | null } | null;
+export type ImageAsset = { _ref: string; _type: string };
 
 export type HomePageQueryResult = {
-  heroTitle: LocalizedString
-  heroSubtitle: LocalizedString
+  heroTitle: LocalizedString;
+  heroSubtitle: LocalizedString;
   heroImage: {
-    asset: ImageAsset
-    hotspot?: { x: number; y: number }
-    crop?: object
-    alt: LocalizedString
-  } | null
+    asset: ImageAsset;
+    hotspot?: { x: number; y: number };
+    crop?: object;
+    alt: LocalizedString;
+  } | null;
   howItWorksSteps: Array<{
-    _key: string
-    title: LocalizedString
-    description: LocalizedString
-  }> | null
+    _key: string;
+    title: LocalizedString;
+    description: LocalizedString;
+  }> | null;
   galleryImages: Array<{
-    _key: string
-    asset: ImageAsset
-    hotspot?: { x: number; y: number }
-    crop?: object
-    alt?: string | null
-  }> | null
-  pricingStartingFrom: number | null
-  pricingDescription: LocalizedString
-  whyTitle: LocalizedString
+    _key: string;
+    asset: ImageAsset;
+    hotspot?: { x: number; y: number };
+    crop?: object;
+    alt?: string | null;
+  }> | null;
+  pricingStartingFrom: number | null;
+  pricingDescription: LocalizedString;
+  whyTitle: LocalizedString;
   whyTeamPhoto: {
-    asset: ImageAsset
-    hotspot?: { x: number; y: number }
-    crop?: object
-    alt?: string | null
-  } | null
-  whyPoints: Array<{ _key: string; en?: string | null; es?: string | null }> | null
-}
+    asset: ImageAsset;
+    hotspot?: { x: number; y: number };
+    crop?: object;
+    alt?: string | null;
+  } | null;
+  whyPoints: Array<{
+    _key: string;
+    en?: string | null;
+    es?: string | null;
+  }> | null;
+};
 
 export async function getHomePage(): Promise<HomePageQueryResult | null> {
-  return client.fetch(homePageQuery)
+  return client.fetch(homePageQuery);
 }

@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import { localized } from '@/sanity/lib/localize';
-import { urlFor } from '@/sanity/lib/image';
-import type { HowItWorksPageQueryResult } from '@/sanity/queries/HowItWorksPage';
+import Image from "next/image";
+import { localized } from "@/sanity/lib/localize";
+import { urlFor } from "@/sanity/lib/image";
+import type { HowItWorksPageQueryResult } from "@/sanity/queries/HowItWorksPage";
 
 type Props = {
   data: HowItWorksPageQueryResult | null;
@@ -10,15 +10,20 @@ type Props = {
 
 export default async function HowItWorksHero({ data, locale }: Props) {
   const title =
-    localized(data?.heroTitle, locale) ?? 'The Path to Your Perfect Wedding';
+    localized(data?.heroTitle, locale) ?? "The Path to Your Perfect Wedding";
   const subtitle =
     localized(data?.heroSubtitle, locale) ??
-    'Our simple, guided process takes you from first idea to final plan in minutes. No back-and-forth, no waiting for quotes — just clarity from the start.';
+    "Our simple, guided process takes you from first idea to final plan in minutes. No back-and-forth, no waiting for quotes — just clarity from the start.";
 
   const imageUrl = data?.heroImage?.asset
-    ? urlFor(data.heroImage.asset).width(1400).height(560).fit('crop').auto('format').url()
+    ? urlFor(data.heroImage.asset)
+        .width(1400)
+        .height(560)
+        .fit("crop")
+        .auto("format")
+        .url()
     : null;
-  const imageAlt = data?.heroImage?.alt ?? 'Wedding planning process';
+  const imageAlt = data?.heroImage?.alt ?? "Wedding planning process";
 
   return (
     <section className="bg-white py-16 md:py-24">

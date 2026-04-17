@@ -1,4 +1,5 @@
 # Implementation Quick Start
+
 ## Punta Cana Wedding Packages
 
 Step-by-step guide to set up your `.claude/` directory and understand the complete project configuration.
@@ -126,6 +127,7 @@ Punta Cana Wedding Packages is a **sales and planning system**, not a brochure w
 ### Design Philosophy
 
 Website must feel:
+
 - ✅ Soft, light, clean, romantic, professional, easy, calm
 - ❌ NOT: Luxury, dark, gold, aggressive, heavy, complicated
 
@@ -134,6 +136,7 @@ Website must feel:
 ### File Organization (Your Preference)
 
 ✅ **Components organized by PAGE/DOMAIN:**
+
 ```
 src/components/
 ├── HomePage/
@@ -144,6 +147,7 @@ src/components/
 ```
 
 ❌ **NOT by type:**
+
 ```
 src/components/
 ├── buttons/
@@ -154,6 +158,7 @@ src/components/
 ### Wedding Calculator (The Core)
 
 Step-by-step wizard where user:
+
 1. Selects date, guests, hotel area
 2. Configures menu, drinks, decor, photo, video, transport, entertainment
 3. Sees estimated total update live
@@ -181,6 +186,7 @@ Claude will:
 ```
 
 The docs let Claude Code understand:
+
 - **Why** things are organized this way
 - **Where** to put new code
 - **How** to structure it
@@ -222,6 +228,7 @@ The docs let Claude Code understand:
 ### Environment Variables (.env.local)
 
 You'll need:
+
 ```
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
@@ -245,6 +252,7 @@ NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
 ### Project Structure
 
 Follow your preferred FILE_STRUCTURE.md exactly:
+
 - `messages/` for i18n
 - `src/app/` for routes
 - `src/components/` for page-scoped components
@@ -276,14 +284,14 @@ See design-vision.md for complete color palette and spacing scale.
 
 ## 📊 Project Stats
 
-| Aspect | Details |
-|--------|---------|
-| **Pages** | 9 (Home, Calculator, How It Works, About, Contact, Blog, Stories, Privacy, Terms) |
-| **Main Components** | 7 (HomePage, WeddingCalculator, BlogPage, StoriesPage, HowItWorksPage, AboutPage, ContactPage) |
-| **Sanity Schemas** | 9 document types + many objects |
-| **Locales** | 2 (en, es) |
-| **Calculator Steps** | 13 (date → form submission) |
-| **Expected Complexity** | High (wedding builder, pricing logic, i18n, design system) |
+| Aspect                  | Details                                                                                        |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| **Pages**               | 9 (Home, Calculator, How It Works, About, Contact, Blog, Stories, Privacy, Terms)              |
+| **Main Components**     | 7 (HomePage, WeddingCalculator, BlogPage, StoriesPage, HowItWorksPage, AboutPage, ContactPage) |
+| **Sanity Schemas**      | 9 document types + many objects                                                                |
+| **Locales**             | 2 (en, es)                                                                                     |
+| **Calculator Steps**    | 13 (date → form submission)                                                                    |
+| **Expected Complexity** | High (wedding builder, pricing logic, i18n, design system)                                     |
 
 ---
 
@@ -349,6 +357,7 @@ See PROJECT_STATE.md → "Performance Targets" for detailed metrics.
 ### Keeping Code Aligned
 
 Regular checks:
+
 - Do components follow file-structure.md organization?
 - Do Sanity schemas match file-structure.md locations?
 - Is every UI element styled per design-vision.md?

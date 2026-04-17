@@ -177,7 +177,12 @@
         "location": "Cabeza de Toro Beach, Punta Cana",
         "description": "All weddings take place at our stunning Cabeza de Toro beachfront venue. Professional wedding coordination is included in every package.",
         "confirm": "I'm excited to get married here!",
-        "features": ["Beachfront ceremony setup", "Professional sound & lighting", "Full day access", "On-site coordination team"]
+        "features": [
+          "Beachfront ceremony setup",
+          "Professional sound & lighting",
+          "Full day access",
+          "On-site coordination team"
+        ]
       },
       "menu": {
         "title": "Menu Selection",
