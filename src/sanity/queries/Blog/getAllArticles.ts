@@ -41,3 +41,13 @@ export async function getAllArticles(
 ): Promise<BlogArticlePreview[]> {
   return client.fetch(getAllArticlesQuery, { locale }) ?? [];
 }
+
+export async function getAllArticleSlugsForSitemap(): Promise<
+  { slug: string; language: string; _updatedAt: string }[]
+> {
+  return (
+    client.fetch(
+      `*[_type == "blogArticle"]{ "slug": slug.current, language, _updatedAt }`,
+    ) ?? []
+  );
+}

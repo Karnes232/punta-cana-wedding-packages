@@ -37,3 +37,13 @@ export type WeddingStoryPreview = {
 export async function getAllStories(): Promise<WeddingStoryPreview[]> {
   return client.fetch(getAllStoriesQuery) ?? [];
 }
+
+export async function getAllStorySlugsForSitemap(): Promise<
+  { slug: string; _updatedAt: string }[]
+> {
+  return (
+    client.fetch(
+      `*[_type == "weddingStory"]{ "slug": slug.current, _updatedAt }`,
+    ) ?? []
+  );
+}

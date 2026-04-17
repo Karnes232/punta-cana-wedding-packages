@@ -10,6 +10,7 @@ import {
   BlogCTABanner,
 } from "@/components/BlogPage";
 import SeoJsonLd from "@/components/SeoJsonLd";
+import { buildUrl } from "@/lib/seoUrls";
 
 export const revalidate = 3600;
 
@@ -55,6 +56,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: title ?? undefined,
       description: description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),
+    },
+    alternates: {
+      canonical: buildUrl(locale, `/blog/${slug}`),
+      languages: Object.fromEntries([
+        ...((article.translations ?? []).map((t) => [
+          t.language,
+          buildUrl(t.language, `/blog/${t.slug}`),
+        ])),
+        ["x-default", buildUrl("en", `/blog/${slug}`)],
+      ]),
     },
   };
 }

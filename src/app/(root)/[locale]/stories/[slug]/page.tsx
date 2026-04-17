@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { MAIN_LOCALES } from "@/i18n/routing";
 import { getStoryBySlug, getAllStorySlugs } from "@/sanity/queries/StoriesPage";
 import { localized } from "@/sanity/lib/localize";
+import { urlFor } from "@/sanity/lib/image";
+import { getPageAlternates } from "@/lib/seoUrls";
 import {
   StoryHero,
   StoryDetails,
@@ -47,10 +49,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : null;
 
   const title = [coupleName, formattedDate].filter(Boolean).join(" · ");
+  const metaTitle =
+    story.seoTitle ?? (title || "Wedding Story | Punta Cana Wedding Packages");
+  const metaDescription = story.seoDescription ?? excerpt ?? undefined;
+
+  // Prefer dedicated OG image; fall back to hero image
+  const ogImageAsset =
+    story.ogImage?.asset ?? story.heroImage?.asset ?? null;
+  const ogImageUrl = ogImageAsset
+    ? urlFor(ogImageAsset)
+        .width(1200)
+        .height(630)
+        .fit("crop")
+        .auto("format")
+        .url()
+    : undefined;
 
   return {
-    title: title || "Wedding Story | Punta Cana Wedding Packages",
-    description: excerpt ?? undefined,
+    title: metaTitle,
+    description: metaDescription,
+    openGraph: {
+      type: "article",
+      title: metaTitle,
+      description: metaDescription,
+      publishedTime: story.publishedAt ?? undefined,
+      ...(ogImageUrl && {
+        images: [{ url: ogImageUrl, width: 1200, height: 630 }],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metaTitle,
+      description: metaDescription,
+      ...(ogImageUrl && { images: [ogImageUrl] }),
+    },
+    alternates: getPageAlternates(`/stories/${slug}`, locale),
   };
 }
 

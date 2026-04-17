@@ -10,6 +10,7 @@ export const weddingStory = defineType({
     { name: "basic", title: "Basic Info" },
     { name: "details", title: "Details & Quote" },
     { name: "content", title: "Story & Photos" },
+    { name: "seo", title: "SEO" },
   ],
   fields: [
     // ── Identity ──────────────────────────────────────────────────────────────
@@ -128,6 +129,36 @@ export const weddingStory = defineType({
       type: "localizedBlock",
       group: "content",
       description: "Full wedding narrative in English and Spanish (rich text).",
+    }),
+
+    // ── SEO ───────────────────────────────────────────────────────────────────
+    defineField({
+      name: "seoTitle",
+      title: "SEO Title",
+      type: "string",
+      group: "seo",
+      description:
+        "Overrides the couple name as the page title in search results. Max 60 characters.",
+      validation: (R) => R.max(60),
+    }),
+
+    defineField({
+      name: "seoDescription",
+      title: "SEO Description",
+      type: "text",
+      rows: 3,
+      group: "seo",
+      description: "Meta description. 120–160 characters recommended.",
+    }),
+
+    defineField({
+      name: "ogImage",
+      title: "Social Share Image (OG Image)",
+      type: "image",
+      group: "seo",
+      description:
+        "Image shown when the story is shared on social media. Falls back to the Hero Image if blank. Ideal: 1200 × 630 px.",
+      options: { hotspot: true },
     }),
   ],
 

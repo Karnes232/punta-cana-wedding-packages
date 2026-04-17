@@ -3,6 +3,7 @@ import { getAllArticles } from "@/sanity/queries/Blog";
 import { BlogHero, ArticleGrid } from "@/components/BlogPage";
 import { pickLocale } from "@/sanity/queries/SEO";
 import { getPageSeo } from "@/sanity/queries/SEO";
+import { getPageAlternates } from "@/lib/seoUrls";
 import { Metadata } from "next";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -50,6 +51,7 @@ export async function generateMetadata({
       description: og?.description ?? meta?.description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),
     },
+    alternates: getPageAlternates("/blog", locale),
   };
 }
 

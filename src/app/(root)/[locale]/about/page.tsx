@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { MAIN_LOCALES } from "@/i18n/routing";
 import { getAboutPage } from "@/sanity/queries/AboutPage";
 import { getPageSeo, pickLocale } from "@/sanity/queries/SEO";
+import { getPageAlternates } from "@/lib/seoUrls";
 import {
   AboutHero,
   OurStory,
@@ -60,6 +61,7 @@ export async function generateMetadata({
       description: og?.description ?? meta?.description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),
     },
+    alternates: getPageAlternates("/about", locale),
   };
 }
 

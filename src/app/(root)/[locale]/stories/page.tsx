@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { MAIN_LOCALES } from "@/i18n/routing";
 import { getAllStories } from "@/sanity/queries/StoriesPage";
 import { getPageSeo, pickLocale } from "@/sanity/queries/SEO";
+import { getPageAlternates } from "@/lib/seoUrls";
 import { StoriesHero, StoriesGrid, StoriesCTA } from "@/components/StoriesPage";
 import { urlFor } from "@/sanity/lib/image";
 
@@ -54,6 +55,7 @@ export async function generateMetadata({
       description: og?.description ?? meta?.description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),
     },
+    alternates: getPageAlternates("/stories", locale),
   };
 }
 

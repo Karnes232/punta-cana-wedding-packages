@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { MAIN_LOCALES } from "@/i18n/routing";
 import { getHowItWorksPage } from "@/sanity/queries/HowItWorksPage";
 import { getPageSeo, pickLocale } from "@/sanity/queries/SEO";
+import { getPageAlternates } from "@/lib/seoUrls";
 import {
   HowItWorksHero,
   ProcessSteps,
@@ -60,6 +61,7 @@ export async function generateMetadata({
       description: og?.description ?? meta?.description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),
     },
+    alternates: getPageAlternates("/how-it-works", locale),
   };
 }
 

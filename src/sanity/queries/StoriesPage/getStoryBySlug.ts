@@ -15,7 +15,10 @@ export const getStoryBySlugQuery = defineQuery(`
     gallery[] { asset, hotspot, crop, alt },
     body,
     featured,
-    publishedAt
+    publishedAt,
+    seoTitle,
+    seoDescription,
+    ogImage { asset, hotspot, crop }
   }
 `);
 
@@ -40,6 +43,13 @@ export type WeddingStoryFull = {
   body: { en: unknown[] | null; es: unknown[] | null } | null;
   featured: boolean | null;
   publishedAt: string | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
+  ogImage: {
+    asset: { _ref: string; _type: string } | null;
+    hotspot?: { x: number; y: number };
+    crop?: object;
+  } | null;
 } | null;
 
 export async function getStoryBySlug(slug: string): Promise<WeddingStoryFull> {

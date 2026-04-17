@@ -6,6 +6,7 @@ import {
   localizePricing,
 } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 import { getPageSeo, pickLocale } from "@/sanity/queries/SEO";
+import { getPageAlternates } from "@/lib/seoUrls";
 import { urlFor } from "@/sanity/lib/image";
 import {
   CalculatorHero,
@@ -60,6 +61,7 @@ export async function generateMetadata({
       description: og?.description ?? meta?.description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),
     },
+    alternates: getPageAlternates("/wedding-calculator", locale),
   };
 }
 

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { MAIN_LOCALES } from "@/i18n/routing";
 import { getPrivacyPolicy } from "@/sanity/queries/PrivacyPolicy";
 import { getPageSeo, pickLocale } from "@/sanity/queries/SEO";
+import { getPageAlternates } from "@/lib/seoUrls";
 import PrivacyPolicyContent from "@/components/PrivacyPolicyPage/PrivacyPolicyContent";
 import SeoJsonLd from "@/components/SeoJsonLd";
 import { urlFor } from "@/sanity/lib/image";
@@ -53,6 +54,7 @@ export async function generateMetadata({
       description: og?.description ?? meta?.description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),
     },
+    alternates: getPageAlternates("/privacy-policy", locale),
   };
 }
 

@@ -13,6 +13,7 @@ import {
 } from "@/components/HomePage";
 import SeoJsonLd from "@/components/SeoJsonLd";
 import { urlFor } from "@/sanity/lib/image";
+import { getPageAlternates } from "@/lib/seoUrls";
 
 export function generateStaticParams() {
   return MAIN_LOCALES.map((locale) => ({ locale }));
@@ -60,6 +61,7 @@ export async function generateMetadata({
       description: og?.description ?? meta?.description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),
     },
+    alternates: getPageAlternates("/", locale),
   };
 }
 

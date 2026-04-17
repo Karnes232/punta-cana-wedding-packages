@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { MAIN_LOCALES } from "@/i18n/routing";
 import { getTermsOfService } from "@/sanity/queries/TermsOfService";
 import { getPageSeo, pickLocale } from "@/sanity/queries/SEO";
+import { getPageAlternates } from "@/lib/seoUrls";
 import TermsOfServiceContent from "@/components/TermsOfServicePage/TermsOfServiceContent";
 import SeoJsonLd from "@/components/SeoJsonLd";
 import { urlFor } from "@/sanity/lib/image";
@@ -53,6 +54,7 @@ export async function generateMetadata({
       description: og?.description ?? meta?.description ?? undefined,
       ...(ogImageUrl && { images: [ogImageUrl] }),
     },
+    alternates: getPageAlternates("/terms-of-service", locale),
   };
 }
 
