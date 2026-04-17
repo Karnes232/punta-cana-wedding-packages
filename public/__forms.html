@@ -34,28 +34,19 @@
   </form>
 
   <!-- ── Wedding calculator lead form (/wedding-calculator) ───────────────── -->
-  <!--
-    Add fields here as the calculator form is built out.
-    Keep field names in sync with the React component.
-  -->
+  <!-- Field names must match SubmissionForm.tsx (FormData keys). -->
   <form name="wedding-calculator" data-netlify="true" netlify-honeypot="bot-field" hidden>
-    <input type="hidden"  name="form-name"      value="wedding-calculator" />
+    <input type="hidden"  name="form-name"       value="wedding-calculator" />
     <input type="text"    name="bot-field" />
     <input type="text"    name="name" />
     <input type="email"   name="email" />
+    <input type="tel"     name="whatsapp" />
     <input type="tel"     name="phone" />
     <input type="text"    name="weddingDate" />
-    <input type="number"  name="guests" />
-    <input type="text"    name="venue" />
-    <input type="text"    name="menu" />
-    <input type="text"    name="drinks" />
-    <input type="text"    name="decoration" />
-    <input type="text"    name="photography" />
-    <input type="text"    name="entertainment" />
-    <input type="text"    name="transportation" />
-    <input type="text"    name="extras" />
-    <input type="number"  name="estimatedTotal" />
-    <textarea             name="message"></textarea>
+    <input type="text"    name="guestCount" />
+    <input type="text"    name="estimatedTotal" />
+    <textarea             name="weddingConfig"></textarea>
+    <textarea             name="notes"></textarea>
   </form>
 
 </body>
