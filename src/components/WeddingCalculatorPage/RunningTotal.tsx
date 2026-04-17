@@ -23,7 +23,7 @@ export default function RunningTotal({ total }: Props) {
   return (
     <>
       {/* Desktop sidebar card */}
-      <div className="hidden rounded-2xl border border-[#EFEFEF] bg-white p-6 shadow-sm lg:block">
+      <div className="hidden rounded-2xl border border-[#EFEFEF] bg-white p-6 mt-5 shadow-sm lg:block">
         <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[#999999]">
           {t("label")}
         </p>
