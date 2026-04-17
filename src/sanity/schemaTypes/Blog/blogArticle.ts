@@ -88,12 +88,6 @@ export const blogArticle = defineType({
       validation: (R) => R.required().min(1).max(60),
     }),
 
-    defineField({
-      name: "author",
-      title: "Author",
-      type: "string",
-      group: "basic",
-    }),
 
     defineField({
       name: "category",
@@ -171,32 +165,43 @@ export const blogArticle = defineType({
       description:
         "Image shown when this article is shared on social media (Facebook, X/Twitter, WhatsApp, etc.). Ideal size: 1200 × 630 px. Falls back to the featured image if not set.",
       options: { hotspot: true },
-      fields: [
-        defineField({
-          name: "alt",
-          title: "Alt text",
-          type: "string",
+    }),
+    defineField({
+      name: "structuredData",
+      title: "Structured Data",
+      type: "text",
+      group: "seo",
+      description: "Paste your schema.org JSON-LD for the article",
+      validation: (Rule) =>
+        Rule.custom((text) => {
+          if (!text) return true;
+          try {
+            JSON.parse(text);
+            return true;
+          } catch {
+            return "Must be valid JSON";
+          }
         }),
-      ],
-    }),
-
-    defineField({
-      name: "canonicalUrl",
-      title: "Canonical URL",
-      type: "url",
-      group: "seo",
-      description:
-        'Use only if this content was originally published elsewhere (e.g. guest post, syndication). Tells search engines which URL is the "original" to avoid duplicate-content penalties.',
-    }),
-
-    defineField({
-      name: "noIndex",
-      title: "Hide from search engines",
-      type: "boolean",
-      group: "seo",
-      description:
-        "When enabled, search engines will not index this article. Use for thin content, drafts, or articles you temporarily want to suppress.",
-      initialValue: false,
+      initialValue: `{
+"@context": "https://schema.org",
+"@type": "BlogPosting",
+"name": "Punta Cana Wedding Packages",
+"description": "Design your dream destination wedding in Punta Cana, Dominican Republic.",
+"url": "https://puntacanaweddingpackages.com",
+"address": {
+"@type": "PostalAddress",
+"addressLocality": "Cabeza de Toro",
+"addressRegion": "La Altagracia",
+"addressCountry": "DO"
+},
+"contactPoint": {
+"@type": "ContactPoint",
+"telephone": "",
+"contactType": "customer service",
+"availableLanguage": ["en", "es"]
+},
+"sameAs": []
+}`,
     }),
   ],
 

@@ -27,7 +27,7 @@ export type BlogArticlePreview = {
   title: string | null;
   excerpt: string | null;
   readingTime: number | null;
-  category: { title: string | null; slug: string } | null;
+  category: { title: { en: string; es: string } | null; slug: string } | null;
   featuredImage: {
     asset: { _ref: string; _type: string };
     hotspot?: { x: number; y: number };

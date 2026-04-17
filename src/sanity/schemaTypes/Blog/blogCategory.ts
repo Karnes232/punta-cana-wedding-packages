@@ -8,7 +8,7 @@ export const blogCategory = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
+      type: "localizedString",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -22,7 +22,7 @@ export const blogCategory = defineType({
   preview: {
     select: { title: "title" },
     prepare({ title }) {
-      return { title: title ?? "Untitled Category" };
+      return { title: title.en ?? "Untitled Category" };
     },
   },
 });

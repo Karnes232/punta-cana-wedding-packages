@@ -40,7 +40,6 @@ export type BlogArticleFull = {
   publishedAt: string;
   language: string;
   translationGroup: string;
-  author: string | null;
   title: string | null;
   excerpt: string | null;
   body: unknown[] | null;
@@ -53,9 +52,7 @@ export type BlogArticleFull = {
     crop?: object;
     alt: string | null;
   } | null;
-  canonicalUrl: string | null;
-  noIndex: boolean | null;
-  category: { title: string | null; slug: string } | null;
+  category: { title: { en: string; es: string } | null; slug: string } | null;
   featuredImage: {
     asset: { _ref: string; _type: string };
     hotspot?: { x: number; y: number };

@@ -44,7 +44,7 @@ export default async function ArticleHeader({ article, locale }: Props) {
         {/* Category */}
         {article.category?.title && (
           <span className="mb-4 block text-[10px] font-semibold uppercase tracking-widest text-[#5B9FD9]">
-            {article.category.title}
+            {article.category.title[locale as keyof typeof article.category.title] as string ?? article.category.title.en}
           </span>
         )}
 
@@ -60,12 +60,7 @@ export default async function ArticleHeader({ article, locale }: Props) {
               {t("publishedOn")} {formattedDate}
             </span>
           )}
-          {article.author && (
-            <>
-              <span aria-hidden="true">·</span>
-              <span>{article.author}</span>
-            </>
-          )}
+    
         </div>
       </div>
 

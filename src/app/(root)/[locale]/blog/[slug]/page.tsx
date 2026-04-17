@@ -40,16 +40,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    ...(article.noIndex && { robots: { index: false, follow: false } }),
-    ...(article.canonicalUrl && {
-      alternates: { canonical: article.canonicalUrl },
-    }),
     openGraph: {
       type: "article",
       title: title ?? undefined,
       description: description ?? undefined,
       publishedTime: article.publishedAt ?? undefined,
-      authors: article.author ? [article.author] : undefined,
       ...(ogImageUrl && {
         images: [{ url: ogImageUrl, width: 1200, height: 630 }],
       }),
