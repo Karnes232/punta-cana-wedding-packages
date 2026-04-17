@@ -122,7 +122,7 @@ export default function SubmissionForm({
       formData.append("weddingConfig", buildSummary());
       formData.append("notes", notes);
 
-      await fetch("/__froms.html", {
+      await fetch("/__forms.html", {
         method: "POST",
         body: formData,
       });
