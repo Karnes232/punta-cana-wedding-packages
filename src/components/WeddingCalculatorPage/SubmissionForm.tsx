@@ -46,12 +46,15 @@ export default function SubmissionForm({
 
   // Build a plain-text summary of all selections for the form payload
   function buildSummary(): string {
+    // One line per array entry; join("\n") adds breaks. Empty strings add blank lines
+    // so Netlify submissions (and export CSV) read in clear sections.
     const lines: string[] = [
-      `Wedding Date: ${state.date}\n`,
-      `Guests: ${state.guests}\n`,
+      `Wedding Date: ${state.date}`,
+      `Guests: ${state.guests}`,
       `Hotel Area: ${state.hotel?.name ?? "Not selected"}`,
       "",
-      "PRICING BREAKDOWN:",
+      "PRICING BREAKDOWN",
+      "",
       `Venue & Coordination: ${formatUSD(config.venueCost + config.coordinationCost)}`,
     ];
     if (state.menu)
@@ -88,7 +91,7 @@ export default function SubmissionForm({
       );
     if (state.extras.length > 0)
       lines.push(`Extras: ${state.extras.map((e) => e.name).join(", ")}`);
-    lines.push(``, `TOTAL: ${formatUSD(total)}`);
+    lines.push("", "---", `TOTAL: ${formatUSD(total)}`);
     return lines.join("\n");
   }
 
