@@ -47,8 +47,8 @@ export default function SubmissionForm({
   // Build a plain-text summary of all selections for the form payload
   function buildSummary(): string {
     const lines: string[] = [
-      `Wedding Date: ${state.date}`,
-      `Guests: ${state.guests}`,
+      `Wedding Date: ${state.date}\n`,
+      `Guests: ${state.guests}\n`,
       `Hotel Area: ${state.hotel?.name ?? "Not selected"}`,
       "",
       "PRICING BREAKDOWN:",
