@@ -3,6 +3,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getGeneralLayout } from "@/sanity/queries/GeneralLayout";
 import { localized } from "@/sanity/lib/localize";
+import BuiltBy from "./BuiltBy";
 
 const socialIcons: Record<string, React.ReactElement> = {
   instagram: (
@@ -207,7 +208,9 @@ export default async function Footer() {
         <div className="mt-12 border-t border-[#EFEFEF] pt-6">
           <p className="text-xs text-[#999999]">{t("copyright", { year })}</p>
         </div>
+        <BuiltBy/>
       </div>
+   
     </footer>
   );
 }

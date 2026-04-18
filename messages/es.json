@@ -10,6 +10,8 @@
     "closeMenu": "Cerrar menú"
   },
   "footer": {
+    "builtBy": "Desarrollado por",
+    "developedBy": "Desarrollo Web en la República Dominicana",
     "brand": {
       "tagline": "Tu santuario de bodas en Punta Cana, República Dominicana. Bodas hermosas, precios transparentes, sin estrés."
     },

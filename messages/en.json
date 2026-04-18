@@ -10,6 +10,8 @@
     "closeMenu": "Close menu"
   },
   "footer": {
+    "builtBy": "Built by",
+    "developedBy": "Web Development in the Dominican Republic",
     "brand": {
       "tagline": "Your destination wedding sanctuary in Punta Cana, Dominican Republic. Beautiful weddings, transparent pricing, zero stress."
     },
