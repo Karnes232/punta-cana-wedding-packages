@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { getGeneralLayout } from "@/sanity/queries/GeneralLayout";
 import { urlFor } from "@/sanity/lib/image";
@@ -10,6 +10,15 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
 
 export async function generateMetadata(): Promise<Metadata> {
   const layout = await getGeneralLayout();
@@ -39,7 +48,7 @@ export default function RootLayout({
   return (
     // lang is overridden per-locale by HtmlLang in [locale]/layout.tsx
     // suppressHydrationWarning silences the mismatch between this fallback and the real locale
-    <html lang="en" suppressHydrationWarning className={`${poppins.variable} h-full antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${playfair.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
