@@ -72,7 +72,11 @@ export default function CalculatorContainer({ data }: Props) {
           )}
 
           {/* Mobile style preview (wizard steps only) */}
-          {isWizardStep && <WeddingPreview decor={state.decor} />}
+          {isWizardStep && (
+            <div className="lg:hidden">
+              <WeddingPreview decor={state.decor} variant="mobile" />
+            </div>
+          )}
 
           {/* Step content */}
           {state.currentStep === 1 && (
@@ -188,7 +192,7 @@ export default function CalculatorContainer({ data }: Props) {
         {(isWizardStep || isSummary) && (
           <div className="hidden w-64 shrink-0 lg:block">
             <div className="sticky top-24">
-              {isWizardStep && <WeddingPreview decor={state.decor} />}
+              {isWizardStep && <WeddingPreview decor={state.decor} variant="desktop" />}
               <RunningTotal total={total} />
             </div>
           </div>

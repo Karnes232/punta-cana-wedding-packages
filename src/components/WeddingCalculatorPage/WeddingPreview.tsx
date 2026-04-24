@@ -5,6 +5,7 @@ import type { DecorPackage } from "@/sanity/queries/WeddingCalculator/getCalcula
 
 type Props = {
   decor: DecorPackage | null;
+  variant: "mobile" | "desktop";
 };
 
 function EmptyState({ compact }: { compact?: boolean }) {
@@ -35,15 +36,14 @@ function EmptyState({ compact }: { compact?: boolean }) {
   );
 }
 
-export default function WeddingPreview({ decor }: Props) {
+export default function WeddingPreview({ decor, variant }: Props) {
   const imageUrl = decor?.previewImageUrl ?? decor?.imageUrl;
 
-  return (
-    <>
-      {/* Mobile/tablet compact banner */}
-      <div className="lg:hidden mb-6 overflow-hidden rounded-2xl border border-[#E0E0E0]">
+  if (variant === "mobile") {
+    return (
+      <div className="mb-6 overflow-hidden rounded-2xl border border-[#E0E0E0]">
         {imageUrl ? (
-          <div className="relative aspect-[16/5]">
+          <div className="relative aspect-[16/9]">
             <Image
               src={imageUrl}
               alt={decor?.name ?? "Wedding style preview"}
@@ -61,41 +61,42 @@ export default function WeddingPreview({ decor }: Props) {
           <EmptyState compact />
         )}
       </div>
+    );
+  }
 
-      {/* Desktop sidebar card */}
-      <div className="hidden lg:block mb-4 overflow-hidden rounded-2xl border border-[#E0E0E0] bg-white">
-        {imageUrl ? (
-          <>
-            <div className="relative aspect-[4/3]">
-              <Image
-                src={imageUrl}
-                alt={decor?.name ?? "Wedding style preview"}
-                fill
-                className="object-cover transition-opacity duration-500"
-                sizes="256px"
-                priority={false}
-              />
-            </div>
-            <div className="px-3 py-2">
-              <p className="text-[10px] uppercase tracking-widest text-[#999]">
-                Your Wedding Style
-              </p>
-              <p className="mt-0.5 text-sm font-semibold text-[#1A1A1A]">
-                {decor?.name}
-              </p>
-            </div>
-          </>
-        ) : (
-          <>
-            <EmptyState />
-            <div className="px-3 pb-3 text-center">
-              <p className="text-[10px] uppercase tracking-widest text-[#999]">
-                Your Wedding Style
-              </p>
-            </div>
-          </>
-        )}
-      </div>
-    </>
+  return (
+    <div className="mb-4 overflow-hidden rounded-2xl border border-[#E0E0E0] bg-white">
+      {imageUrl ? (
+        <>
+          <div className="relative aspect-[4/3]">
+            <Image
+              src={imageUrl}
+              alt={decor?.name ?? "Wedding style preview"}
+              fill
+              className="object-cover transition-opacity duration-500"
+              sizes="256px"
+              priority={false}
+            />
+          </div>
+          <div className="px-3 py-2">
+            <p className="text-[10px] uppercase tracking-widest text-[#999]">
+              Your Wedding Style
+            </p>
+            <p className="mt-0.5 text-sm font-semibold text-[#1A1A1A]">
+              {decor?.name}
+            </p>
+          </div>
+        </>
+      ) : (
+        <>
+          <EmptyState />
+          <div className="px-3 pb-3 text-center">
+            <p className="text-[10px] uppercase tracking-widest text-[#999]">
+              Your Wedding Style
+            </p>
+          </div>
+        </>
+      )}
+    </div>
   );
 }
