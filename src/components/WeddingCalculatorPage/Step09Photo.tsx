@@ -58,11 +58,12 @@ export default function Step09Photo({ state, dispatch, packages }: Props) {
               ].join(" ")}
             >
               {pkg.imageUrl && (
-                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#F0EDE8]">
                   <Image
                     src={pkg.imageUrl}
                     alt={pkg.name}
                     fill
+                    priority
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 400px"
                   />

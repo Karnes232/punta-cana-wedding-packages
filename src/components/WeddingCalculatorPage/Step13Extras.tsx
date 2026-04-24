@@ -57,11 +57,12 @@ export default function Step13Extras({ state, dispatch, options }: Props) {
               ].join(" ")}
             >
               {opt.imageUrl && (
-                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#F0EDE8]">
                   <Image
                     src={opt.imageUrl}
                     alt={opt.name}
                     fill
+                    priority
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 600px"
                   />

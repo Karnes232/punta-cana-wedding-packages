@@ -66,11 +66,12 @@ export default function Step07Furniture({
               ].join(" ")}
             >
               {option.imageUrl && (
-                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#F0EDE8]">
                   <Image
                     src={option.imageUrl}
                     alt={option.name}
                     fill
+                    priority
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 400px"
                   />

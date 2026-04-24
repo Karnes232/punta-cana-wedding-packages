@@ -74,11 +74,12 @@ export default function Step11Transport({ state, dispatch, vehicles }: Props) {
                 ].join(" ")}
               >
                 {vehicle.imageUrl && (
-                  <div className="relative aspect-[3/2] w-full overflow-hidden">
+                  <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#F0EDE8]">
                     <Image
                       src={vehicle.imageUrl}
                       alt={vehicle.name}
                       fill
+                      priority
                       className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 400px"
                     />
