@@ -59,10 +59,17 @@ export const decorPackage = defineType({
     }),
     defineField({
       name: "image",
-      title: "Image",
+      title: "Card Thumbnail",
       type: "image",
       options: { hotspot: true },
-      description: "Optional photo shown in the wedding calculator",
+      description: "Small photo shown on the selection card in Step 8",
+    }),
+    defineField({
+      name: "previewImage",
+      title: "Wedding Preview Image",
+      type: "image",
+      options: { hotspot: true },
+      description: "Full wedding scene shown in the live preview panel — use a wide, cinematic shot of a complete table setup or ceremony",
     }),
     defineField({
       name: "order",

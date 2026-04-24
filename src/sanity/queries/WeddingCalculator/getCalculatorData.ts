@@ -57,6 +57,7 @@ export type RawDecorPackage = {
   addOns?: RawAddOn[];
   order?: number;
   imageUrl?: string | null;
+  previewImageUrl?: string | null;
 };
 
 export type RawPhotoPackage = {
@@ -188,6 +189,7 @@ export type DecorPackage = {
   baseCost: number;
   addOns: AddOn[];
   imageUrl?: string;
+  previewImageUrl?: string;
 };
 
 export type PhotoPackage = {
@@ -316,7 +318,8 @@ const getCalculatorDataQuery = defineQuery(`{
     description,
     baseCost,
     addOns[] { ${addOnFields} },
-    "imageUrl": image.asset->url
+    "imageUrl": image.asset->url,
+    "previewImageUrl": previewImage.asset->url
   },
   "photoPackages": *[_type == "photoPackage"] | order(order asc) {
     _id,
@@ -450,6 +453,7 @@ export function localizePricing(
       baseCost: d.baseCost,
       addOns: localizeAddOns(d.addOns, locale),
       imageUrl: d.imageUrl ?? undefined,
+      previewImageUrl: d.previewImageUrl ?? undefined,
     })),
 
     photoPackages: raw.photoPackages.map((p) => ({

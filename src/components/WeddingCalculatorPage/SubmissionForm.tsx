@@ -40,9 +40,11 @@ export default function SubmissionForm({
   const seatsPerTable =
     state.furniture?.seatsPerTable ?? config.defaultSeatsPerTable;
   const tableCount = Math.ceil(state.guests / seatsPerTable);
-  const vehicleCount = state.hotel
-    ? Math.ceil(state.guests / state.hotel.vehicleCapacity)
-    : 0;
+  const vehicleCount = state.transportVehicle
+    ? Math.ceil(state.guests / state.transportVehicle.capacity)
+    : state.hotel
+      ? Math.ceil(state.guests / state.hotel.vehicleCapacity)
+      : 0;
 
   // Build a plain-text summary of all selections for the form payload.
   // Uses | to separate list items so the text stays readable even when
@@ -98,10 +100,15 @@ export default function SubmissionForm({
       lines.push(`Videography: ${videoParts.join(" | ")}`);
     }
 
-    if (state.hotel && vehicleCount > 0)
+    if (state.transportVehicle && vehicleCount > 0) {
+      lines.push(
+        `Transportation: ${state.transportVehicle.name} × ${vehicleCount} vehicles — ${formatUSD(state.transportVehicle.ratePerVehicle * vehicleCount)}`,
+      );
+    } else if (state.hotel && vehicleCount > 0) {
       lines.push(
         `Transportation: ${vehicleCount} vehicles — ${formatUSD(state.hotel.ratePerVehicle * vehicleCount)}`,
       );
+    }
 
     if (state.entertainment.length > 0) {
       const parts = state.entertainment.map((e) => `${e.name} — ${formatUSD(e.cost)}`);

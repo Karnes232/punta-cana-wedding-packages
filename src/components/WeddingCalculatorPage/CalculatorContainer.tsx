@@ -20,6 +20,7 @@ import Step13Extras from "./Step13Extras";
 import SummaryView from "./SummaryView";
 import SubmissionForm from "./SubmissionForm";
 import SuccessScreen from "./SuccessScreen";
+import WeddingPreview from "./WeddingPreview";
 
 import type { CalculatorData } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
@@ -69,6 +70,9 @@ export default function CalculatorContainer({ data }: Props) {
               />
             </div>
           )}
+
+          {/* Mobile style preview (wizard steps only) */}
+          {isWizardStep && <WeddingPreview decor={state.decor} />}
 
           {/* Step content */}
           {state.currentStep === 1 && (
@@ -182,8 +186,9 @@ export default function CalculatorContainer({ data }: Props) {
 
         {/* Running total sidebar (desktop) — hidden on summary/form/success */}
         {(isWizardStep || isSummary) && (
-          <div className="hidden w-56 shrink-0 lg:block">
+          <div className="hidden w-64 shrink-0 lg:block">
             <div className="sticky top-24">
+              {isWizardStep && <WeddingPreview decor={state.decor} />}
               <RunningTotal total={total} />
             </div>
           </div>
