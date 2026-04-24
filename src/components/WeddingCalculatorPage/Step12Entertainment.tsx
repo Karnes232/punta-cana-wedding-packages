@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import StepWrapper from "./StepWrapper";
 import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
@@ -50,36 +51,49 @@ export default function Step12Entertainment({
             <label
               key={opt._id}
               className={[
-                "flex cursor-pointer items-start gap-4 rounded-xl border p-4 transition-all duration-200",
+                "cursor-pointer overflow-hidden rounded-xl border transition-all duration-200",
                 selected
                   ? "border-[#5B9FD9] bg-[#5B9FD9]/5"
                   : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/40",
               ].join(" ")}
             >
-              <input
-                type="checkbox"
-                checked={selected}
-                onChange={() =>
-                  dispatch({ type: "TOGGLE_ENTERTAINMENT", option: opt })
-                }
-                className="mt-0.5 h-4 w-4 shrink-0 rounded border-[#E0E0E0] accent-[#5B9FD9]"
-              />
-              <div className="flex-1">
-                <div className="flex items-start justify-between gap-2">
-                  <p
-                    className={`text-sm font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
-                  >
-                    {opt.name}
-                  </p>
-                  <p className="shrink-0 text-sm font-semibold text-[#1A1A1A]">
-                    {formatUSD(opt.cost)}
-                  </p>
+              {opt.imageUrl && (
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                  <Image
+                    src={opt.imageUrl}
+                    alt={opt.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 600px"
+                  />
                 </div>
-                {opt.description && (
-                  <p className="mt-1 text-xs leading-relaxed text-[#888888]">
-                    {opt.description}
-                  </p>
-                )}
+              )}
+              <div className="flex items-start gap-4 p-4">
+                <input
+                  type="checkbox"
+                  checked={selected}
+                  onChange={() =>
+                    dispatch({ type: "TOGGLE_ENTERTAINMENT", option: opt })
+                  }
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-[#E0E0E0] accent-[#5B9FD9]"
+                />
+                <div className="flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <p
+                      className={`text-sm font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
+                    >
+                      {opt.name}
+                    </p>
+                    <p className="shrink-0 text-sm font-semibold text-[#1A1A1A]">
+                      {formatUSD(opt.cost)}
+                    </p>
+                  </div>
+                  {opt.description && (
+                    <p className="mt-1 text-xs leading-relaxed text-[#888888]">
+                      {opt.description}
+                    </p>
+                  )}
+                </div>
               </div>
             </label>
           );

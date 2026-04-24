@@ -10,6 +10,7 @@ import type {
   PhotoPackage,
   VideoPackage,
   TransportationZone,
+  TransportVehicle,
   EntertainmentOption,
   ExtraOption,
   AddOn,
@@ -43,6 +44,8 @@ export type CalculatorState = {
   videoAddOns: AddOn[];
   videoSkipped: boolean;
 
+  transportVehicle: TransportVehicle | null;
+
   entertainment: EntertainmentOption[];
   extras: ExtraOption[];
 };
@@ -67,6 +70,7 @@ export type CalculatorAction =
   | { type: "SET_VIDEO"; video: VideoPackage }
   | { type: "TOGGLE_VIDEO_ADDON"; addon: AddOn }
   | { type: "SKIP_VIDEO" }
+  | { type: "SET_TRANSPORT_VEHICLE"; vehicle: TransportVehicle }
   | { type: "TOGGLE_ENTERTAINMENT"; option: EntertainmentOption }
   | { type: "TOGGLE_EXTRA"; option: ExtraOption }
   | { type: "NEXT_STEP" }
@@ -99,6 +103,7 @@ const initialState: CalculatorState = {
   video: null,
   videoAddOns: [],
   videoSkipped: false,
+  transportVehicle: null,
   entertainment: [],
   extras: [],
 };
@@ -203,6 +208,9 @@ function calculatorReducer(
     case "SKIP_VIDEO":
       return { ...state, video: null, videoAddOns: [], videoSkipped: true };
 
+    case "SET_TRANSPORT_VEHICLE":
+      return { ...state, transportVehicle: action.vehicle };
+
     case "TOGGLE_ENTERTAINMENT":
       return {
         ...state,
@@ -294,7 +302,10 @@ export function calculateTotal(
   }
 
   // Transportation
-  if (state.hotel) {
+  if (state.transportVehicle) {
+    const vehicleCount = Math.ceil(g / state.transportVehicle.capacity);
+    total += state.transportVehicle.ratePerVehicle * vehicleCount;
+  } else if (state.hotel) {
     const vehicleCount = Math.ceil(g / state.hotel.vehicleCapacity);
     total += state.hotel.ratePerVehicle * vehicleCount;
   }

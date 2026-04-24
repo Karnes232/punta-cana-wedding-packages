@@ -21,6 +21,7 @@ const CALCULATOR_TYPES = new Set([
   "photoPackage",
   "videoPackage",
   "transportationZone",
+  "transportVehicle",
   "entertainmentOption",
   "extraOption",
   "calculatorConfig",
@@ -164,11 +165,15 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem("transportationZone").title(
                 "Transportation Zones",
               ),
+              S.documentTypeListItem("transportVehicle").title(
+                "Transport Vehicles",
+              ),
               S.documentTypeListItem("entertainmentOption").title(
                 "Entertainment Options",
               ),
               S.documentTypeListItem("extraOption").title("Extra Experiences"),
             ]),
+            
         ),
 
       S.divider(),
@@ -177,7 +182,7 @@ export const structure: StructureResolver = (S) =>
       ...S.documentTypeListItems().filter(
         (item) =>
           !SINGLETON_IDS.has(item.getId() ?? "") &&
-          !CALCULATOR_TYPES.has(item.getId() ?? "") &&
+         !CALCULATOR_TYPES.has(item.getId() ?? "") &&
           item.getId() !== "pageSeo" &&
           item.getId() !== "weddingStory",
       ),

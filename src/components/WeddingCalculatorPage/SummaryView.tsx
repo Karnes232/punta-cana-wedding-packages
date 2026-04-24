@@ -37,9 +37,17 @@ export default function SummaryView({ state, dispatch, config, total }: Props) {
   const seatsPerTable =
     state.furniture?.seatsPerTable ?? config.defaultSeatsPerTable;
   const tableCount = Math.ceil(state.guests / seatsPerTable);
-  const vehicleCount = state.hotel
-    ? Math.ceil(state.guests / state.hotel.vehicleCapacity)
-    : 0;
+  const vehicleCount = state.transportVehicle
+    ? Math.ceil(state.guests / state.transportVehicle.capacity)
+    : state.hotel
+      ? Math.ceil(state.guests / state.hotel.vehicleCapacity)
+      : 0;
+
+  const transportTotal = state.transportVehicle
+    ? state.transportVehicle.ratePerVehicle * vehicleCount
+    : state.hotel
+      ? state.hotel.ratePerVehicle * vehicleCount
+      : 0;
 
   const barTotal = state.bar
     ? state.bar.costPerPersonPerHour * state.barHours * state.guests +
@@ -151,10 +159,10 @@ export default function SummaryView({ state, dispatch, config, total }: Props) {
               value={formatUSD(videoTotal)}
             />
           )}
-          {state.hotel && vehicleCount > 0 && (
+          {(state.transportVehicle || state.hotel) && vehicleCount > 0 && (
             <Row
               label={t("transport", { n: vehicleCount })}
-              value={formatUSD(state.hotel.ratePerVehicle * vehicleCount)}
+              value={formatUSD(transportTotal)}
             />
           )}
           {entertainmentTotal > 0 && (

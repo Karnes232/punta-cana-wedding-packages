@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import StepWrapper from "./StepWrapper";
 import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
@@ -58,29 +59,42 @@ export default function Step07Furniture({
                 dispatch({ type: "SET_FURNITURE", furniture: option })
               }
               className={[
-                "rounded-xl border p-5 text-left transition-all duration-200",
+                "overflow-hidden rounded-xl border text-left transition-all duration-200",
                 selected
                   ? "border-[#5B9FD9] bg-[#5B9FD9]/5 shadow-sm"
                   : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/50",
               ].join(" ")}
             >
-              <p
-                className={`font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
-              >
-                {option.name}
-              </p>
-              <p className="mt-1 text-sm font-medium text-[#888888]">
-                {formatUSD(option.costPerTable)}
-                {t("perTable")}
-              </p>
-              {option.description && (
-                <p className="mt-2 text-xs leading-relaxed text-[#AAAAAA]">
-                  {option.description}
-                </p>
+              {option.imageUrl && (
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                  <Image
+                    src={option.imageUrl}
+                    alt={option.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 400px"
+                  />
+                </div>
               )}
-              <p className="mt-3 text-xs font-semibold text-[#1A1A1A]">
-                {formatUSD(option.costPerTable * tables)} total
-              </p>
+              <div className="p-5">
+                <p
+                  className={`font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
+                >
+                  {option.name}
+                </p>
+                <p className="mt-1 text-sm font-medium text-[#888888]">
+                  {formatUSD(option.costPerTable)}
+                  {t("perTable")}
+                </p>
+                {option.description && (
+                  <p className="mt-2 text-xs leading-relaxed text-[#AAAAAA]">
+                    {option.description}
+                  </p>
+                )}
+                <p className="mt-3 text-xs font-semibold text-[#1A1A1A]">
+                  {formatUSD(option.costPerTable * tables)} total
+                </p>
+              </div>
             </button>
           );
         })}

@@ -57,6 +57,13 @@ export const furnitureOption = defineType({
       validation: (R) => R.required().min(0),
     }),
     defineField({
+      name: "image",
+      title: "Image",
+      type: "image",
+      options: { hotspot: true },
+      description: "Optional photo shown in the wedding calculator",
+    }),
+    defineField({
       name: "order",
       title: "Sort Order",
       type: "number",

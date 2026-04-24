@@ -140,7 +140,11 @@ export default function CalculatorContainer({ data }: Props) {
             />
           )}
           {state.currentStep === 11 && (
-            <Step11Transport state={state} dispatch={dispatch} />
+            <Step11Transport
+              state={state}
+              dispatch={dispatch}
+              vehicles={data.transportVehicles}
+            />
           )}
           {state.currentStep === 12 && (
             <Step12Entertainment

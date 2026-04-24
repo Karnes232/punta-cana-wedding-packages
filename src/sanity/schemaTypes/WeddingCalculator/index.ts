@@ -5,6 +5,7 @@ export { decorPackage } from "./decorPackage";
 export { photoPackage } from "./photoPackage";
 export { videoPackage } from "./videoPackage";
 export { transportationZone } from "./transportationZone";
+export { transportVehicle } from "./transportVehicle";
 export { entertainmentOption } from "./entertainmentOption";
 export { extraOption } from "./extraOption";
 export { calculatorConfig } from "./calculatorConfig";

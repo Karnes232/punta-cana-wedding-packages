@@ -22,6 +22,7 @@ export type RawMenuOption = {
   style?: string;
   costPerPerson: number;
   order?: number;
+  imageUrl?: string | null;
 };
 
 export type RawBarPackage = {
@@ -33,6 +34,7 @@ export type RawBarPackage = {
   availableHours: number[];
   addOns?: RawAddOn[];
   order?: number;
+  imageUrl?: string | null;
 };
 
 export type RawFurnitureOption = {
@@ -44,6 +46,7 @@ export type RawFurnitureOption = {
   seatsPerTable: number;
   costPerTable: number;
   order?: number;
+  imageUrl?: string | null;
 };
 
 export type RawDecorPackage = {
@@ -53,6 +56,7 @@ export type RawDecorPackage = {
   baseCost: number;
   addOns?: RawAddOn[];
   order?: number;
+  imageUrl?: string | null;
 };
 
 export type RawPhotoPackage = {
@@ -63,6 +67,7 @@ export type RawPhotoPackage = {
   cost: number;
   addOns?: RawAddOn[];
   order?: number;
+  imageUrl?: string | null;
 };
 
 export type RawVideoPackage = {
@@ -73,6 +78,7 @@ export type RawVideoPackage = {
   cost: number;
   addOns?: RawAddOn[];
   order?: number;
+  imageUrl?: string | null;
 };
 
 export type RawTransportationZone = {
@@ -84,12 +90,23 @@ export type RawTransportationZone = {
   order?: number;
 };
 
+export type RawTransportVehicle = {
+  _id: string;
+  name: LocalizedString;
+  description?: LocalizedText;
+  capacity: number;
+  ratePerVehicle: number;
+  order?: number;
+  imageUrl?: string | null;
+};
+
 export type RawEntertainmentOption = {
   _id: string;
   name: LocalizedString;
   description?: LocalizedText;
   cost: number;
   order?: number;
+  imageUrl?: string | null;
 };
 
 export type RawExtraOption = {
@@ -99,6 +116,7 @@ export type RawExtraOption = {
   cost: number;
   isPerPerson: boolean;
   order?: number;
+  imageUrl?: string | null;
 };
 
 export type RawCalculatorConfig = {
@@ -117,6 +135,7 @@ export type RawCalculatorData = {
   photoPackages: RawPhotoPackage[];
   videoPackages: RawVideoPackage[];
   transportationZones: RawTransportationZone[];
+  transportVehicles: RawTransportVehicle[];
   entertainmentOptions: RawEntertainmentOption[];
   extraOptions: RawExtraOption[];
 };
@@ -137,6 +156,7 @@ export type MenuOption = {
   description: string;
   style: string;
   costPerPerson: number;
+  imageUrl?: string;
 };
 
 export type BarPackage = {
@@ -147,6 +167,7 @@ export type BarPackage = {
   costPerPersonPerHour: number;
   availableHours: number[];
   addOns: AddOn[];
+  imageUrl?: string;
 };
 
 export type FurnitureOption = {
@@ -157,6 +178,7 @@ export type FurnitureOption = {
   chairType: string;
   seatsPerTable: number;
   costPerTable: number;
+  imageUrl?: string;
 };
 
 export type DecorPackage = {
@@ -165,6 +187,7 @@ export type DecorPackage = {
   description: string;
   baseCost: number;
   addOns: AddOn[];
+  imageUrl?: string;
 };
 
 export type PhotoPackage = {
@@ -174,6 +197,7 @@ export type PhotoPackage = {
   hours: number;
   cost: number;
   addOns: AddOn[];
+  imageUrl?: string;
 };
 
 export type VideoPackage = {
@@ -183,6 +207,7 @@ export type VideoPackage = {
   hours: number;
   cost: number;
   addOns: AddOn[];
+  imageUrl?: string;
 };
 
 export type TransportationZone = {
@@ -193,11 +218,21 @@ export type TransportationZone = {
   ratePerVehicle: number;
 };
 
+export type TransportVehicle = {
+  _id: string;
+  name: string;
+  description: string;
+  capacity: number;
+  ratePerVehicle: number;
+  imageUrl?: string;
+};
+
 export type EntertainmentOption = {
   _id: string;
   name: string;
   description: string;
   cost: number;
+  imageUrl?: string;
 };
 
 export type ExtraOption = {
@@ -206,6 +241,7 @@ export type ExtraOption = {
   description: string;
   cost: number;
   isPerPerson: boolean;
+  imageUrl?: string;
 };
 
 export type CalculatorConfig = {
@@ -224,6 +260,7 @@ export type CalculatorData = {
   photoPackages: PhotoPackage[];
   videoPackages: VideoPackage[];
   transportationZones: TransportationZone[];
+  transportVehicles: TransportVehicle[];
   entertainmentOptions: EntertainmentOption[];
   extraOptions: ExtraOption[];
 };
@@ -250,7 +287,8 @@ const getCalculatorDataQuery = defineQuery(`{
     name,
     description,
     style,
-    costPerPerson
+    costPerPerson,
+    "imageUrl": image.asset->url
   },
   "barPackages": *[_type == "barPackage"] | order(order asc) {
     _id,
@@ -259,7 +297,8 @@ const getCalculatorDataQuery = defineQuery(`{
     tier,
     costPerPersonPerHour,
     availableHours,
-    addOns[] { ${addOnFields} }
+    addOns[] { ${addOnFields} },
+    "imageUrl": image.asset->url
   },
   "furnitureOptions": *[_type == "furnitureOption"] | order(order asc) {
     _id,
@@ -268,14 +307,16 @@ const getCalculatorDataQuery = defineQuery(`{
     tableType,
     chairType,
     seatsPerTable,
-    costPerTable
+    costPerTable,
+    "imageUrl": image.asset->url
   },
   "decorPackages": *[_type == "decorPackage"] | order(order asc) {
     _id,
     name,
     description,
     baseCost,
-    addOns[] { ${addOnFields} }
+    addOns[] { ${addOnFields} },
+    "imageUrl": image.asset->url
   },
   "photoPackages": *[_type == "photoPackage"] | order(order asc) {
     _id,
@@ -283,7 +324,8 @@ const getCalculatorDataQuery = defineQuery(`{
     description,
     hours,
     cost,
-    addOns[] { ${addOnFields} }
+    addOns[] { ${addOnFields} },
+    "imageUrl": image.asset->url
   },
   "videoPackages": *[_type == "videoPackage"] | order(order asc) {
     _id,
@@ -291,7 +333,8 @@ const getCalculatorDataQuery = defineQuery(`{
     description,
     hours,
     cost,
-    addOns[] { ${addOnFields} }
+    addOns[] { ${addOnFields} },
+    "imageUrl": image.asset->url
   },
   "transportationZones": *[_type == "transportationZone"] | order(order asc) {
     _id,
@@ -300,18 +343,28 @@ const getCalculatorDataQuery = defineQuery(`{
     vehicleCapacity,
     ratePerVehicle
   },
+  "transportVehicles": *[_type == "transportVehicle"] | order(order asc) {
+    _id,
+    name,
+    description,
+    capacity,
+    ratePerVehicle,
+    "imageUrl": image.asset->url
+  },
   "entertainmentOptions": *[_type == "entertainmentOption"] | order(order asc) {
     _id,
     name,
     description,
-    cost
+    cost,
+    "imageUrl": image.asset->url
   },
   "extraOptions": *[_type == "extraOption"] | order(order asc) {
     _id,
     name,
     description,
     cost,
-    isPerPerson
+    isPerPerson,
+    "imageUrl": image.asset->url
   }
 }`);
 
@@ -365,6 +418,7 @@ export function localizePricing(
       description: localized(m.description, locale) ?? "",
       style: m.style ?? "",
       costPerPerson: m.costPerPerson,
+      imageUrl: m.imageUrl ?? undefined,
     })),
 
     barPackages: raw.barPackages.map((b) => ({
@@ -375,6 +429,7 @@ export function localizePricing(
       costPerPersonPerHour: b.costPerPersonPerHour,
       availableHours: b.availableHours ?? [],
       addOns: localizeAddOns(b.addOns, locale),
+      imageUrl: b.imageUrl ?? undefined,
     })),
 
     furnitureOptions: raw.furnitureOptions.map((f) => ({
@@ -385,6 +440,7 @@ export function localizePricing(
       chairType: f.chairType ?? "",
       seatsPerTable: f.seatsPerTable ?? 10,
       costPerTable: f.costPerTable,
+      imageUrl: f.imageUrl ?? undefined,
     })),
 
     decorPackages: raw.decorPackages.map((d) => ({
@@ -393,6 +449,7 @@ export function localizePricing(
       description: localized(d.description, locale) ?? "",
       baseCost: d.baseCost,
       addOns: localizeAddOns(d.addOns, locale),
+      imageUrl: d.imageUrl ?? undefined,
     })),
 
     photoPackages: raw.photoPackages.map((p) => ({
@@ -402,6 +459,7 @@ export function localizePricing(
       hours: p.hours,
       cost: p.cost,
       addOns: localizeAddOns(p.addOns, locale),
+      imageUrl: p.imageUrl ?? undefined,
     })),
 
     videoPackages: raw.videoPackages.map((v) => ({
@@ -411,6 +469,7 @@ export function localizePricing(
       hours: v.hours,
       cost: v.cost,
       addOns: localizeAddOns(v.addOns, locale),
+      imageUrl: v.imageUrl ?? undefined,
     })),
 
     transportationZones: raw.transportationZones.map((z) => ({
@@ -421,11 +480,21 @@ export function localizePricing(
       ratePerVehicle: z.ratePerVehicle,
     })),
 
+    transportVehicles: (raw.transportVehicles ?? []).map((v) => ({
+      _id: v._id,
+      name: localized(v.name, locale) ?? "",
+      description: localized(v.description, locale) ?? "",
+      capacity: v.capacity,
+      ratePerVehicle: v.ratePerVehicle,
+      imageUrl: v.imageUrl ?? undefined,
+    })),
+
     entertainmentOptions: raw.entertainmentOptions.map((e) => ({
       _id: e._id,
       name: localized(e.name, locale) ?? "",
       description: localized(e.description, locale) ?? "",
       cost: e.cost,
+      imageUrl: e.imageUrl ?? undefined,
     })),
 
     extraOptions: raw.extraOptions.map((x) => ({
@@ -434,6 +503,7 @@ export function localizePricing(
       description: localized(x.description, locale) ?? "",
       cost: x.cost,
       isPerPerson: x.isPerPerson ?? true,
+      imageUrl: x.imageUrl ?? undefined,
     })),
   };
 }

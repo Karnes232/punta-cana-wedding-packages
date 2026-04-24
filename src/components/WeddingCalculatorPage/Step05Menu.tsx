@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import StepWrapper from "./StepWrapper";
 import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
@@ -44,33 +45,46 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
               key={menu._id}
               onClick={() => dispatch({ type: "SET_MENU", menu })}
               className={[
-                "rounded-xl border p-5 text-left transition-all duration-200",
+                "overflow-hidden rounded-xl border text-left transition-all duration-200",
                 selected
                   ? "border-[#5B9FD9] bg-[#5B9FD9]/5 shadow-sm"
                   : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/50",
               ].join(" ")}
             >
-              <div className="flex items-start justify-between gap-2">
-                <p
-                  className={`font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
-                >
-                  {menu.name}
-                </p>
-                <p className="shrink-0 text-sm font-semibold text-[#1A1A1A]">
-                  {formatUSD(menu.costPerPerson)}
-                  {t("perPerson")}
-                </p>
+              {menu.imageUrl && (
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                  <Image
+                    src={menu.imageUrl}
+                    alt={menu.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 600px"
+                  />
+                </div>
+              )}
+              <div className="p-5">
+                <div className="flex items-start justify-between gap-2">
+                  <p
+                    className={`font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
+                  >
+                    {menu.name}
+                  </p>
+                  <p className="shrink-0 text-sm font-semibold text-[#1A1A1A]">
+                    {formatUSD(menu.costPerPerson)}
+                    {t("perPerson")}
+                  </p>
+                </div>
+                {menu.description && (
+                  <p className="mt-2 text-xs leading-relaxed text-[#888888]">
+                    {menu.description}
+                  </p>
+                )}
+                {menu.style && (
+                  <p className="mt-2 text-xs font-medium capitalize text-[#5B9FD9]">
+                    {menu.style}
+                  </p>
+                )}
               </div>
-              {menu.description && (
-                <p className="mt-2 text-xs leading-relaxed text-[#888888]">
-                  {menu.description}
-                </p>
-              )}
-              {menu.style && (
-                <p className="mt-2 text-xs font-medium capitalize text-[#5B9FD9]">
-                  {menu.style}
-                </p>
-              )}
             </button>
           );
         })}

@@ -238,7 +238,8 @@
         "vehiclesNeeded": "{n} vehicles needed for {g} guests",
         "perVehicle": "/vehicle",
         "capacity": "{n} passengers per vehicle",
-        "total": "Transportation total:"
+        "total": "Transportation total:",
+        "noVehicles": "No vehicle options available. Please contact us directly."
       },
       "entertainment": {
         "title": "Entertainment",

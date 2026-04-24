@@ -1,11 +1,11 @@
 import { defineType, defineField } from "sanity";
-import { DocumentIcon as RestaurantIcon } from "@sanity/icons";
+import { ArrowRightIcon as VehicleIcon } from "@sanity/icons";
 
-export const menuOption = defineType({
-  name: "menuOption",
-  title: "Menu Option",
+export const transportVehicle = defineType({
+  name: "transportVehicle",
+  title: "Transport Vehicle",
   type: "document",
-  icon: RestaurantIcon,
+  icon: VehicleIcon,
   fields: [
     defineField({
       name: "name",
@@ -19,21 +19,15 @@ export const menuOption = defineType({
       type: "localizedText",
     }),
     defineField({
-      name: "style",
-      title: "Service Style",
-      type: "string",
-      options: {
-        list: [
-          { title: "Buffet", value: "buffet" },
-          { title: "Plated", value: "plated" },
-          { title: "Family Style", value: "family" },
-        ],
-        layout: "radio",
-      },
+      name: "capacity",
+      title: "Passengers Per Vehicle",
+      type: "number",
+      description: "e.g. 15 for a mini-van, 40 for a coach bus",
+      validation: (R) => R.required().min(1),
     }),
     defineField({
-      name: "costPerPerson",
-      title: "Cost Per Person (USD)",
+      name: "ratePerVehicle",
+      title: "Rate Per Vehicle (USD)",
       type: "number",
       validation: (R) => R.required().min(0),
     }),
@@ -42,7 +36,7 @@ export const menuOption = defineType({
       title: "Image",
       type: "image",
       options: { hotspot: true },
-      description: "Optional photo shown in the wedding calculator",
+      description: "Photo shown in the wedding calculator",
     }),
     defineField({
       name: "order",
@@ -55,13 +49,15 @@ export const menuOption = defineType({
   preview: {
     select: {
       nameEn: "name.en",
-      cost: "costPerPerson",
-      style: "style",
+      rate: "ratePerVehicle",
+      capacity: "capacity",
+      media: "image",
     },
-    prepare({ nameEn, cost, style }) {
+    prepare({ nameEn, rate, capacity, media }) {
       return {
-        title: nameEn ?? "Unnamed Menu",
-        subtitle: `$${cost}/person · ${style ?? ""}`,
+        title: nameEn ?? "Unnamed Vehicle",
+        subtitle: `$${rate}/vehicle · ${capacity} seats`,
+        media,
       };
     },
   },

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import StepWrapper from "./StepWrapper";
 import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
@@ -64,25 +65,38 @@ export default function Step08Decor({
               key={pkg._id}
               onClick={() => dispatch({ type: "SET_DECOR", decor: pkg })}
               className={[
-                "rounded-xl border p-5 text-left transition-all duration-200",
+                "overflow-hidden rounded-xl border text-left transition-all duration-200",
                 selected
                   ? "border-[#5B9FD9] bg-[#5B9FD9]/5 shadow-sm"
                   : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/50",
               ].join(" ")}
             >
-              <p
-                className={`font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
-              >
-                {pkg.name}
-              </p>
-              <p className="mt-1 text-lg font-semibold text-[#1A1A1A]">
-                {formatUSD(pkg.baseCost)}
-              </p>
-              {pkg.description && (
-                <p className="mt-2 text-xs leading-relaxed text-[#AAAAAA]">
-                  {pkg.description}
-                </p>
+              {pkg.imageUrl && (
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                  <Image
+                    src={pkg.imageUrl}
+                    alt={pkg.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 400px"
+                  />
+                </div>
               )}
+              <div className="p-5">
+                <p
+                  className={`font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
+                >
+                  {pkg.name}
+                </p>
+                <p className="mt-1 text-lg font-semibold text-[#1A1A1A]">
+                  {formatUSD(pkg.baseCost)}
+                </p>
+                {pkg.description && (
+                  <p className="mt-2 text-xs leading-relaxed text-[#AAAAAA]">
+                    {pkg.description}
+                  </p>
+                )}
+              </div>
             </button>
           );
         })}
