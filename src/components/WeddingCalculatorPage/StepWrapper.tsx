@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 
 type Props = {
@@ -24,9 +25,16 @@ export default function StepWrapper({
   hideContinue = false,
 }: Props) {
   const t = useTranslations("weddingCalculator.nav");
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!wrapperRef.current) return;
+    const y = wrapperRef.current.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+  }, []);
 
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+    <div ref={wrapperRef} className="animate-in fade-in slide-in-from-bottom-2 duration-300">
       {/* Step header */}
       <div className="mb-6">
         <p className="mb-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#5B9FD9]">
