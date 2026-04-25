@@ -239,7 +239,8 @@
         "perVehicle": "/ vehículo",
         "capacity": "{n} pasajeros por vehículo",
         "total": "Total transporte:",
-        "noVehicles": "No hay opciones de vehículos disponibles. Contáctanos directamente."
+        "noVehicles": "No hay opciones de vehículos disponibles. Contáctanos directamente.",
+        "noPriceForZone": "Contactar para precio"
       },
       "entertainment": {
         "title": "Entretenimiento",
