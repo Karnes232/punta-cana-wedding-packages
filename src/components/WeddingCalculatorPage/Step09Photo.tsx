@@ -51,7 +51,7 @@ export default function Step09Photo({ state, dispatch, packages }: Props) {
               key={pkg._id}
               onClick={() => dispatch({ type: "SET_PHOTO", photo: pkg })}
               className={[
-                "overflow-hidden rounded-xl border text-left transition-all duration-200",
+                "flex flex-col overflow-hidden rounded-xl border text-left transition-all duration-200",
                 selected
                   ? "border-[#5B9FD9] bg-[#5B9FD9]/5 shadow-sm"
                   : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/50",

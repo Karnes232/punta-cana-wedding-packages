@@ -45,7 +45,7 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
               key={menu._id}
               onClick={() => dispatch({ type: "SET_MENU", menu })}
               className={[
-                "overflow-hidden rounded-xl border text-left transition-all duration-200",
+                "flex flex-col overflow-hidden rounded-xl border text-left transition-all duration-200",
                 selected
                   ? "border-[#5B9FD9] bg-[#5B9FD9]/5 shadow-sm"
                   : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/50",

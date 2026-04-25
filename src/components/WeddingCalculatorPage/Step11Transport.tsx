@@ -77,7 +77,7 @@ export default function Step11Transport({ state, dispatch, vehicles }: Props) {
                   dispatch({ type: "SET_TRANSPORT_VEHICLE", vehicle })
                 }
                 className={[
-                  "overflow-hidden rounded-xl border text-left transition-all duration-200",
+                  "flex flex-col overflow-hidden rounded-xl border text-left transition-all duration-200",
                   isSelected
                     ? "border-[#5B9FD9] bg-[#5B9FD9]/5 shadow-sm"
                     : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/50",

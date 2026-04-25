@@ -50,7 +50,7 @@ export default function Step13Extras({ state, dispatch, options }: Props) {
             <label
               key={opt._id}
               className={[
-                "cursor-pointer overflow-hidden rounded-xl border transition-all duration-200",
+                "flex flex-col cursor-pointer overflow-hidden rounded-xl border transition-all duration-200",
                 selected
                   ? "border-[#5B9FD9] bg-[#5B9FD9]/5"
                   : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/40",
