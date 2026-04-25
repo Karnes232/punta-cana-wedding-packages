@@ -251,9 +251,6 @@ export function calculateTotal(
 ): number {
   let total = 0;
 
-  total += config.venueCost;
-  total += config.coordinationCost;
-
   const g = state.guests;
   const tableCount = Math.ceil(
     g / (state.furniture?.seatsPerTable ?? config.defaultSeatsPerTable),
@@ -301,13 +298,15 @@ export function calculateTotal(
     }
   }
 
-  // Transportation
-  if (state.transportVehicle) {
-    const vehicleCount = Math.ceil(g / state.transportVehicle.capacity);
-    total += state.transportVehicle.ratePerVehicle * vehicleCount;
-  } else if (state.hotel) {
-    const vehicleCount = Math.ceil(g / state.hotel.vehicleCapacity);
-    total += state.hotel.ratePerVehicle * vehicleCount;
+  // Transportation — rate depends on the selected vehicle × zone combination
+  if (state.transportVehicle && state.hotel) {
+    const zp = state.transportVehicle.zonePricing.find(
+      (zp) => zp.zoneId === state.hotel!._id,
+    );
+    if (zp) {
+      const vehicleCount = Math.ceil(g / state.transportVehicle.capacity);
+      total += zp.ratePerVehicle * vehicleCount;
+    }
   }
 
   // Entertainment (fixed costs)
@@ -328,6 +327,9 @@ export function calculateTotal(
 export function useCalculatorState(config: CalculatorConfig) {
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
   const total = calculateTotal(state, config);
+  const fullTotal =
+    Math.round((total + config.venueCost + config.coordinationCost) * 100) /
+    100;
 
   const goToStep = useCallback((step: number) => {
     dispatch({ type: "SET_STEP", step });
@@ -337,6 +339,7 @@ export function useCalculatorState(config: CalculatorConfig) {
     state,
     dispatch,
     total,
+    fullTotal,
     goToStep,
     SUMMARY_STEP,
     FORM_STEP,

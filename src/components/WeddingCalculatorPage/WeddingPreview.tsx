@@ -29,7 +29,8 @@ function EmptyState({ compact }: { compact?: boolean }) {
       </svg>
       {!compact && (
         <p className="max-w-[180px] text-center text-xs text-[#999]">
-          Your style preview will appear once you choose a decor package (step 8)
+          Your style preview will appear once you choose a decor package (step
+          8)
         </p>
       )}
     </div>

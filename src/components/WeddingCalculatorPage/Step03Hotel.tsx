@@ -48,9 +48,6 @@ export default function Step03Hotel({ state, dispatch, zones }: Props) {
                   {zone.description}
                 </p>
               )}
-              <p className="mt-2 text-xs font-medium text-[#AAAAAA]">
-                ${zone.ratePerVehicle}/vehicle · {zone.vehicleCapacity} seats
-              </p>
             </button>
           );
         })}

@@ -32,11 +32,11 @@ export default function Step13Extras({ state, dispatch, options }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={13}
+      stepNumber={12}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
-      onContinue={() => dispatch({ type: "GO_TO_SUMMARY" })}
-      onSkip={() => dispatch({ type: "GO_TO_SUMMARY" })}
+      onContinue={() => dispatch({ type: "NEXT_STEP" })}
+      onSkip={() => dispatch({ type: "NEXT_STEP" })}
     >
       <p className="mb-6 text-sm text-[#666666]">{t("label")}</p>
 

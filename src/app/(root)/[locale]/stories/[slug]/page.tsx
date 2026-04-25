@@ -54,8 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const metaDescription = story.seoDescription ?? excerpt ?? undefined;
 
   // Prefer dedicated OG image; fall back to hero image
-  const ogImageAsset =
-    story.ogImage?.asset ?? story.heroImage?.asset ?? null;
+  const ogImageAsset = story.ogImage?.asset ?? story.heroImage?.asset ?? null;
   const ogImageUrl = ogImageAsset
     ? urlFor(ogImageAsset)
         .width(1200)

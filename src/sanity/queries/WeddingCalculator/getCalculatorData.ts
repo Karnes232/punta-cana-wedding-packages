@@ -86,9 +86,13 @@ export type RawTransportationZone = {
   _id: string;
   name: LocalizedString;
   description?: LocalizedText;
-  vehicleCapacity: number;
-  ratePerVehicle: number;
   order?: number;
+};
+
+export type RawZonePricing = {
+  _key: string;
+  zoneId: string;
+  ratePerVehicle: number;
 };
 
 export type RawTransportVehicle = {
@@ -96,7 +100,7 @@ export type RawTransportVehicle = {
   name: LocalizedString;
   description?: LocalizedText;
   capacity: number;
-  ratePerVehicle: number;
+  zonePricing: RawZonePricing[];
   order?: number;
   imageUrl?: string | null;
 };
@@ -216,7 +220,11 @@ export type TransportationZone = {
   _id: string;
   name: string;
   description: string;
-  vehicleCapacity: number;
+};
+
+export type ZonePricing = {
+  _key: string;
+  zoneId: string;
   ratePerVehicle: number;
 };
 
@@ -225,7 +233,7 @@ export type TransportVehicle = {
   name: string;
   description: string;
   capacity: number;
-  ratePerVehicle: number;
+  zonePricing: ZonePricing[];
   imageUrl?: string;
 };
 
@@ -342,16 +350,18 @@ const getCalculatorDataQuery = defineQuery(`{
   "transportationZones": *[_type == "transportationZone"] | order(order asc) {
     _id,
     name,
-    description,
-    vehicleCapacity,
-    ratePerVehicle
+    description
   },
   "transportVehicles": *[_type == "transportVehicle"] | order(order asc) {
     _id,
     name,
     description,
     capacity,
-    ratePerVehicle,
+    "zonePricing": zonePricing[] {
+      _key,
+      "zoneId": zone._ref,
+      ratePerVehicle
+    },
     "imageUrl": image.asset->url
   },
   "entertainmentOptions": *[_type == "entertainmentOption"] | order(order asc) {
@@ -480,8 +490,6 @@ export function localizePricing(
       _id: z._id,
       name: localized(z.name, locale) ?? "",
       description: localized(z.description, locale) ?? "",
-      vehicleCapacity: z.vehicleCapacity,
-      ratePerVehicle: z.ratePerVehicle,
     })),
 
     transportVehicles: (raw.transportVehicles ?? []).map((v) => ({
@@ -489,7 +497,11 @@ export function localizePricing(
       name: localized(v.name, locale) ?? "",
       description: localized(v.description, locale) ?? "",
       capacity: v.capacity,
-      ratePerVehicle: v.ratePerVehicle,
+      zonePricing: (v.zonePricing ?? []).map((zp) => ({
+        _key: zp._key,
+        zoneId: zp.zoneId,
+        ratePerVehicle: zp.ratePerVehicle,
+      })),
       imageUrl: v.imageUrl ?? undefined,
     })),
 

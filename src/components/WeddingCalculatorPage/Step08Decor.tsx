@@ -49,7 +49,7 @@ export default function Step08Decor({
 
   return (
     <StepWrapper
-      stepNumber={8}
+      stepNumber={7}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

@@ -19,7 +19,6 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-
 export async function generateMetadata(): Promise<Metadata> {
   const layout = await getGeneralLayout();
 
@@ -48,7 +47,12 @@ export default function RootLayout({
   return (
     // lang is overridden per-locale by HtmlLang in [locale]/layout.tsx
     // suppressHydrationWarning silences the mismatch between this fallback and the real locale
-    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${playfair.variable} h-full antialiased`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${poppins.variable} ${playfair.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
+    >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );

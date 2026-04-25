@@ -236,7 +236,7 @@
         "label": "Transporte desde tu área de hotel",
         "zone": "Tu área de hotel",
         "vehiclesNeeded": "{n} vehículos necesarios para {g} invitados",
-        "perVehicle": "/vehículo",
+        "perVehicle": "/ vehículo",
         "capacity": "{n} pasajeros por vehículo",
         "total": "Total transporte:",
         "noVehicles": "No hay opciones de vehículos disponibles. Contáctanos directamente."

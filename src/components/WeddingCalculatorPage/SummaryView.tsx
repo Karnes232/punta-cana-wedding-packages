@@ -39,15 +39,16 @@ export default function SummaryView({ state, dispatch, config, total }: Props) {
   const tableCount = Math.ceil(state.guests / seatsPerTable);
   const vehicleCount = state.transportVehicle
     ? Math.ceil(state.guests / state.transportVehicle.capacity)
-    : state.hotel
-      ? Math.ceil(state.guests / state.hotel.vehicleCapacity)
+    : 0;
+
+  const transportZoneRate =
+    state.transportVehicle && state.hotel
+      ? (state.transportVehicle.zonePricing.find(
+          (zp) => zp.zoneId === state.hotel!._id,
+        )?.ratePerVehicle ?? 0)
       : 0;
 
-  const transportTotal = state.transportVehicle
-    ? state.transportVehicle.ratePerVehicle * vehicleCount
-    : state.hotel
-      ? state.hotel.ratePerVehicle * vehicleCount
-      : 0;
+  const transportTotal = transportZoneRate * vehicleCount;
 
   const barTotal = state.bar
     ? state.bar.costPerPersonPerHour * state.barHours * state.guests +
@@ -159,7 +160,7 @@ export default function SummaryView({ state, dispatch, config, total }: Props) {
               value={formatUSD(videoTotal)}
             />
           )}
-          {(state.transportVehicle || state.hotel) && vehicleCount > 0 && (
+          {state.transportVehicle && vehicleCount > 0 && transportTotal > 0 && (
             <Row
               label={t("transport", { n: vehicleCount })}
               value={formatUSD(transportTotal)}

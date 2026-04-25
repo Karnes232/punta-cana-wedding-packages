@@ -173,7 +173,6 @@ export const structure: StructureResolver = (S) =>
               ),
               S.documentTypeListItem("extraOption").title("Extra Experiences"),
             ]),
-            
         ),
 
       S.divider(),
@@ -182,7 +181,7 @@ export const structure: StructureResolver = (S) =>
       ...S.documentTypeListItems().filter(
         (item) =>
           !SINGLETON_IDS.has(item.getId() ?? "") &&
-         !CALCULATOR_TYPES.has(item.getId() ?? "") &&
+          !CALCULATOR_TYPES.has(item.getId() ?? "") &&
           item.getId() !== "pageSeo" &&
           item.getId() !== "weddingStory",
       ),

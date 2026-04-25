@@ -53,7 +53,8 @@ const BuiltBy = () => {
           />
           DR Web Studio
         </a>
-        <span className="hidden sm:inline text-text-muted"> —</span> {t("developedBy")}.
+        <span className="hidden sm:inline text-text-muted"> —</span>{" "}
+        {t("developedBy")}.
       </p>
       <script
         id="dr-webstudio-builtby-schema"

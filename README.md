@@ -4,15 +4,15 @@ A destination wedding planning platform for Cabeza de Toro, Punta Cana. Couples 
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 16 (App Router) |
-| CMS | Sanity 5.x + next-sanity 12.x |
-| Styling | Tailwind CSS 4 |
-| i18n (main site) | next-intl (en, es) |
-| i18n (blog) | Sanity-stored translations (en, es, fr, de, ru) |
-| Deployment | Netlify |
-| Forms | Netlify Forms |
+| Layer            | Technology                                      |
+| ---------------- | ----------------------------------------------- |
+| Framework        | Next.js 16 (App Router)                         |
+| CMS              | Sanity 5.x + next-sanity 12.x                   |
+| Styling          | Tailwind CSS 4                                  |
+| i18n (main site) | next-intl (en, es)                              |
+| i18n (blog)      | Sanity-stored translations (en, es, fr, de, ru) |
+| Deployment       | Netlify                                         |
+| Forms            | Netlify Forms                                   |
 
 ## Getting Started
 
@@ -84,21 +84,21 @@ scripts/
 
 The calculator is the core of the product. It walks couples through 13 steps, updating an estimated total after every selection:
 
-| Step | Category |
-|---|---|
-| 1 | Wedding date |
-| 2 | Guest count |
-| 3 | Hotel / area (for transport routing) |
-| 4 | Venue & coordination (always included) |
-| 5 | Menu selection |
-| 6 | Bar package + hours |
-| 7 | Furniture & linens |
-| 8 | Decor & flowers |
-| 9 | Photography |
-| 10 | Videography |
-| 11 | Transport vehicles |
-| 12 | Entertainment |
-| 13 | Extra experiences |
+| Step | Category                               |
+| ---- | -------------------------------------- |
+| 1    | Wedding date                           |
+| 2    | Guest count                            |
+| 3    | Hotel / area (for transport routing)   |
+| 4    | Venue & coordination (always included) |
+| 5    | Menu selection                         |
+| 6    | Bar package + hours                    |
+| 7    | Furniture & linens                     |
+| 8    | Decor & flowers                        |
+| 9    | Photography                            |
+| 10   | Videography                            |
+| 11   | Transport vehicles                     |
+| 12   | Entertainment                          |
+| 13   | Extra experiences                      |
 
 All pricing lives in Sanity. The calculator only multiplies (never invents numbers). After step 13, the couple reviews a summary and submits a lead form — no payment is collected on the site.
 

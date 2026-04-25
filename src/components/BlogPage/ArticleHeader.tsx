@@ -31,7 +31,11 @@ export default async function ArticleHeader({ article, locale }: Props) {
     : null;
 
   return (
-    <header id="article-hero" className="bg-white py-16 md:py-20" dir={isRtl ? "rtl" : undefined}>
+    <header
+      id="article-hero"
+      className="bg-white py-16 md:py-20"
+      dir={isRtl ? "rtl" : undefined}
+    >
       <div className="mx-auto max-w-3xl px-6">
         {/* Back link */}
         <Link
@@ -44,7 +48,9 @@ export default async function ArticleHeader({ article, locale }: Props) {
         {/* Category */}
         {article.category?.title && (
           <span className="mb-4 block text-[10px] font-semibold uppercase tracking-widest text-[#5B9FD9]">
-            {article.category.title[locale as keyof typeof article.category.title] as string ?? article.category.title.en}
+            {(article.category.title[
+              locale as keyof typeof article.category.title
+            ] as string) ?? article.category.title.en}
           </span>
         )}
 
@@ -60,7 +66,6 @@ export default async function ArticleHeader({ article, locale }: Props) {
               {t("publishedOn")} {formattedDate}
             </span>
           )}
-    
         </div>
       </div>
 

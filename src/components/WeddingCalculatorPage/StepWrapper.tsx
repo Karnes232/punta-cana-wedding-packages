@@ -29,12 +29,16 @@ export default function StepWrapper({
 
   useEffect(() => {
     if (!wrapperRef.current) return;
-    const y = wrapperRef.current.getBoundingClientRect().top + window.scrollY - 96;
+    const y =
+      wrapperRef.current.getBoundingClientRect().top + window.scrollY - 96;
     window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
   }, []);
 
   return (
-    <div ref={wrapperRef} className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+    <div
+      ref={wrapperRef}
+      className="animate-in fade-in slide-in-from-bottom-2 duration-300"
+    >
       {/* Step header */}
       <div className="mb-6">
         <p className="mb-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#5B9FD9]">

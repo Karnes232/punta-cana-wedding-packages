@@ -19,19 +19,6 @@ export const transportationZone = defineType({
       type: "localizedText",
     }),
     defineField({
-      name: "vehicleCapacity",
-      title: "Passengers Per Vehicle",
-      type: "number",
-      description: "e.g. 15 for a passenger van",
-      validation: (R) => R.required().min(1),
-    }),
-    defineField({
-      name: "ratePerVehicle",
-      title: "Rate Per Vehicle (USD)",
-      type: "number",
-      validation: (R) => R.required().min(0),
-    }),
-    defineField({
       name: "order",
       title: "Sort Order",
       type: "number",
@@ -42,13 +29,10 @@ export const transportationZone = defineType({
   preview: {
     select: {
       nameEn: "name.en",
-      rate: "ratePerVehicle",
-      capacity: "vehicleCapacity",
     },
-    prepare({ nameEn, rate, capacity }) {
+    prepare({ nameEn }) {
       return {
         title: nameEn ?? "Unnamed Zone",
-        subtitle: `$${rate}/vehicle · ${capacity} seats`,
       };
     },
   },

@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { useState, useMemo } from 'react'
-import Image from 'next/image'
-import { Link } from '@/i18n/navigation'
-import { urlFor } from '@/sanity/lib/image'
-import type { BlogArticlePreview } from '@/sanity/queries/Blog'
+import { useState, useMemo } from "react";
+import Image from "next/image";
+import { Link } from "@/i18n/navigation";
+import { urlFor } from "@/sanity/lib/image";
+import type { BlogArticlePreview } from "@/sanity/queries/Blog";
 
 type Props = {
-  articles: BlogArticlePreview[]
-  locale: string
-  allLabel: string
-  readMoreLabel: string
-  noArticlesLabel: string
-}
+  articles: BlogArticlePreview[];
+  locale: string;
+  allLabel: string;
+  readMoreLabel: string;
+  noArticlesLabel: string;
+};
 
 export default function BlogFilterClient({
   articles,
@@ -21,22 +21,22 @@ export default function BlogFilterClient({
   readMoreLabel,
   noArticlesLabel,
 }: Props) {
-  const [selected, setSelected] = useState<string | null>(null)
+  const [selected, setSelected] = useState<string | null>(null);
 
   // Derive unique categories from the articles already in memory
   const categories = useMemo(() => {
-    const map = new Map<string, NonNullable<BlogArticlePreview['category']>>()
+    const map = new Map<string, NonNullable<BlogArticlePreview["category"]>>();
     for (const article of articles) {
       if (article.category && !map.has(article.category.slug)) {
-        map.set(article.category.slug, article.category)
+        map.set(article.category.slug, article.category);
       }
     }
-    return Array.from(map.values())
-  }, [articles])
+    return Array.from(map.values());
+  }, [articles]);
 
   const filtered = selected
     ? articles.filter((a) => a.category?.slug === selected)
-    : articles
+    : articles;
 
   return (
     <>
@@ -47,8 +47,8 @@ export default function BlogFilterClient({
             onClick={() => setSelected(null)}
             className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${
               selected === null
-                ? 'bg-[#5B9FD9] text-white'
-                : 'bg-white text-[#555555] ring-1 ring-[#E5E5E5] hover:text-[#5B9FD9] hover:ring-[#5B9FD9]'
+                ? "bg-[#5B9FD9] text-white"
+                : "bg-white text-[#555555] ring-1 ring-[#E5E5E5] hover:text-[#5B9FD9] hover:ring-[#5B9FD9]"
             }`}
           >
             {allLabel}
@@ -58,20 +58,20 @@ export default function BlogFilterClient({
             const label =
               cat.title?.[locale as keyof typeof cat.title] ??
               cat.title?.en ??
-              cat.slug
+              cat.slug;
             return (
               <button
                 key={cat.slug}
                 onClick={() => setSelected(cat.slug)}
                 className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${
                   selected === cat.slug
-                    ? 'bg-[#5B9FD9] text-white'
-                    : 'bg-white text-[#555555] ring-1 ring-[#E5E5E5] hover:text-[#5B9FD9] hover:ring-[#5B9FD9]'
+                    ? "bg-[#5B9FD9] text-white"
+                    : "bg-white text-[#555555] ring-1 ring-[#E5E5E5] hover:text-[#5B9FD9] hover:ring-[#5B9FD9]"
                 }`}
               >
                 {label}
               </button>
-            )
+            );
           })}
         </div>
       )}
@@ -86,34 +86,39 @@ export default function BlogFilterClient({
               ? urlFor(article.featuredImage.asset)
                   .width(720)
                   .height(405)
-                  .fit('crop')
-                  .auto('format')
+                  .fit("crop")
+                  .auto("format")
                   .url()
-              : null
+              : null;
 
             const formattedDate = article.publishedAt
               ? new Date(article.publishedAt).toLocaleDateString(locale, {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
                 })
-              : null
+              : null;
 
             const catLabel =
-              article.category?.title?.[locale as keyof typeof article.category.title] ??
-              article.category?.title?.en
+              article.category?.title?.[
+                locale as keyof typeof article.category.title
+              ] ?? article.category?.title?.en;
 
             return (
               <article
                 key={article._id}
                 className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-shadow duration-200 hover:shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
               >
-                <Link href={`/blog/${article.slug}`} tabIndex={-1} aria-hidden="true">
+                <Link
+                  href={`/blog/${article.slug}`}
+                  tabIndex={-1}
+                  aria-hidden="true"
+                >
                   <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#F0F4F8]">
                     {imageUrl ? (
                       <Image
                         src={imageUrl}
-                        alt={article.featuredImage?.alt ?? article.title ?? ''}
+                        alt={article.featuredImage?.alt ?? article.title ?? ""}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover transition-transform duration-300"
@@ -150,7 +155,9 @@ export default function BlogFilterClient({
 
                   <div className="mt-auto flex items-center justify-between pt-4">
                     {formattedDate && (
-                      <span className="text-xs text-[#AAAAAA]">{formattedDate}</span>
+                      <span className="text-xs text-[#AAAAAA]">
+                        {formattedDate}
+                      </span>
                     )}
                     <Link
                       href={`/blog/${article.slug}`}
@@ -161,10 +168,10 @@ export default function BlogFilterClient({
                   </div>
                 </div>
               </article>
-            )
+            );
           })}
         </div>
       )}
     </>
-  )
+  );
 }

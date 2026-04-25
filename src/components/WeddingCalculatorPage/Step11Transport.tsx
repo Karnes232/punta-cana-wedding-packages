@@ -24,17 +24,22 @@ export default function Step11Transport({ state, dispatch, vehicles }: Props) {
   const t = useTranslations("weddingCalculator.steps.transport");
 
   const selected = state.transportVehicle;
+  const selectedZoneRate =
+    selected && state.hotel
+      ? (selected.zonePricing.find((zp) => zp.zoneId === state.hotel!._id)
+          ?.ratePerVehicle ?? null)
+      : null;
   const vehicleCount = selected
     ? Math.ceil(state.guests / selected.capacity)
     : null;
   const transportTotal =
-    selected && vehicleCount !== null
-      ? selected.ratePerVehicle * vehicleCount
+    selectedZoneRate !== null && vehicleCount !== null
+      ? selectedZoneRate * vehicleCount
       : null;
 
   return (
     <StepWrapper
-      stepNumber={11}
+      stepNumber={10}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}
@@ -58,7 +63,12 @@ export default function Step11Transport({ state, dispatch, vehicles }: Props) {
           {vehicles.map((vehicle) => {
             const isSelected = state.transportVehicle?._id === vehicle._id;
             const count = Math.ceil(state.guests / vehicle.capacity);
-            const total = vehicle.ratePerVehicle * count;
+            const zoneRate = state.hotel
+              ? (vehicle.zonePricing.find(
+                  (zp) => zp.zoneId === state.hotel!._id,
+                )?.ratePerVehicle ?? null)
+              : null;
+            const total = zoneRate !== null ? zoneRate * count : null;
 
             return (
               <button
@@ -86,11 +96,19 @@ export default function Step11Transport({ state, dispatch, vehicles }: Props) {
                   </div>
                 )}
                 <div className="p-5">
-                  <p
-                    className={`font-semibold ${isSelected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
-                  >
-                    {vehicle.name}
-                  </p>
+                  <div className="flex items-center justify-between">
+                    <p
+                      className={`font-semibold ${isSelected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
+                    >
+                      {vehicle.name}
+                    </p>
+                    <p className="text-xs text-[#AAAAAA]">
+                      {zoneRate !== null
+                        ? formatUSD(zoneRate)
+                        : t("noPriceForZone")}{" "}
+                      {t("perVehicle")}
+                    </p>
+                  </div>
                   <p className="mt-1 text-xs text-[#888888]">
                     {t("capacity", { n: vehicle.capacity })}
                   </p>
@@ -103,9 +121,17 @@ export default function Step11Transport({ state, dispatch, vehicles }: Props) {
                     <p className="text-xs text-[#888888]">
                       {t("vehiclesNeeded", { n: count, g: state.guests })}
                     </p>
-                    <p className="text-sm font-semibold text-[#1A1A1A]">
-                      {formatUSD(total)}
-                    </p>
+                    {total !== null && zoneRate !== null ? (
+                      <div className="text-right">
+                        <p className="text-sm font-semibold text-[#1A1A1A]">
+                          {formatUSD(total)}
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="text-xs text-[#AAAAAA]">
+                        {t("noPriceForZone")}
+                      </p>
+                    )}
                   </div>
                 </div>
               </button>
@@ -117,15 +143,18 @@ export default function Step11Transport({ state, dispatch, vehicles }: Props) {
       )}
 
       {/* Selected summary */}
-      {selected && transportTotal !== null && vehicleCount !== null && (
-        <p className="mt-5 text-sm font-medium text-[#1A1A1A]">
-          {t("total")}{" "}
-          <span className="text-[#5B9FD9]">{formatUSD(transportTotal)}</span>
-          <span className="ml-1 text-xs text-[#AAAAAA]">
-            ({vehicleCount} × {formatUSD(selected.ratePerVehicle)})
-          </span>
-        </p>
-      )}
+      {selected &&
+        transportTotal !== null &&
+        vehicleCount !== null &&
+        selectedZoneRate !== null && (
+          <p className="mt-5 text-sm font-medium text-[#1A1A1A]">
+            {t("total")}{" "}
+            <span className="text-[#5B9FD9]">{formatUSD(transportTotal)}</span>
+            <span className="ml-1 text-xs text-[#AAAAAA]">
+              ({vehicleCount} × {formatUSD(selectedZoneRate)})
+            </span>
+          </p>
+        )}
     </StepWrapper>
   );
 }

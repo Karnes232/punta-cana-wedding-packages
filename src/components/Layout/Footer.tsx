@@ -208,9 +208,8 @@ export default async function Footer() {
         <div className="mt-12 border-t border-[#EFEFEF] pt-6">
           <p className="text-xs text-[#999999]">{t("copyright", { year })}</p>
         </div>
-        <BuiltBy/>
+        <BuiltBy />
       </div>
-   
     </footer>
   );
 }

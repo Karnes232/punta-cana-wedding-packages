@@ -30,7 +30,7 @@ export default function RunningTotal({ total }: Props) {
         <p className="mt-2 text-3xl font-semibold text-[#1A1A1A] tabular-nums">
           {formatUSD(total)}
         </p>
-        <p className="mt-2 text-xs text-[#AAAAAA]">{t("included")}</p>
+        {/* <p className="mt-2 text-xs text-[#AAAAAA]">{t("included")}</p> */}
       </div>
 
       {/* Mobile sticky bottom bar */}
@@ -47,15 +47,15 @@ export default function RunningTotal({ total }: Props) {
               {formatUSD(total)}
             </span>
           </div>
-          <span className="text-xs text-[#5B9FD9]">
+          {/* <span className="text-xs text-[#5B9FD9]">
             {expanded ? t("collapse") : t("expand")}
-          </span>
+          </span> */}
         </button>
-        {expanded && (
+        {/* {expanded && (
           <div className="border-t border-[#F5F5F5] px-6 py-3">
             <p className="text-xs text-[#AAAAAA]">{t("included")}</p>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

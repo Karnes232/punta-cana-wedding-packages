@@ -69,7 +69,8 @@ export const decorPackage = defineType({
       title: "Wedding Preview Image",
       type: "image",
       options: { hotspot: true },
-      description: "Full wedding scene shown in the live preview panel — use a wide, cinematic shot of a complete table setup or ceremony",
+      description:
+        "Full wedding scene shown in the live preview panel — use a wide, cinematic shot of a complete table setup or ceremony",
     }),
     defineField({
       name: "order",

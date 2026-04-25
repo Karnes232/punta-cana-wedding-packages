@@ -36,7 +36,7 @@ export default function Step10Video({ state, dispatch, packages }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={10}
+      stepNumber={9}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

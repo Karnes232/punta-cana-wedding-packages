@@ -42,8 +42,13 @@ export default function SubmissionForm({
   const tableCount = Math.ceil(state.guests / seatsPerTable);
   const vehicleCount = state.transportVehicle
     ? Math.ceil(state.guests / state.transportVehicle.capacity)
-    : state.hotel
-      ? Math.ceil(state.guests / state.hotel.vehicleCapacity)
+    : 0;
+
+  const transportZoneRate =
+    state.transportVehicle && state.hotel
+      ? (state.transportVehicle.zonePricing.find(
+          (zp) => zp.zoneId === state.hotel!._id,
+        )?.ratePerVehicle ?? 0)
       : 0;
 
   // Build a plain-text summary of all selections for the form payload.
@@ -65,12 +70,16 @@ export default function SubmissionForm({
       );
 
     if (state.bar) {
-      const barBase = state.bar.costPerPersonPerHour * state.barHours * state.guests;
+      const barBase =
+        state.bar.costPerPersonPerHour * state.barHours * state.guests;
       const addonParts = state.barAddOns.map((a) => {
         const c = a.isPerPerson ? a.cost * state.guests : a.cost;
         return `+${a.name} ${formatUSD(c)}`;
       });
-      const barParts = [`${state.bar.name} × ${state.barHours}h — ${formatUSD(barBase)}`, ...addonParts];
+      const barParts = [
+        `${state.bar.name} × ${state.barHours}h — ${formatUSD(barBase)}`,
+        ...addonParts,
+      ];
       lines.push(`Bar: ${barParts.join(" | ")}`);
     }
 
@@ -84,34 +93,45 @@ export default function SubmissionForm({
         const c = a.isPerTable ? a.cost * tableCount : a.cost;
         return `+${a.name} ${formatUSD(c)}`;
       });
-      const decorParts = [`${state.decor.name} — ${formatUSD(state.decor.baseCost)}`, ...addonParts];
+      const decorParts = [
+        `${state.decor.name} — ${formatUSD(state.decor.baseCost)}`,
+        ...addonParts,
+      ];
       lines.push(`Decor: ${decorParts.join(" | ")}`);
     }
 
     if (state.photo) {
-      const addonParts = state.photoAddOns.map((a) => `+${a.name} ${formatUSD(a.cost)}`);
-      const photoParts = [`${state.photo.name} — ${formatUSD(state.photo.cost)}`, ...addonParts];
+      const addonParts = state.photoAddOns.map(
+        (a) => `+${a.name} ${formatUSD(a.cost)}`,
+      );
+      const photoParts = [
+        `${state.photo.name} — ${formatUSD(state.photo.cost)}`,
+        ...addonParts,
+      ];
       lines.push(`Photography: ${photoParts.join(" | ")}`);
     }
 
     if (state.video && !state.videoSkipped) {
-      const addonParts = state.videoAddOns.map((a) => `+${a.name} ${formatUSD(a.cost)}`);
-      const videoParts = [`${state.video.name} — ${formatUSD(state.video.cost)}`, ...addonParts];
+      const addonParts = state.videoAddOns.map(
+        (a) => `+${a.name} ${formatUSD(a.cost)}`,
+      );
+      const videoParts = [
+        `${state.video.name} — ${formatUSD(state.video.cost)}`,
+        ...addonParts,
+      ];
       lines.push(`Videography: ${videoParts.join(" | ")}`);
     }
 
-    if (state.transportVehicle && vehicleCount > 0) {
+    if (state.transportVehicle && vehicleCount > 0 && transportZoneRate > 0) {
       lines.push(
-        `Transportation: ${state.transportVehicle.name} × ${vehicleCount} vehicles — ${formatUSD(state.transportVehicle.ratePerVehicle * vehicleCount)}`,
-      );
-    } else if (state.hotel && vehicleCount > 0) {
-      lines.push(
-        `Transportation: ${vehicleCount} vehicles — ${formatUSD(state.hotel.ratePerVehicle * vehicleCount)}`,
+        `Transportation: ${state.transportVehicle.name} × ${vehicleCount} vehicles — ${formatUSD(transportZoneRate * vehicleCount)}`,
       );
     }
 
     if (state.entertainment.length > 0) {
-      const parts = state.entertainment.map((e) => `${e.name} — ${formatUSD(e.cost)}`);
+      const parts = state.entertainment.map(
+        (e) => `${e.name} — ${formatUSD(e.cost)}`,
+      );
       lines.push(`Entertainment: ${parts.join(" | ")}`);
     }
 

@@ -88,7 +88,6 @@ export const blogArticle = defineType({
       validation: (R) => R.required().min(1).max(60),
     }),
 
-
     defineField({
       name: "category",
       title: "Category",

@@ -35,7 +35,7 @@ export default function Step09Photo({ state, dispatch, packages }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={9}
+      stepNumber={8}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

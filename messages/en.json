@@ -236,10 +236,11 @@
         "label": "Transportation from your hotel area",
         "zone": "Your hotel area",
         "vehiclesNeeded": "{n} vehicles needed for {g} guests",
-        "perVehicle": "/vehicle",
+        "perVehicle": "/ vehicle",
         "capacity": "{n} passengers per vehicle",
         "total": "Transportation total:",
-        "noVehicles": "No vehicle options available. Please contact us directly."
+        "noVehicles": "No vehicle options available. Please contact us directly.",
+        "noPriceForZone": "Contact for price"
       },
       "entertainment": {
         "title": "Entertainment",

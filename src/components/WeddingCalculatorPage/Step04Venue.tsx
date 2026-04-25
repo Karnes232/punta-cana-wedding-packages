@@ -24,10 +24,10 @@ export default function Step04Venue({ state, dispatch, config }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={4}
+      stepNumber={13}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
-      onContinue={() => dispatch({ type: "NEXT_STEP" })}
+      onContinue={() => dispatch({ type: "GO_TO_SUMMARY" })}
       continueDisabled={!state.venueConfirmed}
     >
       <div className="max-w-lg">

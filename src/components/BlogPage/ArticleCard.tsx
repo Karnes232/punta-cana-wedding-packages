@@ -58,7 +58,9 @@ export default async function ArticleCard({ article, locale }: Props) {
         {/* Category */}
         {article.category?.title && (
           <span className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-[#5B9FD9]">
-            {article.category.title[locale as keyof typeof article.category.title] as string ?? article.category.title.en}
+            {(article.category.title[
+              locale as keyof typeof article.category.title
+            ] as string) ?? article.category.title.en}
           </span>
         )}
 

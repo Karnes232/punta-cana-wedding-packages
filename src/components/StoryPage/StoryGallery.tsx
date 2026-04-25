@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useCallback,
-  useSyncExternalStore,
-} from "react";
+import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -180,8 +175,7 @@ export default function StoryGallery({ story }: Props) {
                   }`}
                   onClick={() => setLightboxIndex(i)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ")
-                      setLightboxIndex(i);
+                    if (e.key === "Enter" || e.key === " ") setLightboxIndex(i);
                   }}
                 >
                   <Image

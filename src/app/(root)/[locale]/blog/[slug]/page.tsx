@@ -60,10 +60,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: buildUrl(locale, `/blog/${slug}`),
       languages: Object.fromEntries([
-        ...((article.translations ?? []).map((t) => [
+        ...(article.translations ?? []).map((t) => [
           t.language,
           buildUrl(t.language, `/blog/${t.slug}`),
-        ])),
+        ]),
         ["x-default", buildUrl("en", `/blog/${slug}`)],
       ]),
     },
@@ -80,7 +80,7 @@ export default async function BlogArticlePage({ params }: Props) {
 
   return (
     <>
-{article.structuredData && <SeoJsonLd json={article.structuredData} />}
+      {article.structuredData && <SeoJsonLd json={article.structuredData} />}
       <ArticleTranslationsRegistrar translations={article.translations ?? []} />
       <ArticleHeader article={article} locale={locale} />
       <ArticleBody body={article.body} locale={locale} />

@@ -29,7 +29,7 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={5}
+      stepNumber={4}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

@@ -36,6 +36,7 @@ export default function CalculatorContainer({ data }: Props) {
     state,
     dispatch,
     total,
+    fullTotal,
     goToStep,
     SUMMARY_STEP,
     FORM_STEP,
@@ -47,6 +48,9 @@ export default function CalculatorContainer({ data }: Props) {
   if (state.currentStep > maxStepReached && state.currentStep <= TOTAL_STEPS) {
     setMaxStepReached(state.currentStep);
   }
+
+  // Show full total (including venue) once the user has confirmed the venue
+  const runningDisplayTotal = state.venueConfirmed ? fullTotal : total;
 
   const isWizardStep =
     state.currentStep >= 1 && state.currentStep <= TOTAL_STEPS;
@@ -97,27 +101,20 @@ export default function CalculatorContainer({ data }: Props) {
             />
           )}
           {state.currentStep === 4 && (
-            <Step04Venue
-              state={state}
-              dispatch={dispatch}
-              config={data.config}
-            />
-          )}
-          {state.currentStep === 5 && (
             <Step05Menu
               state={state}
               dispatch={dispatch}
               menus={data.menuOptions}
             />
           )}
-          {state.currentStep === 6 && (
+          {state.currentStep === 5 && (
             <Step06Bar
               state={state}
               dispatch={dispatch}
               packages={data.barPackages}
             />
           )}
-          {state.currentStep === 7 && (
+          {state.currentStep === 6 && (
             <Step07Furniture
               state={state}
               dispatch={dispatch}
@@ -125,7 +122,7 @@ export default function CalculatorContainer({ data }: Props) {
               defaultSeatsPerTable={data.config.defaultSeatsPerTable}
             />
           )}
-          {state.currentStep === 8 && (
+          {state.currentStep === 7 && (
             <Step08Decor
               state={state}
               dispatch={dispatch}
@@ -133,39 +130,46 @@ export default function CalculatorContainer({ data }: Props) {
               defaultSeatsPerTable={data.config.defaultSeatsPerTable}
             />
           )}
-          {state.currentStep === 9 && (
+          {state.currentStep === 8 && (
             <Step09Photo
               state={state}
               dispatch={dispatch}
               packages={data.photoPackages}
             />
           )}
-          {state.currentStep === 10 && (
+          {state.currentStep === 9 && (
             <Step10Video
               state={state}
               dispatch={dispatch}
               packages={data.videoPackages}
             />
           )}
-          {state.currentStep === 11 && (
+          {state.currentStep === 10 && (
             <Step11Transport
               state={state}
               dispatch={dispatch}
               vehicles={data.transportVehicles}
             />
           )}
-          {state.currentStep === 12 && (
+          {state.currentStep === 11 && (
             <Step12Entertainment
               state={state}
               dispatch={dispatch}
               options={data.entertainmentOptions}
             />
           )}
-          {state.currentStep === 13 && (
+          {state.currentStep === 12 && (
             <Step13Extras
               state={state}
               dispatch={dispatch}
               options={data.extraOptions}
+            />
+          )}
+          {state.currentStep === 13 && (
+            <Step04Venue
+              state={state}
+              dispatch={dispatch}
+              config={data.config}
             />
           )}
 
@@ -174,7 +178,7 @@ export default function CalculatorContainer({ data }: Props) {
               state={state}
               dispatch={dispatch}
               config={data.config}
-              total={total}
+              total={fullTotal}
             />
           )}
           {isForm && (
@@ -182,7 +186,7 @@ export default function CalculatorContainer({ data }: Props) {
               state={state}
               dispatch={dispatch}
               config={data.config}
-              total={total}
+              total={fullTotal}
             />
           )}
           {isSuccess && <SuccessScreen />}
@@ -192,15 +196,17 @@ export default function CalculatorContainer({ data }: Props) {
         {(isWizardStep || isSummary) && (
           <div className="hidden w-64 shrink-0 lg:block">
             <div className="sticky top-24">
-              {isWizardStep && <WeddingPreview decor={state.decor} variant="desktop" />}
-              <RunningTotal total={total} />
+              {isWizardStep && (
+                <WeddingPreview decor={state.decor} variant="desktop" />
+              )}
+              <RunningTotal total={runningDisplayTotal} />
             </div>
           </div>
         )}
       </div>
 
       {/* Running total mobile bar (always shown in wizard) */}
-      {isWizardStep && <RunningTotal total={total} />}
+      {isWizardStep && <RunningTotal total={runningDisplayTotal} />}
     </div>
   );
 }
