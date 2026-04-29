@@ -6,6 +6,7 @@ import ProgressBar from "./ProgressBar";
 import RunningTotal from "./RunningTotal";
 import Step01Date from "./Step01Date";
 import Step02Guests from "./Step02Guests";
+import Step03WeddingType from "./Step03WeddingType";
 import Step03Hotel from "./Step03Hotel";
 import Step04Venue from "./Step04Venue";
 import Step05Menu from "./Step05Menu";
@@ -24,7 +25,7 @@ import WeddingPreview from "./WeddingPreview";
 
 import type { CalculatorData } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
-const TOTAL_STEPS = 13;
+const TOTAL_STEPS = 14;
 
 type Props = {
   data: CalculatorData;
@@ -94,27 +95,34 @@ export default function CalculatorContainer({ data }: Props) {
             <Step02Guests state={state} dispatch={dispatch} />
           )}
           {state.currentStep === 3 && (
+            <Step03WeddingType
+              state={state}
+              dispatch={dispatch}
+              weddingTypes={data.weddingTypes}
+            />
+          )}
+          {state.currentStep === 4 && (
             <Step03Hotel
               state={state}
               dispatch={dispatch}
               zones={data.transportationZones}
             />
           )}
-          {state.currentStep === 4 && (
+          {state.currentStep === 5 && (
             <Step05Menu
               state={state}
               dispatch={dispatch}
               menus={data.menuOptions}
             />
           )}
-          {state.currentStep === 5 && (
+          {state.currentStep === 6 && (
             <Step06Bar
               state={state}
               dispatch={dispatch}
               packages={data.barPackages}
             />
           )}
-          {state.currentStep === 6 && (
+          {state.currentStep === 7 && (
             <Step07Furniture
               state={state}
               dispatch={dispatch}
@@ -122,7 +130,7 @@ export default function CalculatorContainer({ data }: Props) {
               defaultSeatsPerTable={data.config.defaultSeatsPerTable}
             />
           )}
-          {state.currentStep === 7 && (
+          {state.currentStep === 8 && (
             <Step08Decor
               state={state}
               dispatch={dispatch}
@@ -130,42 +138,42 @@ export default function CalculatorContainer({ data }: Props) {
               defaultSeatsPerTable={data.config.defaultSeatsPerTable}
             />
           )}
-          {state.currentStep === 8 && (
+          {state.currentStep === 9 && (
             <Step09Photo
               state={state}
               dispatch={dispatch}
               packages={data.photoPackages}
             />
           )}
-          {state.currentStep === 9 && (
+          {state.currentStep === 10 && (
             <Step10Video
               state={state}
               dispatch={dispatch}
               packages={data.videoPackages}
             />
           )}
-          {state.currentStep === 10 && (
+          {state.currentStep === 11 && (
             <Step11Transport
               state={state}
               dispatch={dispatch}
               vehicles={data.transportVehicles}
             />
           )}
-          {state.currentStep === 11 && (
+          {state.currentStep === 12 && (
             <Step12Entertainment
               state={state}
               dispatch={dispatch}
               options={data.entertainmentOptions}
             />
           )}
-          {state.currentStep === 12 && (
+          {state.currentStep === 13 && (
             <Step13Extras
               state={state}
               dispatch={dispatch}
               options={data.extraOptions}
             />
           )}
-          {state.currentStep === 13 && (
+          {state.currentStep === 14 && (
             <Step04Venue
               state={state}
               dispatch={dispatch}

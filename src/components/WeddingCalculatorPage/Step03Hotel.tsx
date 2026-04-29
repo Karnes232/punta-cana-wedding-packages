@@ -16,7 +16,7 @@ export default function Step03Hotel({ state, dispatch, zones }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={3}
+      stepNumber={4}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

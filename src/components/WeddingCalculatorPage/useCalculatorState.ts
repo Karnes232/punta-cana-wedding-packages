@@ -3,6 +3,7 @@
 import { useReducer, useCallback } from "react";
 import type {
   CalculatorConfig,
+  WeddingType,
   MenuOption,
   BarPackage,
   FurnitureOption,
@@ -19,9 +20,10 @@ import type {
 // ── State shape ────────────────────────────────────────────────────────────────
 
 export type CalculatorState = {
-  currentStep: number; // 1–13, 14 = summary, 15 = form, 16 = success
+  currentStep: number; // 1–14, 15 = summary, 16 = form, 17 = success
   date: string; // ISO date string
   guests: number;
+  weddingType: WeddingType | null;
   hotel: TransportationZone | null;
 
   // Step 4: always Cabeza de Toro — just confirmed boolean
@@ -56,6 +58,7 @@ export type CalculatorAction =
   | { type: "SET_STEP"; step: number }
   | { type: "SET_DATE"; date: string }
   | { type: "SET_GUESTS"; guests: number }
+  | { type: "SET_WEDDING_TYPE"; weddingType: WeddingType }
   | { type: "SET_HOTEL"; hotel: TransportationZone }
   | { type: "SET_VENUE_CONFIRMED"; confirmed: boolean }
   | { type: "SET_MENU"; menu: MenuOption }
@@ -81,14 +84,15 @@ export type CalculatorAction =
 
 // ── Initial state ──────────────────────────────────────────────────────────────
 
-const SUMMARY_STEP = 14;
-const FORM_STEP = 15;
-const SUCCESS_STEP = 16;
+const SUMMARY_STEP = 15;
+const FORM_STEP = 16;
+const SUCCESS_STEP = 17;
 
 const initialState: CalculatorState = {
   currentStep: 1,
   date: "",
   guests: 50,
+  weddingType: null,
   hotel: null,
   venueConfirmed: false,
   menu: null,
@@ -146,6 +150,9 @@ function calculatorReducer(
 
     case "SET_GUESTS":
       return { ...state, guests: action.guests };
+
+    case "SET_WEDDING_TYPE":
+      return { ...state, weddingType: action.weddingType };
 
     case "SET_HOTEL":
       return { ...state, hotel: action.hotel };
@@ -224,7 +231,7 @@ function calculatorReducer(
       };
 
     case "NEXT_STEP":
-      return { ...state, currentStep: Math.min(state.currentStep + 1, 13) };
+      return { ...state, currentStep: Math.min(state.currentStep + 1, 14) };
 
     case "PREV_STEP":
       return { ...state, currentStep: Math.max(state.currentStep - 1, 1) };
@@ -255,6 +262,11 @@ export function calculateTotal(
   const tableCount = Math.ceil(
     g / (state.furniture?.seatsPerTable ?? config.defaultSeatsPerTable),
   );
+
+  // Wedding type fee
+  if (state.weddingType) {
+    total += state.weddingType.fee;
+  }
 
   // Menu
   if (state.menu) {

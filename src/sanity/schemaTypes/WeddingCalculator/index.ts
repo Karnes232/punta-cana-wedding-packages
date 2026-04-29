@@ -9,3 +9,4 @@ export { transportVehicle } from "./transportVehicle";
 export { entertainmentOption } from "./entertainmentOption";
 export { extraOption } from "./extraOption";
 export { calculatorConfig } from "./calculatorConfig";
+export { weddingType } from "./weddingType";

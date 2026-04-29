@@ -169,6 +169,11 @@
         "min": "Minimum 10 guests",
         "max": "Maximum 500 guests"
       },
+      "weddingType": {
+        "title": "Type of Wedding",
+        "help": "Choose the type of ceremony that best fits your plans.",
+        "noFee": "Included"
+      },
       "hotel": {
         "title": "Hotel / Area",
         "label": "Where are most guests staying?",
@@ -264,6 +269,8 @@
       "guests": "{n} guests",
       "breakdown": "Pricing Breakdown",
       "venue": "Venue & Coordination",
+      "weddingType": "{name} Ceremony",
+      "weddingTypeIncluded": "Included",
       "menu": "Menu ({name} × {n} guests)",
       "bar": "Open Bar ({name} · {h}h × {n} guests)",
       "furniture": "Furniture ({name} · {n} tables)",

@@ -25,6 +25,7 @@ const CALCULATOR_TYPES = new Set([
   "entertainmentOption",
   "extraOption",
   "calculatorConfig",
+  "weddingType",
 ]);
 
 // All singleton document IDs — excluded from auto-generated list items
@@ -150,6 +151,7 @@ export const structure: StructureResolver = (S) =>
                     .title("Calculator Configuration"),
                 ),
               S.divider(),
+              S.documentTypeListItem("weddingType").title("Wedding Types"),
               S.documentTypeListItem("menuOption").title("Menu Options"),
               S.documentTypeListItem("barPackage").title("Bar Packages"),
               S.documentTypeListItem("furnitureOption").title(

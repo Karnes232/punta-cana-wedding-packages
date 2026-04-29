@@ -37,7 +37,7 @@ export default function Step07Furniture({
 
   return (
     <StepWrapper
-      stepNumber={6}
+      stepNumber={7}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

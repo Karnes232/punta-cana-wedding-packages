@@ -169,6 +169,11 @@
         "min": "Mínimo 10 invitados",
         "max": "Máximo 500 invitados"
       },
+      "weddingType": {
+        "title": "Tipo de Boda",
+        "help": "Elige el tipo de ceremonia que mejor se adapte a tus planes.",
+        "noFee": "Incluido"
+      },
       "hotel": {
         "title": "Hotel / Área",
         "label": "¿Dónde se hospedan la mayoría de los invitados?",
@@ -264,6 +269,8 @@
       "guests": "{n} invitados",
       "breakdown": "Desglose de Precios",
       "venue": "Lugar y Coordinación",
+      "weddingType": "Ceremonia {name}",
+      "weddingTypeIncluded": "Incluido",
       "menu": "Menú ({name} × {n} invitados)",
       "bar": "Barra Libre ({name} · {h}h × {n} invitados)",
       "furniture": "Mobiliario ({name} · {n} mesas)",

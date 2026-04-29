@@ -39,7 +39,7 @@ export default function Step06Bar({ state, dispatch, packages }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={5}
+      stepNumber={6}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

@@ -58,11 +58,17 @@ export default function SubmissionForm({
     const lines: string[] = [
       `Wedding Date: ${state.date}`,
       `Guests: ${state.guests}`,
+      `Wedding Type: ${state.weddingType?.name ?? "Not selected"}`,
       `Hotel Area: ${state.hotel?.name ?? "Not selected"}`,
       ``,
       `===== PRICING BREAKDOWN =====`,
       `Venue & Coordination: ${formatUSD(config.venueCost + config.coordinationCost)}`,
     ];
+
+    if (state.weddingType && state.weddingType.fee > 0)
+      lines.push(
+        `Legal Wedding Fee (${state.weddingType.name}): ${formatUSD(state.weddingType.fee)}`,
+      );
 
     if (state.menu)
       lines.push(

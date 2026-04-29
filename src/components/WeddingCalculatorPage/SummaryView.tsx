@@ -117,6 +117,16 @@ export default function SummaryView({ state, dispatch, config, total }: Props) {
             label={t("venue")}
             value={formatUSD(config.venueCost + config.coordinationCost)}
           />
+          {state.weddingType && (
+            <Row
+              label={t("weddingType", { name: state.weddingType.name })}
+              value={
+                state.weddingType.fee > 0
+                  ? formatUSD(state.weddingType.fee)
+                  : t("weddingTypeIncluded")
+              }
+            />
+          )}
           {state.menu && (
             <Row
               label={t("menu", { name: state.menu.name, n: state.guests })}

@@ -36,7 +36,7 @@ export default function Step12Entertainment({
 
   return (
     <StepWrapper
-      stepNumber={11}
+      stepNumber={12}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

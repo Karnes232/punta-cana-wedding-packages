@@ -124,6 +124,14 @@ export type RawExtraOption = {
   imageUrl?: string | null;
 };
 
+export type RawWeddingType = {
+  _id: string;
+  name: LocalizedString;
+  description?: LocalizedText;
+  fee: number;
+  order?: number;
+};
+
 export type RawCalculatorConfig = {
   venueCost: number;
   coordinationCost: number;
@@ -133,6 +141,7 @@ export type RawCalculatorConfig = {
 
 export type RawCalculatorData = {
   config: RawCalculatorConfig | null;
+  weddingTypes: RawWeddingType[];
   menuOptions: RawMenuOption[];
   barPackages: RawBarPackage[];
   furnitureOptions: RawFurnitureOption[];
@@ -254,6 +263,13 @@ export type ExtraOption = {
   imageUrl?: string;
 };
 
+export type WeddingType = {
+  _id: string;
+  name: string;
+  description: string;
+  fee: number;
+};
+
 export type CalculatorConfig = {
   venueCost: number;
   coordinationCost: number;
@@ -263,6 +279,7 @@ export type CalculatorConfig = {
 
 export type CalculatorData = {
   config: CalculatorConfig;
+  weddingTypes: WeddingType[];
   menuOptions: MenuOption[];
   barPackages: BarPackage[];
   furnitureOptions: FurnitureOption[];
@@ -291,6 +308,12 @@ const getCalculatorDataQuery = defineQuery(`{
     coordinationCost,
     defaultSeatsPerTable,
     minimumAdvanceMonths
+  },
+  "weddingTypes": *[_type == "weddingType"] | order(order asc) {
+    _id,
+    name,
+    description,
+    fee
   },
   "menuOptions": *[_type == "menuOption"] | order(order asc) {
     _id,
@@ -424,6 +447,13 @@ export function localizePricing(
           minimumAdvanceMonths: raw.config.minimumAdvanceMonths,
         }
       : fallbackConfig,
+
+    weddingTypes: (raw.weddingTypes ?? []).map((w) => ({
+      _id: w._id,
+      name: localized(w.name, locale) ?? "",
+      description: localized(w.description, locale) ?? "",
+      fee: w.fee ?? 0,
+    })),
 
     menuOptions: raw.menuOptions.map((m) => ({
       _id: m._id,
