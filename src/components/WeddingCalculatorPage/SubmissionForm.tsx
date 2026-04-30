@@ -54,104 +54,144 @@ export default function SubmissionForm({
   // Build a plain-text summary of all selections for the form payload.
   // Uses | to separate list items so the text stays readable even when
   // Netlify's email notification collapses newlines into spaces.
-  function buildSummary(): string {
-    const lines: string[] = [
-      `Wedding Date: ${state.date}`,
-      `Guests: ${state.guests}`,
-      `Wedding Type: ${state.weddingType?.name ?? "Not selected"}`,
-      `Hotel Area: ${state.hotel?.name ?? "Not selected"}`,
-      ``,
-      `===== PRICING BREAKDOWN =====`,
-      `Venue & Coordination: ${formatUSD(config.venueCost + config.coordinationCost)}`,
-    ];
 
-    if (state.weddingType && state.weddingType.fee > 0)
-      lines.push(
-        `Legal Wedding Fee (${state.weddingType.name}): ${formatUSD(state.weddingType.fee)}`,
-      );
-
-    if (state.menu)
-      lines.push(
-        `Menu: ${state.menu.name} — ${formatUSD(state.menu.costPerPerson * state.guests)}`,
-      );
-
-    if (state.bar) {
-      const barBase =
-        state.bar.costPerPersonPerHour * state.barHours * state.guests;
-      const addonParts = state.barAddOns.map((a) => {
-        const c = a.isPerPerson ? a.cost * state.guests : a.cost;
-        return `+${a.name} ${formatUSD(c)}`;
-      });
-      const barParts = [
-        `${state.bar.name} × ${state.barHours}h — ${formatUSD(barBase)}`,
-        ...addonParts,
-      ];
-      lines.push(`Bar: ${barParts.join(" | ")}`);
-    }
-
-    if (state.furniture)
-      lines.push(
-        `Furniture: ${state.furniture.name} × ${tableCount} tables — ${formatUSD(state.furniture.costPerTable * tableCount)}`,
-      );
-
-    if (state.decor) {
-      const addonParts = state.decorAddOns.map((a) => {
-        const c = a.isPerTable ? a.cost * tableCount : a.cost;
-        return `+${a.name} ${formatUSD(c)}`;
-      });
-      const decorParts = [
-        `${state.decor.name} — ${formatUSD(state.decor.baseCost)}`,
-        ...addonParts,
-      ];
-      lines.push(`Decor: ${decorParts.join(" | ")}`);
-    }
-
-    if (state.photo) {
-      const addonParts = state.photoAddOns.map(
-        (a) => `+${a.name} ${formatUSD(a.cost)}`,
-      );
-      const photoParts = [
-        `${state.photo.name} — ${formatUSD(state.photo.cost)}`,
-        ...addonParts,
-      ];
-      lines.push(`Photography: ${photoParts.join(" | ")}`);
-    }
-
-    if (state.video && !state.videoSkipped) {
-      const addonParts = state.videoAddOns.map(
-        (a) => `+${a.name} ${formatUSD(a.cost)}`,
-      );
-      const videoParts = [
-        `${state.video.name} — ${formatUSD(state.video.cost)}`,
-        ...addonParts,
-      ];
-      lines.push(`Videography: ${videoParts.join(" | ")}`);
-    }
-
-    if (state.transportVehicle && vehicleCount > 0 && transportZoneRate > 0) {
-      lines.push(
-        `Transportation: ${state.transportVehicle.name} × ${vehicleCount} vehicles — ${formatUSD(transportZoneRate * vehicleCount)}`,
-      );
-    }
-
-    if (state.entertainment.length > 0) {
-      const parts = state.entertainment.map(
-        (e) => `${e.name} — ${formatUSD(e.cost)}`,
-      );
-      lines.push(`Entertainment: ${parts.join(" | ")}`);
-    }
-
-    if (state.extras.length > 0) {
-      const parts = state.extras.map((e) => {
-        const c = e.isPerPerson ? e.cost * state.guests : e.cost;
-        return `${e.name} — ${formatUSD(c)}`;
-      });
-      lines.push(`Extra Experiences: ${parts.join(" | ")}`);
-    }
-
-    lines.push(``, `===== TOTAL: ${formatUSD(total)} =====`);
-    return lines.join("\n");
+  function barAddOnsSummary(): string {
+    return state.barAddOns.map((a) => {
+      const c = a.isPerPerson ? a.cost * state.guests : a.cost;
+      return `${a.name} ${formatUSD(c)}`;
+    }).join(" | ");
   }
+
+  function decorAddOnsSummary(): string {
+    return state.decorAddOns.map((a) => {
+      const c = a.isPerTable ? a.cost * tableCount : a.cost;
+      return `${a.name} ${formatUSD(c)}`;
+    }).join(" | ");
+  }
+
+  function photoAddOnsSummary(): string {
+    return state.photoAddOns.map((a) => {
+      return `${a.name} ${formatUSD(a.cost)}`;
+    }).join(" | ");
+  }
+
+  function videoAddOnsSummary(): string {
+    return state.videoAddOns.map((a) => {
+      return `${a.name} ${formatUSD(a.cost)}`;
+    }).join(" | ");
+  }
+
+  function entertainmentSummary(): string {
+    return state.entertainment.map((e) => {
+      return `${e.name} — ${formatUSD(e.cost)}`;
+    }).join(" | ");
+  }
+
+  function extrasSummary(): string {
+    return state.extras.map((e) => {
+      const c = e.isPerPerson ? e.cost * state.guests : e.cost;
+      return `${e.name} — ${formatUSD(c)}`;
+    }).join(" | ");
+  }
+
+  // function buildSummary(): string {
+  //   const lines: string[] = [
+  //     `Wedding Date: ${state.date}`,
+  //     `Guests: ${state.guests}`,
+  //     `Wedding Type: ${state.weddingType?.name ?? "Not selected"}`,
+  //     `Hotel Area: ${state.hotel?.name ?? "Not selected"}`,
+  //     ``,
+  //     `===== PRICING BREAKDOWN =====`,
+  //     `Venue & Coordination: ${formatUSD(config.venueCost + config.coordinationCost)}`,
+  //   ];
+
+  //   if (state.weddingType && state.weddingType.fee > 0)
+  //     lines.push(
+  //       `Legal Wedding Fee (${state.weddingType.name}): ${formatUSD(state.weddingType.fee)}`,
+  //     );
+
+  //   if (state.menu)
+  //     lines.push(
+  //       `Menu: ${state.menu.name} — ${formatUSD(state.menu.costPerPerson * state.guests)}`,
+  //     );
+
+  //   if (state.bar) {
+  //     const barBase =
+  //       state.bar.costPerPersonPerHour * state.barHours * state.guests;
+  //     const addonParts = state.barAddOns.map((a) => {
+  //       const c = a.isPerPerson ? a.cost * state.guests : a.cost;
+  //       return `+${a.name} ${formatUSD(c)}`;
+  //     });
+  //     const barParts = [
+  //       `${state.bar.name} × ${state.barHours}h — ${formatUSD(barBase)}`,
+  //       ...addonParts,
+  //     ];
+  //     lines.push(`Bar: ${barParts.join(" | ")}`);
+  //   }
+
+  //   if (state.furniture)
+  //     lines.push(
+  //       `Furniture: ${state.furniture.name} × ${tableCount} tables — ${formatUSD(state.furniture.costPerTable * tableCount)}`,
+  //     );
+
+  //   if (state.decor) {
+  //     const addonParts = state.decorAddOns.map((a) => {
+  //       const c = a.isPerTable ? a.cost * tableCount : a.cost;
+  //       return `+${a.name} ${formatUSD(c)}`;
+  //     });
+  //     const decorParts = [
+  //       `${state.decor.name} — ${formatUSD(state.decor.baseCost)}`,
+  //       ...addonParts,
+  //     ];
+  //     lines.push(`Decor: ${decorParts.join(" | ")}`);
+  //   }
+
+  //   if (state.photo) {
+  //     const addonParts = state.photoAddOns.map(
+  //       (a) => `+${a.name} ${formatUSD(a.cost)}`,
+  //     );
+  //     const photoParts = [
+  //       `${state.photo.name} — ${formatUSD(state.photo.cost)}`,
+  //       ...addonParts,
+  //     ];
+  //     lines.push(`Photography: ${photoParts.join(" | ")}`);
+  //   }
+
+  //   if (state.video && !state.videoSkipped) {
+  //     const addonParts = state.videoAddOns.map(
+  //       (a) => `+${a.name} ${formatUSD(a.cost)}`,
+  //     );
+  //     const videoParts = [
+  //       `${state.video.name} — ${formatUSD(state.video.cost)}`,
+  //       ...addonParts,
+  //     ];
+  //     lines.push(`Videography: ${videoParts.join(" | ")}`);
+  //   }
+
+  //   if (state.transportVehicle && vehicleCount > 0 && transportZoneRate > 0) {
+  //     lines.push(
+  //       `Transportation: ${state.transportVehicle.name} × ${vehicleCount} vehicles — ${formatUSD(transportZoneRate * vehicleCount)}`,
+  //     );
+  //   }
+
+  //   if (state.entertainment.length > 0) {
+  //     const parts = state.entertainment.map(
+  //       (e) => `${e.name} — ${formatUSD(e.cost)}`,
+  //     );
+  //     lines.push(`Entertainment: ${parts.join(" | ")}`);
+  //   }
+
+  //   if (state.extras.length > 0) {
+  //     const parts = state.extras.map((e) => {
+  //       const c = e.isPerPerson ? e.cost * state.guests : e.cost;
+  //       return `${e.name} — ${formatUSD(c)}`;
+  //     });
+  //     lines.push(`Extra Experiences: ${parts.join(" | ")}`);
+  //   }
+
+  //   lines.push(``, `===== TOTAL: ${formatUSD(total)} =====`);
+  //   return lines.join("\n");
+  // }
 
   function validate() {
     const e: Record<string, string> = {};
@@ -179,8 +219,36 @@ export default function SubmissionForm({
       formData.append("phone", phone);
       formData.append("weddingDate", state.date);
       formData.append("guestCount", String(state.guests));
+      formData.append("weddingType", state.weddingType?.name ?? "Not selected");
+      formData.append("weddingTypeFee", state.weddingType?.fee.toString() ?? "0");
+      formData.append("hotelArea", state.hotel?.name ?? "Not selected");
+      formData.append('menu', state.menu?.name ?? "Not selected");
+      formData.append('menuCost', `${formatUSD(state.menu?.costPerPerson || 0 * state.guests )}`);
+      formData.append('bar', state.bar?.name ?? "Not selected");
+      formData.append('barHours', state.barHours.toString());
+      formData.append('barAddOns', barAddOnsSummary());
+      formData.append('furniture', state.furniture?.name ?? "Not selected");
+      formData.append('furnitureCost', `${formatUSD(state.furniture?.costPerTable || 0 * tableCount)}`);
+      formData.append('decor', state.decor?.name ?? "Not selected");
+      formData.append('decorBaseCost', `${formatUSD(state.decor?.baseCost || 0)}`);
+      formData.append('decorAddOns', decorAddOnsSummary());
+      formData.append('barCost', `${formatUSD(state.bar?.costPerPersonPerHour || 0 * state.barHours * state.guests)}`);
+      formData.append('photo', state.photo?.name ?? "Not selected");
+      formData.append('photoCost', `${formatUSD(state.photo?.cost || 0)}`);
+      formData.append('photoAddOns', photoAddOnsSummary());
+      formData.append('video', state.video?.name ?? "Not selected");
+      formData.append('videoCost', `${formatUSD(state.video?.cost || 0)}`);
+      formData.append('videoAddOns', videoAddOnsSummary());
+      formData.append('transportVehicle', state.transportVehicle?.name ?? "Not selected");
+      formData.append('transportVehicleCount', vehicleCount.toString());
+      formData.append('transportVehicleCost', `${formatUSD(transportZoneRate * vehicleCount)}`);
+      formData.append('entertainment', entertainmentSummary());
+      formData.append('extras', extrasSummary());
+      
+      
+      
       formData.append("estimatedTotal", formatUSD(total));
-      formData.append("weddingConfig", buildSummary());
+      // formData.append("weddingConfig", buildSummary());
       formData.append("notes", notes);
 
       await fetch("/__forms.html", {
