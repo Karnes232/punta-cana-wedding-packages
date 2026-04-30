@@ -223,16 +223,20 @@ export default function SubmissionForm({
       formData.append("weddingTypeFee", state.weddingType?.fee.toString() ?? "0");
       formData.append("hotelArea", state.hotel?.name ?? "Not selected");
       formData.append('menu', state.menu?.name ?? "Not selected");
-      formData.append('menuCost', `${formatUSD(state.menu?.costPerPerson || 0 * state.guests )}`);
+      formData.append(
+        'menuCost',
+        `${formatUSD((state.menu?.costPerPerson ?? 0) * state.guests)}`,
+      );
       formData.append('bar', state.bar?.name ?? "Not selected");
       formData.append('barHours', state.barHours.toString());
       formData.append('barAddOns', barAddOnsSummary());
+      formData.append('barCost', `${formatUSD((state.bar?.costPerPersonPerHour || 0) * state.barHours * state.guests)}`);
       formData.append('furniture', state.furniture?.name ?? "Not selected");
-      formData.append('furnitureCost', `${formatUSD(state.furniture?.costPerTable || 0 * tableCount)}`);
+      formData.append('furnitureCost', `${formatUSD((state.furniture?.costPerTable || 0) * tableCount)}`);
       formData.append('decor', state.decor?.name ?? "Not selected");
       formData.append('decorBaseCost', `${formatUSD(state.decor?.baseCost || 0)}`);
       formData.append('decorAddOns', decorAddOnsSummary());
-      formData.append('barCost', `${formatUSD(state.bar?.costPerPersonPerHour || 0 * state.barHours * state.guests)}`);
+      
       formData.append('photo', state.photo?.name ?? "Not selected");
       formData.append('photoCost', `${formatUSD(state.photo?.cost || 0)}`);
       formData.append('photoAddOns', photoAddOnsSummary());
