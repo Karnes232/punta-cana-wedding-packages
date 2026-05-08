@@ -58,10 +58,11 @@ export const blogLocalizedString = defineType({
     defineField({ name: "zh", title: "中文", type: "string" }),
     defineField({ name: "ru", title: "Русский", type: "string" }),
     defineField({ name: "ar", title: "العربية", type: "string" }),
+    defineField({ name: "hi", title: "हिन्दी", type: "string" }),
   ],
 });
 
-/** Blog localized text — 9 locales for blog articles */
+/** Blog localized text — 10 locales for blog articles */
 export const blogLocalizedText = defineType({
   name: "blogLocalizedText",
   title: "Localized Text (Blog)",
@@ -76,10 +77,11 @@ export const blogLocalizedText = defineType({
     defineField({ name: "zh", title: "中文", type: "text" }),
     defineField({ name: "ru", title: "Русский", type: "text" }),
     defineField({ name: "ar", title: "العربية", type: "text" }),
+    defineField({ name: "hi", title: "हिन्दी", type: "text" }),
   ],
 });
 
-/** Blog localized rich text — 9 locales for blog articles */
+/** Blog localized rich text — 10 locales for blog articles */
 export const blogLocalizedBlock = defineType({
   name: "blogLocalizedBlock",
   title: "Localized Rich Text (Blog)",
@@ -136,6 +138,12 @@ export const blogLocalizedBlock = defineType({
     defineField({
       name: "ar",
       title: "العربية",
+      type: "array",
+      of: [{ type: "block" }],
+    }),
+    defineField({
+      name: "hi",
+      title: "हिन्दी",
       type: "array",
       of: [{ type: "block" }],
     }),

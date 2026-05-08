@@ -4,7 +4,7 @@ import { defineRouting } from "next-intl/routing";
 export const MAIN_LOCALES = ["en", "es"] as const;
 
 export const routing = defineRouting({
-  locales: ["en", "es", "fr", "it", "de", "pt", "ru", "zh", "ar"],
+  locales: ["en", "es", "fr", "it", "de", "pt", "ru", "zh", "ar", "hi"],
   defaultLocale: "en",
   localePrefix: "as-needed", // English: localhost:3000/  Spanish: localhost:3000/es/
 });

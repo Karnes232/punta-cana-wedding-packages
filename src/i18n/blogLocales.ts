@@ -10,6 +10,7 @@ export const ALL_LOCALES = [
   "ru",
   "zh",
   "ar",
+  "hi",
 ] as const;
 
 export type BlogLocale = (typeof ALL_LOCALES)[number];

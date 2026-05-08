@@ -18,6 +18,7 @@ const BLOG_LOCALES = [
   { code: "ru", label: "Русский", short: "RU" },
   { code: "zh", label: "中文", short: "ZH" },
   { code: "ar", label: "العربية", short: "AR" },
+  { code: "hi", label: "हिन्दी", short: "HI" },
 ] as const;
 
 export default function LanguageSwitcher() {
