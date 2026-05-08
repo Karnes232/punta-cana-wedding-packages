@@ -1,7 +1,12 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
+import {
+  isPlatedEffective,
+  PLATED_SURCHARGE,
+  type CalculatorAction,
+  type CalculatorState,
+} from "./useCalculatorState";
 import type { CalculatorConfig } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
@@ -131,6 +136,14 @@ export default function SummaryView({ state, dispatch, config, total }: Props) {
             <Row
               label={t("menu", { name: state.menu.name, n: state.guests })}
               value={formatUSD(state.menu.costPerPerson * state.guests)}
+            />
+          )}
+          {state.menu && isPlatedEffective(state) && (
+            <Row
+              label={t("plated")}
+              value={formatUSD(
+                state.menu.costPerPerson * state.guests * PLATED_SURCHARGE,
+              )}
             />
           )}
           {state.bar && barTotal !== null && (

@@ -3,7 +3,13 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import StepWrapper from "./StepWrapper";
-import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
+import {
+  isPlatedEffective,
+  PLATED_FORCED_BELOW,
+  PLATED_SURCHARGE,
+  type CalculatorAction,
+  type CalculatorState,
+} from "./useCalculatorState";
 import type { MenuOption } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
@@ -26,6 +32,9 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
   const selectedMenuCost = state.menu
     ? state.menu.costPerPerson * state.guests
     : 0;
+  const plated = isPlatedEffective(state);
+  const platedSurcharge = plated ? selectedMenuCost * PLATED_SURCHARGE : 0;
+  const showToggle = state.guests >= PLATED_FORCED_BELOW;
 
   return (
     <StepWrapper
@@ -80,11 +89,6 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
                     {menu.description}
                   </p>
                 )}
-                {menu.style && (
-                  <p className="mt-2 text-xs font-medium capitalize text-[#5B9FD9]">
-                    {menu.style}
-                  </p>
-                )}
               </div>
             </button>
           );
@@ -92,14 +96,69 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
       </div>
 
       {state.menu && (
-        <p className="mt-5 text-sm font-medium text-[#1A1A1A]">
-          {t("total")}{" "}
-          <span className="text-[#5B9FD9]">{formatUSD(selectedMenuCost)}</span>
-          <span className="ml-1 text-xs text-[#AAAAAA]">
-            ({formatUSD(state.menu.costPerPerson)}/person × {state.guests}{" "}
-            guests)
-          </span>
-        </p>
+        <div className="mt-6 rounded-xl border border-[#E0E0E0] bg-[#FAFAFA] p-5">
+          <p className="mb-3 text-sm font-medium text-[#1A1A1A]">
+            {t("serviceStyle")}
+          </p>
+          {showToggle ? (
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  dispatch({ type: "SET_PLATED_UPGRADE", value: false })
+                }
+                className={[
+                  "rounded-lg border px-4 py-3 text-sm font-medium transition-all duration-200",
+                  !plated
+                    ? "border-[#5B9FD9] bg-white text-[#5B9FD9] shadow-sm"
+                    : "border-[#E0E0E0] bg-white text-[#666666] hover:border-[#5B9FD9]/50",
+                ].join(" ")}
+              >
+                {t("buffet")}
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  dispatch({ type: "SET_PLATED_UPGRADE", value: true })
+                }
+                className={[
+                  "rounded-lg border px-4 py-3 text-sm font-medium transition-all duration-200",
+                  plated
+                    ? "border-[#5B9FD9] bg-white text-[#5B9FD9] shadow-sm"
+                    : "border-[#E0E0E0] bg-white text-[#666666] hover:border-[#5B9FD9]/50",
+                ].join(" ")}
+              >
+                {t("plated")}{" "}
+                <span className="text-xs text-[#AAAAAA]">
+                  {t("platedSurcharge")}
+                </span>
+              </button>
+            </div>
+          ) : (
+            <p className="text-xs text-[#666666]">{t("platedRequiredNote")}</p>
+          )}
+
+          <div className="mt-5 space-y-1 border-t border-[#EEEEEE] pt-4 text-sm">
+            <p className="font-medium text-[#1A1A1A]">
+              {t("total")}{" "}
+              <span className="text-[#5B9FD9]">
+                {formatUSD(selectedMenuCost + platedSurcharge)}
+              </span>
+              <span className="ml-1 text-xs text-[#AAAAAA]">
+                ({formatUSD(state.menu.costPerPerson)}/person × {state.guests}{" "}
+                guests)
+              </span>
+            </p>
+            {plated && (
+              <p className="text-xs text-[#888888]">
+                {t("platedLine")}{" "}
+                <span className="text-[#5B9FD9]">
+                  +{formatUSD(platedSurcharge)}
+                </span>
+              </p>
+            )}
+          </div>
+        </div>
       )}
     </StepWrapper>
   );

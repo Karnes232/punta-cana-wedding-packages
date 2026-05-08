@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
+import {
+  isPlatedEffective,
+  PLATED_SURCHARGE,
+  type CalculatorAction,
+  type CalculatorState,
+} from "./useCalculatorState";
 import type { CalculatorConfig } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
@@ -226,6 +231,16 @@ export default function SubmissionForm({
       formData.append(
         'menuCost',
         `${formatUSD((state.menu?.costPerPerson ?? 0) * state.guests)}`,
+      );
+      const platedActive = isPlatedEffective(state);
+      formData.append('serviceStyle', platedActive ? "plated" : "buffet");
+      formData.append(
+        'platedSurcharge',
+        formatUSD(
+          platedActive
+            ? (state.menu?.costPerPerson ?? 0) * state.guests * PLATED_SURCHARGE
+            : 0,
+        ),
       );
       formData.append('bar', state.bar?.name ?? "Not selected");
       formData.append('barHours', state.barHours.toString());

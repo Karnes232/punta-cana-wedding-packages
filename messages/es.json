@@ -196,7 +196,13 @@
         "title": "Selección de Menú",
         "label": "Elige tu experiencia gastronómica",
         "perPerson": "/persona",
-        "total": "Total comida:"
+        "total": "Total comida:",
+        "serviceStyle": "Estilo de servicio",
+        "buffet": "Buffet",
+        "plated": "Plato servido",
+        "platedSurcharge": "(+10%)",
+        "platedLine": "Cargo por servicio en plato:",
+        "platedRequiredNote": "El servicio en plato está incluido para bodas de menos de 20 invitados (+10%)."
       },
       "bar": {
         "title": "Bebidas y Barra Libre",
@@ -272,6 +278,7 @@
       "weddingType": "Ceremonia {name}",
       "weddingTypeIncluded": "Incluido",
       "menu": "Menú ({name} × {n} invitados)",
+      "plated": "Servicio en plato (+10%)",
       "bar": "Barra Libre ({name} · {h}h × {n} invitados)",
       "furniture": "Mobiliario ({name} · {n} mesas)",
       "decor": "Decoración y Flores ({name})",

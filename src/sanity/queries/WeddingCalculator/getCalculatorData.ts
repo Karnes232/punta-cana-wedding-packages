@@ -19,7 +19,6 @@ export type RawMenuOption = {
   _id: string;
   name: LocalizedString;
   description?: LocalizedText;
-  style?: string;
   costPerPerson: number;
   order?: number;
   imageUrl?: string | null;
@@ -168,7 +167,6 @@ export type MenuOption = {
   _id: string;
   name: string;
   description: string;
-  style: string;
   costPerPerson: number;
   imageUrl?: string;
 };
@@ -319,7 +317,6 @@ const getCalculatorDataQuery = defineQuery(`{
     _id,
     name,
     description,
-    style,
     costPerPerson,
     "imageUrl": image.asset->url
   },
@@ -459,7 +456,6 @@ export function localizePricing(
       _id: m._id,
       name: localized(m.name, locale) ?? "",
       description: localized(m.description, locale) ?? "",
-      style: m.style ?? "",
       costPerPerson: m.costPerPerson,
       imageUrl: m.imageUrl ?? undefined,
     })),

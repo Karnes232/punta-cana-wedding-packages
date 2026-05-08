@@ -196,7 +196,13 @@
         "title": "Menu Selection",
         "label": "Choose your dining experience",
         "perPerson": "/person",
-        "total": "Food total:"
+        "total": "Food total:",
+        "serviceStyle": "Service style",
+        "buffet": "Buffet",
+        "plated": "Plated",
+        "platedSurcharge": "(+10%)",
+        "platedLine": "Plated service surcharge:",
+        "platedRequiredNote": "Plated service is included for weddings under 20 guests (+10%)."
       },
       "bar": {
         "title": "Drinks & Open Bar",
@@ -272,6 +278,7 @@
       "weddingType": "{name} Ceremony",
       "weddingTypeIncluded": "Included",
       "menu": "Menu ({name} × {n} guests)",
+      "plated": "Plated service (+10%)",
       "bar": "Open Bar ({name} · {h}h × {n} guests)",
       "furniture": "Furniture ({name} · {n} tables)",
       "decor": "Decoration & Florals ({name})",

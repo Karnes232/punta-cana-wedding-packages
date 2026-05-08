@@ -19,19 +19,6 @@ export const menuOption = defineType({
       type: "localizedText",
     }),
     defineField({
-      name: "style",
-      title: "Service Style",
-      type: "string",
-      options: {
-        list: [
-          { title: "Buffet", value: "buffet" },
-          { title: "Plated", value: "plated" },
-          { title: "Family Style", value: "family" },
-        ],
-        layout: "radio",
-      },
-    }),
-    defineField({
       name: "costPerPerson",
       title: "Cost Per Person (USD)",
       type: "number",
@@ -56,12 +43,11 @@ export const menuOption = defineType({
     select: {
       nameEn: "name.en",
       cost: "costPerPerson",
-      style: "style",
     },
-    prepare({ nameEn, cost, style }) {
+    prepare({ nameEn, cost }) {
       return {
         title: nameEn ?? "Unnamed Menu",
-        subtitle: `$${cost}/person · ${style ?? ""}`,
+        subtitle: `$${cost}/person`,
       };
     },
   },

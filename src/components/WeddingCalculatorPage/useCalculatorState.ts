@@ -30,6 +30,7 @@ export type CalculatorState = {
   venueConfirmed: boolean;
 
   menu: MenuOption | null;
+  platedUpgrade: boolean;
   bar: BarPackage | null;
   barHours: number;
   barAddOns: AddOn[];
@@ -62,6 +63,7 @@ export type CalculatorAction =
   | { type: "SET_HOTEL"; hotel: TransportationZone }
   | { type: "SET_VENUE_CONFIRMED"; confirmed: boolean }
   | { type: "SET_MENU"; menu: MenuOption }
+  | { type: "SET_PLATED_UPGRADE"; value: boolean }
   | { type: "SET_BAR"; bar: BarPackage }
   | { type: "SET_BAR_HOURS"; hours: number }
   | { type: "TOGGLE_BAR_ADDON"; addon: AddOn }
@@ -96,6 +98,7 @@ const initialState: CalculatorState = {
   hotel: null,
   venueConfirmed: false,
   menu: null,
+  platedUpgrade: false,
   bar: null,
   barHours: 5,
   barAddOns: [],
@@ -162,6 +165,9 @@ function calculatorReducer(
 
     case "SET_MENU":
       return { ...state, menu: action.menu };
+
+    case "SET_PLATED_UPGRADE":
+      return { ...state, platedUpgrade: action.value };
 
     case "SET_BAR":
       return {
@@ -250,6 +256,15 @@ function calculatorReducer(
   }
 }
 
+// ── Plated service ─────────────────────────────────────────────────────────────
+
+export const PLATED_SURCHARGE = 0.1;
+export const PLATED_FORCED_BELOW = 20;
+
+export function isPlatedEffective(s: CalculatorState): boolean {
+  return s.guests < PLATED_FORCED_BELOW || s.platedUpgrade;
+}
+
 // ── calculateTotal ─────────────────────────────────────────────────────────────
 
 export function calculateTotal(
@@ -268,9 +283,13 @@ export function calculateTotal(
     total += state.weddingType.fee;
   }
 
-  // Menu
+  // Menu (+ plated service surcharge when applicable)
   if (state.menu) {
-    total += state.menu.costPerPerson * g;
+    const menuCost = state.menu.costPerPerson * g;
+    total += menuCost;
+    if (isPlatedEffective(state)) {
+      total += menuCost * PLATED_SURCHARGE;
+    }
   }
 
   // Bar
