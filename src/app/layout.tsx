@@ -53,6 +53,13 @@ export default function RootLayout({
       className={`${poppins.variable} ${playfair.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
     >
+       <head>
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="ZgZbk18NP1i6oyyLH2DBzA"
+          async
+        ></script>
+      </head>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
