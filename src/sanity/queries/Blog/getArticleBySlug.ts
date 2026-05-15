@@ -1,13 +1,11 @@
 import { defineQuery } from "groq";
 import { client } from "@/sanity/lib/client";
 
-// Tries the requested locale first; falls back to English if no match for that slug.
-// select() converts the locale match to 0 (match) or 1 (fallback), sorted asc so the
-// locale match lands at [0].
+// Match only the requested locale — never fall back across languages, so the served
+// content language always equals the URL locale (keeps <html lang> and hreflang aligned).
 // translations: all language versions of the same article, for the language switcher.
 export const getArticleBySlugQuery = defineQuery(`
-  *[_type == "blogArticle" && language in [$locale, "en"] && slug.current == $slug]
-    | order(select(language == $locale => 0, 1) asc)[0] {
+  *[_type == "blogArticle" && language == $locale && slug.current == $slug][0] {
     _id,
     "slug": slug.current,
     publishedAt,

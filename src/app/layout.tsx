@@ -1,23 +1,7 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { getGeneralLayout } from "@/sanity/queries/GeneralLayout";
 import { urlFor } from "@/sanity/lib/image";
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const layout = await getGeneralLayout();
@@ -44,23 +28,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    // lang is overridden per-locale by HtmlLang in [locale]/layout.tsx
-    // suppressHydrationWarning silences the mismatch between this fallback and the real locale
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${poppins.variable} ${playfair.variable} h-full antialiased`}
-      data-scroll-behavior="smooth"
-    >
-       <head>
-        <script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="ZgZbk18NP1i6oyyLH2DBzA"
-          async
-        ></script>
-      </head>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
-    </html>
-  );
+  // <html> and <body> are rendered in src/app/(root)/[locale]/layout.tsx
+  // so that the lang attribute matches the served locale.
+  return children;
 }
