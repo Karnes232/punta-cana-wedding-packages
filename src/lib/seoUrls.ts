@@ -9,7 +9,12 @@ const BASE =
  */
 export function buildUrl(locale: string, path: string): string {
   const prefix = locale === "en" ? "" : `/${locale}`;
-  return `${BASE}${prefix}${path}`;
+  const url = `${BASE}${prefix}${path}`;
+  // Strip trailing slash, except for the bare base URL ("https://domain.com/").
+  if (url.length > BASE.length + 1 && url.endsWith("/")) {
+    return url.slice(0, -1);
+  }
+  return url;
 }
 
 /**

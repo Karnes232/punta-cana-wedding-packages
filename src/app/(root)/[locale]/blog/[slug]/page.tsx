@@ -59,15 +59,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     alternates: {
       canonical: buildUrl(locale, `/blog/${slug}`),
-      languages: Object.fromEntries([
-        ...(article.translations ?? []).map((t) => [
-          t.language,
-          buildUrl(t.language, `/blog/${t.slug}`),
-        ]),
-        ["x-default", buildUrl("en", `/blog/${slug}`)],
-      ]),
+      languages: buildLanguageAlternates(article.translations ?? []),
     },
   };
+}
+
+function buildLanguageAlternates(
+  translations: { language: string; slug: string }[],
+): Record<string, string> {
+  const languages: Record<string, string> = Object.fromEntries(
+    translations.map((t) => [t.language, buildUrl(t.language, `/blog/${t.slug}`)]),
+  );
+  const en = translations.find((t) => t.language === "en");
+  if (en) {
+    languages["x-default"] = buildUrl("en", `/blog/${en.slug}`);
+  }
+  return languages;
 }
 
 export default async function BlogArticlePage({ params }: Props) {
