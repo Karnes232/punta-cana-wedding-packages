@@ -17,6 +17,15 @@ export const menuOption = defineType({
       name: "description",
       title: "Description",
       type: "localizedText",
+      
+    }),
+    defineField({
+      name: "menuDetails",
+      title: "Full Menu (shown in 'See Menu' modal)",
+      type: "localizedBlock",
+      validation: (R) => R.required(),
+      description:
+        "Rich-text menu details (courses, dishes, dietary notes) shown when a guest clicks 'See Menu' on this card.",
     }),
     defineField({
       name: "costPerPerson",

@@ -189,7 +189,9 @@
         "plated": "Plated",
         "platedSurcharge": "(+10%)",
         "platedLine": "Plated service surcharge:",
-        "platedRequiredNote": "Plated service is included for weddings under 20 guests (+10%)."
+        "platedRequiredNote": "Plated service is included for weddings under 20 guests (+10%).",
+        "seeMenu": "See Menu",
+        "closeMenu": "Close"
       },
       "bar": {
         "title": "Drinks & Open Bar",

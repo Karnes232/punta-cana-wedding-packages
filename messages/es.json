@@ -189,7 +189,9 @@
         "plated": "Plato servido",
         "platedSurcharge": "(+10%)",
         "platedLine": "Cargo por servicio en plato:",
-        "platedRequiredNote": "El servicio en plato está incluido para bodas de menos de 20 invitados (+10%)."
+        "platedRequiredNote": "El servicio en plato está incluido para bodas de menos de 20 invitados (+10%).",
+        "seeMenu": "Ver Menú",
+        "closeMenu": "Cerrar"
       },
       "bar": {
         "title": "Bebidas y Barra Libre",

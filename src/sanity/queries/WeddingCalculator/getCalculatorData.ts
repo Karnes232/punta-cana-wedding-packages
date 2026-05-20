@@ -15,6 +15,8 @@ export type RawAddOn = {
   isPerTable?: boolean;
 };
 
+type LocalizedBlocks = { en?: unknown[] | null; es?: unknown[] | null };
+
 export type RawMenuOption = {
   _id: string;
   name: LocalizedString;
@@ -22,6 +24,7 @@ export type RawMenuOption = {
   costPerPerson: number;
   order?: number;
   imageUrl?: string | null;
+  menuDetails?: LocalizedBlocks | null;
 };
 
 export type RawBarPackage = {
@@ -176,6 +179,7 @@ export type MenuOption = {
   description: string;
   costPerPerson: number;
   imageUrl?: string;
+  menuDetails?: unknown[];
 };
 
 export type BarPackage = {
@@ -339,7 +343,8 @@ const getCalculatorDataQuery = defineQuery(`{
     name,
     description,
     costPerPerson,
-    "imageUrl": image.asset->url
+    "imageUrl": image.asset->url,
+    menuDetails { en, es }
   },
   "barPackages": *[_type == "barPackage"] | order(order asc) {
     _id,
@@ -494,13 +499,19 @@ export function localizePricing(
       fee: w.fee ?? 0,
     })),
 
-    menuOptions: raw.menuOptions.map((m) => ({
-      _id: m._id,
-      name: localized(m.name, locale) ?? "",
-      description: localized(m.description, locale) ?? "",
-      costPerPerson: m.costPerPerson,
-      imageUrl: m.imageUrl ?? undefined,
-    })),
+    menuOptions: raw.menuOptions.map((m) => {
+      const details =
+        m.menuDetails?.[localeKey] ?? m.menuDetails?.en ?? undefined;
+      return {
+        _id: m._id,
+        name: localized(m.name, locale) ?? "",
+        description: localized(m.description, locale) ?? "",
+        costPerPerson: m.costPerPerson,
+        imageUrl: m.imageUrl ?? undefined,
+        menuDetails:
+          Array.isArray(details) && details.length > 0 ? details : undefined,
+      };
+    }),
 
     barPackages: raw.barPackages.map((b) => ({
       _id: b._id,

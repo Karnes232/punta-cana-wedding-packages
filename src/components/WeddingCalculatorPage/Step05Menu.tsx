@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import StepWrapper from "./StepWrapper";
+import MenuDetailsModal from "./MenuDetailsModal";
 import {
   isPlatedEffective,
   PLATED_FORCED_BELOW,
@@ -28,6 +30,7 @@ function formatUSD(n: number) {
 
 export default function Step05Menu({ state, dispatch, menus }: Props) {
   const t = useTranslations("weddingCalculator.steps.menu");
+  const [detailsMenu, setDetailsMenu] = useState<MenuOption | null>(null);
 
   const selectedMenuCost = state.menu
     ? state.menu.costPerPerson * state.guests
@@ -49,12 +52,22 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {menus.map((menu) => {
           const selected = state.menu?._id === menu._id;
+          const selectMenu = () => dispatch({ type: "SET_MENU", menu });
           return (
-            <button
+            <div
               key={menu._id}
-              onClick={() => dispatch({ type: "SET_MENU", menu })}
+              role="button"
+              tabIndex={0}
+              aria-pressed={selected}
+              onClick={selectMenu}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  selectMenu();
+                }
+              }}
               className={[
-                "flex flex-col overflow-hidden rounded-xl border text-left transition-all duration-200",
+                "flex cursor-pointer flex-col overflow-hidden rounded-xl border text-left transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5B9FD9]",
                 selected
                   ? "border-[#5B9FD9] bg-[#5B9FD9]/5 shadow-sm"
                   : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/50",
@@ -89,8 +102,20 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
                     {menu.description}
                   </p>
                 )}
+                {menu.menuDetails && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDetailsMenu(menu);
+                    }}
+                    className="mt-3 text-sm font-medium text-[#5B9FD9] underline-offset-2 hover:underline"
+                  >
+                    {t("seeMenu")}
+                  </button>
+                )}
               </div>
-            </button>
+            </div>
           );
         })}
       </div>
@@ -160,6 +185,14 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
           </div>
         </div>
       )}
+
+      <MenuDetailsModal
+        open={!!detailsMenu}
+        onClose={() => setDetailsMenu(null)}
+        title={detailsMenu?.name ?? ""}
+        closeLabel={t("closeMenu")}
+        value={detailsMenu?.menuDetails ?? []}
+      />
     </StepWrapper>
   );
 }
