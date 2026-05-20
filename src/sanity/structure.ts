@@ -10,6 +10,7 @@ const SINGLETONS = {
   termsOfService: "termsOfService",
   contactPage: "contactPage",
   calculatorConfig: "calculatorConfig",
+  propertyConfig: "propertyConfig",
 } as const;
 
 // Calculator collection types — excluded from auto-generated list
@@ -25,6 +26,7 @@ const CALCULATOR_TYPES = new Set([
   "entertainmentOption",
   "extraOption",
   "calculatorConfig",
+  "propertyConfig",
   "weddingType",
 ]);
 
@@ -149,6 +151,15 @@ export const structure: StructureResolver = (S) =>
                     .schemaType("calculatorConfig")
                     .documentId("calculatorConfig")
                     .title("Calculator Configuration"),
+                ),
+              S.listItem()
+                .title("Property (Stay With Us)")
+                .id("propertyConfig")
+                .child(
+                  S.document()
+                    .schemaType("propertyConfig")
+                    .documentId("propertyConfig")
+                    .title("Property Configuration"),
                 ),
               S.divider(),
               S.documentTypeListItem("weddingType").title("Wedding Types"),

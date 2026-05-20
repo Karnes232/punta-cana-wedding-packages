@@ -174,6 +174,16 @@
         "help": "Elige el tipo de ceremonia que mejor se adapte a tus planes.",
         "noFee": "Incluido"
       },
+      "lodging": {
+        "title": "Alojamiento",
+        "label": "¿Dónde se hospedarán tú y tus invitados?",
+        "otherOption": "Ya tengo otro hotel",
+        "otherOptionSub": "Organizaremos el transporte desde tu área de hotel.",
+        "seeDetails": "Ver Detalles de la Propiedad",
+        "accept": "Aceptar y Continuar",
+        "closeLabel": "Cerrar",
+        "perGuest": "/invitado"
+      },
       "hotel": {
         "title": "Hotel / Área",
         "label": "¿Dónde se hospedan la mayoría de los invitados?",
@@ -273,6 +283,7 @@
       "decor": "Decoración y Flores ({name})",
       "photo": "Fotografía ({name})",
       "video": "Videografía ({name})",
+      "lodging": "Alojamiento en {name} ({n} invitados)",
       "transport": "Transporte ({n} vehículos)",
       "entertainment": "Entretenimiento",
       "extras": "Experiencias Extra",

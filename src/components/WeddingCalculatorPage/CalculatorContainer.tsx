@@ -7,6 +7,7 @@ import RunningTotal from "./RunningTotal";
 import Step01Date from "./Step01Date";
 import Step02Guests from "./Step02Guests";
 import Step03WeddingType from "./Step03WeddingType";
+import Step04Lodging from "./Step04Lodging";
 import Step03Hotel from "./Step03Hotel";
 import Step04Venue from "./Step04Venue";
 import Step05Menu from "./Step05Menu";
@@ -25,7 +26,7 @@ import WeddingPreview from "./WeddingPreview";
 
 import type { CalculatorData } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
-const TOTAL_STEPS = 14;
+const TOTAL_STEPS = 15;
 
 type Props = {
   data: CalculatorData;
@@ -42,7 +43,7 @@ export default function CalculatorContainer({ data }: Props) {
     SUMMARY_STEP,
     FORM_STEP,
     SUCCESS_STEP,
-  } = useCalculatorState(data.config);
+  } = useCalculatorState(data.config, data.propertyConfig);
 
   // Track the highest step reached so user can click back on progress bar
   const [maxStepReached, setMaxStepReached] = useState(1);
@@ -102,27 +103,34 @@ export default function CalculatorContainer({ data }: Props) {
             />
           )}
           {state.currentStep === 4 && (
+            <Step04Lodging
+              state={state}
+              dispatch={dispatch}
+              propertyConfig={data.propertyConfig}
+            />
+          )}
+          {state.currentStep === 5 && (
             <Step03Hotel
               state={state}
               dispatch={dispatch}
               zones={data.transportationZones}
             />
           )}
-          {state.currentStep === 5 && (
+          {state.currentStep === 6 && (
             <Step05Menu
               state={state}
               dispatch={dispatch}
               menus={data.menuOptions}
             />
           )}
-          {state.currentStep === 6 && (
+          {state.currentStep === 7 && (
             <Step06Bar
               state={state}
               dispatch={dispatch}
               packages={data.barPackages}
             />
           )}
-          {state.currentStep === 7 && (
+          {state.currentStep === 8 && (
             <Step07Furniture
               state={state}
               dispatch={dispatch}
@@ -130,7 +138,7 @@ export default function CalculatorContainer({ data }: Props) {
               defaultSeatsPerTable={data.config.defaultSeatsPerTable}
             />
           )}
-          {state.currentStep === 8 && (
+          {state.currentStep === 9 && (
             <Step08Decor
               state={state}
               dispatch={dispatch}
@@ -138,42 +146,42 @@ export default function CalculatorContainer({ data }: Props) {
               defaultSeatsPerTable={data.config.defaultSeatsPerTable}
             />
           )}
-          {state.currentStep === 9 && (
+          {state.currentStep === 10 && (
             <Step09Photo
               state={state}
               dispatch={dispatch}
               packages={data.photoPackages}
             />
           )}
-          {state.currentStep === 10 && (
+          {state.currentStep === 11 && (
             <Step10Video
               state={state}
               dispatch={dispatch}
               packages={data.videoPackages}
             />
           )}
-          {state.currentStep === 11 && (
+          {state.currentStep === 12 && (
             <Step11Transport
               state={state}
               dispatch={dispatch}
               vehicles={data.transportVehicles}
             />
           )}
-          {state.currentStep === 12 && (
+          {state.currentStep === 13 && (
             <Step12Entertainment
               state={state}
               dispatch={dispatch}
               options={data.entertainmentOptions}
             />
           )}
-          {state.currentStep === 13 && (
+          {state.currentStep === 14 && (
             <Step13Extras
               state={state}
               dispatch={dispatch}
               options={data.extraOptions}
             />
           )}
-          {state.currentStep === 14 && (
+          {state.currentStep === 15 && (
             <Step04Venue
               state={state}
               dispatch={dispatch}
@@ -186,6 +194,7 @@ export default function CalculatorContainer({ data }: Props) {
               state={state}
               dispatch={dispatch}
               config={data.config}
+              propertyConfig={data.propertyConfig}
               total={fullTotal}
             />
           )}
@@ -194,6 +203,7 @@ export default function CalculatorContainer({ data }: Props) {
               state={state}
               dispatch={dispatch}
               config={data.config}
+              propertyConfig={data.propertyConfig}
               total={fullTotal}
             />
           )}

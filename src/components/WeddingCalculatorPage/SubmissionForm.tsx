@@ -8,12 +8,16 @@ import {
   type CalculatorAction,
   type CalculatorState,
 } from "./useCalculatorState";
-import type { CalculatorConfig } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
+import type {
+  CalculatorConfig,
+  PropertyConfig,
+} from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   config: CalculatorConfig;
+  propertyConfig: PropertyConfig | null;
   total: number;
 };
 
@@ -29,6 +33,7 @@ export default function SubmissionForm({
   state,
   dispatch,
   config,
+  propertyConfig,
   total,
 }: Props) {
   const t = useTranslations("weddingCalculator.form");
@@ -227,6 +232,20 @@ export default function SubmissionForm({
       formData.append("weddingType", state.weddingType?.name ?? "Not selected");
       formData.append("weddingTypeFee", state.weddingType?.fee.toString() ?? "0");
       formData.append("hotelArea", state.hotel?.name ?? "Not selected");
+      formData.append(
+        "lodgingChoice",
+        state.stayAtProperty
+          ? `Our Property${propertyConfig?.name ? ` (${propertyConfig.name})` : ""}`
+          : "Own Hotel",
+      );
+      formData.append(
+        "lodgingCost",
+        formatUSD(
+          state.stayAtProperty
+            ? (propertyConfig?.propertyCostPerGuest ?? 0) * state.guests
+            : 0,
+        ),
+      );
       formData.append('menu', state.menu?.name ?? "Not selected");
       formData.append(
         'menuCost',

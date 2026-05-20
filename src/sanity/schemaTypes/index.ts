@@ -33,6 +33,7 @@ import {
   entertainmentOption,
   extraOption,
   calculatorConfig,
+  propertyConfig,
   weddingType,
 } from "./WeddingCalculator";
 
@@ -75,5 +76,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     entertainmentOption,
     extraOption,
     calculatorConfig,
+    propertyConfig,
   ],
 };

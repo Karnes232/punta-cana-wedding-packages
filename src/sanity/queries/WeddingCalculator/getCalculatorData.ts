@@ -148,8 +148,24 @@ export type RawCalculatorConfig = {
   venueConfirmLabel: LocalizedString | null;
 };
 
+export type RawPropertyConfig = {
+  name: LocalizedString | null;
+  images: Array<{
+    _key: string;
+    url: string | null;
+    alt?: string | null;
+  }> | null;
+  description: LocalizedBlocks | null;
+  stayOptionLabel: LocalizedString | null;
+  stayOptionSub: LocalizedText | null;
+  otherOptionLabel: LocalizedString | null;
+  otherOptionSub: LocalizedText | null;
+  propertyCostPerGuest: number;
+};
+
 export type RawCalculatorData = {
   config: RawCalculatorConfig | null;
+  propertyConfig: RawPropertyConfig | null;
   weddingTypes: RawWeddingType[];
   menuOptions: RawMenuOption[];
   barPackages: RawBarPackage[];
@@ -293,8 +309,20 @@ export type CalculatorConfig = {
   venueConfirmLabel: string;
 };
 
+export type PropertyConfig = {
+  name: string;
+  images: Array<{ url: string; alt: string }>;
+  description: unknown[];
+  stayOptionLabel: string;
+  stayOptionSub: string;
+  otherOptionLabel: string;
+  otherOptionSub: string;
+  propertyCostPerGuest: number;
+};
+
 export type CalculatorData = {
   config: CalculatorConfig;
+  propertyConfig: PropertyConfig | null;
   weddingTypes: WeddingType[];
   menuOptions: MenuOption[];
   barPackages: BarPackage[];
@@ -331,6 +359,16 @@ const getCalculatorDataQuery = defineQuery(`{
     venueDescription,
     venueFeatures,
     venueConfirmLabel
+  },
+  "propertyConfig": *[_type == "propertyConfig"][0] {
+    name,
+    "images": images[]{ _key, "url": asset->url, alt },
+    description { en, es },
+    stayOptionLabel,
+    stayOptionSub,
+    otherOptionLabel,
+    otherOptionSub,
+    propertyCostPerGuest
   },
   "weddingTypes": *[_type == "weddingType"] | order(order asc) {
     _id,
@@ -491,6 +529,28 @@ export function localizePricing(
             localized(raw.config.venueConfirmLabel, locale) ?? "",
         }
       : fallbackConfig,
+
+    propertyConfig: raw.propertyConfig
+      ? {
+          name: localized(raw.propertyConfig.name, locale) ?? "",
+          images: (raw.propertyConfig.images ?? [])
+            .filter((i) => !!i.url)
+            .map((i) => ({ url: i.url!, alt: i.alt ?? "" })),
+          description:
+            (raw.propertyConfig.description?.[localeKey] ??
+              raw.propertyConfig.description?.en ??
+              []) as unknown[],
+          stayOptionLabel:
+            localized(raw.propertyConfig.stayOptionLabel, locale) ?? "",
+          stayOptionSub:
+            localized(raw.propertyConfig.stayOptionSub, locale) ?? "",
+          otherOptionLabel:
+            localized(raw.propertyConfig.otherOptionLabel, locale) ?? "",
+          otherOptionSub:
+            localized(raw.propertyConfig.otherOptionSub, locale) ?? "",
+          propertyCostPerGuest: raw.propertyConfig.propertyCostPerGuest ?? 0,
+        }
+      : null,
 
     weddingTypes: (raw.weddingTypes ?? []).map((w) => ({
       _id: w._id,

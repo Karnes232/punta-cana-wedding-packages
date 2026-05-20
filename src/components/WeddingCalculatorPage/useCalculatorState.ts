@@ -3,6 +3,7 @@
 import { useReducer, useCallback } from "react";
 import type {
   CalculatorConfig,
+  PropertyConfig,
   WeddingType,
   MenuOption,
   BarPackage,
@@ -20,13 +21,17 @@ import type {
 // ── State shape ────────────────────────────────────────────────────────────────
 
 export type CalculatorState = {
-  currentStep: number; // 1–14, 15 = summary, 16 = form, 17 = success
+  currentStep: number; // 1–15, 16 = summary, 17 = form, 18 = success
   date: string; // ISO date string
   guests: number;
   weddingType: WeddingType | null;
+
+  // Step 4: lodging choice. When true, hotel + transport steps are skipped.
+  stayAtProperty: boolean;
+
   hotel: TransportationZone | null;
 
-  // Step 4: always Cabeza de Toro — just confirmed boolean
+  // Step 15: always Cabeza de Toro — just confirmed boolean
   venueConfirmed: boolean;
 
   menu: MenuOption | null;
@@ -61,6 +66,7 @@ export type CalculatorAction =
   | { type: "SET_GUESTS"; guests: number }
   | { type: "SET_WEDDING_TYPE"; weddingType: WeddingType }
   | { type: "SET_HOTEL"; hotel: TransportationZone }
+  | { type: "SET_STAY_AT_PROPERTY"; value: boolean }
   | { type: "SET_VENUE_CONFIRMED"; confirmed: boolean }
   | { type: "SET_MENU"; menu: MenuOption }
   | { type: "SET_PLATED_UPGRADE"; value: boolean }
@@ -86,15 +92,16 @@ export type CalculatorAction =
 
 // ── Initial state ──────────────────────────────────────────────────────────────
 
-const SUMMARY_STEP = 15;
-const FORM_STEP = 16;
-const SUCCESS_STEP = 17;
+const SUMMARY_STEP = 16;
+const FORM_STEP = 17;
+const SUCCESS_STEP = 18;
 
 const initialState: CalculatorState = {
   currentStep: 1,
   date: "",
   guests: 50,
   weddingType: null,
+  stayAtProperty: false,
   hotel: null,
   venueConfirmed: false,
   menu: null,
@@ -159,6 +166,16 @@ function calculatorReducer(
 
     case "SET_HOTEL":
       return { ...state, hotel: action.hotel };
+
+    case "SET_STAY_AT_PROPERTY":
+      return action.value
+        ? {
+            ...state,
+            stayAtProperty: true,
+            hotel: null,
+            transportVehicle: null,
+          }
+        : { ...state, stayAtProperty: false };
 
     case "SET_VENUE_CONFIRMED":
       return { ...state, venueConfirmed: action.confirmed };
@@ -236,11 +253,18 @@ function calculatorReducer(
         extras: toggleItem(state.extras, action.option),
       };
 
-    case "NEXT_STEP":
-      return { ...state, currentStep: Math.min(state.currentStep + 1, 14) };
+    case "NEXT_STEP": {
+      let next = state.currentStep + 1;
+      // Skip Hotel (5) and Transport (12) when staying at our property
+      if (state.stayAtProperty && (next === 5 || next === 12)) next += 1;
+      return { ...state, currentStep: Math.min(next, 15) };
+    }
 
-    case "PREV_STEP":
-      return { ...state, currentStep: Math.max(state.currentStep - 1, 1) };
+    case "PREV_STEP": {
+      let prev = state.currentStep - 1;
+      if (state.stayAtProperty && (prev === 5 || prev === 12)) prev -= 1;
+      return { ...state, currentStep: Math.max(prev, 1) };
+    }
 
     case "GO_TO_SUMMARY":
       return { ...state, currentStep: SUMMARY_STEP };
@@ -270,6 +294,7 @@ export function isPlatedEffective(s: CalculatorState): boolean {
 export function calculateTotal(
   state: CalculatorState,
   config: CalculatorConfig,
+  propertyCostPerGuest: number = 0,
 ): number {
   let total = 0;
 
@@ -281,6 +306,11 @@ export function calculateTotal(
   // Wedding type fee
   if (state.weddingType) {
     total += state.weddingType.fee;
+  }
+
+  // Lodging (only when staying at our property)
+  if (state.stayAtProperty && propertyCostPerGuest > 0) {
+    total += propertyCostPerGuest * g;
   }
 
   // Menu (+ plated service surcharge when applicable)
@@ -355,9 +385,13 @@ export function calculateTotal(
 
 // ── Hook ───────────────────────────────────────────────────────────────────────
 
-export function useCalculatorState(config: CalculatorConfig) {
+export function useCalculatorState(
+  config: CalculatorConfig,
+  propertyConfig: PropertyConfig | null,
+) {
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
-  const total = calculateTotal(state, config);
+  const propertyCostPerGuest = propertyConfig?.propertyCostPerGuest ?? 0;
+  const total = calculateTotal(state, config, propertyCostPerGuest);
   const fullTotal =
     Math.round((total + config.venueCost + config.coordinationCost) * 100) /
     100;

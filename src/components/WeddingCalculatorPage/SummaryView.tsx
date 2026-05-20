@@ -7,12 +7,16 @@ import {
   type CalculatorAction,
   type CalculatorState,
 } from "./useCalculatorState";
-import type { CalculatorConfig } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
+import type {
+  CalculatorConfig,
+  PropertyConfig,
+} from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   config: CalculatorConfig;
+  propertyConfig: PropertyConfig | null;
   total: number;
 };
 
@@ -36,7 +40,13 @@ function Row({ label, value }: { label: string; value: string | null }) {
   );
 }
 
-export default function SummaryView({ state, dispatch, config, total }: Props) {
+export default function SummaryView({
+  state,
+  dispatch,
+  config,
+  propertyConfig,
+  total,
+}: Props) {
   const t = useTranslations("weddingCalculator.summary");
 
   const seatsPerTable =
@@ -183,6 +193,19 @@ export default function SummaryView({ state, dispatch, config, total }: Props) {
               value={formatUSD(videoTotal)}
             />
           )}
+          {state.stayAtProperty &&
+            propertyConfig &&
+            propertyConfig.propertyCostPerGuest > 0 && (
+              <Row
+                label={t("lodging", {
+                  name: propertyConfig.name,
+                  n: state.guests,
+                })}
+                value={formatUSD(
+                  propertyConfig.propertyCostPerGuest * state.guests,
+                )}
+              />
+            )}
           {state.transportVehicle && vehicleCount > 0 && transportTotal > 0 && (
             <Row
               label={t("transport", { n: vehicleCount })}
