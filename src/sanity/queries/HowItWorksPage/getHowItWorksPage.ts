@@ -17,8 +17,16 @@ export const howItWorksPageQuery = defineQuery(`
 
     paymentTitle { en, es },
     depositAmount,
+    paymentStats[] {
+      _key,
+      label { en, es },
+      value { en, es },
+      description { en, es }
+    },
+    depositScheduleTitle { en, es },
     depositDescription { en, es },
     paymentScheduleNote { en, es },
+    flexibilityTitle { en, es },
     flexibilityNote { en, es },
     advanceBookingNote { en, es },
 
@@ -60,8 +68,16 @@ export type HowItWorksPageQueryResult = {
 
   paymentTitle: LocalizedString;
   depositAmount: number | null;
+  paymentStats: Array<{
+    _key: string;
+    label: LocalizedString;
+    value: LocalizedString;
+    description: LocalizedString;
+  }> | null;
+  depositScheduleTitle: LocalizedString;
   depositDescription: LocalizedString;
   paymentScheduleNote: LocalizedString;
+  flexibilityTitle: LocalizedString;
   flexibilityNote: LocalizedString;
   advanceBookingNote: LocalizedString;
 
