@@ -136,6 +136,13 @@ export type RawCalculatorConfig = {
   coordinationCost: number;
   defaultSeatsPerTable: number;
   minimumAdvanceMonths: number;
+  venueName: LocalizedString | null;
+  venueStepTitle: LocalizedString | null;
+  venueIncludedLabel: LocalizedString | null;
+  venueLocation: LocalizedString | null;
+  venueDescription: LocalizedString | null;
+  venueFeatures: { en?: string[] | null; es?: string[] | null } | null;
+  venueConfirmLabel: LocalizedString | null;
 };
 
 export type RawCalculatorData = {
@@ -273,6 +280,13 @@ export type CalculatorConfig = {
   coordinationCost: number;
   defaultSeatsPerTable: number;
   minimumAdvanceMonths: number;
+  venueName: string;
+  venueStepTitle: string;
+  venueIncludedLabel: string;
+  venueLocation: string;
+  venueDescription: string;
+  venueFeatures: string[];
+  venueConfirmLabel: string;
 };
 
 export type CalculatorData = {
@@ -305,7 +319,14 @@ const getCalculatorDataQuery = defineQuery(`{
     venueCost,
     coordinationCost,
     defaultSeatsPerTable,
-    minimumAdvanceMonths
+    minimumAdvanceMonths,
+    venueName,
+    venueStepTitle,
+    venueIncludedLabel,
+    venueLocation,
+    venueDescription,
+    venueFeatures,
+    venueConfirmLabel
   },
   "weddingTypes": *[_type == "weddingType"] | order(order asc) {
     _id,
@@ -428,11 +449,19 @@ export function localizePricing(
   raw: RawCalculatorData,
   locale: string,
 ): CalculatorData {
+  const localeKey = locale === "es" ? "es" : "en";
   const fallbackConfig: CalculatorConfig = {
     venueCost: 4500,
     coordinationCost: 0,
     defaultSeatsPerTable: 10,
     minimumAdvanceMonths: 6,
+    venueName: "",
+    venueStepTitle: "",
+    venueIncludedLabel: "",
+    venueLocation: "",
+    venueDescription: "",
+    venueFeatures: [],
+    venueConfirmLabel: "",
   };
 
   return {
@@ -442,6 +471,19 @@ export function localizePricing(
           coordinationCost: raw.config.coordinationCost,
           defaultSeatsPerTable: raw.config.defaultSeatsPerTable,
           minimumAdvanceMonths: raw.config.minimumAdvanceMonths,
+          venueName: localized(raw.config.venueName, locale) ?? "",
+          venueStepTitle: localized(raw.config.venueStepTitle, locale) ?? "",
+          venueIncludedLabel:
+            localized(raw.config.venueIncludedLabel, locale) ?? "",
+          venueLocation: localized(raw.config.venueLocation, locale) ?? "",
+          venueDescription:
+            localized(raw.config.venueDescription, locale) ?? "",
+          venueFeatures:
+            raw.config.venueFeatures?.[localeKey] ??
+            raw.config.venueFeatures?.en ??
+            [],
+          venueConfirmLabel:
+            localized(raw.config.venueConfirmLabel, locale) ?? "",
         }
       : fallbackConfig,
 

@@ -40,6 +40,74 @@ export const calculatorConfig = defineType({
       initialValue: 6,
       validation: (R) => R.required().min(1),
     }),
+    defineField({
+      name: "venueName",
+      title: "Venue Name",
+      type: "localizedString",
+      description: 'Display name for the venue (e.g. "Cabeza de Toro").',
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: "venueStepTitle",
+      title: "Venue Step Title",
+      type: "localizedString",
+      description:
+        'Heading shown on the venue step (e.g. "Venue & Coordination").',
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: "venueIncludedLabel",
+      title: 'Venue "Included" Label',
+      type: "localizedString",
+      description:
+        'Small uppercase label above the venue name (e.g. "Always Included").',
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: "venueLocation",
+      title: "Venue Location",
+      type: "localizedString",
+      description:
+        'Sub-text shown under the venue name (e.g. "Cabeza de Toro Beach, Punta Cana").',
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: "venueDescription",
+      title: "Venue Description",
+      type: "localizedText",
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: "venueFeatures",
+      title: "Venue Features",
+      description:
+        "Bullet list shown on the venue card. Provide matching entries per language.",
+      type: "object",
+      fields: [
+        defineField({
+          name: "en",
+          title: "English",
+          type: "array",
+          of: [{ type: "string" }],
+          validation: (R) => R.min(1),
+        }),
+        defineField({
+          name: "es",
+          title: "Español",
+          type: "array",
+          of: [{ type: "string" }],
+          validation: (R) => R.min(1),
+        }),
+      ],
+    }),
+    defineField({
+      name: "venueConfirmLabel",
+      title: "Venue Confirmation Checkbox Label",
+      type: "localizedString",
+      description:
+        'Text next to the confirmation checkbox (e.g. "I\'m excited to get married here!").',
+      validation: (R) => R.required(),
+    }),
   ],
 
   preview: {
