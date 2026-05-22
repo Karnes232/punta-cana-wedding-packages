@@ -43,8 +43,8 @@ export default function ProgressBar({
           const step = i + 1;
           const done = step < currentStep;
           const active = step === currentStep;
-        //  const reachable = step <= completedStep;
-        const reachable = true;
+          const reachable = step <= completedStep;
+ 
         return (
             <button
               key={step}
