@@ -37,6 +37,7 @@ export type RawBarPackage = {
   addOns?: RawAddOn[];
   order?: number;
   imageUrl?: string | null;
+  barDetails?: LocalizedBlocks | null;
 };
 
 export type RawFurnitureOption = {
@@ -60,6 +61,7 @@ export type RawDecorPackage = {
   order?: number;
   imageUrl?: string | null;
   previewImageUrl?: string | null;
+  decorDetails?: LocalizedBlocks | null;
 };
 
 export type RawPhotoPackage = {
@@ -207,6 +209,7 @@ export type BarPackage = {
   availableHours: number[];
   addOns: AddOn[];
   imageUrl?: string;
+  barDetails?: unknown[];
 };
 
 export type FurnitureOption = {
@@ -228,6 +231,7 @@ export type DecorPackage = {
   addOns: AddOn[];
   imageUrl?: string;
   previewImageUrl?: string;
+  decorDetails?: unknown[];
 };
 
 export type PhotoPackage = {
@@ -392,7 +396,8 @@ const getCalculatorDataQuery = defineQuery(`{
     costPerPersonPerHour,
     availableHours,
     addOns[] { ${addOnFields} },
-    "imageUrl": image.asset->url
+    "imageUrl": image.asset->url,
+    barDetails { en, es }
   },
   "furnitureOptions": *[_type == "furnitureOption"] | order(order asc) {
     _id,
@@ -411,7 +416,8 @@ const getCalculatorDataQuery = defineQuery(`{
     baseCost,
     addOns[] { ${addOnFields} },
     "imageUrl": image.asset->url,
-    "previewImageUrl": previewImage.asset->url
+    "previewImageUrl": previewImage.asset->url,
+    decorDetails { en, es }
   },
   "photoPackages": *[_type == "photoPackage"] | order(order asc) {
     _id,
@@ -573,16 +579,22 @@ export function localizePricing(
       };
     }),
 
-    barPackages: raw.barPackages.map((b) => ({
-      _id: b._id,
-      name: localized(b.name, locale) ?? "",
-      description: localized(b.description, locale) ?? "",
-      tier: b.tier,
-      costPerPersonPerHour: b.costPerPersonPerHour,
-      availableHours: b.availableHours ?? [],
-      addOns: localizeAddOns(b.addOns, locale),
-      imageUrl: b.imageUrl ?? undefined,
-    })),
+    barPackages: raw.barPackages.map((b) => {
+      const details =
+        b.barDetails?.[localeKey] ?? b.barDetails?.en ?? undefined;
+      return {
+        _id: b._id,
+        name: localized(b.name, locale) ?? "",
+        description: localized(b.description, locale) ?? "",
+        tier: b.tier,
+        costPerPersonPerHour: b.costPerPersonPerHour,
+        availableHours: b.availableHours ?? [],
+        addOns: localizeAddOns(b.addOns, locale),
+        imageUrl: b.imageUrl ?? undefined,
+        barDetails:
+          Array.isArray(details) && details.length > 0 ? details : undefined,
+      };
+    }),
 
     furnitureOptions: raw.furnitureOptions.map((f) => ({
       _id: f._id,
@@ -595,15 +607,21 @@ export function localizePricing(
       imageUrl: f.imageUrl ?? undefined,
     })),
 
-    decorPackages: raw.decorPackages.map((d) => ({
-      _id: d._id,
-      name: localized(d.name, locale) ?? "",
-      description: localized(d.description, locale) ?? "",
-      baseCost: d.baseCost,
-      addOns: localizeAddOns(d.addOns, locale),
-      imageUrl: d.imageUrl ?? undefined,
-      previewImageUrl: d.previewImageUrl ?? undefined,
-    })),
+    decorPackages: raw.decorPackages.map((d) => {
+      const details =
+        d.decorDetails?.[localeKey] ?? d.decorDetails?.en ?? undefined;
+      return {
+        _id: d._id,
+        name: localized(d.name, locale) ?? "",
+        description: localized(d.description, locale) ?? "",
+        baseCost: d.baseCost,
+        addOns: localizeAddOns(d.addOns, locale),
+        imageUrl: d.imageUrl ?? undefined,
+        previewImageUrl: d.previewImageUrl ?? undefined,
+        decorDetails:
+          Array.isArray(details) && details.length > 0 ? details : undefined,
+      };
+    }),
 
     photoPackages: raw.photoPackages.map((p) => ({
       _id: p._id,

@@ -210,7 +210,9 @@
         "selectHours": "Duration",
         "perPersonPerHour": "/person/hour",
         "addOns": "Optional Upgrades",
-        "barTotal": "Bar total:"
+        "barTotal": "Bar total:",
+        "seeBar": "See Bar Package",
+        "closeBar": "Close"
       },
       "furniture": {
         "title": "Furniture & Linens",
@@ -224,7 +226,9 @@
         "label": "Choose your decor package",
         "addOns": "Add-on upgrades",
         "perTable": "/table",
-        "total": "Decor total:"
+        "total": "Decor total:",
+        "seeDecor": "See Decor Package",
+        "closeDecor": "Close"
       },
       "photo": {
         "title": "Photography",

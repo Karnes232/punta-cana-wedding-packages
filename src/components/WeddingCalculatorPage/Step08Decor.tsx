@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import StepWrapper from "./StepWrapper";
+import DetailsModal from "./DetailsModal";
 import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 import type {
   DecorPackage,
@@ -31,6 +33,7 @@ export default function Step08Decor({
   defaultSeatsPerTable,
 }: Props) {
   const t = useTranslations("weddingCalculator.steps.decor");
+  const [detailsPkg, setDetailsPkg] = useState<DecorPackage | null>(null);
 
   const tableCount = Math.ceil(
     state.guests / (state.furniture?.seatsPerTable ?? defaultSeatsPerTable),
@@ -60,12 +63,22 @@ export default function Step08Decor({
       <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
         {packages.map((pkg) => {
           const selected = state.decor?._id === pkg._id;
+          const selectPkg = () => dispatch({ type: "SET_DECOR", decor: pkg });
           return (
-            <button
+            <div
               key={pkg._id}
-              onClick={() => dispatch({ type: "SET_DECOR", decor: pkg })}
+              role="button"
+              tabIndex={0}
+              aria-pressed={selected}
+              onClick={selectPkg}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  selectPkg();
+                }
+              }}
               className={[
-                "flex flex-col overflow-hidden rounded-xl border text-left transition-all duration-200",
+                "flex cursor-pointer flex-col overflow-hidden rounded-xl border text-left transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5B9FD9]",
                 selected
                   ? "border-[#5B9FD9] bg-[#5B9FD9]/5 shadow-sm"
                   : "border-[#E0E0E0] bg-white hover:border-[#5B9FD9]/50",
@@ -83,7 +96,7 @@ export default function Step08Decor({
                   />
                 </div>
               )}
-              <div className="p-5">
+              <div className="flex flex-1 flex-col p-5">
                 <p
                   className={`font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
                 >
@@ -92,13 +105,23 @@ export default function Step08Decor({
                 <p className="mt-1 text-lg font-semibold text-[#1A1A1A]">
                   {formatUSD(pkg.baseCost)}
                 </p>
-                {pkg.description && (
-                  <p className="mt-2 text-xs leading-relaxed text-[#AAAAAA]">
-                    {pkg.description}
-                  </p>
+                <p className="mt-2 line-clamp-3 min-h-[3.75rem] text-xs leading-relaxed text-[#AAAAAA]">
+                  {pkg.description ?? ""}
+                </p>
+                {pkg.decorDetails && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDetailsPkg(pkg);
+                    }}
+                    className="mt-auto self-start pt-3 text-sm font-medium text-[#5B9FD9] underline-offset-2 hover:underline"
+                  >
+                    {t("seeDecor")}
+                  </button>
                 )}
               </div>
-            </button>
+            </div>
           );
         })}
       </div>
@@ -141,6 +164,14 @@ export default function Step08Decor({
           <span className="text-[#5B9FD9]">{formatUSD(decorTotal)}</span>
         </p>
       )}
+
+      <DetailsModal
+        open={!!detailsPkg}
+        onClose={() => setDetailsPkg(null)}
+        title={detailsPkg?.name ?? ""}
+        closeLabel={t("closeDecor")}
+        value={detailsPkg?.decorDetails ?? []}
+      />
     </StepWrapper>
   );
 }

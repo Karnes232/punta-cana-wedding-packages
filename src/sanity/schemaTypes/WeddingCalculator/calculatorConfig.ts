@@ -44,8 +44,8 @@ export const calculatorConfig = defineType({
       name: "venueName",
       title: "Venue Name",
       type: "localizedString",
-      description: 'Display name for the venue (e.g. "Cabeza de Toro").',
-      validation: (R) => R.required(),
+      description: 'Display name for the venue (e.g. "Cabeza de Toro"). (Optional)',
+  
     }),
     defineField({
       name: "venueStepTitle",
@@ -68,8 +68,8 @@ export const calculatorConfig = defineType({
       title: "Venue Location",
       type: "localizedString",
       description:
-        'Sub-text shown under the venue name (e.g. "Cabeza de Toro Beach, Punta Cana").',
-      validation: (R) => R.required(),
+        'Sub-text shown under the venue name (e.g. "Cabeza de Toro Beach, Punta Cana"). (Optional)',
+    
     }),
     defineField({
       name: "venueDescription",

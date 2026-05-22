@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import StepWrapper from "./StepWrapper";
-import MenuDetailsModal from "./MenuDetailsModal";
+import DetailsModal from "./DetailsModal";
 import {
   isPlatedEffective,
   PLATED_FORCED_BELOW,
@@ -85,7 +85,7 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
                   />
                 </div>
               )}
-              <div className="p-5">
+              <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-start justify-between gap-2">
                   <p
                     className={`font-semibold ${selected ? "text-[#5B9FD9]" : "text-[#1A1A1A]"}`}
@@ -97,11 +97,9 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
                     {t("perPerson")}
                   </p>
                 </div>
-                {menu.description && (
-                  <p className="mt-2 text-xs leading-relaxed text-[#888888]">
-                    {menu.description}
-                  </p>
-                )}
+                <p className="mt-2 line-clamp-3 min-h-[3.75rem] text-xs leading-relaxed text-[#888888]">
+                  {menu.description ?? ""}
+                </p>
                 {menu.menuDetails && (
                   <button
                     type="button"
@@ -109,7 +107,7 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
                       e.stopPropagation();
                       setDetailsMenu(menu);
                     }}
-                    className="mt-3 text-sm font-medium text-[#5B9FD9] underline-offset-2 hover:underline"
+                    className="mt-auto self-start pt-3 text-sm font-medium text-[#5B9FD9] underline-offset-2 hover:underline"
                   >
                     {t("seeMenu")}
                   </button>
@@ -186,7 +184,7 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
         </div>
       )}
 
-      <MenuDetailsModal
+      <DetailsModal
         open={!!detailsMenu}
         onClose={() => setDetailsMenu(null)}
         title={detailsMenu?.name ?? ""}

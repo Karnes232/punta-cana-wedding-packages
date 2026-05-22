@@ -11,7 +11,7 @@ type Props = {
   value: unknown[];
 };
 
-const menuPortableTextComponents: PortableTextComponents = {
+const detailsPortableTextComponents: PortableTextComponents = {
   block: {
     h1: ({ children }) => (
       <h2 className="mt-6 mb-3 text-2xl font-semibold text-[#1A1A1A] first:mt-0">
@@ -77,7 +77,7 @@ const menuPortableTextComponents: PortableTextComponents = {
   },
 };
 
-export default function MenuDetailsModal({
+export default function DetailsModal({
   open,
   onClose,
   title,
@@ -127,7 +127,7 @@ export default function MenuDetailsModal({
         <div className="max-h-[70vh] overflow-y-auto px-6 py-5">
           <PortableText
             value={value as Parameters<typeof PortableText>[0]["value"]}
-            components={menuPortableTextComponents}
+            components={detailsPortableTextComponents}
           />
         </div>
         <div className="border-t border-[#EEEEEE] px-6 py-3 text-right">

@@ -210,7 +210,9 @@
         "selectHours": "Duración",
         "perPersonPerHour": "/persona/hora",
         "addOns": "Mejoras Opcionales",
-        "barTotal": "Total bebidas:"
+        "barTotal": "Total bebidas:",
+        "seeBar": "Ver Paquete de Bar",
+        "closeBar": "Cerrar"
       },
       "furniture": {
         "title": "Mobiliario y Manteles",
@@ -224,7 +226,9 @@
         "label": "Elige tu paquete de decoración",
         "addOns": "Mejoras adicionales",
         "perTable": "/mesa",
-        "total": "Total decoración:"
+        "total": "Total decoración:",
+        "seeDecor": "Ver Paquete de Decoración",
+        "closeDecor": "Cerrar"
       },
       "photo": {
         "title": "Fotografía",

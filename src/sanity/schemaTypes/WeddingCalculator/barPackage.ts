@@ -19,6 +19,14 @@ export const barPackage = defineType({
       type: "localizedText",
     }),
     defineField({
+      name: "barDetails",
+      title: "Full Bar Package Details (shown in 'See Bar Package' modal)",
+      type: "localizedBlock",
+      validation: (R) => R.required(),
+      description:
+        "Rich-text details (drinks included, brands, notes) shown when a guest clicks 'See Bar Package' on this card.",
+    }),
+    defineField({
       name: "tier",
       title: "Tier",
       type: "string",

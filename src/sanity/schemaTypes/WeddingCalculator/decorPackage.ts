@@ -19,6 +19,14 @@ export const decorPackage = defineType({
       type: "localizedText",
     }),
     defineField({
+      name: "decorDetails",
+      title: "Full Decor Package Details (shown in 'See Decor Package' modal)",
+      type: "localizedBlock",
+      validation: (R) => R.required(),
+      description:
+        "Rich-text details (what's included, color palettes, style notes) shown when a guest clicks 'See Decor Package' on this card.",
+    }),
+    defineField({
       name: "baseCost",
       title: "Base Cost (USD)",
       type: "number",

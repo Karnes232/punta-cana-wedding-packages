@@ -35,12 +35,16 @@ export default function Step04Venue({ state, dispatch, config }: Props) {
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-[#5B9FD9]">
                 {config.venueIncludedLabel}
               </p>
-              <h3 className="mt-1 text-xl font-semibold text-[#1A1A1A]">
-                {config.venueName}
-              </h3>
-              <p className="mt-0.5 text-sm text-[#888888]">
-                {config.venueLocation}
-              </p>
+              {config.venueName && (
+                <h3 className="mt-1 text-xl font-semibold text-[#1A1A1A]">
+                  {config.venueName}
+                </h3>
+              )}
+              {config.venueLocation && (
+                <p className="mt-0.5 text-sm text-[#888888]">
+                  {config.venueLocation}
+                </p>
+              )}
             </div>
             <p className="text-lg font-semibold text-[#1A1A1A]">
               {formatUSD(config.venueCost + config.coordinationCost)}
