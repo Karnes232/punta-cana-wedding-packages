@@ -9,7 +9,7 @@ const BLOG_ONLY_LOCALES = routing.locales.filter(
 ) as string[];
 
 // Full 9-locale handler used only for blog routes
-const handleBlog = createMiddleware(routing);
+const handleBlog = createMiddleware({ ...routing, alternateLinks: false });
 
 // Main-site handler: only knows en/es — can never auto-detect a blog-only locale
 const handleMainSite = createMiddleware(
