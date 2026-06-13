@@ -64,6 +64,28 @@ export type RawDecorPackage = {
   decorDetails?: LocalizedBlocks | null;
 };
 
+export type RawBridalTablePackage = {
+  _id: string;
+  name: LocalizedString;
+  description?: LocalizedText;
+  baseCost: number;
+  addOns?: RawAddOn[];
+  order?: number;
+  imageUrl?: string | null;
+  previewImageUrl?: string | null;
+  details?: LocalizedBlocks | null;
+};
+
+export type RawBeautyService = {
+  _id: string;
+  name: LocalizedString;
+  description?: LocalizedText;
+  category: string;
+  pricePerPerson: number;
+  order?: number;
+  imageUrl?: string | null;
+};
+
 export type RawPhotoPackage = {
   _id: string;
   name: LocalizedString;
@@ -173,6 +195,8 @@ export type RawCalculatorData = {
   barPackages: RawBarPackage[];
   furnitureOptions: RawFurnitureOption[];
   decorPackages: RawDecorPackage[];
+  bridalTablePackages: RawBridalTablePackage[];
+  beautyServices: RawBeautyService[];
   photoPackages: RawPhotoPackage[];
   videoPackages: RawVideoPackage[];
   transportationZones: RawTransportationZone[];
@@ -232,6 +256,26 @@ export type DecorPackage = {
   imageUrl?: string;
   previewImageUrl?: string;
   decorDetails?: unknown[];
+};
+
+export type BridalTablePackage = {
+  _id: string;
+  name: string;
+  description: string;
+  baseCost: number;
+  addOns: AddOn[];
+  imageUrl?: string;
+  previewImageUrl?: string;
+  details?: unknown[];
+};
+
+export type BeautyService = {
+  _id: string;
+  name: string;
+  description: string;
+  category: string;
+  pricePerPerson: number;
+  imageUrl?: string;
 };
 
 export type PhotoPackage = {
@@ -332,6 +376,8 @@ export type CalculatorData = {
   barPackages: BarPackage[];
   furnitureOptions: FurnitureOption[];
   decorPackages: DecorPackage[];
+  bridalTablePackages: BridalTablePackage[];
+  beautyServices: BeautyService[];
   photoPackages: PhotoPackage[];
   videoPackages: VideoPackage[];
   transportationZones: TransportationZone[];
@@ -418,6 +464,24 @@ const getCalculatorDataQuery = defineQuery(`{
     "imageUrl": image.asset->url,
     "previewImageUrl": previewImage.asset->url,
     decorDetails { en, es }
+  },
+  "bridalTablePackages": *[_type == "bridalTablePackage"] | order(order asc) {
+    _id,
+    name,
+    description,
+    baseCost,
+    addOns[] { ${addOnFields} },
+    "imageUrl": image.asset->url,
+    "previewImageUrl": previewImage.asset->url,
+    details { en, es }
+  },
+  "beautyServices": *[_type == "beautyService"] | order(order asc) {
+    _id,
+    name,
+    description,
+    category,
+    pricePerPerson,
+    "imageUrl": image.asset->url
   },
   "photoPackages": *[_type == "photoPackage"] | order(order asc) {
     _id,
@@ -623,6 +687,30 @@ export function localizePricing(
           Array.isArray(details) && details.length > 0 ? details : undefined,
       };
     }),
+
+    bridalTablePackages: (raw.bridalTablePackages ?? []).map((b) => {
+      const details = b.details?.[localeKey] ?? b.details?.en ?? undefined;
+      return {
+        _id: b._id,
+        name: localized(b.name, locale) ?? "",
+        description: localized(b.description, locale) ?? "",
+        baseCost: b.baseCost,
+        addOns: localizeAddOns(b.addOns, locale),
+        imageUrl: b.imageUrl ?? undefined,
+        previewImageUrl: b.previewImageUrl ?? undefined,
+        details:
+          Array.isArray(details) && details.length > 0 ? details : undefined,
+      };
+    }),
+
+    beautyServices: (raw.beautyServices ?? []).map((s) => ({
+      _id: s._id,
+      name: localized(s.name, locale) ?? "",
+      description: localized(s.description, locale) ?? "",
+      category: s.category ?? "hairMakeup",
+      pricePerPerson: s.pricePerPerson,
+      imageUrl: s.imageUrl ?? undefined,
+    })),
 
     photoPackages: raw.photoPackages.map((p) => ({
       _id: p._id,

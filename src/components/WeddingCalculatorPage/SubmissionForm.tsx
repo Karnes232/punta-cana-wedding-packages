@@ -79,6 +79,20 @@ export default function SubmissionForm({
     }).join(" | ");
   }
 
+  function bridalTableAddOnsSummary(): string {
+    return state.bridalTableAddOns.map((a) => {
+      const c = a.isPerTable ? a.cost * tableCount : a.cost;
+      return `${a.name} ${formatUSD(c)}`;
+    }).join(" | ");
+  }
+
+  function beautyServicesSummary(): string {
+    return state.beautyServices.map((b) => {
+      const c = b.service.pricePerPerson * b.quantity;
+      return `${b.service.name} ×${b.quantity} — ${formatUSD(c)}`;
+    }).join(" | ");
+  }
+
   function photoAddOnsSummary(): string {
     return state.photoAddOns.map((a) => {
       return `${a.name} ${formatUSD(a.cost)}`;
@@ -268,7 +282,11 @@ export default function SubmissionForm({
       formData.append('decor', state.decor?.name ?? "Not selected");
       formData.append('decorBaseCost', `${formatUSD(state.decor?.baseCost || 0)}`);
       formData.append('decorAddOns', decorAddOnsSummary());
-      
+      formData.append('bridalTable', state.bridalTable?.name ?? "Not selected");
+      formData.append('bridalTableBaseCost', `${formatUSD(state.bridalTable?.baseCost || 0)}`);
+      formData.append('bridalTableAddOns', bridalTableAddOnsSummary());
+      formData.append('beautyServices', beautyServicesSummary());
+
       formData.append('photo', state.photo?.name ?? "Not selected");
       formData.append('photoCost', `${formatUSD(state.photo?.cost || 0)}`);
       formData.append('photoAddOns', photoAddOnsSummary());

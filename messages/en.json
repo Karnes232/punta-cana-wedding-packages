@@ -229,6 +229,26 @@
         "seeDecor": "See Decor Package",
         "closeDecor": "Close"
       },
+      "bridalTable": {
+        "title": "Bridal Table",
+        "label": "Choose your bridal table package",
+        "addOns": "Add-on upgrades",
+        "perTable": "/table",
+        "total": "Bridal table total:",
+        "seeDetails": "See Details",
+        "close": "Close"
+      },
+      "beauty": {
+        "title": "Hair, Makeup & Barber",
+        "label": "Add beauty services and choose how many people for each (optional)",
+        "hairMakeupHeading": "Hair & Makeup",
+        "barberHeading": "Barber",
+        "perPerson": "{price} / person",
+        "people": "people",
+        "decrease": "Remove one person",
+        "increase": "Add one person",
+        "total": "Beauty total:"
+      },
       "photo": {
         "title": "Photography",
         "label": "Choose your photography package",
@@ -284,6 +304,8 @@
       "bar": "Open Bar ({name} · {h}h × {n} guests)",
       "furniture": "Furniture ({name} · {n} tables)",
       "decor": "Decoration & Florals ({name})",
+      "bridalTable": "Bridal Table ({name})",
+      "beauty": "Hair, Makeup & Barber",
       "photo": "Photography ({name})",
       "video": "Videography ({name})",
       "lodging": "Lodging at {name}",

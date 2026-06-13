@@ -229,6 +229,26 @@
         "seeDecor": "Ver Paquete de Decoración",
         "closeDecor": "Cerrar"
       },
+      "bridalTable": {
+        "title": "Mesa Nupcial",
+        "label": "Elige tu paquete de mesa nupcial",
+        "addOns": "Mejoras adicionales",
+        "perTable": "/mesa",
+        "total": "Total mesa nupcial:",
+        "seeDetails": "Ver Detalles",
+        "close": "Cerrar"
+      },
+      "beauty": {
+        "title": "Peinado, Maquillaje y Barbería",
+        "label": "Agrega servicios de belleza y elige cuántas personas para cada uno (opcional)",
+        "hairMakeupHeading": "Peinado y Maquillaje",
+        "barberHeading": "Barbería",
+        "perPerson": "{price} / persona",
+        "people": "personas",
+        "decrease": "Quitar una persona",
+        "increase": "Agregar una persona",
+        "total": "Total belleza:"
+      },
       "photo": {
         "title": "Fotografía",
         "label": "Elige tu paquete de fotografía",
@@ -284,6 +304,8 @@
       "bar": "Barra Libre ({name} · {h}h × {n} invitados)",
       "furniture": "Mobiliario ({name} · {n} mesas)",
       "decor": "Decoración y Flores ({name})",
+      "bridalTable": "Mesa Nupcial ({name})",
+      "beauty": "Peinado, Maquillaje y Barbería",
       "photo": "Fotografía ({name})",
       "video": "Videografía ({name})",
       "lodging": "Alojamiento en {name}",

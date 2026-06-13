@@ -39,7 +39,7 @@ export default function Step11Transport({ state, dispatch, vehicles }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={12}
+      stepNumber={14}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

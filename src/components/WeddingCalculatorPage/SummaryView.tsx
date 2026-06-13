@@ -81,6 +81,19 @@ export default function SummaryView({
       )
     : null;
 
+  const bridalTableTotal = state.bridalTable
+    ? state.bridalTable.baseCost +
+      state.bridalTableAddOns.reduce(
+        (s, a) => s + (a.isPerTable ? a.cost * tableCount : a.cost),
+        0,
+      )
+    : null;
+
+  const beautyTotal = state.beautyServices.reduce(
+    (s, b) => s + b.service.pricePerPerson * b.quantity,
+    0,
+  );
+
   const photoTotal = state.photo
     ? state.photo.cost + state.photoAddOns.reduce((s, a) => s + a.cost, 0)
     : null;
@@ -180,6 +193,15 @@ export default function SummaryView({
               label={t("decor", { name: state.decor.name })}
               value={formatUSD(decorTotal)}
             />
+          )}
+          {state.bridalTable && bridalTableTotal !== null && (
+            <Row
+              label={t("bridalTable", { name: state.bridalTable.name })}
+              value={formatUSD(bridalTableTotal)}
+            />
+          )}
+          {beautyTotal > 0 && (
+            <Row label={t("beauty")} value={formatUSD(beautyTotal)} />
           )}
           {state.photo && photoTotal !== null && (
             <Row

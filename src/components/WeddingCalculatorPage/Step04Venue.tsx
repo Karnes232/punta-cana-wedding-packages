@@ -21,7 +21,7 @@ function formatUSD(n: number) {
 export default function Step04Venue({ state, dispatch, config }: Props) {
   return (
     <StepWrapper
-      stepNumber={15}
+      stepNumber={17}
       title={config.venueStepTitle}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "GO_TO_SUMMARY" })}

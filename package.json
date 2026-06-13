@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
-    "seed": "tsx scripts/seed-sanity.ts"
+    "seed": "tsx scripts/seed-sanity.ts",
+    "seed-bridal-beauty": "tsx scripts/seed-bridal-beauty.ts"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.3",

@@ -19,6 +19,8 @@ const CALCULATOR_TYPES = new Set([
   "barPackage",
   "furnitureOption",
   "decorPackage",
+  "bridalTablePackage",
+  "beautyService",
   "photoPackage",
   "videoPackage",
   "transportationZone",
@@ -169,6 +171,12 @@ export const structure: StructureResolver = (S) =>
                 "Furniture Options",
               ),
               S.documentTypeListItem("decorPackage").title("Decor Packages"),
+              S.documentTypeListItem("bridalTablePackage").title(
+                "Bridal Table Packages",
+              ),
+              S.documentTypeListItem("beautyService").title(
+                "Hair, Makeup & Barber",
+              ),
               S.documentTypeListItem("photoPackage").title(
                 "Photography Packages",
               ),

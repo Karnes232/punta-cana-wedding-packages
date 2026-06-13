@@ -14,6 +14,8 @@ import Step05Menu from "./Step05Menu";
 import Step06Bar from "./Step06Bar";
 import Step07Furniture from "./Step07Furniture";
 import Step08Decor from "./Step08Decor";
+import StepBridalTable from "./StepBridalTable";
+import StepBeauty from "./StepBeauty";
 import Step09Photo from "./Step09Photo";
 import Step10Video from "./Step10Video";
 import Step11Transport from "./Step11Transport";
@@ -26,7 +28,7 @@ import WeddingPreview from "./WeddingPreview";
 
 import type { CalculatorData } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
-const TOTAL_STEPS = 15;
+const TOTAL_STEPS = 17;
 
 type Props = {
   data: CalculatorData;
@@ -147,41 +149,56 @@ export default function CalculatorContainer({ data }: Props) {
             />
           )}
           {state.currentStep === 10 && (
+            <StepBridalTable
+              state={state}
+              dispatch={dispatch}
+              packages={data.bridalTablePackages}
+              defaultSeatsPerTable={data.config.defaultSeatsPerTable}
+            />
+          )}
+          {state.currentStep === 11 && (
+            <StepBeauty
+              state={state}
+              dispatch={dispatch}
+              services={data.beautyServices}
+            />
+          )}
+          {state.currentStep === 12 && (
             <Step09Photo
               state={state}
               dispatch={dispatch}
               packages={data.photoPackages}
             />
           )}
-          {state.currentStep === 11 && (
+          {state.currentStep === 13 && (
             <Step10Video
               state={state}
               dispatch={dispatch}
               packages={data.videoPackages}
             />
           )}
-          {state.currentStep === 12 && (
+          {state.currentStep === 14 && (
             <Step11Transport
               state={state}
               dispatch={dispatch}
               vehicles={data.transportVehicles}
             />
           )}
-          {state.currentStep === 13 && (
+          {state.currentStep === 15 && (
             <Step12Entertainment
               state={state}
               dispatch={dispatch}
               options={data.entertainmentOptions}
             />
           )}
-          {state.currentStep === 14 && (
+          {state.currentStep === 16 && (
             <Step13Extras
               state={state}
               dispatch={dispatch}
               options={data.extraOptions}
             />
           )}
-          {state.currentStep === 15 && (
+          {state.currentStep === 17 && (
             <Step04Venue
               state={state}
               dispatch={dispatch}

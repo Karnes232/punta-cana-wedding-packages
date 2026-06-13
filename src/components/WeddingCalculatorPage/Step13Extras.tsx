@@ -32,7 +32,7 @@ export default function Step13Extras({ state, dispatch, options }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={14}
+      stepNumber={16}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

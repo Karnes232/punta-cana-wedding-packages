@@ -8,6 +8,8 @@ import type {
   BarPackage,
   FurnitureOption,
   DecorPackage,
+  BridalTablePackage,
+  BeautyService,
   PhotoPackage,
   VideoPackage,
   TransportationZone,
@@ -17,10 +19,13 @@ import type {
   AddOn,
 } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
+// A beauty service selection with the quantity (number of people) chosen.
+export type BeautySelection = { service: BeautyService; quantity: number };
+
 // ── State shape ────────────────────────────────────────────────────────────────
 
 export type CalculatorState = {
-  currentStep: number; // 1–15, 16 = summary, 17 = form, 18 = success
+  currentStep: number; // 1–17, 18 = summary, 19 = form, 20 = success
   date: string; // ISO date string
   guests: number;
   weddingType: WeddingType | null;
@@ -30,7 +35,7 @@ export type CalculatorState = {
 
   hotel: TransportationZone | null;
 
-  // Step 15: always Cabeza de Toro — just confirmed boolean
+  // Step 17: always Cabeza de Toro — just confirmed boolean
   venueConfirmed: boolean;
 
   menu: MenuOption | null;
@@ -43,6 +48,13 @@ export type CalculatorState = {
 
   decor: DecorPackage | null;
   decorAddOns: AddOn[];
+
+  // Step 10: bridal table (required, package + add-ons like decor)
+  bridalTable: BridalTablePackage | null;
+  bridalTableAddOns: AddOn[];
+
+  // Step 11: hair & makeup + barber services, each with a per-person quantity
+  beautyServices: BeautySelection[];
 
   photo: PhotoPackage | null;
   photoAddOns: AddOn[];
@@ -75,6 +87,9 @@ export type CalculatorAction =
   | { type: "SET_FURNITURE"; furniture: FurnitureOption }
   | { type: "SET_DECOR"; decor: DecorPackage }
   | { type: "TOGGLE_DECOR_ADDON"; addon: AddOn }
+  | { type: "SET_BRIDAL_TABLE"; bridalTable: BridalTablePackage }
+  | { type: "TOGGLE_BRIDAL_TABLE_ADDON"; addon: AddOn }
+  | { type: "SET_BEAUTY_QUANTITY"; service: BeautyService; quantity: number }
   | { type: "SET_PHOTO"; photo: PhotoPackage }
   | { type: "TOGGLE_PHOTO_ADDON"; addon: AddOn }
   | { type: "SET_VIDEO"; video: VideoPackage }
@@ -91,9 +106,9 @@ export type CalculatorAction =
 
 // ── Initial state ──────────────────────────────────────────────────────────────
 
-const SUMMARY_STEP = 16;
-const FORM_STEP = 17;
-const SUCCESS_STEP = 18;
+const SUMMARY_STEP = 18;
+const FORM_STEP = 19;
+const SUCCESS_STEP = 20;
 
 const initialState: CalculatorState = {
   currentStep: 1,
@@ -111,6 +126,9 @@ const initialState: CalculatorState = {
   furniture: null,
   decor: null,
   decorAddOns: [],
+  bridalTable: null,
+  bridalTableAddOns: [],
+  beautyServices: [],
   photo: null,
   photoAddOns: [],
   video: null,
@@ -211,6 +229,32 @@ function calculatorReducer(
         decorAddOns: toggleItem(state.decorAddOns, action.addon),
       };
 
+    case "SET_BRIDAL_TABLE":
+      return {
+        ...state,
+        bridalTable: action.bridalTable,
+        bridalTableAddOns: [],
+      };
+
+    case "TOGGLE_BRIDAL_TABLE_ADDON":
+      return {
+        ...state,
+        bridalTableAddOns: toggleItem(state.bridalTableAddOns, action.addon),
+      };
+
+    case "SET_BEAUTY_QUANTITY": {
+      const rest = state.beautyServices.filter(
+        (b) => b.service._id !== action.service._id,
+      );
+      return {
+        ...state,
+        beautyServices:
+          action.quantity > 0
+            ? [...rest, { service: action.service, quantity: action.quantity }]
+            : rest,
+      };
+    }
+
     case "SET_PHOTO":
       return { ...state, photo: action.photo, photoAddOns: [] };
 
@@ -254,14 +298,14 @@ function calculatorReducer(
 
     case "NEXT_STEP": {
       let next = state.currentStep + 1;
-      // Skip Hotel (5) and Transport (12) when staying at our property
-      if (state.stayAtProperty && (next === 5 || next === 12)) next += 1;
-      return { ...state, currentStep: Math.min(next, 15) };
+      // Skip Hotel (5) and Transport (14) when staying at our property
+      if (state.stayAtProperty && (next === 5 || next === 14)) next += 1;
+      return { ...state, currentStep: Math.min(next, 17) };
     }
 
     case "PREV_STEP": {
       let prev = state.currentStep - 1;
-      if (state.stayAtProperty && (prev === 5 || prev === 12)) prev -= 1;
+      if (state.stayAtProperty && (prev === 5 || prev === 14)) prev -= 1;
       return { ...state, currentStep: Math.max(prev, 1) };
     }
 
@@ -336,6 +380,19 @@ export function calculateTotal(
     for (const addon of state.decorAddOns) {
       total += addon.isPerTable ? addon.cost * tableCount : addon.cost;
     }
+  }
+
+  // Bridal table (required — package base + add-ons, like decor)
+  if (state.bridalTable) {
+    total += state.bridalTable.baseCost;
+    for (const addon of state.bridalTableAddOns) {
+      total += addon.isPerTable ? addon.cost * tableCount : addon.cost;
+    }
+  }
+
+  // Hair & makeup + barber — per-person rate × chosen quantity
+  for (const b of state.beautyServices) {
+    total += b.service.pricePerPerson * b.quantity;
   }
 
   // Photography

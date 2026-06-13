@@ -2,6 +2,8 @@ export { menuOption } from "./menuOption";
 export { barPackage } from "./barPackage";
 export { furnitureOption } from "./furnitureOption";
 export { decorPackage } from "./decorPackage";
+export { bridalTablePackage } from "./bridalTablePackage";
+export { beautyService } from "./beautyService";
 export { photoPackage } from "./photoPackage";
 export { videoPackage } from "./videoPackage";
 export { transportationZone } from "./transportationZone";
