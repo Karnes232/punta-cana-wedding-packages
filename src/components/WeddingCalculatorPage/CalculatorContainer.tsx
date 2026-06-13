@@ -43,7 +43,7 @@ export default function CalculatorContainer({ data }: Props) {
     SUMMARY_STEP,
     FORM_STEP,
     SUCCESS_STEP,
-  } = useCalculatorState(data.config, data.propertyConfig);
+  } = useCalculatorState(data.config);
 
   // Track the highest step reached so user can click back on progress bar
   const [maxStepReached, setMaxStepReached] = useState(1);

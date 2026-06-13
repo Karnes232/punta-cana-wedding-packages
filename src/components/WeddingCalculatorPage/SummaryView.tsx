@@ -193,19 +193,12 @@ export default function SummaryView({
               value={formatUSD(videoTotal)}
             />
           )}
-          {state.stayAtProperty &&
-            propertyConfig &&
-            propertyConfig.propertyCostPerGuest > 0 && (
-              <Row
-                label={t("lodging", {
-                  name: propertyConfig.name,
-                  n: state.guests,
-                })}
-                value={formatUSD(
-                  propertyConfig.propertyCostPerGuest * state.guests,
-                )}
-              />
-            )}
+          {state.stayAtProperty && propertyConfig && (
+            <Row
+              label={t("lodging", { name: propertyConfig.name })}
+              value={t("lodgingSeparate")}
+            />
+          )}
           {state.transportVehicle && vehicleCount > 0 && transportTotal > 0 && (
             <Row
               label={t("transport", { n: vehicleCount })}

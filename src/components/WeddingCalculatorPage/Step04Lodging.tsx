@@ -13,14 +13,6 @@ type Props = {
   propertyConfig: PropertyConfig | null;
 };
 
-function formatUSD(n: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-  }).format(n);
-}
-
 type Choice = "property" | "other" | null;
 
 export default function Step04Lodging({
@@ -97,10 +89,9 @@ export default function Step04Lodging({
             <p className="mt-1 text-xs text-[#888888]">
               {propertyConfig.stayOptionSub}
             </p>
-            {propertyConfig.propertyCostPerGuest > 0 && (
+            {propertyConfig.startingPriceLabel && (
               <p className="mt-3 text-sm font-medium text-[#1A1A1A]">
-                {formatUSD(propertyConfig.propertyCostPerGuest)}
-                <span className="text-xs text-[#AAAAAA]">{t("perGuest")}</span>
+                {propertyConfig.startingPriceLabel}
               </p>
             )}
             <span className="mt-3 inline-block text-xs font-medium text-[#5B9FD9] underline-offset-2 hover:underline">

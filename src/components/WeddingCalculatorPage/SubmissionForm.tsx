@@ -240,11 +240,9 @@ export default function SubmissionForm({
       );
       formData.append(
         "lodgingCost",
-        formatUSD(
-          state.stayAtProperty
-            ? (propertyConfig?.propertyCostPerGuest ?? 0) * state.guests
-            : 0,
-        ),
+        state.stayAtProperty
+          ? "Booked separately (see property details)"
+          : "N/A",
       );
       formData.append('menu', state.menu?.name ?? "Not selected");
       formData.append(

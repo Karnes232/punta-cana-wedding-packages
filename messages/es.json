@@ -181,8 +181,7 @@
         "otherOptionSub": "Organizaremos el transporte desde tu área de hotel.",
         "seeDetails": "Ver Detalles de la Propiedad",
         "accept": "Aceptar y Continuar",
-        "closeLabel": "Cerrar",
-        "perGuest": "/invitado"
+        "closeLabel": "Cerrar"
       },
       "hotel": {
         "title": "Hotel / Área",
@@ -287,7 +286,8 @@
       "decor": "Decoración y Flores ({name})",
       "photo": "Fotografía ({name})",
       "video": "Videografía ({name})",
-      "lodging": "Alojamiento en {name} ({n} invitados)",
+      "lodging": "Alojamiento en {name}",
+      "lodgingSeparate": "Reservado por separado",
       "transport": "Transporte ({n} vehículos)",
       "entertainment": "Entretenimiento",
       "extras": "Experiencias Extra",

@@ -37,7 +37,7 @@ export const propertyConfig = defineType({
       title: "Property Description (modal body)",
       type: "localizedBlock",
       description:
-        "Rich-text description of the property — amenities, location, what's included.",
+        "Rich-text description of the property — amenities, location, what's included. Include the room price list here (e.g. each room type with its nightly price) and the all-inclusive note (+$70/person/night).",
       validation: (R) => R.required(),
     }),
     defineField({
@@ -69,19 +69,18 @@ export const propertyConfig = defineType({
       validation: (R) => R.required(),
     }),
     defineField({
-      name: "propertyCostPerGuest",
-      title: "Cost Per Guest (USD)",
-      type: "number",
+      name: "startingPriceLabel",
+      title: 'Card — "Starting From" Price',
+      type: "localizedString",
       description:
-        "Added to the wedding total as propertyCostPerGuest × guest count when this option is selected.",
-      validation: (R) => R.required().min(0),
+        "Short price line shown on the lodging card, e.g. \"Starting at $124.62 / night\". The full room price list goes in the Property Description above.",
     }),
   ],
   preview: {
-    select: { nameEn: "name.en", cost: "propertyCostPerGuest" },
-    prepare: ({ nameEn, cost }) => ({
+    select: { nameEn: "name.en", priceEn: "startingPriceLabel.en" },
+    prepare: ({ nameEn, priceEn }) => ({
       title: nameEn ?? "Property Configuration",
-      subtitle: `$${cost ?? 0}/guest`,
+      subtitle: priceEn ?? "",
     }),
   },
 });

@@ -3,7 +3,6 @@
 import { useReducer, useCallback } from "react";
 import type {
   CalculatorConfig,
-  PropertyConfig,
   WeddingType,
   MenuOption,
   BarPackage,
@@ -294,7 +293,6 @@ export function isPlatedEffective(s: CalculatorState): boolean {
 export function calculateTotal(
   state: CalculatorState,
   config: CalculatorConfig,
-  propertyCostPerGuest: number = 0,
 ): number {
   let total = 0;
 
@@ -308,10 +306,7 @@ export function calculateTotal(
     total += state.weddingType.fee;
   }
 
-  // Lodging (only when staying at our property)
-  if (state.stayAtProperty && propertyCostPerGuest > 0) {
-    total += propertyCostPerGuest * g;
-  }
+  // Lodging is informational only — booked separately, never added to the total.
 
   // Menu (+ plated service surcharge when applicable)
   if (state.menu) {
@@ -385,13 +380,9 @@ export function calculateTotal(
 
 // ── Hook ───────────────────────────────────────────────────────────────────────
 
-export function useCalculatorState(
-  config: CalculatorConfig,
-  propertyConfig: PropertyConfig | null,
-) {
+export function useCalculatorState(config: CalculatorConfig) {
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
-  const propertyCostPerGuest = propertyConfig?.propertyCostPerGuest ?? 0;
-  const total = calculateTotal(state, config, propertyCostPerGuest);
+  const total = calculateTotal(state, config);
   const fullTotal =
     Math.round((total + config.venueCost + config.coordinationCost) * 100) /
     100;

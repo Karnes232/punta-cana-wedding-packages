@@ -162,7 +162,7 @@ export type RawPropertyConfig = {
   stayOptionSub: LocalizedText | null;
   otherOptionLabel: LocalizedString | null;
   otherOptionSub: LocalizedText | null;
-  propertyCostPerGuest: number;
+  startingPriceLabel: LocalizedString | null;
 };
 
 export type RawCalculatorData = {
@@ -321,7 +321,7 @@ export type PropertyConfig = {
   stayOptionSub: string;
   otherOptionLabel: string;
   otherOptionSub: string;
-  propertyCostPerGuest: number;
+  startingPriceLabel: string;
 };
 
 export type CalculatorData = {
@@ -372,7 +372,7 @@ const getCalculatorDataQuery = defineQuery(`{
     stayOptionSub,
     otherOptionLabel,
     otherOptionSub,
-    propertyCostPerGuest
+    startingPriceLabel
   },
   "weddingTypes": *[_type == "weddingType"] | order(order asc) {
     _id,
@@ -554,7 +554,8 @@ export function localizePricing(
             localized(raw.propertyConfig.otherOptionLabel, locale) ?? "",
           otherOptionSub:
             localized(raw.propertyConfig.otherOptionSub, locale) ?? "",
-          propertyCostPerGuest: raw.propertyConfig.propertyCostPerGuest ?? 0,
+          startingPriceLabel:
+            localized(raw.propertyConfig.startingPriceLabel, locale) ?? "",
         }
       : null,
 
