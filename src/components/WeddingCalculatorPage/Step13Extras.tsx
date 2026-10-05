@@ -7,6 +7,7 @@ import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 import type { ExtraOption } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   options: ExtraOption[];
@@ -20,7 +21,12 @@ function formatUSD(n: number) {
   }).format(n);
 }
 
-export default function Step13Extras({ state, dispatch, options }: Props) {
+export default function Step13Extras({
+  stepNumber,
+  state,
+  dispatch,
+  options,
+}: Props) {
   const t = useTranslations("weddingCalculator.steps.extras");
 
   const extrasTotal = state.extras.reduce(
@@ -32,7 +38,7 @@ export default function Step13Extras({ state, dispatch, options }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={16}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

@@ -7,6 +7,7 @@ import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 import type { BeautyService } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   services: BeautyService[];
@@ -20,7 +21,12 @@ function formatUSD(n: number) {
   }).format(n);
 }
 
-export default function StepBeauty({ state, dispatch, services }: Props) {
+export default function StepBeauty({
+  stepNumber,
+  state,
+  dispatch,
+  services,
+}: Props) {
   const t = useTranslations("weddingCalculator.steps.beauty");
 
   const beautyTotal = state.beautyServices.reduce(
@@ -45,7 +51,7 @@ export default function StepBeauty({ state, dispatch, services }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={11}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

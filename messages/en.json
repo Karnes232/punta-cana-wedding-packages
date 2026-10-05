@@ -155,6 +155,24 @@
       "expand": "Show total"
     },
     "steps": {
+      "contact": {
+        "title": "Your Contact Details",
+        "help": "Tell us who you are so your wedding coordinator can help as you plan. You can change these details at the end.",
+        "name": "Your Name",
+        "namePlaceholder": "Full name",
+        "email": "Email Address",
+        "emailPlaceholder": "you@example.com",
+        "whatsapp": "WhatsApp Number",
+        "whatsappPlaceholder": "+1 (809) 000-0000",
+        "phone": "Phone Number",
+        "phonePlaceholder": "+1 (809) 000-0000",
+        "phoneHint": "Please provide at least one: WhatsApp or phone.",
+        "nameRequired": "Please enter your name.",
+        "emailRequired": "Please enter a valid email address.",
+        "phoneRequired": "Please enter a WhatsApp or phone number.",
+        "savedNote": "Your progress is saved on this device so you can come back anytime.",
+        "privacyLink": "Privacy Policy"
+      },
       "date": {
         "title": "Wedding Date",
         "label": "When would you like to get married?",
@@ -326,9 +344,9 @@
       "namePlaceholder": "Full name",
       "email": "Email Address",
       "emailPlaceholder": "you@example.com",
-      "whatsapp": "WhatsApp Number (optional)",
+      "whatsapp": "WhatsApp Number",
       "whatsappPlaceholder": "+1 (809) 000-0000",
-      "phone": "Phone Number (optional)",
+      "phone": "Phone Number",
       "phonePlaceholder": "+1 (809) 000-0000",
       "notes": "Special Notes or Questions",
       "notesPlaceholder": "Dietary restrictions, special requests, questions for the team...",
@@ -338,6 +356,7 @@
       "submitting": "Sending...",
       "nameRequired": "Please enter your name.",
       "emailRequired": "Please enter a valid email address.",
+      "contactRequired": "Please enter a WhatsApp or phone number.",
       "termsRequired": "Please confirm that you understand the payment terms."
     },
     "success": {
@@ -353,7 +372,8 @@
     "nav": {
       "back": "Back",
       "continue": "Continue →",
-      "skip": "Skip this step →"
+      "skip": "Skip this step →",
+      "startOver": "Start over"
     }
   },
   "notFound": {

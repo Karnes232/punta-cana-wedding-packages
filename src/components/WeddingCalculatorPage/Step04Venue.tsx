@@ -5,6 +5,7 @@ import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 import type { CalculatorConfig } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   config: CalculatorConfig;
@@ -18,13 +19,18 @@ function formatUSD(n: number) {
   }).format(n);
 }
 
-export default function Step04Venue({ state, dispatch, config }: Props) {
+export default function Step04Venue({
+  stepNumber,
+  state,
+  dispatch,
+  config,
+}: Props) {
   return (
     <StepWrapper
-      stepNumber={17}
+      stepNumber={stepNumber}
       title={config.venueStepTitle}
       onBack={() => dispatch({ type: "PREV_STEP" })}
-      onContinue={() => dispatch({ type: "GO_TO_SUMMARY" })}
+      onContinue={() => dispatch({ type: "NEXT_STEP" })}
       continueDisabled={!state.venueConfirmed}
     >
       <div className="max-w-lg">

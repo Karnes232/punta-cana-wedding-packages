@@ -155,6 +155,24 @@
       "expand": "Mostrar total"
     },
     "steps": {
+      "contact": {
+        "title": "Tus Datos de Contacto",
+        "help": "Cuéntanos quién eres para que tu coordinador de bodas pueda ayudarte mientras planificas. Puedes cambiar estos datos al final.",
+        "name": "Tu Nombre",
+        "namePlaceholder": "Nombre completo",
+        "email": "Correo Electrónico",
+        "emailPlaceholder": "tu@correo.com",
+        "whatsapp": "Número de WhatsApp",
+        "whatsappPlaceholder": "+1 (809) 000-0000",
+        "phone": "Número de Teléfono",
+        "phonePlaceholder": "+1 (809) 000-0000",
+        "phoneHint": "Indica al menos uno: WhatsApp o teléfono.",
+        "nameRequired": "Por favor ingresa tu nombre.",
+        "emailRequired": "Por favor ingresa un correo electrónico válido.",
+        "phoneRequired": "Por favor ingresa un número de WhatsApp o teléfono.",
+        "savedNote": "Tu progreso se guarda en este dispositivo para que puedas volver en cualquier momento.",
+        "privacyLink": "Política de Privacidad"
+      },
       "date": {
         "title": "Fecha de Boda",
         "label": "¿Cuándo te gustaría casarte?",
@@ -326,9 +344,9 @@
       "namePlaceholder": "Nombre completo",
       "email": "Correo Electrónico",
       "emailPlaceholder": "tu@correo.com",
-      "whatsapp": "Número de WhatsApp (opcional)",
+      "whatsapp": "Número de WhatsApp",
       "whatsappPlaceholder": "+1 (809) 000-0000",
-      "phone": "Número de Teléfono (opcional)",
+      "phone": "Número de Teléfono",
       "phonePlaceholder": "+1 (809) 000-0000",
       "notes": "Notas o Preguntas Especiales",
       "notesPlaceholder": "Restricciones dietéticas, solicitudes especiales, preguntas para el equipo...",
@@ -338,6 +356,7 @@
       "submitting": "Enviando...",
       "nameRequired": "Por favor ingresa tu nombre.",
       "emailRequired": "Por favor ingresa un correo electrónico válido.",
+      "contactRequired": "Por favor ingresa un número de WhatsApp o teléfono.",
       "termsRequired": "Por favor confirma que entiendes los términos de pago."
     },
     "success": {
@@ -353,7 +372,8 @@
     "nav": {
       "back": "Atrás",
       "continue": "Continuar →",
-      "skip": "Omitir este paso →"
+      "skip": "Omitir este paso →",
+      "startOver": "Empezar de nuevo"
     }
   },
   "notFound": {

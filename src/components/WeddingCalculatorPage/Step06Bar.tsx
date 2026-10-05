@@ -12,6 +12,7 @@ import type {
 } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   packages: BarPackage[];
@@ -25,7 +26,12 @@ function formatUSD(n: number) {
   }).format(n);
 }
 
-export default function Step06Bar({ state, dispatch, packages }: Props) {
+export default function Step06Bar({
+  stepNumber,
+  state,
+  dispatch,
+  packages,
+}: Props) {
   const t = useTranslations("weddingCalculator.steps.bar");
   const [detailsPkg, setDetailsPkg] = useState<BarPackage | null>(null);
 
@@ -42,7 +48,7 @@ export default function Step06Bar({ state, dispatch, packages }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={7}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

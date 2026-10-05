@@ -5,6 +5,7 @@ import StepWrapper from "./StepWrapper";
 import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
 };
@@ -12,7 +13,7 @@ type Props = {
 const MIN_GUESTS = 10;
 const MAX_GUESTS = 500;
 
-export default function Step02Guests({ state, dispatch }: Props) {
+export default function Step02Guests({ stepNumber, state, dispatch }: Props) {
   const t = useTranslations("weddingCalculator.steps.guests");
 
   const setGuests = (value: number) => {
@@ -22,7 +23,7 @@ export default function Step02Guests({ state, dispatch }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={2}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

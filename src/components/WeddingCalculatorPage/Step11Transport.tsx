@@ -7,6 +7,7 @@ import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 import type { TransportVehicle } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   vehicles: TransportVehicle[];
@@ -20,7 +21,12 @@ function formatUSD(n: number) {
   }).format(n);
 }
 
-export default function Step11Transport({ state, dispatch, vehicles }: Props) {
+export default function Step11Transport({
+  stepNumber,
+  state,
+  dispatch,
+  vehicles,
+}: Props) {
   const t = useTranslations("weddingCalculator.steps.transport");
 
   const selected = state.transportVehicle;
@@ -39,7 +45,7 @@ export default function Step11Transport({ state, dispatch, vehicles }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={14}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

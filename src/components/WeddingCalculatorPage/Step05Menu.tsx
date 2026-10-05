@@ -15,6 +15,7 @@ import {
 import type { MenuOption } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   menus: MenuOption[];
@@ -28,7 +29,12 @@ function formatUSD(n: number) {
   }).format(n);
 }
 
-export default function Step05Menu({ state, dispatch, menus }: Props) {
+export default function Step05Menu({
+  stepNumber,
+  state,
+  dispatch,
+  menus,
+}: Props) {
   const t = useTranslations("weddingCalculator.steps.menu");
   const [detailsMenu, setDetailsMenu] = useState<MenuOption | null>(null);
 
@@ -41,7 +47,7 @@ export default function Step05Menu({ state, dispatch, menus }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={6}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

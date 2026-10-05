@@ -7,6 +7,7 @@ import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 import type { FurnitureOption } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   options: FurnitureOption[];
@@ -22,6 +23,7 @@ function formatUSD(n: number) {
 }
 
 export default function Step07Furniture({
+  stepNumber,
   state,
   dispatch,
   options,
@@ -37,7 +39,7 @@ export default function Step07Furniture({
 
   return (
     <StepWrapper
-      stepNumber={8}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

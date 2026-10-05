@@ -1,9 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useCalculatorState } from "./useCalculatorState";
+import { TOTAL_STEPS, stepIdAt, type StepId } from "./steps";
+import {
+  clearProgress,
+  loadProgress,
+  rehydrateState,
+  saveProgress,
+} from "./persistence";
 import ProgressBar from "./ProgressBar";
 import RunningTotal from "./RunningTotal";
+import StepContact from "./StepContact";
 import Step01Date from "./Step01Date";
 import Step02Guests from "./Step02Guests";
 import Step03WeddingType from "./Step03WeddingType";
@@ -28,8 +37,6 @@ import WeddingPreview from "./WeddingPreview";
 
 import type { CalculatorData } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
-const TOTAL_STEPS = 17;
-
 type Props = {
   data: CalculatorData;
   locale: string;
@@ -46,6 +53,7 @@ export default function CalculatorContainer({ data }: Props) {
     FORM_STEP,
     SUCCESS_STEP,
   } = useCalculatorState(data.config);
+  const t = useTranslations("weddingCalculator.nav");
 
   // Track the highest step reached so user can click back on progress bar
   const [maxStepReached, setMaxStepReached] = useState(1);
@@ -53,14 +61,211 @@ export default function CalculatorContainer({ data }: Props) {
     setMaxStepReached(state.currentStep);
   }
 
+  // Resume saved progress once on mount (after hydration, since localStorage
+  // isn't available during server render)
+  const [restored, setRestored] = useState(false);
+  useEffect(() => {
+    const saved = loadProgress();
+    if (saved) {
+      const next = rehydrateState(saved, data);
+      dispatch({ type: "RESTORE", state: next });
+      setMaxStepReached(Math.min(next.currentStep, TOTAL_STEPS));
+    }
+    setRestored(true);
+  }, [data, dispatch]);
+
+  // Save progress whenever the step changes (Continue, Back, Skip, progress
+  // bar). Future hook point for saving partial leads to a backend.
+  useEffect(() => {
+    if (!restored) return;
+    if (state.currentStep === SUCCESS_STEP) clearProgress();
+    else saveProgress(state);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- save on step change only
+  }, [state.currentStep, restored]);
+
+  const startOver = () => {
+    clearProgress();
+    dispatch({ type: "RESET" });
+    setMaxStepReached(1);
+  };
+
   // Show full total (including venue) once the user has confirmed the venue
   const runningDisplayTotal = state.venueConfirmed ? fullTotal : total;
 
-  const isWizardStep =
-    state.currentStep >= 1 && state.currentStep <= TOTAL_STEPS;
+  const stepId = stepIdAt(state.currentStep);
+  const isWizardStep = stepId !== null;
   const isSummary = state.currentStep === SUMMARY_STEP;
   const isForm = state.currentStep === FORM_STEP;
   const isSuccess = state.currentStep === SUCCESS_STEP;
+
+  function renderStep(id: StepId) {
+    const stepNumber = state.currentStep;
+    switch (id) {
+      case "contact":
+        return (
+          <StepContact
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+          />
+        );
+      case "date":
+        return (
+          <Step01Date
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            minimumAdvanceMonths={data.config.minimumAdvanceMonths}
+          />
+        );
+      case "guests":
+        return (
+          <Step02Guests
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+          />
+        );
+      case "weddingType":
+        return (
+          <Step03WeddingType
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            weddingTypes={data.weddingTypes}
+          />
+        );
+      case "lodging":
+        return (
+          <Step04Lodging
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            propertyConfig={data.propertyConfig}
+          />
+        );
+      case "hotel":
+        return (
+          <Step03Hotel
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            zones={data.transportationZones}
+          />
+        );
+      case "menu":
+        return (
+          <Step05Menu
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            menus={data.menuOptions}
+          />
+        );
+      case "bar":
+        return (
+          <Step06Bar
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            packages={data.barPackages}
+          />
+        );
+      case "furniture":
+        return (
+          <Step07Furniture
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            options={data.furnitureOptions}
+            defaultSeatsPerTable={data.config.defaultSeatsPerTable}
+          />
+        );
+      case "decor":
+        return (
+          <Step08Decor
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            packages={data.decorPackages}
+            defaultSeatsPerTable={data.config.defaultSeatsPerTable}
+          />
+        );
+      case "bridalTable":
+        return (
+          <StepBridalTable
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            packages={data.bridalTablePackages}
+            defaultSeatsPerTable={data.config.defaultSeatsPerTable}
+          />
+        );
+      case "beauty":
+        return (
+          <StepBeauty
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            services={data.beautyServices}
+          />
+        );
+      case "photo":
+        return (
+          <Step09Photo
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            packages={data.photoPackages}
+          />
+        );
+      case "video":
+        return (
+          <Step10Video
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            packages={data.videoPackages}
+          />
+        );
+      case "transport":
+        return (
+          <Step11Transport
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            vehicles={data.transportVehicles}
+          />
+        );
+      case "entertainment":
+        return (
+          <Step12Entertainment
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            options={data.entertainmentOptions}
+          />
+        );
+      case "extras":
+        return (
+          <Step13Extras
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            options={data.extraOptions}
+          />
+        );
+      case "venue":
+        return (
+          <Step04Venue
+            stepNumber={stepNumber}
+            state={state}
+            dispatch={dispatch}
+            config={data.config}
+          />
+        );
+    }
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-6 pb-32 pt-8 lg:pb-16">
@@ -76,6 +281,16 @@ export default function CalculatorContainer({ data }: Props) {
                 completedStep={maxStepReached}
                 onStepClick={goToStep}
               />
+              {(state.currentStep > 1 || maxStepReached > 1) && (
+                <div className="mt-2 flex justify-end">
+                  <button
+                    onClick={startOver}
+                    className="text-xs text-[#AAAAAA] transition-colors duration-200 hover:text-[#5B9FD9]"
+                  >
+                    {t("startOver")}
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -87,124 +302,7 @@ export default function CalculatorContainer({ data }: Props) {
           )}
 
           {/* Step content */}
-          {state.currentStep === 1 && (
-            <Step01Date
-              state={state}
-              dispatch={dispatch}
-              minimumAdvanceMonths={data.config.minimumAdvanceMonths}
-            />
-          )}
-          {state.currentStep === 2 && (
-            <Step02Guests state={state} dispatch={dispatch} />
-          )}
-          {state.currentStep === 3 && (
-            <Step03WeddingType
-              state={state}
-              dispatch={dispatch}
-              weddingTypes={data.weddingTypes}
-            />
-          )}
-          {state.currentStep === 4 && (
-            <Step04Lodging
-              state={state}
-              dispatch={dispatch}
-              propertyConfig={data.propertyConfig}
-            />
-          )}
-          {state.currentStep === 5 && (
-            <Step03Hotel
-              state={state}
-              dispatch={dispatch}
-              zones={data.transportationZones}
-            />
-          )}
-          {state.currentStep === 6 && (
-            <Step05Menu
-              state={state}
-              dispatch={dispatch}
-              menus={data.menuOptions}
-            />
-          )}
-          {state.currentStep === 7 && (
-            <Step06Bar
-              state={state}
-              dispatch={dispatch}
-              packages={data.barPackages}
-            />
-          )}
-          {state.currentStep === 8 && (
-            <Step07Furniture
-              state={state}
-              dispatch={dispatch}
-              options={data.furnitureOptions}
-              defaultSeatsPerTable={data.config.defaultSeatsPerTable}
-            />
-          )}
-          {state.currentStep === 9 && (
-            <Step08Decor
-              state={state}
-              dispatch={dispatch}
-              packages={data.decorPackages}
-              defaultSeatsPerTable={data.config.defaultSeatsPerTable}
-            />
-          )}
-          {state.currentStep === 10 && (
-            <StepBridalTable
-              state={state}
-              dispatch={dispatch}
-              packages={data.bridalTablePackages}
-              defaultSeatsPerTable={data.config.defaultSeatsPerTable}
-            />
-          )}
-          {state.currentStep === 11 && (
-            <StepBeauty
-              state={state}
-              dispatch={dispatch}
-              services={data.beautyServices}
-            />
-          )}
-          {state.currentStep === 12 && (
-            <Step09Photo
-              state={state}
-              dispatch={dispatch}
-              packages={data.photoPackages}
-            />
-          )}
-          {state.currentStep === 13 && (
-            <Step10Video
-              state={state}
-              dispatch={dispatch}
-              packages={data.videoPackages}
-            />
-          )}
-          {state.currentStep === 14 && (
-            <Step11Transport
-              state={state}
-              dispatch={dispatch}
-              vehicles={data.transportVehicles}
-            />
-          )}
-          {state.currentStep === 15 && (
-            <Step12Entertainment
-              state={state}
-              dispatch={dispatch}
-              options={data.entertainmentOptions}
-            />
-          )}
-          {state.currentStep === 16 && (
-            <Step13Extras
-              state={state}
-              dispatch={dispatch}
-              options={data.extraOptions}
-            />
-          )}
-          {state.currentStep === 17 && (
-            <Step04Venue
-              state={state}
-              dispatch={dispatch}
-              config={data.config}
-            />
-          )}
+          {stepId && renderStep(stepId)}
 
           {isSummary && (
             <SummaryView

@@ -6,17 +6,23 @@ import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 import type { TransportationZone } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   zones: TransportationZone[];
 };
 
-export default function Step03Hotel({ state, dispatch, zones }: Props) {
+export default function Step03Hotel({
+  stepNumber,
+  state,
+  dispatch,
+  zones,
+}: Props) {
   const t = useTranslations("weddingCalculator.steps.hotel");
 
   return (
     <StepWrapper
-      stepNumber={5}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

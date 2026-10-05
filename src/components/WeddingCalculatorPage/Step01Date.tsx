@@ -5,6 +5,7 @@ import StepWrapper from "./StepWrapper";
 import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   minimumAdvanceMonths: number;
@@ -17,6 +18,7 @@ function getMinDate(months: number): string {
 }
 
 export default function Step01Date({
+  stepNumber,
   state,
   dispatch,
   minimumAdvanceMonths,
@@ -34,8 +36,9 @@ export default function Step01Date({
 
   return (
     <StepWrapper
-      stepNumber={1}
+      stepNumber={stepNumber}
       title={t("title")}
+      onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={handleContinue}
       continueDisabled={!isValid}
     >

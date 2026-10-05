@@ -10,6 +10,7 @@ import type {
 } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   packages: VideoPackage[];
@@ -23,7 +24,12 @@ function formatUSD(n: number) {
   }).format(n);
 }
 
-export default function Step10Video({ state, dispatch, packages }: Props) {
+export default function Step10Video({
+  stepNumber,
+  state,
+  dispatch,
+  packages,
+}: Props) {
   const t = useTranslations("weddingCalculator.steps.video");
 
   const videoTotal =
@@ -36,7 +42,7 @@ export default function Step10Video({ state, dispatch, packages }: Props) {
 
   return (
     <StepWrapper
-      stepNumber={13}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}

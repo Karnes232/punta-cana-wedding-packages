@@ -18,24 +18,41 @@ import type {
   ExtraOption,
   AddOn,
 } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
+import {
+  STEP_IDS,
+  TOTAL_STEPS,
+  SUMMARY_STEP,
+  FORM_STEP,
+  SUCCESS_STEP,
+  isSkipped,
+} from "./steps";
 
 // A beauty service selection with the quantity (number of people) chosen.
 export type BeautySelection = { service: BeautyService; quantity: number };
 
+// Contact details collected on the first step and reused on the final form.
+export type ContactInfo = {
+  name: string;
+  email: string;
+  whatsapp: string;
+  phone: string;
+};
+
 // ── State shape ────────────────────────────────────────────────────────────────
 
 export type CalculatorState = {
-  currentStep: number; // 1–17, 18 = summary, 19 = form, 20 = success
+  currentStep: number; // 1–TOTAL_STEPS, then summary, form, success (see steps.ts)
+  contact: ContactInfo;
   date: string; // ISO date string
   guests: number;
   weddingType: WeddingType | null;
 
-  // Step 4: lodging choice. When true, hotel + transport steps are skipped.
+  // Lodging choice. When true, hotel + transport steps are skipped.
   stayAtProperty: boolean;
 
   hotel: TransportationZone | null;
 
-  // Step 17: always Cabeza de Toro — just confirmed boolean
+  // Venue: always Cabeza de Toro — just confirmed boolean
   venueConfirmed: boolean;
 
   menu: MenuOption | null;
@@ -49,11 +66,11 @@ export type CalculatorState = {
   decor: DecorPackage | null;
   decorAddOns: AddOn[];
 
-  // Step 10: bridal table (required, package + add-ons like decor)
+  // Bridal table (required, package + add-ons like decor)
   bridalTable: BridalTablePackage | null;
   bridalTableAddOns: AddOn[];
 
-  // Step 11: hair & makeup + barber services, each with a per-person quantity
+  // Hair & makeup + barber services, each with a per-person quantity
   beautyServices: BeautySelection[];
 
   photo: PhotoPackage | null;
@@ -73,6 +90,9 @@ export type CalculatorState = {
 
 export type CalculatorAction =
   | { type: "SET_STEP"; step: number }
+  | { type: "SET_CONTACT"; contact: Partial<ContactInfo> }
+  | { type: "RESTORE"; state: CalculatorState }
+  | { type: "RESET" }
   | { type: "SET_DATE"; date: string }
   | { type: "SET_GUESTS"; guests: number }
   | { type: "SET_WEDDING_TYPE"; weddingType: WeddingType }
@@ -106,12 +126,9 @@ export type CalculatorAction =
 
 // ── Initial state ──────────────────────────────────────────────────────────────
 
-const SUMMARY_STEP = 18;
-const FORM_STEP = 19;
-const SUCCESS_STEP = 20;
-
-const initialState: CalculatorState = {
+export const initialState: CalculatorState = {
   currentStep: 1,
+  contact: { name: "", email: "", whatsapp: "", phone: "" },
   date: "",
   guests: 50,
   weddingType: null,
@@ -171,6 +188,15 @@ function calculatorReducer(
   switch (action.type) {
     case "SET_STEP":
       return { ...state, currentStep: action.step };
+
+    case "SET_CONTACT":
+      return { ...state, contact: { ...state.contact, ...action.contact } };
+
+    case "RESTORE":
+      return action.state;
+
+    case "RESET":
+      return initialState;
 
     case "SET_DATE":
       return { ...state, date: action.date };
@@ -298,14 +324,18 @@ function calculatorReducer(
 
     case "NEXT_STEP": {
       let next = state.currentStep + 1;
-      // Skip Hotel (5) and Transport (14) when staying at our property
-      if (state.stayAtProperty && (next === 5 || next === 14)) next += 1;
-      return { ...state, currentStep: Math.min(next, 17) };
+      while (next <= TOTAL_STEPS && isSkipped(STEP_IDS[next - 1], state)) {
+        next += 1;
+      }
+      // Continuing past the last wizard step lands on the summary
+      return { ...state, currentStep: Math.min(next, SUMMARY_STEP) };
     }
 
     case "PREV_STEP": {
       let prev = state.currentStep - 1;
-      if (state.stayAtProperty && (prev === 5 || prev === 14)) prev -= 1;
+      while (prev > 1 && isSkipped(STEP_IDS[prev - 1], state)) {
+        prev -= 1;
+      }
       return { ...state, currentStep: Math.max(prev, 1) };
     }
 

@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { validateContact } from "./StepContact";
 import {
   isPlatedEffective,
   PLATED_SURCHARGE,
   type CalculatorAction,
   type CalculatorState,
+  type ContactInfo,
 } from "./useCalculatorState";
 import type {
   CalculatorConfig,
@@ -38,10 +40,10 @@ export default function SubmissionForm({
 }: Props) {
   const t = useTranslations("weddingCalculator.form");
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [phone, setPhone] = useState("");
+  // Contact details are collected on the first step and shared via state
+  const { name, email, whatsapp, phone } = state.contact;
+  const setContact = (field: keyof ContactInfo, value: string) =>
+    dispatch({ type: "SET_CONTACT", contact: { [field]: value } });
   const [notes, setNotes] = useState("");
   const [terms, setTerms] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -219,8 +221,10 @@ export default function SubmissionForm({
 
   function validate() {
     const e: Record<string, string> = {};
-    if (!name.trim()) e.name = t("nameRequired");
-    if (!email.match(/^[^@]+@[^@]+\.[^@]+$/)) e.email = t("emailRequired");
+    const invalid = validateContact(state.contact);
+    if (invalid.name) e.name = t("nameRequired");
+    if (invalid.email) e.email = t("emailRequired");
+    if (invalid.phone) e.phone = t("contactRequired");
     if (!terms) e.terms = t("termsRequired");
     return e;
   }
@@ -346,7 +350,7 @@ export default function SubmissionForm({
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setContact("name", e.target.value)}
             placeholder={t("namePlaceholder")}
             className="w-full rounded-xl border border-[#E0E0E0] bg-white px-4 py-3 text-sm text-[#1A1A1A] shadow-sm transition-colors duration-200 focus:border-[#5B9FD9] focus:outline-none focus:ring-2 focus:ring-[#5B9FD9]/20"
           />
@@ -363,7 +367,7 @@ export default function SubmissionForm({
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setContact("email", e.target.value)}
             placeholder={t("emailPlaceholder")}
             className="w-full rounded-xl border border-[#E0E0E0] bg-white px-4 py-3 text-sm text-[#1A1A1A] shadow-sm transition-colors duration-200 focus:border-[#5B9FD9] focus:outline-none focus:ring-2 focus:ring-[#5B9FD9]/20"
           />
@@ -381,7 +385,7 @@ export default function SubmissionForm({
             <input
               type="tel"
               value={whatsapp}
-              onChange={(e) => setWhatsapp(e.target.value)}
+              onChange={(e) => setContact("whatsapp", e.target.value)}
               placeholder={t("whatsappPlaceholder")}
               className="w-full rounded-xl border border-[#E0E0E0] bg-white px-4 py-3 text-sm text-[#1A1A1A] shadow-sm transition-colors duration-200 focus:border-[#5B9FD9] focus:outline-none focus:ring-2 focus:ring-[#5B9FD9]/20"
             />
@@ -393,11 +397,14 @@ export default function SubmissionForm({
             <input
               type="tel"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setContact("phone", e.target.value)}
               placeholder={t("phonePlaceholder")}
               className="w-full rounded-xl border border-[#E0E0E0] bg-white px-4 py-3 text-sm text-[#1A1A1A] shadow-sm transition-colors duration-200 focus:border-[#5B9FD9] focus:outline-none focus:ring-2 focus:ring-[#5B9FD9]/20"
             />
           </div>
+          {errors.phone && (
+            <p className="-mt-4 text-xs text-red-500 sm:col-span-2">{errors.phone}</p>
+          )}
         </div>
 
         {/* Notes */}

@@ -11,6 +11,7 @@ import type {
   CalculatorConfig,
   PropertyConfig,
 } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
+import { stepNumberOf } from "./steps";
 
 type Props = {
   state: CalculatorState;
@@ -251,7 +252,9 @@ export default function SummaryView({
       {/* Actions */}
       <div className="flex items-center gap-4">
         <button
-          onClick={() => dispatch({ type: "SET_STEP", step: 1 })}
+          onClick={() =>
+            dispatch({ type: "SET_STEP", step: stepNumberOf("date") })
+          }
           className="text-sm text-[#888888] transition-colors duration-200 hover:text-[#5B9FD9]"
         >
           {t("edit")}

@@ -8,6 +8,7 @@ import type { CalculatorAction, CalculatorState } from "./useCalculatorState";
 import type { PropertyConfig } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   propertyConfig: PropertyConfig | null;
@@ -16,6 +17,7 @@ type Props = {
 type Choice = "property" | "other" | null;
 
 export default function Step04Lodging({
+  stepNumber,
   state,
   dispatch,
   propertyConfig,
@@ -58,7 +60,7 @@ export default function Step04Lodging({
 
   return (
     <StepWrapper
-      stepNumber={4}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={onContinue}

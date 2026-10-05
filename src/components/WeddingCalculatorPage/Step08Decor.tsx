@@ -12,6 +12,7 @@ import type {
 } from "@/sanity/queries/WeddingCalculator/getCalculatorData";
 
 type Props = {
+  stepNumber: number;
   state: CalculatorState;
   dispatch: React.Dispatch<CalculatorAction>;
   packages: DecorPackage[];
@@ -27,6 +28,7 @@ function formatUSD(n: number) {
 }
 
 export default function Step08Decor({
+  stepNumber,
   state,
   dispatch,
   packages,
@@ -52,7 +54,7 @@ export default function Step08Decor({
 
   return (
     <StepWrapper
-      stepNumber={9}
+      stepNumber={stepNumber}
       title={t("title")}
       onBack={() => dispatch({ type: "PREV_STEP" })}
       onContinue={() => dispatch({ type: "NEXT_STEP" })}
